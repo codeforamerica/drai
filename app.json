@@ -1,0 +1,29 @@
+{
+  "name": "DAFI",
+  "description": "Heroku review apps from GitHub PRs",
+  "scripts": {
+    "postdeploy": "bin/rails heroku:postdeploy"
+  },
+  "stack": "heroku-18",
+  "env": {
+    "LOG_LEVEL": {
+      "value": "info"
+    },
+    "RACK_ENV": {
+      "value": "production"
+    },
+    "RAILS_ENV": {
+      "value": "production"
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "value": "enabled"
+    },
+    "SECRET_KEY_BASE": {
+      "description": "Secret key base for Rails.",
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
