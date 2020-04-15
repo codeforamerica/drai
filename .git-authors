@@ -1,0 +1,8 @@
+pairs:
+  # <initials>: <Firstname> <Lastname>[; <email-id>]
+  anule: Anule Ndukwu; anule
+  ben: Ben Sheldon; ben
+email:
+  prefix: pair
+  domain: codeforamerica.org
+  no_solo_prefix: true
