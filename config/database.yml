@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: dafi_production
-  username: dafi
-  password: <%= ENV['DAFI_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
