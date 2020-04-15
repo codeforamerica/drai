@@ -3,6 +3,7 @@ ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cfa-styleguide', git: 'https://github.com/codeforamerica/honeycrisp-gem', branch: 'fix-broken-path-finder-in-rails-6'
+gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'

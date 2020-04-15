@@ -18,16 +18,17 @@ RSpec.configure do |config|
 
   # When running in a browser, ensure capybara-email links have correct host
   config.around(type: :system) do |example|
-    next example.run unless example.metadata[:js] || ENV['SHOW_BROWSER']
-
     old_mailer_options = ActionMailer::Base.default_url_options
-    ActionMailer::Base.default_url_options = {
-      host: Capybara.current_session.server.host,
-      port: Capybara.current_session.server.port,
-    }
-
     example.run
-
     ActionMailer::Base.default_url_options = old_mailer_options
+  end
+
+  config.before(type: :system) do |example|
+    if example.metadata[:js] || ENV['SHOW_BROWSER']
+      ActionMailer::Base.default_url_options = {
+        host: Capybara.current_session.server.host,
+        port: Capybara.current_session.server.port,
+      }
+    end
   end
 end
