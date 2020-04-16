@@ -23,6 +23,7 @@ end
 group :development do
   gem 'annotate'
   gem 'eefgilm'
+  gem 'letter_opener'
   gem 'lintstyle', github: 'bensheldon/lintstyle'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
