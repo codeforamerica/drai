@@ -13,19 +13,20 @@ RUN apt-get update \
 ADD Gemfile /app/
 ADD Gemfile.lock /app/
 WORKDIR /app
-RUN gem install bundler:2.1.4
-RUN bundle update --bundler
-RUN bundle install
+RUN gem install bundler -v $(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -1 | tr -d " ") \
+    && bundle config set deployment 'true' \
+    && bundle config set with 'production' \
+    && bundle install --jobs 4 --retry 3 --frozen
 
 ADD . /app
 
 # Collect assets. This approach is not fully production-ready, but
 # will help you experiment with Aptible Deploy before bothering with assets.
-# Review http://go.aptible.com/assets for production-ready advice.
+# Review https://go.aptible.com/assets for production-ready advice.
 RUN set -a \
  && . ./.aptible.env \
- && bundle exec rake assets:precompile
+ && bin/rails assets:precompile
 
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
+CMD ["bin/rails", "s", "-b", "0.0.0.0", "-p", "3000"]
