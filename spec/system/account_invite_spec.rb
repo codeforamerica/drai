@@ -16,7 +16,7 @@ describe 'Account invites', type: :system do
     open_email email_address
     current_email.click_link 'Set up your account'
 
-    fill_in 'Password', with: password
+    fill_in 'Choose a password', with: password
     click_button 'Set up account'
 
     expect(page).to have_content "Update account"

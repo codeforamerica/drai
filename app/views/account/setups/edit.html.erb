@@ -1,5 +1,15 @@
-<%= form_for @user, url: { action: :update }, method: :put, builder: Cfa::Styleguide::CfaFormBuilder do |f| %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit "Set up account" %>
+<% content = lambda do |f| %>
+  <%= f.cfa_input_field(:password, "Choose a password", type: "password", classes: ["form-width--med"], help_text: "This should be at least #{User.password_length.min} characters.") %>
 <% end %>
+
+<% footer = lambda do |f| %>
+  <%= f.cfa_button "Set up account" %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: @user,
+           form_options: { url: { action: :update }, html: { method: :put } },
+           title: "Set up your account",
+           content: content,
+           footer: footer
+%>
