@@ -25,3 +25,6 @@
 
 # Ignore RubyMine files
 /.idea/
+
+# Dotenv
+.env*
