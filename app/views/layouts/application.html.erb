@@ -9,8 +9,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="page-wrapper">
+      <%= render 'shared/alerts' %>
+      <%= render 'shared/header' %>
+
+      <div class="grid">
+        <div class="grid__item width-one-half shift-one-fourth">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

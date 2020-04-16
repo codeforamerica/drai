@@ -9,7 +9,7 @@ Rails.application.routes.draw do
              path: 'account'
 
   as :user do
-    get 'account/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
+    get 'account' => 'devise/registrations#edit', as: 'edit_user_registration'
     put 'account' => 'devise/registrations#update', as: 'user_registration'
   end
 

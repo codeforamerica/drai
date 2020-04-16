@@ -1,0 +1,19 @@
+<div class="<%= local_assigns[:header_class] %>">
+  <header class="main-header">
+    <div class="toolbar">
+      <div class="toolbar__left">
+        <div class="main-header__title">
+          <%= link_to "DAFI", root_path, class: "main-header__no-logo" %>
+        </div>
+      </div>
+      <div class="toolbar__right">
+        <% if current_user.present? %>
+          <%= link_to 'Account', edit_user_registration_path, class: 'toolbar__item text--small' %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "toolbar__item text--small" %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, class: "toolbar__item text--small" %>
+        <% end %>
+      </div>
+    </div>
+  </header>
+</div>
