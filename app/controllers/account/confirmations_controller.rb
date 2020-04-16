@@ -31,7 +31,7 @@ module Account
     # The path used after confirmation.
     def after_confirmation_path_for(_resource_name, _resource)
       flash.discard :notice # don't set a flash message, use template below
-      root_path
+      edit_account_setup_path
     end
   end
 end

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'Account invites', type: :system, js: true do
+describe 'Account invites', type: :system do
   let(:email_address) { 'manager@cbo.org' }
   let(:password) { 'qwerty' }
+
   it 'allows user to receive an invite and can confirm and set up account' do
     # An admin will import a bunch of CBO contact info
     user = User.new email: email_address
@@ -16,9 +17,8 @@ describe 'Account invites', type: :system, js: true do
     current_email.click_link 'Set up your account'
 
     fill_in 'Password', with: password
-    fill_in 'Confirm Password', with: password
     click_button 'Set up account'
 
-    expect(page).to have_content "Welcome"
+    expect(page).to have_content "Edit User"
   end
 end

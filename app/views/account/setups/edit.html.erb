@@ -1,0 +1,5 @@
+<%= form_for @user, url: { action: :update }, method: :put, builder: Cfa::Styleguide::CfaFormBuilder do |f| %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.submit "Set up account" %>
+<% end %>

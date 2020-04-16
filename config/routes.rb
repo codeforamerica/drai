@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
+  root 'hello_worlds#show'
+
   devise_for :users,
+             skip: [:registrations],
              controllers: {
                confirmations: 'account/confirmations',
              },
              path: 'account'
 
-  root 'hello_worlds#show'
+  as :user do
+    get 'account/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
+    put 'account' => 'devise/registrations#update', as: 'user_registration'
+  end
 
-  scope module: :account do
-    resource 'setup', only: [:edit, :update]
+  namespace :account do
+    resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
   # honeycrisp gem
