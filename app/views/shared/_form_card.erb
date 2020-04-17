@@ -1,15 +1,17 @@
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title"><%= title %></h1>
-  </header>
+<div class="grid__item width-one-half shift-one-fourth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h1 class="form-card__title"><%= title %></h1>
+    </header>
 
-  <%= form_for(form_resource, form_options.merge(builder: DafiFormBuilder)) do |f| %>
-    <div class="form-card__content">
-      <%= content.call(f) %>
-    </div>
+    <%= form_for(form_resource, form_options.merge(builder: DafiFormBuilder)) do |f| %>
+      <div class="form-card__content">
+        <%= content.call(f) %>
+      </div>
 
-    <div class="form-card__footer">
-      <%= footer.call(f) %>
-    </div>
-  <% end %>
+      <div class="form-card__footer">
+        <%= footer.call(f) %>
+      </div>
+    <% end %>
+  </div>
 </div>
