@@ -1,0 +1,15 @@
+<% content = lambda do |f| %>
+  <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"], help_text: "Enter your email to be sent password reset instructions" %>
+<% end %>
+
+<% footer = lambda do |f| %>
+  <%= f.cfa_button "Send me an email" %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: resource,
+           form_options: { as: resource_name, url: password_path(resource_name), html: { method: :post } },
+           title: "Reset your password",
+           content: content,
+           footer: footer
+%>

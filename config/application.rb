@@ -31,5 +31,9 @@ module Dafi
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_mailer.default_url_options = {
+      host: Rails.application.secrets.host,
+    }
   end
 end

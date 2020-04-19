@@ -1,1 +1,11 @@
 @import 'cfa_styleguide_main';
+
+.main-header__no-logo {
+  @extend .main-header__logo;
+
+  padding-left: 0 !important;
+
+  &:before {
+    background-image: none !important;
+  }
+}

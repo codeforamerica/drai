@@ -3,6 +3,8 @@ ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cfa-styleguide', git: 'https://github.com/codeforamerica/honeycrisp-gem', branch: 'fix-broken-path-finder-in-rails-6'
+gem 'devise'
+gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'
@@ -22,6 +24,7 @@ end
 group :development do
   gem 'annotate'
   gem 'eefgilm'
+  gem 'letter_opener'
   gem 'lintstyle', github: 'bensheldon/lintstyle'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'

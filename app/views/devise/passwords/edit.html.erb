@@ -1,0 +1,17 @@
+<% content = lambda do |f| %>
+  <%= f.hidden_field :reset_password_token %>
+  <%= f.cfa_input_field(:password, "New password", type: "password", classes: ["form-width--med"], help_text: "This should be at least #{@minimum_password_length} characters.") %>
+
+<% end %>
+
+<% footer = lambda do |f| %>
+  <%= f.cfa_button "Change my password" %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: resource,
+           form_options: { as: resource_name, url: password_path(resource_name), html: { method: :put } },
+           title: "Change your password",
+           content: content,
+           footer: footer
+%>
