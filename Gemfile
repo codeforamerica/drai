@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'
 gem 'puma', '~> 4.1'
+gem 'responders'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'sass-rails', '>= 6'
 gem 'sentry-raven'
@@ -25,7 +26,6 @@ group :development do
   gem 'annotate'
   gem 'eefgilm'
   gem 'letter_opener'
-  gem 'lintstyle', github: 'bensheldon/lintstyle'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -38,6 +38,7 @@ group :test do
   gem 'capybara-email'
   gem 'climate_control'
   gem 'launchy', require: false
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'webmock'
 end
