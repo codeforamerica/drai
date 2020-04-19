@@ -1,10 +1,10 @@
-<% content = lambda do |f| %>
+<% content = capture_form do |f| %>
   <%= f.hidden_field :reset_password_token %>
   <%= f.cfa_input_field(:password, "New password", type: "password", classes: ["form-width--med"], help_text: "This should be at least #{@minimum_password_length} characters.") %>
 
 <% end %>
 
-<% footer = lambda do |f| %>
+<% footer = capture_form do |f| %>
   <%= f.cfa_button "Change my password" %>
 <% end %>
 

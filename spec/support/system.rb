@@ -2,6 +2,8 @@ Capybara.default_max_wait_time = 2
 Capybara.server = :puma, { Silent: true }
 
 RSpec.configure do |config|
+  config.include ActionView::RecordIdentifier, type: :system
+
   config.before(:each, type: :system) do |example|
     if ENV['SHOW_BROWSER']
       example.metadata[:js] = true

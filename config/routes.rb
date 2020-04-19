@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
-  resources :assisters, only: :index
+  resources :assisters, only: [:index, :new, :create]
 
   # honeycrisp gem
   mount Cfa::Styleguide::Engine => "/cfa"

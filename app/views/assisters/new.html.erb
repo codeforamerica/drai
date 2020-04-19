@@ -1,0 +1,17 @@
+<% content = capture_form do |f| %>
+  <%= f.cfa_input_field :name, "Name", classes: ["form-width--long"] %>
+  <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"] %>
+<% end %>
+
+<% footer = capture_form do |f| %>
+  <%= f.cfa_button "Invite user" %>
+  <%= link_to "Cancel", assisters_path %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: @user,
+           form_options: { url: { action: :create } },
+           title: "Invite new user",
+           content: content,
+           footer: footer
+%>

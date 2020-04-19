@@ -37,13 +37,21 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :account_setup, unless: :password_present?
 
   def status
-    if unconfirmed_email.present?
-      'invited'
-    elsif confirmed_at.present?
-      'confirmed'
-    else last_sign_in_at?
-      'active'
+    if confirmed_at.blank?
+      :invited
+    elsif encrypted_password.blank?
+      :confirmed
+    else
+      :active
     end
+  end
+
+  def status_human
+    {
+      invited: 'Invited',
+      confirmed: 'Confirmed',
+      active: 'Active',
+    }.fetch(status)
   end
 
   def password_required?

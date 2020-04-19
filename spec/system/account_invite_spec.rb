@@ -19,6 +19,6 @@ describe 'Account invites', type: :system do
     fill_in 'Choose a password', with: password
     click_button 'Set up account'
 
-    expect(page).to have_content "Update account"
+    expect(page).to have_content "Assisters"
   end
 end

@@ -1,4 +1,8 @@
 <div class="grid__item width-one-whole">
+  <%= link_to "Add new user", new_assister_path %>
+</div>
+
+<div class="grid__item width-one-whole">
   <div class="data-table-container">
     <table class="data-table js-sticky-header">
       <thead>
@@ -11,11 +15,11 @@
       </thead>
       <tbody>
       <% @assisters.each do |assister| %>
-        <tr>
+        <tr id="<%= dom_id(assister) %>">
           <td><%= assister.id %></td>
           <td><%= assister.name %></td>
           <td><%= assister.email %></td>
-          <td><%= assister.status %></td>
+          <td><%= assister.status_human %></td>
         </tr>
       <% end %>
       </tbody>

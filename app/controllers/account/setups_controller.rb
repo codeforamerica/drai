@@ -14,7 +14,7 @@ module Account
 
       if @user.errors.empty? && @user.setup?
         bypass_sign_in(@user) # do not sign out the user on password change
-        redirect_to edit_user_registration_path
+        redirect_to assisters_path
       else
         render :edit
       end
@@ -23,7 +23,7 @@ module Account
     private
 
     def credentials
-      params.require(:user).permit(:password)
+      params.require(:user).permit(:name, :password)
     end
   end
 end

@@ -1,14 +1,12 @@
-<% content = lambda do |f| %>
-  <% capture do %>
-    <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"] %>
-    <%= f.cfa_input_field(:password, "Password", type: "password", classes: ["form-width--med"]) %>
-    <p class="text--help">
-      <%= link_to("Forgot your password?", new_password_path(resource_name), class: "link--subtle") %>
-    </p>
-  <% end %>
+<% content = capture_form do |f| %>
+  <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"] %>
+  <%= f.cfa_input_field(:password, "Password", type: "password", classes: ["form-width--med"]) %>
+  <p class="text--help">
+    <%= link_to("Forgot your password?", new_password_path(resource_name), class: "link--subtle") %>
+  </p>
 <% end %>
 
-<% footer = lambda do |f| %>
+<% footer = capture_form do |f| %>
   <%= f.cfa_button "Sign in" %>
 <% end %>
 
