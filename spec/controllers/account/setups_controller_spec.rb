@@ -38,7 +38,7 @@ describe Account::SetupsController do
       put :update, params: { user: { password: 'password' } }
 
       expect(user.reload.password_present?).to be true
-      expect(response).to redirect_to assisters_path
+      expect(response).to redirect_to organization_assisters_path(user.organization)
     end
   end
 end

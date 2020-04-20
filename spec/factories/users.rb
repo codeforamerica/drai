@@ -12,6 +12,13 @@ FactoryBot.define do
 
     organization
 
+    factory :admin do
+      admin { true }
+      organization { nil }
+    end
+
+    factory :assister
+
     trait :unconfirmed do
       confirmed_at { nil }
     end

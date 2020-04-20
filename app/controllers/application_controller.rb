@@ -6,6 +6,26 @@ class ApplicationController < ActionController::Base
     @_current_organization ||= Organization.find_by(id: params[:organization_id]) if params[:organization_id]
   end
 
+  alias devise_authenticate_user! authenticate_user!
+
+  def authenticate_user!
+    devise_authenticate_user!
+    return true if current_user.admin?
+
+    if current_organization && current_organization != current_user.organization
+      Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
+      redirect_to organization_path(current_user.organization)
+    end
+  end
+
+  def authenticate_admin!
+    devise_authenticate_user!
+    return true if current_user.admin?
+
+    Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
+    redirect_to organization_path(current_user.organization)
+  end
+
   helper_method :current_organization
 
   def after_sign_in_path_for(user)

@@ -12,4 +12,17 @@ RSpec.describe User, type: :model do
       expect(user.password_required?).to be true
     end
   end
+
+  describe '#organization' do
+    it 'is required' do
+      user = build :user, organization: nil
+      expect(user.valid?).to be false
+      expect(user.errors[:organization]).to be_present
+    end
+
+    it 'is required unless user is an admin' do
+      user = build :user, organization: nil, admin: true
+      expect(user.valid?).to be true
+    end
+  end
 end

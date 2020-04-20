@@ -1,5 +1,6 @@
 class AidApplicationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, if: :current_organization
+  before_action :authenticate_admin!, unless: :current_organization
 
   def index
     query = AidApplication.all.order(id: :desc)

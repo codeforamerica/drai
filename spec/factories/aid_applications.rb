@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :aid_application do
-    association :assister, factory: :user
+    assister
     organization { assister.organization }
   end
 end
