@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   end
 
   resources :assisters, only: [:index, :new, :create]
+  resources :organizations, only: [:index, :show], param: :id do
+    resources :assisters, only: [:index, :new, :create]
+  end
 
   # honeycrisp gem
   mount Cfa::Styleguide::Engine => "/cfa"

@@ -8,9 +8,13 @@
       </div>
       <div class="toolbar__right">
         <% if current_user.present? %>
-          <%= link_to 'Assisters', assisters_path, method: :get, class: 'toolbar__item text--small' %>
+          <% if current_user.organization.present? %>
+            <%= link_to current_user.organization.name, organization_path(current_user.organization), class: 'toolbar__item text--small' %>
+          <% else %>
+            <%= link_to 'Admin', organizations_path, class: 'toolbar__item text--small' %>
+          <% end %>
           <%= link_to 'Account', edit_user_registration_path, class: 'toolbar__item text--small' %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "toolbar__item text--small" %>
+          <%= link_to "Sign out", destroy_user_session_path, class: "toolbar__item text--small" %>
         <% else %>
           <%= link_to "Sign in", new_user_session_path, class: "toolbar__item text--small" %>
         <% end %>
