@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  aid_applications_count :integer          default(0), not null
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -41,6 +42,7 @@ class User < ApplicationRecord
          :confirmable, :trackable
 
   belongs_to :organization, optional: true, counter_cache: true
+  has_many :aid_applications, inverse_of: :assister
 
   validates :password, presence: true, on: :account_setup, unless: :password_present?
 

@@ -7,19 +7,24 @@ class Seeder
     admin_user
     organization
     assister
+    aid_application
   end
 
   private
 
   def admin_user
-    @admin_user ||= User.create name: "Admin Adminface", email: 'admin@dafi.org', password: 'qwerty', confirmed_at: Time.current
+    @admin_user ||= User.find_or_create_by!(email: 'admin@dafi.org') { |user| user.attributes = { name: "Admin Adminface", password: 'qwerty', confirmed_at: Time.current } }
   end
 
   def organization
-    @organization ||= Organization.create name: 'Food Bank'
+    @organization ||= Organization.find_or_create_by!(name: 'Food Bank')
   end
 
   def assister
-    @assister ||= User.create name: 'Assister Assisterface', email: 'assister@foodbank.org', organization: organization, password: 'qwerty', confirmed_at: Time.current
+    @assister ||= User.find_or_create_by!(email: 'assister@foodbank.org') { |user| user.attributes = { name: 'Assister Assisterface', organization: organization, password: 'qwerty', confirmed_at: Time.current } }
+  end
+
+  def aid_application
+    AidApplication.create! assister: assister, organization: organization
   end
 end
