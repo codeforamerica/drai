@@ -1,5 +1,7 @@
 <div class="grid__item width-one-whole">
-  <%= link_to "Add new user", new_assister_path %>
+  <%= link_to new_assister_path, class: 'button button--primary' do %>
+    <span class="icon icon-add" aria-hidden="true"></span> Add new user
+  <% end %>
 </div>
 
 <div class="grid__item width-one-whole">
