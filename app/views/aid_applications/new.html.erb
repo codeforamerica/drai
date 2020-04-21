@@ -1,0 +1,15 @@
+<% content = capture_form do |f| %>
+<% end %>
+
+<% footer = capture_form do |f| %>
+  <%= f.cfa_button "Create aid application" %>
+  <%= link_to "Cancel", organization_aid_applications_path(current_organization) %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: @aid_application,
+           form_options: { url: { action: :create } },
+           title: "Create new aid application",
+           content: content,
+           footer: footer
+%>

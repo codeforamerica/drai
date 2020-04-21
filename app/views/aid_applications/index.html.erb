@@ -1,0 +1,34 @@
+<%= render 'shared/tab_navigation' %>
+
+<% if current_organization %>
+  <div class="grid__item width-one-whole">
+    <%= link_to "Add new application", new_organization_aid_application_path(current_organization) %>
+  </div>
+<% end %>
+
+<div class="grid__item width-one-whole">
+  <div class="data-table-container">
+    <table class="data-table js-sticky-header">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <% if current_organization.blank? %>
+          <th>Org</th>
+        <% end %>
+        <th>Assister</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @aid_applications.each do |aid_application| %>
+        <tr id="<%= dom_id(aid_application) %>">
+          <td><%= aid_application.id %></td>
+          <% if current_organization.blank? %>
+            <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
+          <% end %>
+            <td><%= aid_application.assister.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
