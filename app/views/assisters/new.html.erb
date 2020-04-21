@@ -1,11 +1,15 @@
 <% content = capture_form do |f| %>
   <%= f.cfa_input_field :name, "Name", classes: ["form-width--long"] %>
   <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"] %>
+
+  <% unless current_organization %>
+    <%= f.cfa_select(:organization_id, "Organization", Organization.all.order(name: :asc).map { |org| [org.name, org.id] }, prompt: "Select Organization") %>
+  <% end %>
 <% end %>
 
 <% footer = capture_form do |f| %>
   <%= f.cfa_button "Invite user" %>
-  <%= link_to "Cancel", assisters_path %>
+  <%= link_to "Cancel", current_organization ? organization_assisters_path(current_organization) : assisters_path %>
 <% end %>
 
 <%= render 'shared/form_card',

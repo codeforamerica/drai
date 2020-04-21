@@ -1,0 +1,11 @@
+<% if current_organization %>
+  <div class="tab-bar">
+    <%= link_to current_organization.name, organization_path(current_organization) , class: "tab-bar__tab #{ current_path?(organization_path(current_organization)) ? 'is-selected' : '' }" %>
+    <%= link_to "Assisters", organization_assisters_path(current_organization), class: "tab-bar__tab #{ current_path?(organization_assisters_path(current_organization)) ? 'is-selected' : '' }" %>
+  </div>
+<% else %>
+  <div class="tab-bar">
+    <%= link_to "All Organizations", organizations_path, class: "tab-bar__tab #{ current_path?(controller: 'organizations', action: 'index') ? 'is-selected' : '' }" %>
+    <%= link_to "All Assisters", assisters_path, class: "tab-bar__tab #{ current_path?(controller: 'assisters', action: 'index') ? 'is-selected' : '' }" %>
+  </div>
+<% end %>

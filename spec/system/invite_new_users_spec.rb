@@ -1,17 +1,24 @@
 require 'rails_helper'
 
-describe 'Users can invite new accounts when logged in', type: :system do
-  let!(:user) { create :user }
-  let!(:new_user_email) { 'daffyduck@dafi.org' }
-  let!(:new_user_password) { 'password1' }
+describe 'Account invitations', type: :system do
+  let(:admin) { create :user, organization: nil }
+  let(:assister) { create :user }
 
-  specify do
+  let(:new_user_email) { 'daffyduck@dafi.org' }
+  let(:new_user_password) { 'password1' }
+
+  # log in
+  # view list of assisters
+  # click on 'Add new user'
+  # Enter email address to invite
+  # Return to list of assisters
+  # See that newly added user is on list with status
+  it 'can be initiated by a Site Admin' do
     new_user = nil
 
     Capybara.using_session(:admin) do
-      sign_in user
+      sign_in admin
       visit assisters_path
-      expect(page).to have_content user.email
 
       click_on 'Add new user'
       fill_in 'Name', with: 'Daffy Duck'
@@ -55,10 +62,26 @@ describe 'Users can invite new accounts when logged in', type: :system do
       end
     end
   end
-  # log in
-  # view list of assisters
-  # click on 'Add new user'
-  # Enter email address to invite
-  # Return to list of assisters
-  # See that newly added user is on list with status
+
+  it 'can be initiated by an assister' do
+    sign_in assister
+    visit root_path
+    click_on assister.organization.name
+
+    click_on 'Assisters'
+    click_on 'Add new user'
+
+    fill_in 'Name', with: 'Daffy Duck'
+    fill_in 'Email', with: new_user_email
+    click_on 'Invite user'
+
+    expect(current_path).to eq organization_assisters_path(assister.organization)
+    expect(page).to have_content "Sent invite to #{new_user_email}"
+
+    new_user = User.last
+    expect(new_user).to have_attributes(
+      email: new_user_email,
+      organization: assister.organization
+    )
+  end
 end
