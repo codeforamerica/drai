@@ -1,8 +1,8 @@
-<% content = lambda do |f| %>
+<% content = capture_form do |f| %>
   <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"], help_text: "Enter your email to be sent password reset instructions" %>
 <% end %>
 
-<% footer = lambda do |f| %>
+<% footer = capture_form do |f| %>
   <%= f.cfa_button "Send me an email" %>
 <% end %>
 
