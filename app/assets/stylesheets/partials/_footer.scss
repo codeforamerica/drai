@@ -1,0 +1,18 @@
+.main-footer {
+  height: auto;
+
+  margin-top: -($footer-height * 1.5);
+
+  @include media($tablet-up) {
+    margin-top: -($footer-height * 1.5);
+  }
+}
+
+.main-footer__cfa-logo {
+  margin-top: 2em;
+
+  @include media($tablet-up) {
+    margin-top: 0;
+    float: right;
+  }
+}
