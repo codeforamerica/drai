@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :show
+  before_action :authenticate_admin!, except: :show
 
   def index
     @organizations = Organization.all

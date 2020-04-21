@@ -12,12 +12,15 @@ module Account
       @user.attributes = credentials
       @user.save(context: :account_setup)
 
-      if @user.errors.empty? && @user.setup?
-        bypass_sign_in(@user) # do not sign out the user on password change
-        redirect_to assisters_path
-      else
-        render :edit
-      end
+      respond_with @user, location: (lambda do
+        bypass_sign_in(@user)
+
+        if @user.organization
+          organization_assisters_path(@user.organization)
+        else
+          assisters_path
+        end
+      end)
     end
 
     private

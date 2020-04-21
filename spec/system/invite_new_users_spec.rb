@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe 'Account invitations', type: :system do
-  let(:admin) { create :user, organization: nil }
-  let(:assister) { create :user }
+  let!(:organization) { create :organization }
+  let(:admin) { create :admin }
+  let(:assister) { create :assister, organization: organization }
 
   let(:new_user_email) { 'daffyduck@dafi.org' }
   let(:new_user_password) { 'password1' }
@@ -21,6 +22,8 @@ describe 'Account invitations', type: :system do
       visit assisters_path
 
       click_on 'Add new user'
+
+      select organization.name, from: 'Organization'
       fill_in 'Name', with: 'Daffy Duck'
       fill_in 'Email', with: new_user_email
       click_on 'Invite user'

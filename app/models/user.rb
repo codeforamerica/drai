@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :aid_applications, inverse_of: :assister
 
   validates :password, presence: true, on: :account_setup, unless: :password_present?
+  validates :organization, presence: true, unless: :admin?
 
   def status
     if confirmed_at.blank?
