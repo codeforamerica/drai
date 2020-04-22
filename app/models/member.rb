@@ -20,6 +20,8 @@
 class Member < ApplicationRecord
   belongs_to :aid_application, counter_cache: true
 
-  validates :name, presence: true
-  validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: 'Must be 18-years or older and born after 1900' }
+  with_options on: :submit_aid_application do
+    validates :name, presence: true
+    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: 'Must be 18-years or older and born after 1900' }
+  end
 end

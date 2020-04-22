@@ -26,19 +26,22 @@
 class AidApplication < ApplicationRecord
   belongs_to :organization, counter_cache: true
   belongs_to :assister, class_name: 'User', counter_cache: true
-  has_many :members
+  has_many :members, -> { order(created_at: :asc) }
 
-  accepts_nested_attributes_for :members
+  accepts_nested_attributes_for :members, allow_destroy: true, reject_if: :all_blank
 
   before_validation :strip_phone_number
-  validates :street_address, presence: true
-  validates :city, presence: true
-  validates :zip_code, presence: true, zip_code: true
 
-  validates :phone_number, presence: true, phone_number: true
-  validates :email, presence: true, email: { message: "Make sure to enter a valid email" }
+  with_options on: :submit_aid_application do
+    validates :street_address, presence: true
+    validates :city, presence: true
+    validates :zip_code, presence: true, zip_code: true
 
-  validates :members, length: { minimum: 1, maximum: 2 }
+    validates :phone_number, presence: true, phone_number: true
+    validates :email, presence: true, email: { message: "Make sure to enter a valid email" }
+
+    validates :members, length: { minimum: 1, maximum: 2 }
+  end
 
   private
 

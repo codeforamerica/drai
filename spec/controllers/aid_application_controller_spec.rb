@@ -34,27 +34,37 @@ describe AidApplicationsController, type: :controller do
     end
   end
 
-  describe '#new' do
-    let!(:assister) { create :assister }
+  describe '#create' do
+    let(:assister) { create :assister }
 
     before { sign_in assister }
 
-    it 'returns a 200 status' do
-      get :new, params: { organization_id: assister.organization.id }
-      expect(response).to have_http_status :ok
+    it 'creates an empty AidApplication and redirects to the edit it' do
+      expect do
+        post :create, params: { organization_id: assister.organization.id }
+      end.to change(AidApplication, :count).by 1
+
+      aid_application = AidApplication.last
+      expect(aid_application).to have_attributes(
+                                       assister: assister,
+                                       organization: assister.organization
+                                     )
+      expect(response).to redirect_to edit_organization_aid_application_path(assister.organization, aid_application)
     end
   end
 
-  describe '#create' do
-    let!(:assister) { create :assister }
+  describe '#update' do
+    let(:assister) { create :assister }
+    let(:aid_application) { AidApplication.create!(assister: assister, organization: assister.organization) }
 
-    before { sign_in assister }
+    before { sign_in aid_application.assister }
 
     it 'creates a new aid application' do
       aid_application_attributes = attributes_for(:aid_application, organization: nil, assister: nil)
       members_attributes = attributes_for_list(:member, 2)
 
-      post :create, params: {
+      put :update, params: {
+        id: aid_application.id,
         organization_id: assister.organization.id,
         aid_application: aid_application_attributes.merge(
           members_attributes: {
@@ -74,8 +84,8 @@ describe AidApplicationsController, type: :controller do
                                                  name: members_attributes[0][:name]
                                                )
       expect(aid_application.members.second).to have_attributes(
-                                                 name: members_attributes[1][:name]
-                                               )
+                                                  name: members_attributes[1][:name]
+                                                )
     end
   end
 end

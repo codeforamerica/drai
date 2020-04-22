@@ -14,7 +14,8 @@ FactoryBot.define do
       members_count { 2 }
     end
 
-    members { build_list(:member, members_count, aid_application: nil) }
-
+    after(:build) do |aid_application, evaluator|
+      aid_application.members = build_list(:member, evaluator.members_count, aid_application: aid_application)
+    end
   end
 end
