@@ -13,6 +13,7 @@ class AidApplicationsController < ApplicationController
 
   def new
     @aid_application = AidApplication.new(assister: current_user, organization: current_organization)
+    2.times { @aid_application.members.build }
   end
 
   def create
@@ -27,6 +28,6 @@ class AidApplicationsController < ApplicationController
   private
 
   def aid_application_params
-    {} # TODO: add aid application form
+    params.require(:aid_application).permit(:street_address, :city, :zip_code, :phone_number, :email, members_attributes: [:id, :name, :birthday])
   end
 end

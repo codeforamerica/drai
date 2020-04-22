@@ -5,6 +5,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cfa-styleguide', git: 'https://github.com/codeforamerica/honeycrisp-gem', branch: 'fix-broken-path-finder-in-rails-6'
 gem 'devise'
 gem 'dotenv-rails'
+gem 'factory_bot_rails'
+gem 'faker'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'
@@ -17,8 +19,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails'
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_180909) do
+ActiveRecord::Schema.define(version: 2020_04_22_000528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,23 @@ ActiveRecord::Schema.define(version: 2020_04_20_180909) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "organization_id", null: false
     t.bigint "assister_id", null: false
+    t.text "street_address"
+    t.text "city"
+    t.text "zip_code"
+    t.text "phone_number"
+    t.text "email"
+    t.integer "members_count", default: 0, null: false
     t.index ["assister_id"], name: "index_aid_applications_on_assister_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "name"
+    t.date "birthday"
+    t.bigint "aid_application_id"
+    t.index ["aid_application_id"], name: "index_members_on_aid_application_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -61,5 +76,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_180909) do
 
   add_foreign_key "aid_applications", "organizations"
   add_foreign_key "aid_applications", "users", column: "assister_id"
+  add_foreign_key "members", "aid_applications"
   add_foreign_key "users", "organizations"
 end

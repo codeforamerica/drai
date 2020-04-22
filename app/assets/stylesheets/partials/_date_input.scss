@@ -1,0 +1,45 @@
+$width-form-year: $s155;
+$width-form-month: $s95;
+$width-form-day: $s95;
+
+.input-group--inline .date-input {
+  display: inline-block;
+}
+
+.date-input--fieldset{
+  margin-bottom: 0 !important;
+}
+
+.date-input--fieldset > p{
+  margin-bottom: $s10 !important;
+  margin-top: $s5 !important;
+}
+
+.date-input--fieldset > .form-question{
+  margin: 0;
+}
+.date-input--fieldset > .text--error{
+  margin-top: -$s60 !important;
+}
+
+.form-width--year {
+  max-width: $width-form-year;
+}
+
+.form-width--month {
+  max-width: $width-form-month;
+}
+
+.form-width--day {
+  max-width: $width-form-day;
+}
+
+.date-input--separator {
+  display: inline-block;
+  font-size: 30px;
+  margin: auto $s5;
+}
+
+.date-input label {
+  display: none;
+}

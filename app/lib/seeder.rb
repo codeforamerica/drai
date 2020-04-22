@@ -25,6 +25,6 @@ class Seeder
   end
 
   def aid_application
-    AidApplication.create! assister: assister, organization: organization
+    FactoryBot.create :aid_application, assister: assister, organization: organization
   end
 end

@@ -3,6 +3,11 @@
 # Table name: aid_applications
 #
 #  id              :bigint           not null, primary key
+#  city            :text
+#  email           :text
+#  phone_number    :text
+#  street_address  :text
+#  zip_code        :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  assister_id     :bigint           not null
@@ -21,4 +26,28 @@
 class AidApplication < ApplicationRecord
   belongs_to :organization, counter_cache: true
   belongs_to :assister, class_name: 'User', counter_cache: true
+  has_many :members
+
+  accepts_nested_attributes_for :members
+
+  before_validation :strip_phone_number
+  validates :street_address, presence: true
+  validates :city, presence: true
+  validates :zip_code, presence: true, zip_code: true
+
+  validates :phone_number, presence: true, phone_number: true
+  validates :email, presence: true, email: { message: "Make sure to enter a valid email" }
+
+  validates :members, length: { minimum: 1, maximum: 2 }
+
+  private
+
+  def strip_phone_number
+    return if phone_number.blank?
+
+    self.phone_number = phone_number.gsub(/\D/, '')
+    if phone_number.size == 11 && phone_number.first == '1'
+      self.phone_number = phone_number.slice(1..-1)
+    end
+  end
 end

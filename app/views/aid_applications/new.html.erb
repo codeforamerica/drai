@@ -1,4 +1,23 @@
 <% content = capture_form do |f| %>
+  <%= f.fields_for :members do |mf| %>
+    <div class="member-fields-<%= mf.index %>">
+      <%= mf.cfa_input_field :name, "Name" %>
+      <%= mf.gcf_date_input :birthday, "Date of Birth", help_text: 'MM/DD/YYYY'%>
+    </div>
+
+    <hr>
+  <% end %>
+
+  <%= f.cfa_input_field :street_address, "Street Address" %>
+  <%= f.cfa_input_field :city, "City" %>
+  <%= f.cfa_input_field :zip_code, "ZIP Code" %>
+
+  <hr>
+
+  <%= f.cfa_input_field :phone_number, "Phone Number" %>
+  <%= f.cfa_input_field :email, "Email Address" %>
+
+
 <% end %>
 
 <% footer = capture_form do |f| %>
