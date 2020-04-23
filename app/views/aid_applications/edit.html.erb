@@ -12,7 +12,9 @@
             <%= mf.gcf_date_input :birthday, "Date of Birth", help_text: 'MM/DD/YYYY'%>
 
             <% if @aid_application.members.size > 1 %>
-              <%= f.button 'Remove Person', type: 'submit', name: "aid_application[members_attributes][#{mf.index}]_destroy", value: '1', class: 'button button--secondary' %>
+              <%= f.button type: 'submit', name: "aid_application[members_attributes][#{mf.index}]_destroy", value: '1', class: 'button button--secondary' do %>
+                <span class="icon icon-cancel" aria-hidden="true"></span> Remove Person
+              <% end %>
             <% end %>
           </div>
 
@@ -20,7 +22,9 @@
         <% end %>
 
         <% if @aid_application.members.size < 2 %>
-          <%= f.button 'Add a second person', type: 'submit', name: 'form_action', value: 'add_person', class: 'button button--secondary' %>
+          <%= f.button type: 'submit', name: 'form_action', value: 'add_person', class: 'button button--secondary' do %>
+            <span class="icon icon-add" aria-hidden="true"></span> Add a second person
+          <% end %>
           <hr>
         <% end %>
 

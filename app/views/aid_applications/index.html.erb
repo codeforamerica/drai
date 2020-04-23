@@ -2,7 +2,10 @@
 
 <% if current_organization %>
   <div class="grid__item width-one-whole">
-    <%= button_to "Add new application", organization_aid_applications_path(current_organization), method: :post %>
+    <br>
+    <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
+      <span class="icon icon-add" aria-hidden="true"></span> Add new application
+    <% end %>
   </div>
 <% end %>
 

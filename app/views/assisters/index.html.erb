@@ -1,6 +1,7 @@
 <%= render 'shared/tab_navigation' %>
 
 <div class="grid__item width-one-whole">
+  <br>
   <%= link_to current_organization ? new_organization_assister_path(current_organization) : new_assister_path, class: 'button button--primary' do %>
     <span class="icon icon-add" aria-hidden="true"></span> Add new user
   <% end %>
