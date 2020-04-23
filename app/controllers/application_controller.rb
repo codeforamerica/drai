@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
 
   alias devise_authenticate_user! authenticate_user!
 
-  def authenticate_user!
-    devise_authenticate_user!
-    return true if current_user.admin?
+  def authenticate_user!(opts = {})
+    devise_authenticate_user!(opts)
+    return if current_user.admin?
 
     if current_organization && current_organization != current_user.organization
       Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate_admin!
-    devise_authenticate_user!
+  def authenticate_admin!(opts = {})
+    devise_authenticate_user!(opts)
     return true if current_user.admin?
 
     Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
