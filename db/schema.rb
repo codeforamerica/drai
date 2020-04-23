@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_04_27_205714) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,4 +95,23 @@ ActiveRecord::Schema.define(version: 2020_04_27_205714) do
   add_foreign_key "members", "aid_applications"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"
+
+  create_view "aid_application_searches", materialized: true, sql_definition: <<-SQL
+      WITH member_details AS (
+           SELECT m.aid_application_id,
+              COALESCE(m.name, ''::text) AS info
+             FROM members m
+          ), combined_member_details AS (
+           SELECT member_details.aid_application_id,
+              string_agg(member_details.info, ' '::text) AS info
+             FROM member_details
+            GROUP BY member_details.aid_application_id
+          )
+   SELECT aid_applications.id AS aid_application_id,
+      ((((((((((((aid_applications.id || ' '::text) || COALESCE(combined_member_details.info, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) AS searchable_data
+     FROM (aid_applications
+       LEFT JOIN combined_member_details ON ((aid_applications.id = combined_member_details.aid_application_id)));
+  SQL
+  add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin
+  add_index "aid_application_searches", ["aid_application_id"], name: "index_aid_application_searches_on_aid_application_id", unique: true
 end

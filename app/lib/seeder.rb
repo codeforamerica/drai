@@ -8,8 +8,8 @@ class Seeder
     organization
     supervisor
     assister
-
     FactoryBot.create_list :aid_application, 4, assister: assister, organization: organization
+    refresh_search_views
   end
 
   private
@@ -50,5 +50,9 @@ class Seeder
         confirmed_at: Time.current
       }
     end
+  end
+
+  def refresh_search_views
+    AidApplicationSearch.refresh
   end
 end

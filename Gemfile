@@ -15,7 +15,9 @@ gem 'puma', '~> 4.1'
 gem 'responders'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'sass-rails', '>= 6'
+gem 'scenic'
 gem 'sentry-raven'
+gem 'textacular', '~> 5.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
