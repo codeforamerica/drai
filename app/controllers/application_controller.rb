@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   def current_organization
     @_current_organization ||= Organization.find_by(id: params[:organization_id]) if params[:organization_id]
   end
+  helper_method :current_organization
 
   alias devise_authenticate_user! authenticate_user!
 
@@ -18,15 +19,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate_admin!(opts = {})
+  def authenticate_supervisor!(opts = {})
     devise_authenticate_user!(opts)
-    return true if current_user.admin?
+    return if current_user.supervisor? || current_user.admin?
 
-    Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
+    Rails.logger.error "Non-Supervisor User ##{current_user.id} is not allowed to access #{request.path}"
     redirect_to organization_path(current_user.organization)
   end
 
-  helper_method :current_organization
+  def authenticate_admin!(opts = {})
+    devise_authenticate_user!(opts)
+    return if current_user.admin?
+
+    Rails.logger.error "Non-Admin User ##{current_user.id} is not allowed to access #{request.path}"
+    redirect_to organization_path(current_user.organization)
+  end
 
   def after_sign_in_path_for(user)
     stored_location = stored_location_for(user)

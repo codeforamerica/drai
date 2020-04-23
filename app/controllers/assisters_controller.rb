@@ -1,6 +1,10 @@
 class AssistersController < ApplicationController
-  before_action :authenticate_user!, if: :current_organization
   before_action :authenticate_admin!, unless: :current_organization
+
+  with_options if: :current_organization do
+    before_action :authenticate_user!
+    before_action :authenticate_supervisor!, only: [:new, :create]
+  end
 
   def index
     query = User.all.order(id: :desc)
@@ -19,8 +23,10 @@ class AssistersController < ApplicationController
     @user = User.new(user_params)
     if current_organization
       @user.organization = current_organization
+      @user.inviter = current_user
     end
-    @user.save!
+
+    @user.save
 
     respond_with @user, location: -> { current_organization ? organization_assisters_path(current_organization) : assisters_path }, notice: "Sent invite to #{@user.email}"
   end

@@ -25,4 +25,22 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be true
     end
   end
+
+  describe '#admin' do
+    it 'cannot be true if the user is a member of an organization' do
+      user = build :user, organization: build(:organization)
+      user.admin = true
+      expect(user).not_to be_valid
+      expect(user.errors[:admin]).to be_present
+    end
+  end
+
+  describe '#supervisor' do
+    it 'cannot be true if the user is NOT a member of an organization' do
+      user = build :user, organization: nil
+      user.supervisor = true
+      expect(user).not_to be_valid
+      expect(user.errors[:supervisor]).to be_present
+    end
+  end
 end

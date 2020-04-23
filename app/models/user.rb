@@ -43,8 +43,11 @@ class User < ApplicationRecord
          :confirmable, :trackable
 
   belongs_to :organization, optional: true, counter_cache: true
+  belongs_to :inviter, class_name: 'User', optional: true
   has_many :aid_applications, inverse_of: :assister
 
+  validates :admin, inclusion: { in: [false] }, if: -> { organization.present? }
+  validates :supervisor, inclusion: { in: [false] }, if: -> { organization.blank? }
   validates :password, presence: true, on: :account_setup, unless: :password_present?
   validates :organization, presence: true, unless: :admin?
 

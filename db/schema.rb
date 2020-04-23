@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_000528) do
+ActiveRecord::Schema.define(version: 2020_04_23_222932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,8 +68,11 @@ ActiveRecord::Schema.define(version: 2020_04_22_000528) do
     t.bigint "organization_id"
     t.integer "aid_applications_count", default: 0, null: false
     t.boolean "admin", default: false, null: false
+    t.boolean "supervisor", default: false, null: false
+    t.bigint "inviter_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["inviter_id"], name: "index_users_on_inviter_id"
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -78,4 +81,5 @@ ActiveRecord::Schema.define(version: 2020_04_22_000528) do
   add_foreign_key "aid_applications", "users", column: "assister_id"
   add_foreign_key "members", "aid_applications"
   add_foreign_key "users", "organizations"
+  add_foreign_key "users", "users", column: "inviter_id"
 end
