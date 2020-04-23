@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:index, :show], param: :id do
     resources :assisters, only: [:index, :new, :create]
-    resources :aid_applications, only: [:index, :new, :create]
+    resources :aid_applications, only: [:index, :new, :create, :edit, :update]
   end
 
   # honeycrisp gem

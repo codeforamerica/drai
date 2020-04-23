@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+  shared:
+    date_select:
+      month: "Month"
+      day: "Day"
+      year: "Year"
+  activerecord:
+    errors:
+      messages:
+        zip_code: "Must be a 5-digit ZIP Code in California"
+        phone_number: "Make sure your phone number is 10 digits long"

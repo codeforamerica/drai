@@ -1,0 +1,45 @@
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h1 class="form-card__title">Aid application</h1>
+    </header>
+
+    <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder) do |f| %>
+      <div class="form-card__content">
+        <%= f.fields_for :members do |mf| %>
+          <div class="member-fields-<%= mf.index %>">
+            <%= mf.cfa_input_field :name, "Name" %>
+            <%= mf.gcf_date_input :birthday, "Date of Birth", help_text: 'MM/DD/YYYY'%>
+
+            <% if @aid_application.members.size > 1 %>
+              <%= f.button 'Remove Person', type: 'submit', name: "aid_application[members_attributes][#{mf.index}]_destroy", value: '1', class: 'button button--secondary' %>
+            <% end %>
+          </div>
+
+          <hr>
+        <% end %>
+
+        <% if @aid_application.members.size < 2 %>
+          <%= f.button 'Add a second person', type: 'submit', name: 'form_action', value: 'add_person', class: 'button button--secondary' %>
+          <hr>
+        <% end %>
+
+        <%= f.cfa_input_field :street_address, "Street Address" %>
+        <%= f.cfa_input_field :city, "City" %>
+        <%= f.cfa_input_field :zip_code, "ZIP Code" %>
+
+        <hr>
+
+        <%= f.cfa_input_field :phone_number, "Phone Number" %>
+        <%= f.cfa_input_field :email, "Email Address" %>
+      </div>
+
+      <div class="form-card__footer">
+        <%= f.button 'Submit', type: 'submit', name: 'form_action', value: 'submit', class: 'button button--primary' %>
+        <%= f.button 'Save', type: 'submit', name: 'form_action', value: 'save', class: 'button button--secondary' %>
+        <%= link_to "Cancel", organization_aid_applications_path(current_organization) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

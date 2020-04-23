@@ -2,7 +2,7 @@
 
 <% if current_organization %>
   <div class="grid__item width-one-whole">
-    <%= link_to "Add new application", new_organization_aid_application_path(current_organization) %>
+    <%= button_to "Add new application", organization_aid_applications_path(current_organization), method: :post %>
   </div>
 <% end %>
 
