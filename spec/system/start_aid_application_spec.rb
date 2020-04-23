@@ -53,10 +53,5 @@ describe 'Start aid application', type: :system do
 
     member = aid_application.members.first
     expect(member.name).to eq 'Barbara'
-
-    within "##{dom_id aid_application}" do
-      expect(page).to have_content aid_application.id
-      expect(page).to have_content user.name
-    end
   end
 end

@@ -1,8 +1,10 @@
+<%= render 'aid_applications/navigation' %>
+
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
-    <header class="form-card__header">
-      <h1 class="form-card__title">Aid application</h1>
-    </header>
+<!--    <header class="form-card__header">-->
+<!--      <h1 class="form-card__title">Aid application</h1>-->
+<!--    </header>-->
 
     <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder) do |f| %>
       <div class="form-card__content">

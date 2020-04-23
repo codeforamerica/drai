@@ -19,6 +19,7 @@
           <th>Org</th>
         <% end %>
         <th>Assister</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@
             <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
           <% end %>
             <td><%= aid_application.assister.name %></td>
+            <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_edit_path(aid_application.organization, aid_application) %>
         </tr>
       <% end %>
       </tbody>

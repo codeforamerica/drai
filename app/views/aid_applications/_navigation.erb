@@ -1,0 +1,21 @@
+<h2>Application #<%= current_aid_application.id %></h2>
+
+<p>
+  Status: <br>
+  Special Code: <br>
+  Other helpful info at a glance...
+</p>
+
+<div class="tab-bar">
+  <%= link_to organization_aid_application_edit_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_edit_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+    1. Apply <span class="icon-arrow_forward"></span>
+  <% end %>
+  <%= link_to organization_aid_application_verification_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_verification_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+    2. Verify <span class="icon-arrow_forward"></span>
+  <% end %>
+  <%= link_to organization_aid_application_disbursement_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_disbursement_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+    3. Disburse
+  <% end %>
+  </div>
+
+<br>

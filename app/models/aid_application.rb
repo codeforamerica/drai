@@ -28,7 +28,7 @@ class AidApplication < ApplicationRecord
   belongs_to :assister, class_name: 'User', counter_cache: true
   has_many :members, -> { order(created_at: :asc) }
 
-  accepts_nested_attributes_for :members, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :members, allow_destroy: true
 
   before_validation :strip_phone_number
 
