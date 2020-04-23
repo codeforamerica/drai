@@ -33,3 +33,10 @@
 .data-table td a {
   text-decoration: underline;
 }
+
+.flash-container {
+  &:target {
+    // Honeycrisp version just has opacity: 0, which means it covers and makes navigation un-clickable
+    display: none;
+  }
+}
