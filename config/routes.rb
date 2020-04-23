@@ -22,7 +22,13 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:index, :show], param: :id do
     resources :assisters, only: [:index, :new, :create]
-    resources :aid_applications, only: [:index, :new, :create, :edit, :update]
+    resources :aid_applications, only: [:index, :new, :create] do
+      scope module: :aid_applications do
+        resource :edit, only: [:edit, :update], path_names: { edit: '' }
+        resource :verification, only: [:edit, :update], path_names: { edit: '' }
+        resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
+      end
+    end
   end
 
   # honeycrisp gem
