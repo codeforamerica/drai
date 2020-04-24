@@ -1,0 +1,38 @@
+<%= render 'form', user: @user, title: "Edit assister", button_label: 'Edit assister' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <br>
+  <h3>Changelog</h3>
+  <ul class="list--bulleted">
+    <%
+      showable_changes = [:name, :email, :supervisor]
+      versions = @user.versions.includes(:item).reorder(created_at: :desc).select { |v| v.changeset.any? { |(field, _values)| field.to_sym.in? showable_changes} }
+      actors_by_id = User.where(id: versions.pluck(:whodunnit).uniq).index_by(&:id)
+    %>
+
+    <% versions.each do |version| %>
+      <li>
+        <strong>
+          <% if actor = actors_by_id[version.whodunnit.to_i] %>
+            <%= actor.name %>
+          <% else %>
+            Automated Process
+          <% end %>
+        </strong>
+        <% if version.event == 'create' %>
+          sent an invite
+        <% else %>
+          changed
+          <%= version.changeset.reject { |c| c == 'updated_at' }.map do |(field, (original_value, new_value))| %>
+            <% capture do %>
+              <strong><%= field %></strong>
+              from <strong><%= original_value %></strong>
+              to <strong><%= new_value %></strong>
+            <% end %>
+          <% end.to_sentence.html_safe %>
+        <% end %>
+        about <strong title="<%= version.created_at %>"><%= time_ago_in_words(version.created_at) %> ago</strong>.
+      </li>
+    <% end %>
+  </ul>
+</div>

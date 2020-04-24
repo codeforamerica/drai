@@ -42,6 +42,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
 
+  has_paper_trail
+
   belongs_to :organization, optional: true, counter_cache: true
   belongs_to :inviter, class_name: 'User', optional: true
   has_many :aid_applications, inverse_of: :assister

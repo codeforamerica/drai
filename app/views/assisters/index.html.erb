@@ -20,6 +20,9 @@
           <% end %>
           <th>Email</th>
           <th>Status</th>
+          <% if supervisor? %>
+            <th>Action</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +40,15 @@
             <% end %>
             <td><%= assister.email %></td>
             <td><%= assister.status_human %></td>
+            <% if supervisor? %>
+              <td>
+                <% if assister.organization %>
+                  <%= link_to "Edit", edit_organization_assister_path(assister.organization, assister) %></td>
+                <% else %>
+                  <%= link_to "Edit", edit_assister_path(assister) %>
+                <% end %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
