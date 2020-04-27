@@ -17,11 +17,11 @@ Rails.application.routes.draw do
     resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
-  resources :assisters, only: [:index, :new, :create]
+  resources :assisters
   resources :aid_applications, only: [:index]
 
   resources :organizations, only: [:index, :show], param: :id do
-    resources :assisters, only: [:index, :new, :create]
+    resources :assisters
     resources :aid_applications, only: [:index, :new, :create] do
       scope module: :aid_applications do
         resource :edit, only: [:edit, :update], path_names: { edit: '' }

@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
+  before_action :set_paper_trail_whodunnit
+
   def current_organization
     @_current_organization ||= Organization.find_by(id: params[:organization_id]) if params[:organization_id]
   end

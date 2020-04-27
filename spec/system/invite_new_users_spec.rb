@@ -26,7 +26,7 @@ describe 'Account invitations', type: :system do
       select organization.name, from: 'Organization'
       fill_in 'Name', with: 'Daffy Duck'
       fill_in 'Email', with: new_user_email
-      click_on 'Invite user'
+      click_on 'Invite assister'
 
       expect(current_path).to eq assisters_path
       expect(page).to have_content "Sent invite to #{new_user_email}"
@@ -76,7 +76,7 @@ describe 'Account invitations', type: :system do
 
     fill_in 'Name', with: 'Daffy Duck'
     fill_in 'Email', with: new_user_email
-    click_on 'Invite user'
+    click_on 'Invite assister'
 
     expect(current_path).to eq organization_assisters_path(supervisor.organization)
     expect(page).to have_content "Sent invite to #{new_user_email}"
