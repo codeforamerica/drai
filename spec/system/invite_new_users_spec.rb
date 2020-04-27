@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Account invitations', type: :system do
   let!(:organization) { create :organization }
   let(:admin) { create :admin }
-  let(:assister) { create :assister, organization: organization }
+  let(:supervisor) { create :supervisor, organization: organization }
 
   let(:new_user_email) { 'daffyduck@dafi.org' }
   let(:new_user_password) { 'password1' }
@@ -21,7 +21,7 @@ describe 'Account invitations', type: :system do
       sign_in admin
       visit assisters_path
 
-      click_on 'Add new user'
+      click_on 'Add new assister'
 
       select organization.name, from: 'Organization'
       fill_in 'Name', with: 'Daffy Duck'
@@ -66,25 +66,36 @@ describe 'Account invitations', type: :system do
     end
   end
 
-  it 'can be initiated by an assister' do
-    sign_in assister
+  it 'can be initiated by a Supervisor' do
+    sign_in supervisor
     visit root_path
-    click_on assister.organization.name
+    click_on supervisor.organization.name
 
     click_on 'Assisters'
-    click_on 'Add new user'
+    click_on 'Add new assister'
 
     fill_in 'Name', with: 'Daffy Duck'
     fill_in 'Email', with: new_user_email
     click_on 'Invite user'
 
-    expect(current_path).to eq organization_assisters_path(assister.organization)
+    expect(current_path).to eq organization_assisters_path(supervisor.organization)
     expect(page).to have_content "Sent invite to #{new_user_email}"
 
     new_user = User.last
     expect(new_user).to have_attributes(
       email: new_user_email,
-      organization: assister.organization
+      organization: supervisor.organization
     )
+  end
+
+  it 'cannot be initiated by an assister' do
+    assister = create :assister
+
+    sign_in assister
+    visit root_path
+    click_on assister.organization.name
+
+    click_on 'Assisters'
+    expect(page).not_to have_link 'Add new assister'
   end
 end

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe 'Start aid application', type: :system do
-  let!(:user) { create :user }
+  let!(:assister) { create :assister }
 
   specify do
-    sign_in user
+    sign_in assister
 
     visit root_path
-    click_on user.organization.name
+    click_on assister.organization.name
 
     click_on "Applications"
     click_on "Add new application"
@@ -43,8 +43,8 @@ describe 'Start aid application', type: :system do
 
     aid_application = AidApplication.last
     expect(aid_application).to have_attributes(
-                                 assister: user,
-                                 organization: user.organization,
+                                 assister: assister,
+                                 organization: assister.organization,
                                  street_address: "123 Main Street",
                                  city: "Big City",
                                  zip_code: "94103"

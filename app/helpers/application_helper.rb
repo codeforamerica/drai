@@ -25,7 +25,7 @@ module ApplicationHelper
                   end
   end
 
-  def layouts
-
+  def supervisor?
+    current_user.try(:supervisor?) || current_user.try(:admin?)
   end
 end

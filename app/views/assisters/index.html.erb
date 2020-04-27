@@ -1,9 +1,10 @@
 <%= render 'shared/tab_navigation' %>
 
 <div class="grid__item width-one-whole">
-  <br>
-  <%= link_to current_organization ? new_organization_assister_path(current_organization) : new_assister_path, class: 'button button--primary' do %>
-    <span class="icon icon-add" aria-hidden="true"></span> Add new user
+  <% if supervisor? %>
+    <%= link_to current_organization ? new_organization_assister_path(current_organization) : new_assister_path, class: 'button button--primary' do %>
+      <span class="icon icon-add" aria-hidden="true"></span> Add new assister
+    <% end %>
   <% end %>
 </div>
 
@@ -25,7 +26,12 @@
         <% @assisters.each do |assister| %>
           <tr id="<%= dom_id(assister) %>">
             <td><%= assister.id %></td>
-            <td><%= assister.name %></td>
+            <td>
+              <%= assister.name %>
+              <% if assister.supervisor? %>
+                <span class="label ">Supervisor</span>
+              <% end %>
+            </td>
             <% unless current_organization %>
               <td><%= assister.organization ? link_to(assister.organization.name, organization_path(assister.organization)) : nil %></td>
             <% end %>
