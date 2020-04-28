@@ -41,5 +41,6 @@ group :test do
   gem 'launchy', require: false
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'timecop'
   gem 'webmock'
 end
