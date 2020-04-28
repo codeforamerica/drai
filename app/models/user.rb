@@ -54,7 +54,9 @@ class User < ApplicationRecord
   validates :organization, presence: true, unless: :admin?
 
   def status
-    if confirmed_at.blank?
+    if deactivated_at.present?
+      :deactivated
+    elsif confirmed_at.blank?
       :invited
     elsif encrypted_password.blank?
       :confirmed
@@ -65,6 +67,7 @@ class User < ApplicationRecord
 
   def status_human
     {
+      deactivated: 'Deactivated',
       invited: 'Invited',
       confirmed: 'Confirmed',
       active: 'Active',
@@ -85,5 +88,14 @@ class User < ApplicationRecord
 
   def setup?
     encrypted_password.present?
+  end
+
+  def active_for_authentication?
+    super && deactivated_at.blank?
+  end
+
+  # Message when deactivated account attempts sign in
+  def inactive_message
+    deactivated_at.present? ? 'Account has been deactivated' : super
   end
 end

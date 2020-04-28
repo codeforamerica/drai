@@ -81,4 +81,37 @@ describe AssistersController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    let(:supervisor) { create :supervisor }
+    let(:assister) { create :assister, organization: supervisor.organization }
+
+    context 'when a supervisor' do
+      before { sign_in supervisor }
+
+      it 'marks the user as deactivated' do
+        expect do
+          delete :destroy, params: { organization_id: supervisor.organization.id, id: assister.id }
+        end.to change { assister.reload.deactivated_at }.from(nil).to within(1.second).of Time.current
+
+        expect(response).to redirect_to organization_assisters_path(supervisor.organization)
+      end
+
+      it 'cannot perform on itself' do
+        expect do
+          delete :destroy, params: { organization_id: supervisor.organization.id, id: supervisor.id }
+        end.not_to change { assister.reload.deactivated_at }
+      end
+    end
+
+    context 'when an assister' do
+      before { sign_in assister }
+
+      it 'does nothing' do
+        expect do
+          delete :destroy, params: { organization_id: supervisor.organization.id, id: assister.id }
+        end.not_to change { assister.reload.deactivated_at }
+      end
+    end
+  end
 end

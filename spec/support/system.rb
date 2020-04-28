@@ -1,8 +1,26 @@
 Capybara.default_max_wait_time = 2
 Capybara.server = :puma, { Silent: true }
 
+module SystemTestHelpers
+  [
+    :accept_confirm,
+    :dismiss_confirm,
+    :accept_prompt,
+    :dismiss_prompt,
+  ].each do |driver_method|
+    define_method(driver_method) do |text = nil, **options, &blk|
+      if Capybara.instance_methods(false).include?(driver_method)
+        super
+      else
+        blk.call
+      end
+    end
+  end
+end
+
 RSpec.configure do |config|
   config.include ActionView::RecordIdentifier, type: :system
+  config.include SystemTestHelpers, type: :system
 
   config.before(:each, type: :system) do |example|
     if ENV['SHOW_BROWSER']

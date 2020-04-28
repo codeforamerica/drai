@@ -43,4 +43,16 @@ RSpec.describe User, type: :model do
       expect(user.errors[:supervisor]).to be_present
     end
   end
+
+  describe '#active_for_authentication?' do
+    it 'is true if deactivated_at is nil' do
+      user = build :user, deactivated_at: nil
+      expect(user.active_for_authentication?).to eq true
+    end
+
+    it 'is false if deactivated_at is set' do
+      user = build :user, deactivated_at: Time.current
+      expect(user.active_for_authentication?).to eq false
+    end
+  end
 end
