@@ -17,6 +17,7 @@
         <% if current_organization.blank? %>
           <th>Org</th>
         <% end %>
+        <th>Member(s)</th>
         <th>Assister</th>
         <th>Action</th>
       </tr>
@@ -25,11 +26,12 @@
       <% @aid_applications.each do |aid_application| %>
         <tr id="<%= dom_id(aid_application) %>">
           <td><%= aid_application.id %></td>
+          <td><%= aid_application.member_names.join(', ') %></td>
           <% if current_organization.blank? %>
             <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
           <% end %>
-            <td><%= aid_application.assister.name %></td>
-            <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_edit_path(aid_application.organization, aid_application) %>
+          <td><%= aid_application.assister.name %></td>
+          <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_edit_path(aid_application.organization, aid_application) %>
         </tr>
       <% end %>
       </tbody>

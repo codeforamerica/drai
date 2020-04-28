@@ -93,4 +93,11 @@ RSpec.describe AidApplication, type: :model do
       expect(aid_application).not_to be_valid(:submit_aid_application)
     end
   end
+
+  describe '.member_names' do
+    it 'returns an array of member names' do
+      aid_application = build :aid_application, members_count: 1
+      expect(aid_application.member_names).to contain_exactly(aid_application.members[0].name)
+    end
+  end
 end
