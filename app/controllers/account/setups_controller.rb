@@ -1,7 +1,7 @@
 module Account
   class SetupsController < ApplicationController
     before_action :authenticate_user!
-    before_action { redirect_to(edit_user_registration_path) if current_user.setup? }
+    before_action { redirect_to(account_path) if current_user.setup? }
 
     def edit
       @user = current_user
@@ -12,9 +12,8 @@ module Account
       @user.attributes = credentials
       @user.save(context: :account_setup)
 
+      bypass_sign_in(@user) if @user.errors.empty?
       respond_with @user, location: (lambda do
-        bypass_sign_in(@user)
-
         if @user.organization
           organization_assisters_path(@user.organization)
         else

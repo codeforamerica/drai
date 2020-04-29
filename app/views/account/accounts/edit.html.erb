@@ -1,0 +1,18 @@
+<% content = capture_form do |f| %>
+  <%= f.cfa_input_field(:current_password, "Current password", type: "password", classes: ["form-width--med"]) %>
+
+  <%= f.cfa_input_field(:password, "New password", type: "password", classes: ["form-width--med"], help_text: "This should be at least #{@user.class.password_length.min} characters.") %>
+  <%= f.cfa_input_field(:password_confirmation, "Confirm new password", type: "password", classes: ["form-width--med"]) %>
+<% end %>
+
+<% footer = capture_form do |f| %>
+  <%= f.cfa_button "Update" %>
+<% end %>
+
+<%= render 'shared/form_card',
+           form_resource: @user,
+           form_options: { url: { action: :update }, html: { method: :put } },
+           title: "Update account",
+           content: content,
+           footer: footer
+%>

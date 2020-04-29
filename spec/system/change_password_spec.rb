@@ -14,15 +14,16 @@ describe 'Password reset', type: :system do
     end
 
     click_on 'Account'
+    click_on 'Change password'
 
     fill_in 'Current password', with: 'password'
     fill_in 'New password', with: 'qwerty'
     fill_in 'Confirm new password', with: 'qwerty'
-    click_on 'Update account'
+    click_on 'Update'
 
-    expect(page).to have_content 'Your account has been updated successfully.'
+    expect(page).to have_content 'Your account has been updated.'
 
-    click_on 'Sign out'
+    click_on 'Sign out', match: :first
 
     click_on 'Sign in'
 

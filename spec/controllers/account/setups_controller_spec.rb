@@ -26,7 +26,7 @@ describe Account::SetupsController do
       it "redirects away" do
         sign_in user
         get :edit
-        expect(response).to redirect_to edit_user_registration_path
+        expect(response).to redirect_to account_path
       end
     end
   end

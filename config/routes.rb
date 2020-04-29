@@ -8,12 +8,7 @@ Rails.application.routes.draw do
              },
              path: 'account'
 
-  as :user do
-    get 'account' => 'devise/registrations#edit', as: 'edit_user_registration'
-    put 'account' => 'devise/registrations#update', as: 'user_registration'
-  end
-
-  namespace :account do
+  resource 'account', module: :account, only: [:show, :edit, :update] do
     resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
