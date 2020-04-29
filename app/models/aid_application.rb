@@ -43,6 +43,10 @@ class AidApplication < ApplicationRecord
     validates :members, length: { minimum: 1, maximum: 2 }
   end
 
+  def member_names
+    members.map(&:name)
+  end
+
   private
 
   def strip_phone_number
