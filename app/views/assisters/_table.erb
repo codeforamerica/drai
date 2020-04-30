@@ -1,0 +1,42 @@
+
+<div class="data-table-container">
+  <table class="data-table js-sticky-header">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <% unless current_organization %>
+        <th>Org</th>
+      <% end %>
+      <th>Email</th>
+      <th>Status</th>
+      <% if supervisor? %>
+        <th>Action</th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% assisters.each do |assister| %>
+      <tr id="<%= dom_id(assister) %>">
+        <td><%= assister.id %></td>
+        <td>
+          <%= assister.name %>
+          <% if assister.supervisor? %>
+            <span class="label ">Supervisor</span>
+          <% end %>
+        </td>
+        <% unless current_organization %>
+          <td><%= assister.organization ? link_to(assister.organization.name, organization_path(assister.organization)) : nil %></td>
+        <% end %>
+        <td><%= assister.email %></td>
+        <td><%= assister.status_human %></td>
+        <% if supervisor? %>
+          <td>
+            <%= yield(assister) %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

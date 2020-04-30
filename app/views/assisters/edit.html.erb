@@ -5,7 +5,7 @@
   <h3>Changelog</h3>
   <ul class="list--bulleted">
     <%
-      showable_changes = [:name, :email, :supervisor]
+      showable_changes = [:name, :email, :supervisor, :deactivated_at]
       versions = @user.versions.includes(:item).reorder(created_at: :desc).select { |v| v.changeset.any? { |(field, _values)| field.to_sym.in? showable_changes} }
       actors_by_id = User.where(id: versions.pluck(:whodunnit).uniq).index_by(&:id)
     %>
@@ -22,12 +22,20 @@
         <% if version.event == 'create' %>
           sent an invite
         <% else %>
-          changed
           <%= version.changeset.reject { |c| c == 'updated_at' }.map do |(field, (original_value, new_value))| %>
             <% capture do %>
-              <strong><%= field %></strong>
-              from <strong><%= original_value %></strong>
-              to <strong><%= new_value %></strong>
+              <% if field == 'deactivated_at' %>
+                <% if original_value.present? && new_value.blank? %>
+                  reactivated account
+                <% else %>
+                  deactivated account
+                <% end %>
+              <% else %>
+                changed
+                <strong><%= field %></strong>
+                from <strong><%= original_value %></strong>
+                to <strong><%= new_value %></strong>
+              <% end %>
             <% end %>
           <% end.to_sentence.html_safe %>
         <% end %>

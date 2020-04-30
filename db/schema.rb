@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_230743) do
+ActiveRecord::Schema.define(version: 2020_04_27_205714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,12 @@ ActiveRecord::Schema.define(version: 2020_04_23_230743) do
     t.boolean "admin", default: false, null: false
     t.boolean "supervisor", default: false, null: false
     t.bigint "inviter_id"
+    t.datetime "deactivated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["inviter_id"], name: "index_users_on_inviter_id"
+    t.index ["organization_id", "deactivated_at", "id"], name: "index_users_on_organization_id_and_deactivated_at_and_id", order: { deactivated_at: :desc, id: :desc }
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
