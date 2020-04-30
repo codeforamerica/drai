@@ -15,7 +15,9 @@ FactoryBot.define do
     end
 
     after(:build) do |aid_application, evaluator|
-      aid_application.members = build_list(:member, evaluator.members_count, aid_application: aid_application)
+      if evaluator.members_count > 0
+        aid_application.members = build_list(:member, evaluator.members_count, aid_application: aid_application)
+      end
     end
   end
 end

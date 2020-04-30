@@ -4,22 +4,21 @@ describe AidApplications::VerificationsController, type: :controller do
   let!(:assister) { create :assister }
   before { sign_in assister}
 
-  describe '#edit' do
-    it 'loads page' do
-      aid_application = create(:aid_application)
-      get :edit, params: { organization_id: assister.organization.id, aid_application: aid_application }
-      expect(page).to have_http_status :ok
-    end
+  render_views
 
+  describe '#edit' do
     context 'when client is not a duplicate'
     context 'when client may be a duplicate' do
-      let!(:current_org) { create :organization }
-      let!(:other_org) { create :organization }
-      let!(:current_app) { create :aid_application, organization: current_org }
-      let!(:other_app) { create :aid_application, organization: other_org }
+      let!(:member) { create :member }
+      let(:duplicate) do
+        duplicate = create :member, name: member.name, birthday: member.birthday
+        duplicate.aid_application.update zip_code: member.aid_application.zip_code
+        duplicate
+      end
 
       it 'displays the duplicates on the page' do
-        get :edit, params: { organization_id: current_org.id, aid_application_id: current_app.id }
+        get :edit, params: { organization_id: member.aid_application.organization.id,
+                             aid_application_id: member.aid_application.id }
         expect(response.body).to have_content "Potential Duplicate"
       end
 

@@ -93,4 +93,22 @@ RSpec.describe AidApplication, type: :model do
       expect(aid_application).not_to be_valid(:submit_aid_application)
     end
   end
+
+  describe 'duplicate_members?' do
+    let!(:member) { create :member }
+    let(:member_without_duplicate) { create :member}
+    let!(:duplicate) do
+      duplicate = create :member, name: member.name, birthday: member.birthday
+      duplicate.aid_application.update! zip_code: member.aid_application.zip_code
+      duplicate
+    end
+
+    it 'returns true if any member has a duplicate' do
+      expect(member.aid_application.duplicate_members?).to be true
+    end
+
+    it 'returns false if member does not have a duplicate' do
+      expect(member_without_duplicate.aid_application.duplicate_members?).to be false
+    end
+  end
 end

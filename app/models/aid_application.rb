@@ -43,6 +43,10 @@ class AidApplication < ApplicationRecord
     validates :members, length: { minimum: 1, maximum: 2 }
   end
 
+  def duplicate_members?
+    members.map(&:find_duplicates).flatten.any?
+  end
+
   private
 
   def strip_phone_number

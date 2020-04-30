@@ -27,4 +27,18 @@ describe Member do
       expect(member).not_to be_valid(:submit_aid_application)
     end
   end
+
+  describe '#find_duplicates' do
+    let(:member) { create :member }
+    let(:duplicate) do
+      duplicate = create :member, name: member.name, birthday: member.birthday
+      duplicate.aid_application.update zip_code: member.aid_application.zip_code
+      duplicate
+    end
+
+    it 'returns a member when there is a matching name, birthday and zip_code' do
+      expect(member.find_duplicates).to contain_exactly duplicate
+    end
+
+  end
 end

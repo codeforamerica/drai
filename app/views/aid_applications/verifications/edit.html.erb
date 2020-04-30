@@ -1,3 +1,14 @@
 <%= render 'aid_applications/navigation' %>
 
-Placeholder to walk person through process of looking at client documents, and also a place to surface potential duplicate household members.
+<div class="grid__item width-one-sixth">
+  <div class="form-card">
+    <% if @aid_application.duplicate_members? %>
+      <h1>Possible Duplicate</h1>
+      <% @aid_application.members do |member| %>
+        <% dupe = member.find_duplicates[0] %>
+        <div><%= member.name %></div>
+        <div><%= dupe.name %></div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
