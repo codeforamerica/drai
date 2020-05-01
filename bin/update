@@ -8,7 +8,7 @@ def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
 end
 
-raise "Only use bin/update in Development environment" if ENV["RAILS_ENV"] == "test" || ENV["RAILS_ENV"] == "production"
+raise "Only use bin/update in Development environment" if ENV["RAILS_ENV"] && ENV["RAILS_ENV"] != "development"
 
 FileUtils.chdir APP_ROOT do
   # This script is a way to setup or update your development environment automatically.
