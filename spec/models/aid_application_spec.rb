@@ -5,7 +5,7 @@ RSpec.describe AidApplication, type: :model do
 
   it 'has a valid factory' do
     aid_application = build :aid_application, members_count: 1
-    expect(aid_application).to be_valid(:submit_aid_application)
+    expect(aid_application).to be_valid(:submit)
   end
 
   describe '#organization' do
@@ -16,56 +16,56 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  describe '#assister' do
+  describe '#creator' do
     it 'is required' do
-      aid_application.assister = nil
+      aid_application.creator = nil
       expect(aid_application).not_to be_valid
-      expect(aid_application.errors[:assister]).to include("must exist")
+      expect(aid_application.errors[:creator]).to include("must exist")
     end
   end
 
   describe '#street_address' do
     it 'is required' do
       aid_application = build :aid_application, street_address: ''
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
   end
 
   describe '#city' do
     it 'is required' do
       aid_application = build :aid_application, city: ''
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
   end
 
   describe '#zip_code' do
     it 'is required' do
       aid_application = build :aid_application, zip_code: ''
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
     it 'must be valid' do
       aid_application = build :aid_application, zip_code: 'none'
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
     it 'cannot be outside of california' do
       aid_application = build :aid_application, zip_code: '89101'
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
   end
 
   describe '#phone_number' do
     it 'is required' do
       aid_application = build :aid_application, phone_number: ''
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
     it 'must be a valid number' do
       aid_application = build :aid_application, phone_number: '111'
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
 
     it 'allows intermediate characters' do
       aid_application = build :aid_application, phone_number: '+1-555-666.1234'
-      expect(aid_application).to be_valid(:submit_aid_application)
+      expect(aid_application).to be_valid(:submit)
       expect(aid_application.phone_number).to eq '5556661234'
     end
   end
@@ -73,24 +73,24 @@ RSpec.describe AidApplication, type: :model do
   describe '#email' do
     it 'is required' do
       aid_application = build :aid_application, email: ''
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
 
     it 'must be valid' do
       aid_application = build :aid_application, email: '@garbage'
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
   end
 
   describe '#members' do
     it 'must have at least 1' do
       aid_application = build :aid_application, members_count: 0
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
 
     it 'must not have more than 2' do
       aid_application = build :aid_application, members_count: 3
-      expect(aid_application).not_to be_valid(:submit_aid_application)
+      expect(aid_application).not_to be_valid(:submit)
     end
   end
 
@@ -117,5 +117,50 @@ RSpec.describe AidApplication, type: :model do
   def refresh_materialized_views
     AidApplicationSearch.refresh
     yield
+  end
+
+  describe '#trigger_submit' do
+    let(:aid_application) { create :aid_application }
+
+    it 'adds a submitted_at' do
+      expect {
+        aid_application.save_and_submit(submitter: aid_application.creator)
+      }.to change { aid_application.reload.submitted_at }.from(nil).to within(1.second).of Time.current
+    end
+
+    it 'generates a application_number' do
+      expect {
+        aid_application.save_and_submit(submitter: aid_application.creator)
+      }.to change { aid_application.reload.application_number.present? }.from(false).to true
+    end
+  end
+
+  describe '#aid_identifier' do
+    it 'cannot be changed once assigned' do
+      aid_application = create :aid_application, :submitted
+      expect do
+        aid_application.update application_number: 'something else'
+      end.not_to change { aid_application.reload.application_number }
+    end
+  end
+
+  describe '#generate_unique_identifer' do
+    let(:aid_application) { create :aid_application }
+
+    it 'is in the shape of APP-[organization_id]-123-456' do
+      expect(aid_application.generate_application_number).to match /APP-#{aid_application.organization.id}-\d{3}-\d{3}/
+    end
+
+    it 'cycles through values until it finds a valid one' do
+      tried_values = []
+      allow(described_class).to receive :exists? do |**args|
+        tried_values << args[:application_number]
+        tried_values.size < 4 ? true : false
+      end
+
+      aid_application.generate_application_number
+
+      expect(tried_values.uniq.size).to eq 4
+    end
   end
 end

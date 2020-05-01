@@ -1,3 +1,21 @@
 <%= render 'aid_applications/navigation' %>
+<% if @aid_application.submitted? %>
+  <div class="grid__item width-two-thirds shift-one-sixth">
+    <div class="form-card">
+      <header class="form-card__header">
+        <h1>Application submitted</h1>
+      </header>
 
-Placeholder to walk person through process of looking at client documents, and also a place to surface potential duplicate household members.
+      <div class="form-card__content">
+        <h2>Application Number</h2>
+        <p>The client should write this number down. They will need it to pick up the benefit in person.</p>
+
+        <h3 class="notice text--centered">
+          <%= @aid_application.application_number %>
+        </h3>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <p>Application not yet submitted.</p>
+<% end %>

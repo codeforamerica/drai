@@ -18,7 +18,7 @@ describe AidApplicationsController, type: :controller do
     end
 
     context 'when an assister' do
-      before { sign_in application1.assister }
+      before { sign_in application1.creator }
 
       it 'does not allow access to the All Applications View' do
         get :index
@@ -46,7 +46,7 @@ describe AidApplicationsController, type: :controller do
 
       aid_application = AidApplication.last
       expect(aid_application).to have_attributes(
-                                       assister: assister,
+                                       creator: assister,
                                        organization: assister.organization
                                      )
       expect(response).to redirect_to edit_organization_aid_application_edit_path(assister.organization, aid_application)

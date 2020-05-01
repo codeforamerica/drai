@@ -16,14 +16,14 @@ module AidApplications
         @aid_application.members.build
       end
 
-      @aid_application.save
-
       if params[:form_action] == 'submit'
-        @aid_application.save(context: :submit_aid_application)
+        @aid_application.save_and_submit(submitter: current_user)
+      else
+        @aid_application.save
       end
 
       respond_with @aid_application, location: (lambda do
-        if params[:form_action] == 'submit'
+        if @aid_application.submitted?
           edit_organization_aid_application_verification_path(current_organization, @aid_application)
         else
           edit_organization_aid_application_edit_path(current_organization, @aid_application)
