@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'rufus-scheduler'
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
+
+scheduler = Rufus::Scheduler.new
+
+scheduler.every ENV.fetch('SEARCH_REFRESH_INTERVAL', '1m'), overlap: false do
+  puts '=== refreshing materialized views ==='
+  AidApplicationSearch.refresh
+end
+
+scheduler.join

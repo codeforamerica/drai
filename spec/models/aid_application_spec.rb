@@ -100,4 +100,22 @@ RSpec.describe AidApplication, type: :model do
       expect(aid_application.member_names).to contain_exactly(aid_application.members[0].name)
     end
   end
+
+  describe '.query', truncate: :database do
+    it 'performs a scoped query against associated AidApplicationSearch' do
+      aid_application = create :aid_application
+      other_aid_application = create :aid_application, city: 'Riverside'
+
+      refresh_materialized_views do
+        expect(described_class.query('Riverside')).to eq [other_aid_application]
+      end
+    end
+  end
+
+  private
+
+  def refresh_materialized_views
+    AidApplicationSearch.refresh
+    yield
+  end
 end

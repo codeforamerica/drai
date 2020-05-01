@@ -4,6 +4,14 @@
   "scripts": {
     "postdeploy": "bin/rails heroku:postdeploy"
   },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "scheduler": {
+      "quantity": 1
+    }
+  },
   "stack": "heroku-18",
   "env": {
     "LOG_LEVEL": {
@@ -21,6 +29,9 @@
     "SECRET_KEY_BASE": {
       "description": "Secret key base for Rails.",
       "generator": "secret"
+    },
+    "SEARCH_REFRESH_INTERVAL": {
+      "value": "5s"
     }
   },
   "addons": [

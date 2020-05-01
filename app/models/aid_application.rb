@@ -5,6 +5,7 @@
 #  id              :bigint           not null, primary key
 #  city            :text
 #  email           :text
+#  members_count   :integer          default(0), not null
 #  phone_number    :text
 #  street_address  :text
 #  zip_code        :text
@@ -27,8 +28,10 @@ class AidApplication < ApplicationRecord
   belongs_to :organization, counter_cache: true
   belongs_to :assister, class_name: 'User', counter_cache: true
   has_many :members, -> { order(created_at: :asc) }
+  has_one :aid_application_search
 
   accepts_nested_attributes_for :members, allow_destroy: true
+  scope :query, ->(term) { select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term)) }
 
   before_validation :strip_phone_number
 
