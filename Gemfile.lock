@@ -345,8 +345,8 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  timecop
   textacular (~> 5.0)
+  timecop
   tzinfo-data
   web-console (>= 3.3.0)
   webmock
