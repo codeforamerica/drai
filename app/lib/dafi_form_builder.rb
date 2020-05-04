@@ -80,4 +80,12 @@ class DafiFormBuilder < Cfa::Styleguide::CfaFormBuilder
 
     options
   end
+
+  def optional_text(optional)
+    if optional
+      " <span class='card__optional'>#{optional}</span>"
+    else
+      ""
+    end
+  end
 end

@@ -32,7 +32,24 @@ module AidApplications
     end
 
     def aid_application_params
-      params.require(:aid_application).permit(:street_address, :city, :zip_code, :phone_number, :email, members_attributes: [:id, :name, :birthday, :_destroy])
+      params.require(:aid_application).permit(
+          :street_address,
+          :city,
+          :zip_code,
+          :phone_number,
+          :email,
+          members_attributes: [
+              :id,
+              :name,
+              :birthday,
+              :preferred_language,
+              :country_of_origin,
+              :racial_ethnic_identity,
+              :sexual_orientation,
+              :gender,
+              :_destroy
+          ]
+      )
     end
   end
 end

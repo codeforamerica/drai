@@ -8,11 +8,21 @@
 
     <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder) do |f| %>
       <div class="form-card__content">
+        <h2>Applicant Information</h2>
         <%= f.fields_for :members do |mf| %>
           <div class="member-fields-<%= mf.index %>">
-            <%= mf.cfa_input_field :name, "Name" %>
-            <%= mf.gcf_date_input :birthday, "Date of Birth", help_text: 'MM/DD/YYYY'%>
+            <%= mf.cfa_input_field :name, "Full name" %>
+            <%= mf.gcf_date_input :birthday, "Date of birth", help_text: 'MM/DD/YYYY'%>
 
+            <fieldset>
+              <legend class="spacing-below-15"><em>The following questions are optional for the client to answer. If left blank, they will be recorded as "prefer not to answer".</em></legend>
+
+              <%= mf.cfa_input_field :preferred_language, "Preferred language", optional: "(optional)" %>
+              <%= mf.cfa_input_field :country_of_origin, "Country of origin", optional: "(optional)" %>
+              <%= mf.cfa_input_field :racial_ethnic_identity, "Racial/ethnic identity", optional: "(optional)" %>
+              <%= mf.cfa_input_field :sexual_orientation, "Sexual orientation", optional: "(optional)" %>
+              <%= mf.cfa_input_field :gender, "Gender", optional: "(optional)" %>
+            </fieldset>
             <% if @aid_application.members.size > 1 %>
               <%= f.button type: 'submit', name: "aid_application[members_attributes][#{mf.index}]_destroy", value: '1', class: 'button button--secondary' do %>
                 <span class="icon icon-cancel" aria-hidden="true"></span> Remove Person
