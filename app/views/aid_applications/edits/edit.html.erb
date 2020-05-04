@@ -2,11 +2,11 @@
 
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
-<!--    <header class="form-card__header">-->
-<!--      <h1 class="form-card__title">Aid application</h1>-->
-<!--    </header>-->
+    <!--    <header class="form-card__header">-->
+    <!--      <h1 class="form-card__title">Aid application</h1>-->
+    <!--    </header>-->
 
-    <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder) do |f| %>
+    <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
         <h2>Applicant Information</h2>
         <%= f.fields_for :members do |mf| %>
@@ -48,8 +48,31 @@
 
         <hr>
 
-        <%= f.cfa_input_field :phone_number, "Phone Number" %>
-        <%= f.cfa_input_field :email, "Email Address" %>
+        <h2>Contact information</h2>
+        <p class="text--help">The applicant will be sent their Unique ID number and activation number.</p>
+        <div class="question-with-follow-up">
+          <div class="question-with-follow-up__question">
+            <fieldset class="form-group">
+              <%= f.cfa_radio_set(:preferred_contact_channel, label_text: "How would they like to be sent this?", collection: [
+                  {value: 'text', label: 'Text message', input_html: {'data-follow-up' => '#preferred-contact-channel__text'}},
+                  {value: 'voice', label: 'Automated phone call', input_html: {'data-follow-up' => '#preferred-contact-channel__voice'}},
+                  {value: 'email', label: 'Email', input_html: {'data-follow-up' => '#preferred-contact-channel__email'}},
+              ]) %>
+            </fieldset>
+          </div>
+
+          <div id="preferred-contact-channel__text" class="question-with-follow-up__follow-up">
+            <p><em>Read the following to the applicant:</em></p>
+            <p>Message and data rates may apply. You will be able to opt out by texting STOP at any time or texting HELP for more information. You will receive 2 messages per application.</p>
+            <%= f.cfa_input_field(:text_phone_number, "Phone number", options: { type: 'tel', inputmode: 'tel' }) %>
+          </div>
+          <div id="preferred-contact-channel__voice" class="question-with-follow-up__follow-up">
+            <%= f.cfa_input_field(:voice_phone_number, "Phone number", options: { type: 'tel', inputmode: 'tel' }) %>
+          </div>
+          <div id="preferred-contact-channel__email" class="question-with-follow-up__follow-up">
+            <%= f.cfa_input_field(:email, "Email address", type: 'email') %>
+          </div>
+        </div>
       </div>
 
       <div class="form-card__footer">

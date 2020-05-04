@@ -54,31 +54,50 @@ RSpec.describe AidApplication, type: :model do
   end
 
   describe '#phone_number' do
-    it 'is required' do
-      aid_application = build :aid_application, phone_number: ''
-      expect(aid_application).not_to be_valid(:submit)
-    end
-    it 'must be a valid number' do
-      aid_application = build :aid_application, phone_number: '111'
-      expect(aid_application).not_to be_valid(:submit)
+    context 'when preferred_contact_channel is either text or voice' do
+      it 'is required' do
+        aid_application = build :aid_application, phone_number: '', preferred_contact_channel: 'text'
+        expect(aid_application).not_to be_valid(:submit)
+      end
+
+      it 'must be a valid number' do
+        aid_application = build :aid_application, phone_number: '111', preferred_contact_channel: 'voice'
+        expect(aid_application).not_to be_valid(:submit)
+      end
+
+      it 'allows intermediate characters' do
+        aid_application = build :aid_application, phone_number: '+1-555-666.1234', preferred_contact_channel: 'text'
+        expect(aid_application).to be_valid(:submit)
+        expect(aid_application.phone_number).to eq '5556661234'
+      end
     end
 
-    it 'allows intermediate characters' do
-      aid_application = build :aid_application, phone_number: '+1-555-666.1234'
-      expect(aid_application).to be_valid(:submit)
-      expect(aid_application.phone_number).to eq '5556661234'
+    context 'when preferred_contact_channel is NEITHER text NOR voice' do
+      it 'is not required' do
+        aid_application = build :aid_application, phone_number: '', preferred_contact_channel: 'email', email: "hi@example.com"
+        expect(aid_application).to be_valid(:submit)
+      end
     end
   end
 
   describe '#email' do
-    it 'is required' do
-      aid_application = build :aid_application, email: ''
-      expect(aid_application).not_to be_valid(:submit)
+    context 'when preferred_contacted_mode is email' do
+      it 'is required' do
+        aid_application = build :aid_application, email: '', preferred_contact_channel: 'email'
+        expect(aid_application).not_to be_valid(:submit)
+      end
+
+      it 'must be valid' do
+        aid_application = build :aid_application, email: '@garbage', preferred_contact_channel: 'email'
+        expect(aid_application).not_to be_valid(:submit)
+      end
     end
 
-    it 'must be valid' do
-      aid_application = build :aid_application, email: '@garbage'
-      expect(aid_application).not_to be_valid(:submit)
+    context 'when preferred_contacted_mode is NOT email' do
+      it 'is not required' do
+        aid_application = build :aid_application, email: '', preferred_contact_channel: 'text'
+        expect(aid_application).to be_valid(:submit)
+      end
     end
   end
 

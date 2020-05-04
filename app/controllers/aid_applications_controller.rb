@@ -33,7 +33,7 @@ class AidApplicationsController < ApplicationController
     @aid_application.save
 
     if params[:form_action] == 'submit'
-      @aid_application.save(context: :submit_aid_application)
+      @aid_application.save(context: :submit)
     end
 
     respond_with @aid_application, location: (lambda do

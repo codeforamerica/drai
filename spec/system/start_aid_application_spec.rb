@@ -47,8 +47,13 @@ describe 'Start aid application', type: :system do
     fill_in "City", with: "Big City"
     fill_in "ZIP Code", with: "94103"
 
-    fill_in "Phone Number", with: "555-555-5555"
-    fill_in "Email Address", with: "client@example.com"
+    expect(page).to have_content "Contact information"
+    expect(page).to have_content "The applicant will be sent their Unique ID number and activation number."
+    choose "Text message"
+    within '#preferred-contact-channel__text' do
+      expect(page).to have_content 'Message and data rates may apply'
+      fill_in "Phone number", with: "555-555-5555"
+    end
 
     click_on 'Submit'
 
@@ -61,7 +66,10 @@ describe 'Start aid application', type: :system do
                                  organization: assister.organization,
                                  street_address: "123 Main Street",
                                  city: "Big City",
-                                 zip_code: "94103"
+                                 zip_code: "94103",
+                                 phone_number: "5555555555",
+                                 email: nil,
+                                 preferred_contact_channel: "text"
                                )
     expect(aid_application.members.size).to eq 1
 
