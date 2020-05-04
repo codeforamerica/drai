@@ -12,8 +12,15 @@ describe 'Start aid application', type: :system do
     click_on "Applications"
     click_on "Add new application"
 
+    within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do
+      choose "No"
+    end
+
+    expect(page).to have_content "Read the following to the applicant. Check any boxes that apply"
+    check "Are you or have you experienced symptoms consistent with COVID-19?"
 
     expect(page).to have_content "Applicant Information"
+
     within '.member-fields-0' do
       fill_in "Full name", with: "Alice"
       fill_in "aid_application[members_attributes][0][birthday(1i)]", with: "1980"
@@ -49,17 +56,21 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content "Contact information"
     expect(page).to have_content "The applicant will be sent their Unique ID number and activation number."
-    choose "Text message"
+
+    within_fieldset "How would they like to be sent this?" do
+      choose "Text message"
+    end
+
     within '#preferred-contact-channel__text' do
       expect(page).to have_content 'Message and data rates may apply'
       fill_in "Phone number", with: "555-555-5555"
     end
 
-    within ".additional-information-section" do
-      expect(page).to have_content "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?"
+    within_fieldset "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?" do
       choose "Yes"
+    end
 
-      expect(page).to have_content "What unmet needs does the applicant have?"
+    within_fieldset "What unmet needs does the applicant have?" do
       check "Childcare"
       check "Utilities"
     end
@@ -81,18 +92,20 @@ describe 'Start aid application', type: :system do
                                  preferred_contact_channel: "text",
                                  receives_calfresh_or_calworks: true,
                                  unmet_childcare: true,
-                                 unmet_utilities: true
+                                 unmet_utilities: true,
+                                 valid_work_authorization: false,
+                                 covid19_experiencing_symptoms: true
                                )
     expect(aid_application.members.size).to eq 1
 
     member = aid_application.members.first
     expect(member).to have_attributes(
-                          name: "Barbara",
-                          preferred_language: "Spanish",
-                          country_of_origin: 'Canada',
-                          racial_ethnic_identity: 'Martian',
-                          sexual_orientation: "Qweer",
-                          gender: nil
+                        name: "Barbara",
+                        preferred_language: "Spanish",
+                        country_of_origin: 'Canada',
+                        racial_ethnic_identity: 'Martian',
+                        sexual_orientation: "Qweer",
+                        gender: nil
                       )
   end
 end

@@ -107,6 +107,11 @@ RSpec.describe AidApplication, type: :model do
       expect(aid_application).not_to be_valid(:submit)
       expect(aid_application.errors[:receives_calfresh_or_calworks]).to be_present
     end
+
+    it 'allows false' do
+      aid_application = build :aid_application, receives_calfresh_or_calworks: false
+      expect(aid_application).to be_valid(:submit)
+    end
   end
 
   describe '#members' do

@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 2020_05_04_234602) do
     t.boolean "unmet_other"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
+    t.boolean "valid_work_authorization"
+    t.boolean "covid19_reduced_work_hours"
+    t.boolean "covid19_care_facility_closed"
+    t.boolean "covid19_experiencing_symptoms"
+    t.boolean "covid19_underlying_health_condition"
+    t.boolean "covid19_caregiver"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end

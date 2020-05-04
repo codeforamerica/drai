@@ -8,6 +8,37 @@
 
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
+        <h2>Eligibility</h2>
+        <%= f.cfa_radio_set(
+                :valid_work_authorization,
+                label_text: 'Do you currently have a valid document that authorizes you to work in the United States?',
+                help_text: 'A valid document includes a Social Security Number card and a work authorization or Employment Authorization Document issued by U.S. Citizenship and Immigration Services.',
+                collection: [
+                    {value: true, label: "Yes"},
+                    {value: false, label: "No"}
+                ],
+                layouts: [:inline]
+            )
+        %>
+
+        <fieldset class="input-group form-group">
+          <legend class="spacing-below-15"><em>Read the following to the applicant. Check any boxes that apply.</em></legend>
+          <% [
+                 {method: :covid19_reduced_work_hours, label: "Have you, or other adults in your household who provide income to your household, lost their employment or had their work hours significantly reduced because of the COVID-19 outbreak?"},
+                 {method: :covid19_care_facility_closed, label: "Is the care facility, such as a school, childcare facility or other adult living facility, where you usually send your child or other person you care for, closed because of the COVID-19 outbreak?"},
+                 {method: :covid19_experiencing_symptoms, label: "Are you or have you experienced symptoms consistent with COVID-19?"},
+                 {method: :covid19_underlying_health_condition, label: "Are you at higher risk of serious illness from COVID-19 due to an underlying health condition or age, and therefore unable to work in order to comply with physical distancing?"},
+                 {method: :covid19_caregiver, label: "Are you a caregiver to a dependent, such as a child or elderly parent, or a spouse who has or had symptoms consistent with COVID-19, which made you unable to work?"}
+             ].each do |item| %>
+            <label class="checkbox">
+              <%= f.check_box(item[:method]) %>
+              <%= item[:label] %>
+            </label>
+          <% end %>
+        </fieldset>
+
+        <hr>
+
         <h2>Applicant Information</h2>
         <%= f.fields_for :members do |mf| %>
           <div class="member-fields-<%= mf.index %>">
@@ -110,6 +141,7 @@
 
       </div>
       </div>
+
       <div class="form-card__footer">
         <div class="toolbar">
           <div class="toolbar__left">
