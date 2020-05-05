@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_211856) do
+ActiveRecord::Schema.define(version: 2020_05_04_182414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,11 @@ ActiveRecord::Schema.define(version: 2020_05_01_211856) do
     t.text "name"
     t.date "birthday"
     t.bigint "aid_application_id"
+    t.text "preferred_language"
+    t.text "country_of_origin"
+    t.text "racial_ethnic_identity"
+    t.text "sexual_orientation"
+    t.text "gender"
     t.index ["aid_application_id"], name: "index_members_on_aid_application_id"
   end
 
@@ -123,4 +128,5 @@ ActiveRecord::Schema.define(version: 2020_05_01_211856) do
   SQL
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin
   add_index "aid_application_searches", ["aid_application_id"], name: "index_aid_application_searches_on_aid_application_id", unique: true
+
 end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.6'
 
+gem 'auto_strip_attributes'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cfa-styleguide', git: 'https://github.com/codeforamerica/honeycrisp-gem', branch: 'fix-broken-path-finder-in-rails-6'
 gem 'devise'

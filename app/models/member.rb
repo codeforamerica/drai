@@ -24,4 +24,11 @@ class Member < ApplicationRecord
     validates :name, presence: true
     validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: 'Must be 18-years or older and born after 1900' }
   end
+
+  auto_strip_attributes :preferred_language,
+                        :country_of_origin,
+                        :racial_ethnic_identity,
+                        :sexual_orientation,
+                        :gender
+
 end

@@ -12,8 +12,10 @@ describe 'Start aid application', type: :system do
     click_on "Applications"
     click_on "Add new application"
 
+
+    expect(page).to have_content "Applicant Information"
     within '.member-fields-0' do
-      fill_in "Name", with: "Alice"
+      fill_in "Full name", with: "Alice"
       fill_in "aid_application[members_attributes][0][birthday(1i)]", with: "1980"
       fill_in "aid_application[members_attributes][0][birthday(2i)]", with: "1"
       fill_in "aid_application[members_attributes][0][birthday(3i)]", with: "1"
@@ -22,10 +24,17 @@ describe 'Start aid application', type: :system do
     click_on 'Add a second person'
 
     within '.member-fields-1' do
-      fill_in "Name", with: "Barbara"
+      fill_in "Full name", with: "Barbara"
       fill_in "aid_application[members_attributes][1][birthday(1i)]", with: "1981"
       fill_in "aid_application[members_attributes][1][birthday(2i)]", with: "1"
       fill_in "aid_application[members_attributes][1][birthday(3i)]", with: "1"
+
+      expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as \"prefer not to answer\"."
+      fill_in "Preferred language (optional)", with: "Spanish"
+      fill_in "Country of origin", with: "Canada"
+      fill_in "Racial/ethnic identity", with: "Martian"
+      fill_in "Sexual orientation", with: "Qweer"
+      fill_in "Gender", with: ''
     end
 
     within '.member-fields-0' do
@@ -55,6 +64,13 @@ describe 'Start aid application', type: :system do
     expect(aid_application.members.size).to eq 1
 
     member = aid_application.members.first
-    expect(member.name).to eq 'Barbara'
+    expect(member).to have_attributes(
+                          name: "Barbara",
+                          preferred_language: "Spanish",
+                          country_of_origin: 'Canada',
+                          racial_ethnic_identity: 'Martian',
+                          sexual_orientation: "Qweer",
+                          gender: nil
+                      )
   end
 end
