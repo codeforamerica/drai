@@ -101,6 +101,14 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#receives_calfresh_or_calworks' do
+    it 'is required' do
+      aid_application = build :aid_application, receives_calfresh_or_calworks: nil
+      expect(aid_application).not_to be_valid(:submit)
+      expect(aid_application.errors[:receives_calfresh_or_calworks]).to be_present
+    end
+  end
+
   describe '#members' do
     it 'must have at least 1' do
       aid_application = build :aid_application, members_count: 0

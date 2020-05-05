@@ -41,6 +41,13 @@ module AidApplications
           :voice_phone_number,
           :phone_number,
           :email,
+          :receives_calfresh_or_calworks,
+          :unmet_food,
+          :unmet_housing,
+          :unmet_childcare,
+          :unmet_utilities,
+          :unmet_transportation,
+          :unmet_other,
           members_attributes: [
               :id,
               :name,

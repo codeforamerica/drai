@@ -73,8 +73,43 @@
             <%= f.cfa_input_field(:email, "Email address", type: 'email') %>
           </div>
         </div>
-      </div>
 
+        <hr>
+
+        <div class="additional-information-section">
+          <h2>Additional Information</h2>
+          <%= f.cfa_radio_set(
+                  :receives_calfresh_or_calworks,
+                  label_text: 'Is anyone in the household currently receiving CalFresh or CalWORKs benefits?',
+                  help_text: 'A household is defined as individuals who live and purchase and prepare meals together.',
+                  collection: [
+                      {value: true, label: "Yes"},
+                      {value: false, label: "No"}
+                  ],
+                  layouts: [:inline]
+              )
+          %>
+
+          <fieldset class="input-group form-group">
+            <legend class="spacing-below-15"><strong>What unmet needs does the applicant have?</strong></legend>
+            <% [
+                   {method: :unmet_food, label: "Food"},
+                   {method: :unmet_housing, label: "Housing (i.e. difficulty paying rent or mortgage)"},
+                   {method: :unmet_childcare, label: "Childcare"},
+                   {method: :unmet_utilities, label: "Utilities"},
+                   {method: :unmet_transportation, label: "Transportation"},
+                   {method: :unmet_other, label: "Other unmet needs"},
+
+               ].each do |item| %>
+              <label class="checkbox">
+                <%= f.check_box(item[:method]) %>
+                <%= item[:label] %>
+              </label>
+            <% end %>
+          </fieldset>
+
+      </div>
+      </div>
       <div class="form-card__footer">
         <div class="toolbar">
           <div class="toolbar__left">
