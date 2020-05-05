@@ -55,6 +55,15 @@ describe 'Start aid application', type: :system do
       fill_in "Phone number", with: "555-555-5555"
     end
 
+    within ".additional-information-section" do
+      expect(page).to have_content "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?"
+      choose "Yes"
+
+      expect(page).to have_content "What unmet needs does the applicant have?"
+      check "Childcare"
+      check "Utilities"
+    end
+
     click_on 'Submit'
 
     expect(page).to have_content 'Application submitted'
@@ -69,7 +78,10 @@ describe 'Start aid application', type: :system do
                                  zip_code: "94103",
                                  phone_number: "5555555555",
                                  email: nil,
-                                 preferred_contact_channel: "text"
+                                 preferred_contact_channel: "text",
+                                 receives_calfresh_or_calworks: true,
+                                 unmet_childcare: true,
+                                 unmet_utilities: true
                                )
     expect(aid_application.members.size).to eq 1
 

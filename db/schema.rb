@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_210225) do
+ActiveRecord::Schema.define(version: 2020_05_04_234602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 2020_05_04_210225) do
     t.string "application_number"
     t.bigint "creator_id", null: false
     t.string "preferred_contact_channel"
+    t.boolean "receives_calfresh_or_calworks"
+    t.boolean "unmet_food"
+    t.boolean "unmet_housing"
+    t.boolean "unmet_childcare"
+    t.boolean "unmet_utilities"
+    t.boolean "unmet_transportation"
+    t.boolean "unmet_other"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"

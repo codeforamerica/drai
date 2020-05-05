@@ -32,7 +32,7 @@
 #
 class AidApplication < ApplicationRecord
   READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id']
-
+  
   scope :submitted, -> { where.not(submitted_at: nil) }
 
   belongs_to :organization, counter_cache: true
@@ -60,6 +60,8 @@ class AidApplication < ApplicationRecord
     validates :preferred_contact_channel, presence: true
     validates :phone_number, presence: true, phone_number: true, if: -> { preferred_contact_channel_text? || preferred_contact_channel_voice? }
     validates :email, presence: true, email: { message: "Make sure to enter a valid email" }, if: -> { preferred_contact_channel_email? }
+
+    validates :receives_calfresh_or_calworks, presence: true
 
     validates :members, length: { minimum: 1, maximum: 2 }
   end

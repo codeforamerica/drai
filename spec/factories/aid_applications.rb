@@ -10,6 +10,8 @@ FactoryBot.define do
     preferred_contact_channel { 'text' }
     phone_number { Faker::PhoneNumber.cell_phone }
 
+    receives_calfresh_or_calworks { true }
+
     transient do
       members_count { 2 }
     end
