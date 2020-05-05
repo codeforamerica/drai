@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 describe AidApplications::EditsController do
+  let(:assister) { create :assister }
+  let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
+
+  describe '#edit' do
+    context 'when not authenticated' do
+      it 'does not allow access' do
+        get :edit, params: {
+          aid_application_id: aid_application.id,
+          organization_id: assister.organization.id,
+        }
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
   describe '#update' do
     let(:assister) { create :assister }
     let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
