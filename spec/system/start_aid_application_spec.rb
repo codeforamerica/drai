@@ -41,6 +41,8 @@ describe 'Start aid application', type: :system do
       click_on 'Remove Person'
     end
 
+    expect(page).to have_content "California address"
+    expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
     fill_in "Street Address", with: "123 Main Street"
     fill_in "City", with: "Big City"
     fill_in "ZIP Code", with: "94103"

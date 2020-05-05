@@ -40,9 +40,11 @@
           <hr>
         <% end %>
 
+        <h2>California address</h2>
+        <p class="text--help">An address is required. Homeless clients can use a shelter or other address.</p>
         <%= f.cfa_input_field :street_address, "Street Address" %>
         <%= f.cfa_input_field :city, "City" %>
-        <%= f.cfa_input_field :zip_code, "ZIP Code" %>
+        <%= f.cfa_input_field :zip_code, "ZIP Code", classes: ["form-width--zip"] %>
 
         <hr>
 
