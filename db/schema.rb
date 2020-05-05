@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_205714) do
+ActiveRecord::Schema.define(version: 2020_05_01_211856) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,15 +19,20 @@ ActiveRecord::Schema.define(version: 2020_04_27_205714) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "organization_id", null: false
-    t.bigint "assister_id", null: false
     t.text "street_address"
     t.text "city"
     t.text "zip_code"
     t.text "phone_number"
     t.text "email"
     t.integer "members_count", default: 0, null: false
-    t.index ["assister_id"], name: "index_aid_applications_on_assister_id"
+    t.datetime "submitted_at"
+    t.bigint "submitter_id"
+    t.string "application_number"
+    t.bigint "creator_id", null: false
+    t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
+    t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
+    t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -70,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_04_27_205714) do
     t.boolean "supervisor", default: false, null: false
     t.bigint "inviter_id"
     t.datetime "deactivated_at"
+    t.bigint "aid_applications_created_count", default: 0, null: false
+    t.bigint "aid_applications_submitted_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -91,7 +99,8 @@ ActiveRecord::Schema.define(version: 2020_04_27_205714) do
   end
 
   add_foreign_key "aid_applications", "organizations"
-  add_foreign_key "aid_applications", "users", column: "assister_id"
+  add_foreign_key "aid_applications", "users", column: "creator_id"
+  add_foreign_key "aid_applications", "users", column: "submitter_id"
   add_foreign_key "members", "aid_applications"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"

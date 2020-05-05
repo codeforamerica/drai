@@ -2,31 +2,42 @@
 #
 # Table name: aid_applications
 #
-#  id              :bigint           not null, primary key
-#  city            :text
-#  email           :text
-#  members_count   :integer          default(0), not null
-#  phone_number    :text
-#  street_address  :text
-#  zip_code        :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  assister_id     :bigint           not null
-#  organization_id :bigint           not null
+#  id                 :bigint           not null, primary key
+#  application_number :string
+#  city               :text
+#  email              :text
+#  members_count      :integer          default(0), not null
+#  phone_number       :text
+#  street_address     :text
+#  submitted_at       :datetime
+#  zip_code           :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  creator_id         :bigint           not null
+#  organization_id    :bigint           not null
+#  submitter_id       :bigint
 #
 # Indexes
 #
-#  index_aid_applications_on_assister_id      (assister_id)
-#  index_aid_applications_on_organization_id  (organization_id)
+#  index_aid_applications_on_application_number  (application_number) UNIQUE
+#  index_aid_applications_on_creator_id          (creator_id)
+#  index_aid_applications_on_organization_id     (organization_id)
+#  index_aid_applications_on_submitter_id        (submitter_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (assister_id => users.id)
+#  fk_rails_...  (creator_id => users.id)
 #  fk_rails_...  (organization_id => organizations.id)
+#  fk_rails_...  (submitter_id => users.id)
 #
 class AidApplication < ApplicationRecord
+  READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id']
+
+  scope :submitted, -> { where.not(submitted_at: nil) }
+
   belongs_to :organization, counter_cache: true
-  belongs_to :assister, class_name: 'User', counter_cache: true
+  belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
+  belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
   has_many :members, -> { order(created_at: :asc) }
   has_one :aid_application_search
 
@@ -35,7 +46,9 @@ class AidApplication < ApplicationRecord
 
   before_validation :strip_phone_number
 
-  with_options on: :submit_aid_application do
+  validates :application_number, uniqueness: true, allow_nil: true
+
+  with_options on: :submit do
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
@@ -46,8 +59,63 @@ class AidApplication < ApplicationRecord
     validates :members, length: { minimum: 1, maximum: 2 }
   end
 
+  with_options if: :submitted_at do
+    validates :application_number, presence: true
+    validates :submitter, presence: true
+  end
+  validates :submitted_at, presence: true, if: :application_number
+
   def member_names
     members.map(&:name)
+  end
+
+  def save_and_submit(submitter:)
+    transaction(joinable: false, requires_new: true) do
+      if errors.empty? && valid?(:submit)
+        self.submitter = submitter
+        self.application_number = generate_application_number
+        self.submitted_at = Time.current
+
+        save(context: :submit)
+      else
+        save
+        valid?(:submit)
+      end
+    end
+  end
+
+  def generate_application_number
+    loop do
+      value = "APP-#{organization.id}-#{rand(100..999)}-#{rand(100..999)}"
+      break(value) unless self.class.exists?(application_number: value)
+    end
+  end
+
+  def readonly_attribute?(name)
+    if name.in? READONLY_ONCE_SET
+      attribute_was(name).present?
+    else
+      super
+    end
+  end
+
+  def status
+    if submitted?
+      :submitted
+    else
+      :started
+    end
+  end
+
+  def status_human
+    {
+      started: 'Started',
+      submitted: 'Submitted',
+    }.fetch(status)
+  end
+
+  def submitted?
+    submitted_at.present?
   end
 
   private

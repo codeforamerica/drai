@@ -39,11 +39,14 @@ describe 'Start aid application', type: :system do
     fill_in "Phone Number", with: "555-555-5555"
     fill_in "Email Address", with: "client@example.com"
 
-    click_on "Submit"
+    click_on 'Submit'
+
+    expect(page).to have_content 'Application submitted'
+    expect(page).to have_content /APP-/
 
     aid_application = AidApplication.last
     expect(aid_application).to have_attributes(
-                                 assister: assister,
+                                 creator: assister,
                                  organization: assister.organization,
                                  street_address: "123 Main Street",
                                  city: "Big City",

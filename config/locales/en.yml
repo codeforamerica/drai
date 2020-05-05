@@ -41,3 +41,15 @@ en:
       messages:
         zip_code: "Must be a 5-digit ZIP Code in California"
         phone_number: "Make sure your phone number is 10 digits long"
+
+  flash:
+    actions:
+      create:
+        notice: ''
+        alert: ''
+      update:
+        notice: ''
+        alert: ''
+      destroy:
+        notice: ''
+        alert: ''

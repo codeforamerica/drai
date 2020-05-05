@@ -41,9 +41,18 @@
       </div>
 
       <div class="form-card__footer">
-        <%= f.button 'Submit', type: 'submit', name: 'form_action', value: 'submit', class: 'button button--primary' %>
-        <%= f.button 'Save', type: 'submit', name: 'form_action', value: 'save', class: 'button button--secondary' %>
-        <%= link_to "Cancel", organization_aid_applications_path(current_organization) %>
+        <div class="toolbar">
+          <div class="toolbar__left">
+            <%= link_to "Cancel", organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
+          </div>
+          <div class="toolbar__right">
+            <% if @aid_application.submitted? %>
+              <%= f.button 'Update', type: 'submit', class: 'toolbar__item button button--primary' %>
+            <% else %>
+              <%= f.button 'Submit', type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
