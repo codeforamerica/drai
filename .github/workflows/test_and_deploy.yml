@@ -54,6 +54,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: [test]
     runs-on: ubuntu-latest
+    env:
+      SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -62,8 +64,6 @@ jobs:
           fetch-depth: 0
 
       - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan beta.aptible.com >> ~/.ssh/known_hosts
@@ -71,8 +71,11 @@ jobs:
           ssh-add - <<< "${{ secrets.APTIBLE_DRAI_ROBOT_SSH_PRIVATE_KEY }}"
 
       - name: Push to Aptible Staging
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           git remote add aptible-staging ${{ secrets.APTIBLE_STAGING_GIT_REMOTE }}
           git push aptible-staging master
+
+      - name: Push to Aptible Production
+        run: |
+          git remote add aptible-production ${{ secrets.APTIBLE_PRODUCTION_GIT_REMOTE }}
+          git push aptible-production master

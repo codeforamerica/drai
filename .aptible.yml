@@ -1,2 +1,2 @@
-#before_release:
-#  - bin/rails db:migrate
+before_release:
+  - bin/rails db:migrate
