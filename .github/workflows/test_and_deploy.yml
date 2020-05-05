@@ -48,3 +48,31 @@ jobs:
         run: bin/rails assets:precompile
       - name: Run tests
         run: RAILS_ENV=test DISABLE_SPRING=1 bin/rspec
+
+  deploy:
+    name: "Deploy to Aptible"
+    if: github.ref == 'refs/heads/master'
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan beta.aptible.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.APTIBLE_DRAI_ROBOT_SSH_PRIVATE_KEY }}"
+
+      - name: Push to Aptible Staging
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          git remote add aptible-staging ${{ secrets.APTIBLE_STAGING_GIT_REMOTE }}
+          git push aptible-staging master
