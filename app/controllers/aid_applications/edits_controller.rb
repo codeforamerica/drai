@@ -10,7 +10,7 @@ module AidApplications
 
     def update
       @aid_application = current_aid_application
-      @aid_application.attributes = aid_application_params
+      @aid_application.assign_attributes(aid_application_params)
 
       if params[:form_action] == 'add_person'
         @aid_application.members.build
@@ -36,6 +36,9 @@ module AidApplications
           :street_address,
           :city,
           :zip_code,
+          :preferred_contact_channel,
+          :text_phone_number,
+          :voice_phone_number,
           :phone_number,
           :email,
           members_attributes: [

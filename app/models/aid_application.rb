@@ -44,7 +44,11 @@ class AidApplication < ApplicationRecord
   accepts_nested_attributes_for :members, allow_destroy: true
   scope :query, ->(term) { select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term)) }
 
+  enum preferred_contact_channel: { text: "text", voice: "voice", email: "email" }, _prefix: "preferred_contact_channel"
+
+  auto_strip_attributes :email
   before_validation :strip_phone_number
+  after_validation :copy_phone_number_errors
 
   validates :application_number, uniqueness: true, allow_nil: true
 
@@ -53,8 +57,9 @@ class AidApplication < ApplicationRecord
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
 
-    validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: { message: "Make sure to enter a valid email" }
+    validates :preferred_contact_channel, presence: true
+    validates :phone_number, presence: true, phone_number: true, if: -> { preferred_contact_channel_text? || preferred_contact_channel_voice? }
+    validates :email, presence: true, email: { message: "Make sure to enter a valid email" }, if: -> { preferred_contact_channel_email? }
 
     validates :members, length: { minimum: 1, maximum: 2 }
   end
@@ -64,6 +69,30 @@ class AidApplication < ApplicationRecord
     validates :submitter, presence: true
   end
   validates :submitted_at, presence: true, if: :application_number
+
+  alias_attribute :text_phone_number, :phone_number
+  alias_attribute :voice_phone_number, :phone_number
+
+  def text_phone_number=(value)
+    self.phone_number = value if preferred_contact_channel_text?
+  end
+
+  def voice_phone_number=(value)
+    self.phone_number = value if preferred_contact_channel_voice?
+  end
+
+  def phone_number=(value)
+    super(value) if value.present?
+  end
+
+  def copy_phone_number_errors
+    return if errors[:phone_number].empty?
+
+    errors[:phone_number].each do |error|
+      errors[:voice_phone_number] << error
+      errors[:text_phone_number] << error
+    end
+  end
 
   def member_names
     members.map(&:name)

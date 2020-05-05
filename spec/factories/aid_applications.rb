@@ -7,7 +7,7 @@ FactoryBot.define do
     city { Faker::Address.city }
     zip_code { '94103' }
 
-    email { Faker::Internet.email }
+    preferred_contact_channel { 'text' }
     phone_number { Faker::PhoneNumber.cell_phone }
 
     transient do
