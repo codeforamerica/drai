@@ -107,5 +107,8 @@ describe 'Start aid application', type: :system do
                         sexual_orientation: "Qweer",
                         gender: nil
                       )
+
+    open_sms aid_application.phone_number
+    expect(current_sms).to have_content aid_application.application_number
   end
 end

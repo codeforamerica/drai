@@ -18,6 +18,10 @@ module AidApplications
 
       if params[:form_action] == 'submit'
         @aid_application.save_and_submit(submitter: current_user)
+
+        if @aid_application.errors.empty?
+          ApplicationTexter.basic_message(to: @aid_application.phone_number, body: "Your Application Number is #{@aid_application.application_number}").deliver_now
+        end
       else
         @aid_application.save
       end
