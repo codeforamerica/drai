@@ -2,12 +2,21 @@
 
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
-    <!--    <header class="form-card__header">-->
-    <!--      <h1 class="form-card__title">Aid application</h1>-->
-    <!--    </header>-->
+    <header class="form-card__header">
+      <h1>DAFI Application</h1>
+    </header>
 
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
+        <h2>About this program</h2>
+        <p>This is a program for undocumented immigrants to get financial assistance during the pandemic. The assistance is one $500 debit card per adult. Two people who live together can apply together and get $1,000. If there are more than two undocumented adults in the household, they will need to apply on their own.</p>
+        <hr>
+
+        <h2>Safety and privacy</h2>
+        <p class="text--help"><em>Read this to the applicant</em></p>
+        <p>I will be asking you several questions that will be used to verify your eligibility for this assistance. We also will collect documentation from you to verify who is applying for this assistance. Your personal information is protected. It will be entered into an online portal that is administered by a nonprofit organization. It also will be held by our organization. We will be sharing some general aggregate information with the state government, but nothing that will identify you. Your information will not be shared with anyone else, and eventually it will be destroyed securely by everyone.</p>
+        <hr>
+
         <h2>Eligibility</h2>
         <%= f.cfa_radio_set(
                 :valid_work_authorization,

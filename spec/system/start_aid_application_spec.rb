@@ -12,6 +12,10 @@ describe 'Start aid application', type: :system do
     click_on "Applications"
     click_on "Add new application"
 
+    expect(page).to have_content "DAFI Application"
+    expect(page).to have_content "About this program"
+    expect(page).to have_content "Safety and privacy"
+
     within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do
       choose "No"
     end
