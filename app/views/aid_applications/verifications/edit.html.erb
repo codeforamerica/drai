@@ -3,12 +3,12 @@
   <div class="grid__item width-two-thirds shift-one-sixth">
     <div class="form-card">
       <header class="form-card__header">
-        <h1>Application submitted</h1>
+        <h1><%= t('.title') %></h1>
       </header>
 
       <div class="form-card__content">
-        <h2>Application Number</h2>
-        <p>The client should write this number down. They will need it to pick up the benefit in person.</p>
+        <h2><%= t('.app_number_header') %></h2>
+        <p><%= t('.app_number_desc') %></p>
 
         <h3 class="notice text--centered">
           <%= @aid_application.application_number %>
@@ -17,5 +17,5 @@
     </div>
   </div>
 <% else %>
-  <p>Application not yet submitted.</p>
+  <p><%= t('.app_not_submitted') %></p>
 <% end %>

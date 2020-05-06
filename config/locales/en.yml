@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
   shared:
@@ -36,11 +5,120 @@ en:
       month: "Month"
       day: "Day"
       year: "Year"
+
+  account:
+    accounts:
+      edit:
+        current_password: "Current password"
+        new_password: "New password"
+        password_confirmation: "Confirm new password"
+        form_card_title: "Update account"
+      show:
+        card_title: "Account information"
+        name: "Your name"
+        organization: "Your organization"
+        email: "Your email"
+        password: "Your password"
+        change_password: "Change password"
+    setups:
+      edit:
+        name: "Your Name"
+        password: "Choose a password"
+        set_up_account: "Set up account"
+        form_card_title: "Set up your account"
+
+  aid_applications:
+    edits:
+      edit:
+        about_program:
+          title: "About this program"
+          text: "This is a program for undocumented immigrants to get financial assistance during the pandemic. The assistance is one $500 debit card per adult. Two people who live together can apply together and get $1,000. If there are more than two undocumented adults in the household, they will need to apply on their own."
+        privacy:
+          title: "Safety and privacy"
+          help_text: "Read this to the applicant"
+          text: "I will be asking you several questions that will be used to verify your eligibility for this assistance. We also will collect documentation from you to verify who is applying for this assistance. Your personal information is protected. It will be entered into an online portal that is administered by a nonprofit organization. It also will be held by our organization. We will be sharing some general aggregate information with the state government, but nothing that will identify you. Your information will not be shared with anyone else, and eventually it will be destroyed securely by everyone."
+        eligibility:
+          title: "Eligibility"
+          label_text: "Do you currently have a valid document that authorizes you to work in the United States?"
+          help_text: "A valid document includes a Social Security Number card and a work authorization or Employment Authorization Document issued by U.S. Citizenship and Immigration Services."
+          read_to_client: "Read the following to the applicant. Check any boxes that apply."
+          reduced_work_hours: "Have you, or other adults in your household who provide income to your household, lost their employment or had their work hours significantly reduced because of the COVID-19 outbreak?"
+          care_facility_closed: "Is the care facility, such as a school, childcare facility or other adult living facility, where you usually send your child or other person you care for, closed because of the COVID-19 outbreak?"
+          experiencing_symptoms: "Are you or have you experienced symptoms consistent with COVID-19?"
+          underlying_health_condition: "Are you at higher risk of serious illness from COVID-19 due to an underlying health condition or age, and therefore unable to work in order to comply with physical distancing?"
+          caregiver: "Are you a caregiver to a dependent, such as a child or elderly parent, or a spouse who has or had symptoms consistent with COVID-19, which made you unable to work?"
+        applicant_information:
+          title: "Applicant Information"
+          name: "Full name"
+          dob: "Date of birth"
+          preferred_language: "Preferred language"
+          country_of_origin: "Country of origin"
+          racial_ethnic_identity: "Racial/ethnic identity"
+          sexual_orientation: "Sexual orientation"
+          gender: "Gender"
+          add_a_person: "Add a second person"
+          remove_person: "Remove Person"
+        california_address:
+          title: "California address"
+          address_required: "An address is required. Homeless clients can use a shelter or other address."
+          street_address: "Street Address"
+          city: "City"
+          zip: "ZIP Code"
+        contact_information:
+          title: "Contact information"
+          help_text: "The applicant will be sent their Unique ID number and activation number."
+          optional_questions_prompt: "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
+          preferred_contact_label: "How would they like to be sent this?"
+          preferred_contact_text: "Text message"
+          preferred_contact_voice: "Automated phone call"
+          preferred_contact_email: "Email"
+          read_to_client: "Read the following to the applicant:"
+          message_rates_apply: "Message and data rates may apply. You will be able to opt out by texting STOP at any time or texting HELP for more information. You will receive 2 messages per application."
+        additional_information:
+          title: "Additional Information"
+          receives_calfresh_label: "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?"
+          receives_calfresh_help_text: "A household is defined as individuals who live and purchase and prepare meals together."
+          unmet_needs_legend: "What unmet needs does the applicant have?"
+          unmet_needs_food: "Food"
+          unmet_needs_housing: "Housing (i.e. difficulty paying rent or mortgage)"
+          unmet_needs_childcare: "Childcare"
+          unmet_needs_utilities: "Utilities"
+          unmet_needs_transportation: "Transportation"
+          unmet_needs_other: "Other unmet needs"
+    index:
+      add_app: "Add new application"
+      search_apps: "Search applications"
+      id: "ID"
+      status: "Status"
+      app_number: "Application Number"
+      org: "Org"
+      members: "Member(s)"
+      assister: "Assister"
+      action: "Action"
+    verifications:
+      edit:
+        title: "Application submitted"
+        app_number_header: "Application Number"
+        app_number_desc: "The client should write this number down. They will need it to pick up the benefit in person."
+        app_not_submitted: "Application not yet submitted."
+
   activerecord:
     errors:
       messages:
         zip_code: "Must be a 5-digit ZIP Code in California"
         phone_number: "Make sure your phone number is 10 digits long"
+        email: "Make sure to enter a valid email"
+  general:
+    affirmative: "Yes"
+    negative: "No"
+    optional: "optional"
+    phone_number: "Phone number"
+    email_address: "Email address"
+    cancel: "Cancel"
+    update: "Update"
+    submit: "Submit"
+    sign_out: "Sign out"
+    password_help: "This should be at least %{min_length} characters."
 
   flash:
     actions:
