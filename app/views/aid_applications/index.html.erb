@@ -3,13 +3,13 @@
 <% if current_organization %>
   <div class="grid__item width-one-whole">
     <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
-      <span class="icon icon-add" aria-hidden="true"></span> Add new application
+      <span class="icon icon-add" aria-hidden="true"></span> <%= t('.add_app') %>
     <% end %>
   </div>
 <% end %>
 
 <div class="grid__item">
-  <%= render 'shared/search_bar', placeholder: 'Search applications' %>
+  <%= render 'shared/search_bar', placeholder: t('.search_apps') %>
 </div>
 
 <div class="grid__item width-one-whole">
@@ -17,15 +17,15 @@
     <table class="data-table js-sticky-header">
       <thead>
       <tr>
-        <th>ID</th>
-        <th>Status</th>
-        <th>Application Number</th>
+        <th><%= t('.id') %></th>
+        <th><%= t('.status') %></th>
+        <th><%= t('.app_number') %></th>
         <% if current_organization.blank? %>
-          <th>Org</th>
+          <th><%= t('.org') %></th>
         <% end %>
-        <th>Member(s)</th>
-        <th>Assister</th>
-        <th>Action</th>
+        <th><%= t('.members') %></th>
+        <th><%= t('.assister') %></th>
+        <th><%= t('.action') %></th>
       </tr>
       </thead>
       <tbody>

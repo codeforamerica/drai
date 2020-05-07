@@ -3,37 +3,37 @@
     <div class="grid__item width-two-thirds shift-one-sixth">
       <div class="form-card form-card--compact">
         <div class="form-card__header">
-          <h1 class="form-card__title">Account information</h1>
+          <h1 class="form-card__title"><%= t('.card_title') %></h1>
         </div>
         <div class="form-card__content">
           <div class="summary-table summary-table--left with-padding-med">
-            <p class="summary-table__label">Your name</p>
+            <p class="summary-table__label"><%= t('.name') %></p>
             <p class="summary-table__value"><%= @user.name %></span></p>
           </div>
           <div class="summary-table summary-table--left with-padding-med">
-            <p class="summary-table__label">Your organization</p>
+            <p class="summary-table__label"><%= t('.organization') %></p>
             <p class="summary-table__value"><%= @user&.organization&.name %></span></p>
           </div>
           <div class="summary-table summary-table--left with-padding-med">
-            <p class="summary-table__label">Your email</p>
+            <p class="summary-table__label"><%= t('.email') %></p>
             <p class="summary-table__value"><%= @user.email %></span></p>
           </div>
 
           <div class="grid">
             <div class="grid__item width-one-half">
               <div class="summary-table summary-table--left">
-                <p class="summary-table__label">Your password</p>
-                <p class="summary-table__value">**********</span></p>
+                <p class="summary-table__label"><%= t('.password') %></p>
+                <p class="summary-table__value"><span>**********</span></p>
               </div>
             </div>
             <div class="grid__item width-one-half">
-              <%= link_to "Change password", edit_account_path, class: "button button--small" %>
+              <%= link_to t('.change_password'), edit_account_path, class: "button button--small" %>
             </div>
           </div>
         </div>
 
         <div class="form-card__footer">
-          <%= link_to "Sign out", destroy_user_session_path, class: "button button--primary" %>
+          <%= link_to I18n.t('general.sign_out'), destroy_user_session_path, class: "button button--primary" %>
         </div>
       </div>
     </div>

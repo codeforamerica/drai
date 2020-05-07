@@ -40,7 +40,7 @@ describe 'Start aid application', type: :system do
       fill_in "aid_application[members_attributes][1][birthday(2i)]", with: "1"
       fill_in "aid_application[members_attributes][1][birthday(3i)]", with: "1"
 
-      expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as \"prefer not to answer\"."
+      expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
       fill_in "Preferred language (optional)", with: "Spanish"
       fill_in "Country of origin", with: "Canada"
       fill_in "Racial/ethnic identity", with: "Martian"

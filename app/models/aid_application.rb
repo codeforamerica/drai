@@ -59,7 +59,7 @@ class AidApplication < ApplicationRecord
 
     validates :preferred_contact_channel, presence: true
     validates :phone_number, presence: true, phone_number: true, if: -> { preferred_contact_channel_text? || preferred_contact_channel_voice? }
-    validates :email, presence: true, email: { message: "Make sure to enter a valid email" }, if: -> { preferred_contact_channel_email? }
+    validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { preferred_contact_channel_email? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
 
