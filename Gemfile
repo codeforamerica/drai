@@ -20,6 +20,7 @@ gem 'sass-rails', '>= 6'
 gem 'scenic'
 gem 'sentry-raven'
 gem 'textacular', '~> 5.0'
+gem 'twilio-ruby'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
