@@ -62,14 +62,14 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
+  ActionMailer::Base.smtp_settings = {
     user_name: 'apikey',
     password: Rails.application.secrets.sendgrid_api_key,
-    domain: 'yourdomain.com',
+    domain: Rails.application.secrets.url_host,
     address: 'smtp.sendgrid.net',
-    port: 587,
+    port: 465,
     authentication: :plain,
-    enable_starttls_auto: true
+    tls: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

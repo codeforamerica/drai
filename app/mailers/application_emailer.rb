@@ -1,5 +1,5 @@
 class ApplicationEmailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: "no-reply@#{Rails.application.secrets.email_domain}"
   layout 'mailer'
 
   def basic_message(to:, subject:, body:)
