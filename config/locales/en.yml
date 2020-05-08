@@ -101,6 +101,9 @@ en:
         app_number_header: "Application Number"
         app_number_desc: "The client should write this number down. They will need it to pick up the benefit in person."
         app_not_submitted: "Application not yet submitted."
+  text_message:
+    app_id:
+      body: "Your application for financial assistance has been submitted. Your application ID number is %{app_id}. You will need this number and your verification documents to receive the payment card."
 
   activerecord:
     errors:
