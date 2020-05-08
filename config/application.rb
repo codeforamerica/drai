@@ -36,7 +36,7 @@ module Dafi
     config.generators.system_tests = nil
 
     config.action_mailer.default_url_options = {
-      host: Rails.application.secrets.host,
+      host: Rails.application.secrets.url_host,
     }
 
   end
