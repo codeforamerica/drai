@@ -14,6 +14,51 @@ describe AidApplications::EditsController do
         expect(response).to redirect_to new_user_session_path
       end
     end
+
+    context 'authenticated' do
+      context 'when the demographic fields are nil' do
+        before { sign_in assister }
+
+        it 'defaults to Decline to state' do
+          get :edit, params: {
+              aid_application_id: aid_application.id,
+              organization_id: assister.organization.id
+          }
+
+          aid_application = assigns(:aid_application)
+          expect(aid_application.country_of_origin).to eq 'Decline to state'
+          expect(aid_application.racial_ethnic_identity).to eq 'Decline to state'
+          expect(aid_application.sexual_orientation).to eq 'Decline to state'
+          expect(aid_application.gender).to eq 'Decline to state'
+        end
+      end
+
+      context 'when the demographic fields have values' do
+        before do
+          sign_in assister
+
+          aid_application.update(
+            country_of_origin: 'Pakistan',
+            racial_ethnic_identity: 'American Indian or Alaska Native',
+            sexual_orientation: 'Another sexual orientation',
+            gender: 'Transgender: Female to Male'
+          )
+        end
+
+        it 'uses the existing values' do
+          get :edit, params: {
+              aid_application_id: aid_application.id,
+              organization_id: assister.organization.id
+          }
+
+          aid_application = assigns(:aid_application)
+          expect(aid_application.country_of_origin).to eq 'Pakistan'
+          expect(aid_application.racial_ethnic_identity).to eq 'American Indian or Alaska Native'
+          expect(aid_application.sexual_orientation).to eq 'Another sexual orientation'
+          expect(aid_application.gender).to eq 'Transgender: Female to Male'
+        end
+      end
+    end
   end
 
   describe '#update' do

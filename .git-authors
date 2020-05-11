@@ -3,7 +3,10 @@ pairs:
   anule: Anule Ndukwu; anule
   ben: Ben Sheldon; ben
   kristi: Kristi Lanzisera; kristi
+  whitney: Whitney Schaefer
 email:
   prefix: pair
   domain: codeforamerica.org
   no_solo_prefix: true
+email_addresses:
+  whitney: whitney.schaefer@gmail.com

@@ -32,10 +32,9 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
     fill_in "Preferred language (optional)", with: "Spanish"
-    fill_in "Country of origin", with: "Canada"
-    fill_in "Racial/ethnic identity", with: "Martian"
-    fill_in "Sexual orientation", with: "Qweer"
-    fill_in "Gender", with: ''
+    select "Asian Indian", from: "Racial/ethnic identity"
+    select "Bisexual", from: "Sexual orientation"
+    select "Another gender identity", from: "Gender"
 
     expect(page).to have_content "California address"
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
@@ -86,10 +85,10 @@ describe 'Start aid application', type: :system do
                                  covid19_experiencing_symptoms: true,
                                  name: "Alice",
                                  preferred_language: "Spanish",
-                                 country_of_origin: 'Canada',
-                                 racial_ethnic_identity: 'Martian',
-                                 sexual_orientation: "Qweer",
-                                 gender: nil,
+                                 country_of_origin: 'Decline to state',
+                                 racial_ethnic_identity: 'Asian Indian',
+                                 sexual_orientation: "Bisexual",
+                                 gender: "Another gender identity",
                                  birthday: "01-01-1980".to_date,
 
                                )

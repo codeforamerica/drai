@@ -55,10 +55,10 @@
         <fieldset>
           <legend class="spacing-below-15"><em><%= I18n.t('aid_applications.edits.edit.contact_information.optional_questions_prompt') %></em></legend>
           <%= f.cfa_input_field :preferred_language, I18n.t('aid_applications.edits.edit.applicant_information.preferred_language'), optional: "(#{I18n.t('general.optional')})" %>
-          <%= f.cfa_input_field :country_of_origin, I18n.t('aid_applications.edits.edit.applicant_information.country_of_origin'), optional: "(#{I18n.t('general.optional')})" %>
-          <%= f.cfa_input_field :racial_ethnic_identity, I18n.t('aid_applications.edits.edit.applicant_information.racial_ethnic_identity'), optional: "(#{I18n.t('general.optional')})" %>
-          <%= f.cfa_input_field :sexual_orientation, I18n.t('aid_applications.edits.edit.applicant_information.sexual_orientation'), optional: "(#{I18n.t('general.optional')})" %>
-          <%= f.cfa_input_field :gender, I18n.t('aid_applications.edits.edit.applicant_information.gender'), optional: "(#{I18n.t('general.optional')})" %>
+          <%= f.cfa_select :country_of_origin, I18n.t('aid_applications.edits.edit.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
+          <%= f.cfa_select :racial_ethnic_identity, I18n.t('aid_applications.edits.edit.applicant_information.racial_ethnic_identity'), AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS %>
+          <%= f.cfa_select :sexual_orientation, I18n.t('aid_applications.edits.edit.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
+          <%= f.cfa_select :gender, I18n.t('aid_applications.edits.edit.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
         </fieldset>
 
         <hr>
