@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_234602) do
+ActiveRecord::Schema.define(version: 2020_05_11_211715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2020_05_04_234602) do
     t.text "zip_code"
     t.text "phone_number"
     t.text "email"
-    t.integer "members_count", default: 0, null: false
     t.datetime "submitted_at"
     t.bigint "submitter_id"
     t.string "application_number"
@@ -37,30 +36,23 @@ ActiveRecord::Schema.define(version: 2020_05_04_234602) do
     t.boolean "unmet_utilities"
     t.boolean "unmet_transportation"
     t.boolean "unmet_other"
-    t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
-    t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.boolean "valid_work_authorization"
     t.boolean "covid19_reduced_work_hours"
     t.boolean "covid19_care_facility_closed"
     t.boolean "covid19_experiencing_symptoms"
     t.boolean "covid19_underlying_health_condition"
     t.boolean "covid19_caregiver"
-    t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
-    t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
-  end
-
-  create_table "members", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "name"
     t.date "birthday"
-    t.bigint "aid_application_id"
     t.text "preferred_language"
     t.text "country_of_origin"
     t.text "racial_ethnic_identity"
     t.text "sexual_orientation"
     t.text "gender"
-    t.index ["aid_application_id"], name: "index_members_on_aid_application_id"
+    t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
+    t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
+    t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
+    t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -120,25 +112,13 @@ ActiveRecord::Schema.define(version: 2020_05_04_234602) do
   add_foreign_key "aid_applications", "organizations"
   add_foreign_key "aid_applications", "users", column: "creator_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
-  add_foreign_key "members", "aid_applications"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"
 
   create_view "aid_application_searches", materialized: true, sql_definition: <<-SQL
-      WITH member_details AS (
-           SELECT m.aid_application_id,
-              COALESCE(m.name, ''::text) AS info
-             FROM members m
-          ), combined_member_details AS (
-           SELECT member_details.aid_application_id,
-              string_agg(member_details.info, ' '::text) AS info
-             FROM member_details
-            GROUP BY member_details.aid_application_id
-          )
-   SELECT aid_applications.id AS aid_application_id,
-      ((((((((((((aid_applications.id || ' '::text) || COALESCE(combined_member_details.info, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) AS searchable_data
-     FROM (aid_applications
-       LEFT JOIN combined_member_details ON ((aid_applications.id = combined_member_details.aid_application_id)));
+      SELECT aid_applications.id AS aid_application_id,
+      ((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) AS searchable_data
+     FROM aid_applications;
   SQL
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin
   add_index "aid_application_searches", ["aid_application_id"], name: "index_aid_application_searches_on_aid_application_id", unique: true

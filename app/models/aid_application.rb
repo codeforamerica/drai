@@ -2,20 +2,40 @@
 #
 # Table name: aid_applications
 #
-#  id                 :bigint           not null, primary key
-#  application_number :string
-#  city               :text
-#  email              :text
-#  members_count      :integer          default(0), not null
-#  phone_number       :text
-#  street_address     :text
-#  submitted_at       :datetime
-#  zip_code           :text
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  creator_id         :bigint           not null
-#  organization_id    :bigint           not null
-#  submitter_id       :bigint
+#  id                                  :bigint           not null, primary key
+#  application_number                  :string
+#  birthday                            :date
+#  city                                :text
+#  country_of_origin                   :text
+#  covid19_care_facility_closed        :boolean
+#  covid19_caregiver                   :boolean
+#  covid19_experiencing_symptoms       :boolean
+#  covid19_reduced_work_hours          :boolean
+#  covid19_underlying_health_condition :boolean
+#  email                               :text
+#  gender                              :text
+#  name                                :text
+#  phone_number                        :text
+#  preferred_contact_channel           :string
+#  preferred_language                  :text
+#  racial_ethnic_identity              :text
+#  receives_calfresh_or_calworks       :boolean
+#  sexual_orientation                  :text
+#  street_address                      :text
+#  submitted_at                        :datetime
+#  unmet_childcare                     :boolean
+#  unmet_food                          :boolean
+#  unmet_housing                       :boolean
+#  unmet_other                         :boolean
+#  unmet_transportation                :boolean
+#  unmet_utilities                     :boolean
+#  valid_work_authorization            :boolean
+#  zip_code                            :text
+#  created_at                          :datetime         not null
+#  updated_at                          :datetime         not null
+#  creator_id                          :bigint           not null
+#  organization_id                     :bigint           not null
+#  submitter_id                        :bigint
 #
 # Indexes
 #
@@ -38,21 +58,27 @@ class AidApplication < ApplicationRecord
   belongs_to :organization, counter_cache: true
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
-  has_many :members, -> { order(created_at: :asc) }
   has_one :aid_application_search
 
-  accepts_nested_attributes_for :members, allow_destroy: true
   scope :query, ->(term) { select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term)) }
 
   enum preferred_contact_channel: { text: "text", voice: "voice", email: "email" }, _prefix: "preferred_contact_channel"
 
-  auto_strip_attributes :email
+  auto_strip_attributes :email,
+                        :preferred_language,
+                        :country_of_origin,
+                        :racial_ethnic_identity,
+                        :sexual_orientation,
+                        :gender
+
   before_validation :strip_phone_number
   after_validation :copy_phone_number_errors
 
   validates :application_number, uniqueness: true, allow_nil: true
 
   with_options on: :submit do
+    validates :name, presence: true
+    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: 'Must be 18-years or older and born after 1900' }
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
@@ -63,7 +89,6 @@ class AidApplication < ApplicationRecord
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
 
-    validates :members, length: { minimum: 1, maximum: 2 }
   end
 
   with_options if: :submitted_at do
@@ -94,10 +119,6 @@ class AidApplication < ApplicationRecord
       errors[:voice_phone_number] << error
       errors[:text_phone_number] << error
     end
-  end
-
-  def member_names
-    members.map(&:name)
   end
 
   def save_and_submit(submitter:)

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: aid_application_searches
+#
+#  searchable_data    :text
+#  aid_application_id :bigint
+#
+# Indexes
+#
+#  index_aid_application_searches_on_aid_application_id  (aid_application_id) UNIQUE
+#  index_aid_application_searches_on_searchable_data     (to_tsvector('english'::regconfig, searchable_data)) USING gin
+#
 class AidApplicationSearch < ApplicationRecord
   extend Textacular
 

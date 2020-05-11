@@ -3,6 +3,9 @@ FactoryBot.define do
     creator { build :assister }
     organization { creator.organization }
 
+    name { Faker::Name.name }
+    birthday { 'January 1, 1980' }
+
     street_address { Faker::Address.street_address }
     city { Faker::Address.city }
     zip_code { '94103' }
@@ -11,14 +14,6 @@ FactoryBot.define do
     phone_number { Faker::PhoneNumber.cell_phone }
 
     receives_calfresh_or_calworks { true }
-
-    transient do
-      members_count { 2 }
-    end
-
-    after(:build) do |aid_application, evaluator|
-      aid_application.members = build_list(:member, evaluator.members_count, aid_application: aid_application)
-    end
 
     trait :submitted do
       submitter { creator }
