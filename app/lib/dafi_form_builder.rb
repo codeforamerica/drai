@@ -3,6 +3,33 @@ class DafiFormBuilder < Cfa::Styleguide::CfaFormBuilder
     button(value, class: 'button button--primary') { text }
   end
 
+# Expecting array of strings
+  def gcf_collection_check_boxes(method, label_text, collection)
+
+    formatted_label = label(
+        method,
+        label_contents(
+            label_text,
+            nil
+        )
+    )
+
+    checkboxes = collection_check_boxes method,
+                                        collection, ->(str) { str }, ->(str) { str } do |b|
+      b.label(class: "checkbox") { b.check_box + b.text }
+    end
+
+    html_output = <<~HTML
+          <div class="form-group#{error_state(object, method)}">
+            #{formatted_label}
+            #{checkboxes}
+            #{errors_for(object, method)}
+          </div>
+    HTML
+
+    html_output.html_safe
+  end
+
   def gcf_date_input(method, label_text, classes: [], options: {}, help_text: "")
     classes_string = classes.join(' ')
     helper_text_array = help_text.split('/')

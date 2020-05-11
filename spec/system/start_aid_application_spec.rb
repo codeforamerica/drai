@@ -32,7 +32,8 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
     fill_in "Preferred language (optional)", with: "Spanish"
-    select "Asian Indian", from: "Racial/ethnic identity"
+    check "Asian Indian"
+    check "Hispanic or Latino (any other race)"
     select "Bisexual", from: "Sexual orientation"
     select "Another gender identity", from: "Gender"
 
@@ -86,7 +87,7 @@ describe 'Start aid application', type: :system do
                                  name: "Alice",
                                  preferred_language: "Spanish",
                                  country_of_origin: 'Decline to state',
-                                 racial_ethnic_identity: 'Asian Indian',
+                                 racial_ethnic_identity: ['Asian Indian', 'Hispanic or Latino (any other race)'],
                                  sexual_orientation: "Bisexual",
                                  gender: "Another gender identity",
                                  birthday: "01-01-1980".to_date,

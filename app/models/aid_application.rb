@@ -92,6 +92,7 @@ class AidApplication < ApplicationRecord
   ].freeze
 
   RACIAL_OR_ETHNIC_IDENTITY_OPTIONS = [
+    DEMOGRAPHIC_OPTIONS_DEFAULT,
     'American Indian or Alaska Native',
     'Asian Indian',
     'Black or African American (Hispanic or Latino)',
@@ -114,7 +115,6 @@ class AidApplication < ApplicationRecord
     'White (non-Hispanic or Latino)',
     'Hispanic or Latino (any other race)',
     'Other',
-    DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
   SEXUAL_ORIENTATION_OPTIONS = [
@@ -173,7 +173,7 @@ class AidApplication < ApplicationRecord
     validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { preferred_contact_channel_email? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
-
+    validates :racial_ethnic_identity, presence: true
   end
 
   with_options if: :submitted_at do

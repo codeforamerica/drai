@@ -27,7 +27,6 @@ describe AidApplications::EditsController do
 
           aid_application = assigns(:aid_application)
           expect(aid_application.country_of_origin).to eq 'Decline to state'
-          expect(aid_application.racial_ethnic_identity).to eq 'Decline to state'
           expect(aid_application.sexual_orientation).to eq 'Decline to state'
           expect(aid_application.gender).to eq 'Decline to state'
         end
@@ -39,7 +38,6 @@ describe AidApplications::EditsController do
 
           aid_application.update(
             country_of_origin: 'Pakistan',
-            racial_ethnic_identity: 'American Indian or Alaska Native',
             sexual_orientation: 'Another sexual orientation',
             gender: 'Transgender: Female to Male'
           )
@@ -53,7 +51,6 @@ describe AidApplications::EditsController do
 
           aid_application = assigns(:aid_application)
           expect(aid_application.country_of_origin).to eq 'Pakistan'
-          expect(aid_application.racial_ethnic_identity).to eq 'American Indian or Alaska Native'
           expect(aid_application.sexual_orientation).to eq 'Another sexual orientation'
           expect(aid_application.gender).to eq 'Transgender: Female to Male'
         end
