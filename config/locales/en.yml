@@ -56,8 +56,6 @@ en:
           racial_ethnic_identity: "Racial/ethnic identity"
           sexual_orientation: "Sexual orientation"
           gender: "Gender"
-          add_a_person: "Add a second person"
-          remove_person: "Remove Person"
         california_address:
           title: "California address"
           address_required: "An address is required. Homeless clients can use a shelter or other address."

@@ -49,36 +49,19 @@
         <hr>
 
         <h2><%= I18n.t('aid_applications.edits.edit.applicant_information.title') %></h2>
-        <%= f.fields_for :members do |mf| %>
-          <div class="member-fields-<%= mf.index %>">
-            <%= mf.cfa_input_field :name, I18n.t('aid_applications.edits.edit.applicant_information.name') %>
-            <%= mf.gcf_date_input :birthday, I18n.t('aid_applications.edits.edit.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
+        <%= f.cfa_input_field :name, I18n.t('aid_applications.edits.edit.applicant_information.name') %>
+        <%= f.gcf_date_input :birthday, I18n.t('aid_applications.edits.edit.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
 
-            <fieldset>
-              <legend class="spacing-below-15"><em><%= I18n.t('aid_applications.edits.edit.contact_information.optional_questions_prompt') %></em></legend>
+        <fieldset>
+          <legend class="spacing-below-15"><em><%= I18n.t('aid_applications.edits.edit.contact_information.optional_questions_prompt') %></em></legend>
+          <%= f.cfa_input_field :preferred_language, I18n.t('aid_applications.edits.edit.applicant_information.preferred_language'), optional: "(#{I18n.t('general.optional')})" %>
+          <%= f.cfa_input_field :country_of_origin, I18n.t('aid_applications.edits.edit.applicant_information.country_of_origin'), optional: "(#{I18n.t('general.optional')})" %>
+          <%= f.cfa_input_field :racial_ethnic_identity, I18n.t('aid_applications.edits.edit.applicant_information.racial_ethnic_identity'), optional: "(#{I18n.t('general.optional')})" %>
+          <%= f.cfa_input_field :sexual_orientation, I18n.t('aid_applications.edits.edit.applicant_information.sexual_orientation'), optional: "(#{I18n.t('general.optional')})" %>
+          <%= f.cfa_input_field :gender, I18n.t('aid_applications.edits.edit.applicant_information.gender'), optional: "(#{I18n.t('general.optional')})" %>
+        </fieldset>
 
-              <%= mf.cfa_input_field :preferred_language, I18n.t('aid_applications.edits.edit.applicant_information.preferred_language'), optional: "(#{I18n.t('general.optional')})" %>
-              <%= mf.cfa_input_field :country_of_origin, I18n.t('aid_applications.edits.edit.applicant_information.country_of_origin'), optional: "(#{I18n.t('general.optional')})" %>
-              <%= mf.cfa_input_field :racial_ethnic_identity, I18n.t('aid_applications.edits.edit.applicant_information.racial_ethnic_identity'), optional: "(#{I18n.t('general.optional')})" %>
-              <%= mf.cfa_input_field :sexual_orientation, I18n.t('aid_applications.edits.edit.applicant_information.sexual_orientation'), optional: "(#{I18n.t('general.optional')})" %>
-              <%= mf.cfa_input_field :gender, I18n.t('aid_applications.edits.edit.applicant_information.gender'), optional: "(#{I18n.t('general.optional')})" %>
-            </fieldset>
-            <% if @aid_application.members.size > 1 %>
-              <%= f.button type: 'submit', name: "aid_application[members_attributes][#{mf.index}]_destroy", value: '1', class: 'button button--secondary' do %>
-                <span class="icon icon-cancel" aria-hidden="true"></span> <%= I18n.t('aid_applications.edits.edit.applicant_information.remove_person') %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <hr>
-        <% end %>
-
-        <% if @aid_application.members.size < 2 %>
-          <%= f.button type: 'submit', name: 'form_action', value: 'add_person', class: 'button button--secondary' do %>
-            <span class="icon icon-add" aria-hidden="true"></span> <%= I18n.t('aid_applications.edits.edit.applicant_information.add_a_person') %>
-          <% end %>
-          <hr>
-        <% end %>
+        <hr>
 
         <h2><%= I18n.t('aid_applications.edits.edit.california_address.title') %></h2>
         <p class="text--help"><%= I18n.t('aid_applications.edits.edit.california_address.address_required') %></p>

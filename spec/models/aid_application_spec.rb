@@ -4,7 +4,7 @@ RSpec.describe AidApplication, type: :model do
   let(:aid_application) { create :aid_application }
 
   it 'has a valid factory' do
-    aid_application = build :aid_application, members_count: 1
+    aid_application = build :aid_application
     expect(aid_application).to be_valid(:submit)
   end
 
@@ -111,25 +111,6 @@ RSpec.describe AidApplication, type: :model do
     it 'allows false' do
       aid_application = build :aid_application, receives_calfresh_or_calworks: false
       expect(aid_application).to be_valid(:submit)
-    end
-  end
-
-  describe '#members' do
-    it 'must have at least 1' do
-      aid_application = build :aid_application, members_count: 0
-      expect(aid_application).not_to be_valid(:submit)
-    end
-
-    it 'must not have more than 2' do
-      aid_application = build :aid_application, members_count: 3
-      expect(aid_application).not_to be_valid(:submit)
-    end
-  end
-
-  describe '.member_names' do
-    it 'returns an array of member names' do
-      aid_application = build :aid_application, members_count: 1
-      expect(aid_application.member_names).to contain_exactly(aid_application.members[0].name)
     end
   end
 

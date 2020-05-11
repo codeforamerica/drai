@@ -17,18 +17,11 @@ class AidApplicationsController < ApplicationController
 
   def edit
     @aid_application = current_organization.aid_applications.find(params[:id])
-    if @aid_application.members.size == 0
-      @aid_application.members.build
-    end
   end
 
   def update
     @aid_application = current_organization.aid_applications.find(params[:id])
     @aid_application.attributes = aid_application_params
-
-    if params[:form_action] == 'add_person'
-      @aid_application.members.build
-    end
 
     @aid_application.save
 
@@ -48,7 +41,7 @@ class AidApplicationsController < ApplicationController
   private
 
   def aid_applications
-    applications = AidApplication.all.order(id: :desc).includes(:members, :organization, :creator, :submitter)
+    applications = AidApplication.all.order(id: :desc).includes(:organization, :creator, :submitter)
 
     if current_organization
       applications = applications.where(organization: current_organization)
@@ -60,6 +53,6 @@ class AidApplicationsController < ApplicationController
   end
 
   def aid_application_params
-    params.require(:aid_application).permit(:street_address, :city, :zip_code, :phone_number, :email, members_attributes: [:id, :name, :birthday, :_destroy])
+    params.require(:aid_application).permit(:street_address, :city, :zip_code, :phone_number, :email, :name, :birthday)
   end
 end

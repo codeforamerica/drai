@@ -2,19 +2,11 @@ module AidApplications
   class EditsController < BaseController
     def edit
       @aid_application = current_aid_application
-
-      if @aid_application.members.size == 0
-        @aid_application.members.build
-      end
     end
 
     def update
       @aid_application = current_aid_application
       @aid_application.assign_attributes(aid_application_params)
-
-      if params[:form_action] == 'add_person'
-        @aid_application.members.build
-      end
 
       if params[:form_action] == 'submit'
         @aid_application.save_and_submit(submitter: current_user)
@@ -58,17 +50,13 @@ module AidApplications
           :unmet_utilities,
           :unmet_transportation,
           :unmet_other,
-          members_attributes: [
-              :id,
-              :name,
-              :birthday,
-              :preferred_language,
-              :country_of_origin,
-              :racial_ethnic_identity,
-              :sexual_orientation,
-              :gender,
-              :_destroy
-          ]
+          :name,
+          :birthday,
+          :preferred_language,
+          :country_of_origin,
+          :racial_ethnic_identity,
+          :sexual_orientation,
+          :gender,
       )
     end
   end

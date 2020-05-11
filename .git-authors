@@ -2,6 +2,7 @@ pairs:
   # <initials>: <Firstname> <Lastname>[; <email-id>]
   anule: Anule Ndukwu; anule
   ben: Ben Sheldon; ben
+  kristi: Kristi Lanzisera; kristi
 email:
   prefix: pair
   domain: codeforamerica.org

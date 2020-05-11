@@ -25,32 +25,17 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content "Applicant Information"
 
-    within '.member-fields-0' do
-      fill_in "Full name", with: "Alice"
-      fill_in "aid_application[members_attributes][0][birthday(1i)]", with: "1980"
-      fill_in "aid_application[members_attributes][0][birthday(2i)]", with: "1"
-      fill_in "aid_application[members_attributes][0][birthday(3i)]", with: "1"
-    end
+    fill_in "Full name", with: "Alice"
+    fill_in "aid_application[birthday(1i)]", with: "1980"
+    fill_in "aid_application[birthday(2i)]", with: "1"
+    fill_in "aid_application[birthday(3i)]", with: "1"
 
-    click_on 'Add a second person'
-
-    within '.member-fields-1' do
-      fill_in "Full name", with: "Barbara"
-      fill_in "aid_application[members_attributes][1][birthday(1i)]", with: "1981"
-      fill_in "aid_application[members_attributes][1][birthday(2i)]", with: "1"
-      fill_in "aid_application[members_attributes][1][birthday(3i)]", with: "1"
-
-      expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
-      fill_in "Preferred language (optional)", with: "Spanish"
-      fill_in "Country of origin", with: "Canada"
-      fill_in "Racial/ethnic identity", with: "Martian"
-      fill_in "Sexual orientation", with: "Qweer"
-      fill_in "Gender", with: ''
-    end
-
-    within '.member-fields-0' do
-      click_on 'Remove Person'
-    end
+    expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
+    fill_in "Preferred language (optional)", with: "Spanish"
+    fill_in "Country of origin", with: "Canada"
+    fill_in "Racial/ethnic identity", with: "Martian"
+    fill_in "Sexual orientation", with: "Qweer"
+    fill_in "Gender", with: ''
 
     expect(page).to have_content "California address"
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
@@ -98,19 +83,16 @@ describe 'Start aid application', type: :system do
                                  unmet_childcare: true,
                                  unmet_utilities: true,
                                  valid_work_authorization: false,
-                                 covid19_experiencing_symptoms: true
-                               )
-    expect(aid_application.members.size).to eq 1
+                                 covid19_experiencing_symptoms: true,
+                                 name: "Alice",
+                                 preferred_language: "Spanish",
+                                 country_of_origin: 'Canada',
+                                 racial_ethnic_identity: 'Martian',
+                                 sexual_orientation: "Qweer",
+                                 gender: nil,
+                                 birthday: "01-01-1980".to_date,
 
-    member = aid_application.members.first
-    expect(member).to have_attributes(
-                        name: "Barbara",
-                        preferred_language: "Spanish",
-                        country_of_origin: 'Canada',
-                        racial_ethnic_identity: 'Martian',
-                        sexual_orientation: "Qweer",
-                        gender: nil
-                      )
+                               )
 
     open_sms aid_application.phone_number
     expect(current_sms).to have_content aid_application.application_number

@@ -34,7 +34,7 @@
           <td><%= aid_application.id %></td>
           <td><%= aid_application.status_human %></td>
           <td><%= aid_application.application_number %></td>
-          <td><%= aid_application.member_names.join(', ') %></td>
+          <td><%= aid_application.name %></td>
           <% if current_organization.blank? %>
             <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
           <% end %>
