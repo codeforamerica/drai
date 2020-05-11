@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
+
   resources :assisters
   resources :aid_applications, only: [:index]
+  resource :privacy, only: [:show]
 
   resources :organizations, only: [:index, :show], param: :id do
     resources :assisters
