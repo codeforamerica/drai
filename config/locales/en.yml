@@ -84,6 +84,7 @@ en:
           title: "Additional Information"
           receives_calfresh_label: "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?"
           receives_calfresh_help_text: "A household is defined as individuals who live and purchase and prepare meals together."
+          read_to_client: "Read the following to the applicant:"
           unmet_needs_legend: "What unmet needs does the applicant have?"
           unmet_needs_food: "Food"
           unmet_needs_housing: "Housing (i.e. difficulty paying rent or mortgage)"
@@ -91,6 +92,8 @@ en:
           unmet_needs_utilities: "Utilities"
           unmet_needs_transportation: "Transportation"
           unmet_needs_other: "Other unmet needs"
+          attestation_label: "Applicant attestation"
+          attestation_help_text: "Do you attest that the information you provided is true and accurate, and do you understand that the information provided, if misrepresented, or incomplete, may be grounds to deny your application?"
     index:
       add_app: "Add new application"
       search_apps: "Search applications"
@@ -125,6 +128,7 @@ en:
   activerecord:
     errors:
       messages:
+        attestation: "You must click 'Yes' to submit"
         zip_five_digits: "Must be a 5-digit ZIP Code"
         zip_code: "Must be a 5-digit ZIP Code in California"
         phone_number: "Make sure your phone number is 10 digits long"

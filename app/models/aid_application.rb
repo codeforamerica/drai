@@ -182,6 +182,7 @@ class AidApplication < ApplicationRecord
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
     validates :racial_ethnic_identity, presence: true
+    validates :attestation, inclusion: { in: [true], message: I18n.t('activerecord.errors.messages.attestation') }
   end
 
   with_options if: :submitted_at do

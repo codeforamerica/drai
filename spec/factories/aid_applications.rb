@@ -23,6 +23,8 @@ FactoryBot.define do
 
     racial_ethnic_identity { [AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS.first] }
 
+    attestation { true }
+
     trait :submitted do
       submitter { creator }
       submitted_at { Time.current }

@@ -79,6 +79,7 @@ module AidApplications
           { racial_ethnic_identity: [] },
           :sexual_orientation,
           :gender,
+          :attestation
       ).each do |_, value|
         value.delete('') # removes arrays with empty string from checkboxes
       end
