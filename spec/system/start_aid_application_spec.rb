@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Start aid application', type: :system do
+describe 'Start aid application', type: :system, js: true do
   let!(:assister) { create :assister }
 
   specify do
@@ -58,13 +58,21 @@ describe 'Start aid application', type: :system do
     expect(page).to have_content "Contact information"
     expect(page).to have_content "The applicant will be sent their Unique ID number and activation number."
 
-    within_fieldset "How would they like to be sent this?" do
-      choose "Text message"
+    fill_in "Phone number", with: "555-555-5555"
+    fill_in "Email address (if available)", with: "example@example.com"
+
+    check "This is a landline"
+    expect(page).to have_field('Text message', disabled: true)
+
+    uncheck "This is a landline"
+    expect(page).to have_field('Text message', disabled: false)
+
+    within_fieldset "How would you like to receive these messages?" do
+      check "Text message"
     end
 
     within '#preferred-contact-channel__text' do
       expect(page).to have_content 'Message and data rates may apply'
-      fill_in "Phone number", with: "555-555-5555"
     end
 
     within_fieldset "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?" do
@@ -96,8 +104,9 @@ describe 'Start aid application', type: :system do
                                  mailing_zip_code: "02130",
                                  mailing_state: "Massachusetts",
                                  phone_number: "5555555555",
-                                 email: nil,
-                                 preferred_contact_channel: "text",
+                                 email: "example@example.com",
+                                 sms_consent: true,
+                                 email_consent: false,
                                  receives_calfresh_or_calworks: true,
                                  unmet_childcare: true,
                                  unmet_utilities: true,

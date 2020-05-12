@@ -12,22 +12,23 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.assign_attributes(aid_application_params)
 
-      if params[:form_action] == 'allow_mailing_address'
-        @aid_application.allow_mailing_address = true
-      end
-
       if params[:form_action] == 'submit'
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
-          if @aid_application.preferred_contact_channel_text?
+          if @aid_application.sms_consent?
             ApplicationTexter.basic_message(to: @aid_application.phone_number, body: I18n.t('text_message.app_id.body', app_id: @aid_application.application_number)).deliver_now
-          elsif @aid_application.preferred_contact_channel_email?
+          end
+
+          if @aid_application.email_consent?
             ApplicationEmailer.basic_message(to: @aid_application.email, subject: I18n.t('email_message.app_id.subject', app_id: @aid_application.application_number), body: I18n.t('email_message.app_id.body', app_id: @aid_application.application_number)).deliver_now
           end
         end
-      else
+      elsif params[:form_action] == 'allow_mailing_address'
+        @aid_application.allow_mailing_address = true
         @aid_application.save
+      else
+        @aid_application.save(context: :submit)
       end
 
       respond_with @aid_application, location: (lambda do
@@ -59,10 +60,10 @@ module AidApplications
           :mailing_city,
           :mailing_state,
           :mailing_zip_code,
-          :preferred_contact_channel,
-          :text_phone_number,
-          :voice_phone_number,
+          :sms_consent,
+          :email_consent,
           :phone_number,
+          :landline,
           :email,
           :receives_calfresh_or_calworks,
           :unmet_food,
