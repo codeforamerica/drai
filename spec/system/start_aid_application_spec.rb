@@ -84,6 +84,10 @@ describe 'Start aid application', type: :system, js: true do
       check "Utilities"
     end
 
+    within_fieldset "Applicant attestation" do
+      check "Yes"
+    end
+
     click_on 'Submit'
 
     expect(page).to have_content 'Application submitted'
