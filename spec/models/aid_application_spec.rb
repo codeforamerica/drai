@@ -208,13 +208,14 @@ RSpec.describe AidApplication, type: :model do
     yield
   end
 
-  describe '#trigger_submit' do
+  describe '#save_and_submit' do
     let(:aid_application) { create :aid_application }
 
-    it 'adds a submitted_at' do
+    it 'adds a submitted_at and submitter' do
       expect {
         aid_application.save_and_submit(submitter: aid_application.creator)
       }.to change { aid_application.reload.submitted_at }.from(nil).to within(1.second).of Time.current
+      expect(aid_application.reload.submitter).to eq aid_application.creator
     end
 
     it 'generates a application_number' do
@@ -224,7 +225,19 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  describe '#aid_identifier' do
+  describe '#save_and_approve' do
+    let(:aid_application) { create :aid_application }
+
+    it 'adds an approved_at' do
+      expect {
+        aid_application.save_and_approve(approver: aid_application.creator)
+      }.to change { aid_application.reload.approved_at }.from(nil).to(within(1.second).of Time.current)
+      expect(aid_application.reload.approver).to eq aid_application.creator
+
+    end
+  end
+
+  describe '#application_number' do
     it 'cannot be changed once assigned' do
       aid_application = create :aid_application, :submitted
       expect do

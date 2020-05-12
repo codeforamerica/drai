@@ -58,7 +58,7 @@
 #  fk_rails_...  (submitter_id => users.id)
 #
 class AidApplication < ApplicationRecord
-  READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id']
+  READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id', 'approved_at', 'approver_id']
   DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
   COUNTRY_OF_ORIGIN_OPTIONS = [
     'Afghanistan',
@@ -146,10 +146,12 @@ class AidApplication < ApplicationRecord
 
 
   scope :submitted, -> { where.not(submitted_at: nil) }
+  scope :approved, -> { where.not(submitted_at: nil) }
 
   belongs_to :organization, counter_cache: true
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
+  belongs_to :approver, class_name: 'User', inverse_of: :aid_applications_approved, counter_cache: :aid_applications_approved_count, optional: :true
   has_one :aid_application_search
 
   scope :query, ->(term) { select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term)) }
@@ -198,6 +200,34 @@ class AidApplication < ApplicationRecord
   end
   validates :submitted_at, presence: true, if: :application_number
 
+  with_options if: :approved_at do
+    validates :approver, presence: true
+  end
+
+  alias_attribute :text_phone_number, :phone_number
+  alias_attribute :voice_phone_number, :phone_number
+
+  def text_phone_number=(value)
+    self.phone_number = value if preferred_contact_channel_text?
+  end
+
+  def voice_phone_number=(value)
+    self.phone_number = value if preferred_contact_channel_voice?
+  end
+
+  def phone_number=(value)
+    super(value) if value.present?
+  end
+
+  def copy_phone_number_errors
+    return if errors[:phone_number].empty?
+
+    errors[:phone_number].each do |error|
+      errors[:voice_phone_number] << error
+      errors[:text_phone_number] << error
+    end
+  end
+
   def save_and_submit(submitter:)
     transaction(joinable: false, requires_new: true) do
       if errors.empty? && valid?(:submit)
@@ -221,6 +251,13 @@ class AidApplication < ApplicationRecord
     end
   end
 
+  def save_and_approve(approver:)
+    self.approver = approver
+    self.approved_at = Time.current
+
+    save!
+  end
+
   def generate_application_number
     loop do
       value = "APP-#{organization.id}-#{rand(100..999)}-#{rand(100..999)}"
@@ -239,6 +276,8 @@ class AidApplication < ApplicationRecord
   def status
     if submitted?
       :submitted
+    elsif approved?
+      :approved
     else
       :started
     end
@@ -248,11 +287,16 @@ class AidApplication < ApplicationRecord
     {
       started: 'Started',
       submitted: 'Submitted',
+      approved: 'Approved',
     }.fetch(status)
   end
 
   def submitted?
     submitted_at.present?
+  end
+
+  def approved?
+    approved_at.present?
   end
 
   private

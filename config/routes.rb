@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
         resource :applicant, only: [:edit, :update], path_names: { edit: '' }
         resource :verification, only: [:edit, :update], path_names: { edit: '' }
+        resource :approval, only: [:edit, :update], path_names: { edit: '' }
         resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
       end
     end
