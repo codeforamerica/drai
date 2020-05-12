@@ -79,6 +79,7 @@ describe AidApplications::EditsController do
                                    creator: assister,
                                    organization: assister.organization
                                  )
+      expect(aid_application.landline).to eq false
     end
 
     context 'when submit form action' do

@@ -71,6 +71,7 @@ en:
         contact_information:
           title: "Contact information"
           help_text: "The applicant will be sent their Unique ID number and activation number."
+          landline: "This is a landline"
           optional_questions_prompt: "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
           preferred_contact_label: "How would you like to receive these messages?"
           preferred_contact_text: "Text message"

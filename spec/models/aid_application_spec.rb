@@ -83,14 +83,23 @@ RSpec.describe AidApplication, type: :model do
   end
 
   describe '#email' do
-    it 'is not required' do
-      aid_application = build :aid_application, email: ''
-      expect(aid_application).to be_valid(:submit)
+    context 'email_consent is false' do
+      it 'is not required' do
+        aid_application = build :aid_application, email_consent: false, email: ''
+        expect(aid_application).to be_valid(:submit)
+      end
     end
 
-    it 'must be valid' do
-      aid_application = build :aid_application, email: '@garbage'
-      expect(aid_application).not_to be_valid(:submit)
+    context 'email_consent is true' do
+      it 'is required' do
+        aid_application = build :aid_application, email_consent: true, email: ''
+        expect(aid_application).not_to be_valid(:submit)
+      end
+
+      it 'must be valid' do
+        aid_application = build :aid_application, email_consent: true, email: '@garbage'
+        expect(aid_application).not_to be_valid(:submit)
+      end
     end
   end
 
@@ -111,8 +120,18 @@ RSpec.describe AidApplication, type: :model do
 
     context 'email_consent is true' do
       it 'is valid' do
-        aid_application = build :aid_application, sms_consent: false, email_consent: true
+        aid_application = build :aid_application, sms_consent: false, email_consent: true, email: 'e@example.com'
         expect(aid_application).to be_valid(:submit)
+      end
+    end
+  end
+
+  describe 'landline' do
+    context 'is true' do
+      it 'sets sms_consent to false' do
+        aid_application = build :aid_application, sms_consent: true, landline: true
+        aid_application.save
+        expect(aid_application.reload.sms_consent).to eq false
       end
     end
   end

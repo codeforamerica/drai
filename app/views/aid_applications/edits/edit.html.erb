@@ -90,6 +90,10 @@
 
         <h2><%= I18n.t('aid_applications.edits.edit.contact_information.title') %></h2>
         <%= f.cfa_input_field(:phone_number, I18n.t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
+        <label class="checkbox checkbox-with-associated-field-to-disable">
+          <%= f.check_box(:landline) %>
+          <%= t('.contact_information.landline') %>
+        </label>
         <%= f.cfa_input_field(:email, t('.contact_information.email_address'), type: 'email') %>
 
         <p class="text--help"><%= t('.contact_information.help_text') %></p>
@@ -99,17 +103,13 @@
             <%= t('.contact_information.preferred_contact_label') %>
           </legend>
 
-          <label class="checkbox">
-            <%= f.check_box(:email_consent) %>
-            <%= t('.contact_information.preferred_contact_email') %>
-          </label>
-
           <div class="question-with-follow-up">
-            <div class="question-with-follow-up__question">
+            <div class="question-with-follow-up__question associated-field-to-disable">
               <%= f.cfa_checkbox(:sms_consent, t('.contact_information.preferred_contact_text'), options: {'data-follow-up' => '#preferred-contact-channel__text'}) %>
             </div>
+            <%= f.cfa_checkbox(:email_consent, t('.contact_information.preferred_contact_email')) %>
 
-            <div id="preferred-contact-channel__text" class="question-with-follow-up__follow-up">
+            <div id="preferred-contact-channel__text" class="question-with-follow-up__follow-up spacing-above-25">
               <p><em><%= I18n.t('aid_applications.edits.edit.contact_information.read_to_client') %></em></p>
               <p><%= I18n.t('aid_applications.edits.edit.contact_information.message_rates_apply') %></p>
             </div>

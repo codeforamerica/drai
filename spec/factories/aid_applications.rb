@@ -17,6 +17,7 @@ FactoryBot.define do
 
     phone_number { Faker::PhoneNumber.cell_phone }
     sms_consent { true }
+    landline { false }
 
     receives_calfresh_or_calworks { true }
 

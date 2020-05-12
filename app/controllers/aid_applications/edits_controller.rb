@@ -63,6 +63,7 @@ module AidApplications
           :sms_consent,
           :email_consent,
           :phone_number,
+          :landline,
           :email,
           :receives_calfresh_or_calworks,
           :unmet_food,

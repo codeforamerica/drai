@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Start aid application', type: :system do
+describe 'Start aid application', type: :system, js: true do
   let!(:assister) { create :assister }
 
   specify do
@@ -60,6 +60,12 @@ describe 'Start aid application', type: :system do
 
     fill_in "Phone number", with: "555-555-5555"
     fill_in "Email address (if available)", with: "example@example.com"
+
+    check "This is a landline"
+    expect(page).to have_field('Text message', disabled: true)
+
+    uncheck "This is a landline"
+    expect(page).to have_field('Text message', disabled: false)
 
     within_fieldset "How would you like to receive these messages?" do
       check "Text message"

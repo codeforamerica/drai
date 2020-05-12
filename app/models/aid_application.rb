@@ -164,6 +164,7 @@ class AidApplication < ApplicationRecord
                         :gender
 
   before_validation :strip_phone_number
+  before_validation :sms_consent_only_if_not_landline
 
   validates :application_number, uniqueness: true, allow_nil: true
 
@@ -176,8 +177,7 @@ class AidApplication < ApplicationRecord
     validates :mailing_zip_code, five_digit_zip: true
 
     validates :phone_number, presence: true, phone_number: true
-    validates :email, allow_blank: true, email: { message: I18n.t('activerecord.errors.messages.email') }
-    validates :sms_consent, presence: true, unless: -> { email_consent? }
+    validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { email_consent? }
     validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
@@ -247,6 +247,12 @@ class AidApplication < ApplicationRecord
     self.phone_number = phone_number.gsub(/\D/, '')
     if phone_number.size == 11 && phone_number.first == '1'
       self.phone_number = phone_number.slice(1..-1)
+    end
+  end
+
+  def sms_consent_only_if_not_landline
+    if sms_consent? && landline?
+      self.sms_consent = false
     end
   end
 end
