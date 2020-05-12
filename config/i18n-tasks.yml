@@ -1,0 +1,7 @@
+<% require './lib/i18n_csv_tasks' %>
+
+csv:
+  export:
+    - "tmp/i18n-export/drai-locales.csv"
+  import:
+    - "tmp/i18n-export/drai-locales.csv"

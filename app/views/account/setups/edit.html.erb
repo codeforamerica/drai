@@ -1,6 +1,6 @@
 <% content = capture_form do |f| %>
   <%= f.cfa_input_field(:name, t('.name'), classes: ["form-width--med"]) %>
-  <%= f.cfa_input_field(:password, I18n.t('account.setups.edit.password'), type: "password", classes: ["form-width--med"], help_text: I18n.t('general.password_help', min_length: User.password_length.min)) %>
+  <%= f.cfa_input_field(:password, I18n.t('account.setups.edit.password'), type: "password", classes: ["form-width--med"], help_text: "This should be at least #{User.password_length.min} characters.") %>
 <% end %>
 
 <% footer = capture_form do |f| %>
