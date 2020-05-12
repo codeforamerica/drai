@@ -15,8 +15,8 @@ FactoryBot.define do
     mailing_city { Faker::Address.city }
     mailing_zip_code { '03226' }
 
-    preferred_contact_channel { 'text' }
     phone_number { Faker::PhoneNumber.cell_phone }
+    sms_consent { true }
 
     receives_calfresh_or_calworks { true }
 

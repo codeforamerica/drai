@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_224906) do
+ActiveRecord::Schema.define(version: 2020_05_12_172045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_224906) do
     t.bigint "submitter_id"
     t.string "application_number"
     t.bigint "creator_id", null: false
-    t.string "preferred_contact_channel"
     t.boolean "receives_calfresh_or_calworks"
     t.boolean "unmet_food"
     t.boolean "unmet_housing"
@@ -56,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_224906) do
     t.text "mailing_state"
     t.text "mailing_zip_code"
     t.string "racial_ethnic_identity", array: true
+    t.boolean "sms_consent"
+    t.boolean "email_consent"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"

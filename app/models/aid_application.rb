@@ -164,7 +164,6 @@ class AidApplication < ApplicationRecord
                         :gender
 
   before_validation :strip_phone_number
-  after_validation :copy_phone_number_errors
 
   validates :application_number, uniqueness: true, allow_nil: true
 
@@ -176,9 +175,10 @@ class AidApplication < ApplicationRecord
     validates :zip_code, presence: true, zip_code: true
     validates :mailing_zip_code, five_digit_zip: true
 
-    validates :preferred_contact_channel, presence: true
-    validates :phone_number, presence: true, phone_number: true, if: -> { preferred_contact_channel_text? || preferred_contact_channel_voice? }
-    validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { preferred_contact_channel_email? }
+    validates :phone_number, presence: true, phone_number: true
+    validates :email, allow_blank: true, email: { message: I18n.t('activerecord.errors.messages.email') }
+    validates :sms_consent, presence: true, unless: -> { email_consent? }
+    validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
     validates :racial_ethnic_identity, presence: true
@@ -189,30 +189,6 @@ class AidApplication < ApplicationRecord
     validates :submitter, presence: true
   end
   validates :submitted_at, presence: true, if: :application_number
-
-  alias_attribute :text_phone_number, :phone_number
-  alias_attribute :voice_phone_number, :phone_number
-
-  def text_phone_number=(value)
-    self.phone_number = value if preferred_contact_channel_text?
-  end
-
-  def voice_phone_number=(value)
-    self.phone_number = value if preferred_contact_channel_voice?
-  end
-
-  def phone_number=(value)
-    super(value) if value.present?
-  end
-
-  def copy_phone_number_errors
-    return if errors[:phone_number].empty?
-
-    errors[:phone_number].each do |error|
-      errors[:voice_phone_number] << error
-      errors[:text_phone_number] << error
-    end
-  end
 
   def save_and_submit(submitter:)
     transaction(joinable: false, requires_new: true) do
