@@ -16,7 +16,11 @@ module AidApplications
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
-          ApplicationTexter.basic_message(to: @aid_application.phone_number, body: I18n.t('text_message.app_id.body', app_id: @aid_application.application_number)).deliver_now
+          if @aid_application.preferred_contact_channel_text?
+            ApplicationTexter.basic_message(to: @aid_application.phone_number, body: I18n.t('text_message.app_id.body', app_id: @aid_application.application_number)).deliver_now
+          elsif @aid_application.preferred_contact_channel_email?
+            ApplicationEmailer.basic_message(to: @aid_application.email, subject: I18n.t('email_message.app_id.subject', app_id: @aid_application.application_number), body: I18n.t('email_message.app_id.body', app_id: @aid_application.application_number)).deliver_now
+          end
         end
       else
         @aid_application.save

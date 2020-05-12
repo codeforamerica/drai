@@ -102,6 +102,17 @@ en:
   text_message:
     app_id:
       body: "Your application for financial assistance has been submitted. Your application ID number is %{app_id}. You will need this number and your verification documents to receive the payment card."
+  email_message:
+    app_id:
+      subject: "Assistance application submitted %{app_id}"
+      body: |
+        <p>Hello!</p>
+
+        <p>Your application for financial assistance has been submitted. Your application ID number is %{app_id}.</p>
+
+        <p>You will need this number and your verification documents to receive the payment card.</p>
+
+        <p>- The DRAI Team</p>
 
   activerecord:
     errors:
