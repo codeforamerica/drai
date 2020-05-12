@@ -8,36 +8,36 @@
 
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
-        <h2><%= I18n.t('aid_applications.edits.edit.about_program.title') %></h2>
-        <p><%= I18n.t('aid_applications.edits.edit.about_program.text') %></p>
+        <h2><%= t('.about_program.title') %></h2>
+        <p><%= t('.about_program.text') %></p>
         <hr>
 
-        <h2><%= I18n.t('aid_applications.edits.edit.privacy.title') %></h2>
-        <p class="text--help"><em><%= I18n.t('aid_applications.edits.edit.privacy.help_text') %></em></p>
-        <p><%= I18n.t('aid_applications.edits.edit.privacy.text') %></p>
+        <h2><%= t('.privacy.title') %></h2>
+        <p class="text--help"><em><%= t('.privacy.help_text') %></em></p>
+        <p><%= t('.privacy.text') %></p>
         <hr>
 
-        <h2><%= t('aid_applications.edits.edit.eligibility.title') %></h2>
+        <h2><%= t('.eligibility.title') %></h2>
         <%= f.cfa_radio_set(
                 :valid_work_authorization,
-                label_text: I18n.t('aid_applications.edits.edit.eligibility.label_text'),
-                help_text: I18n.t('aid_applications.edits.edit.eligibility.help_text'),
+                label_text: t('.eligibility.label_text'),
+                help_text: t('.eligibility.help_text'),
                 collection: [
-                    {value: true, label: I18n.t('general.affirmative')},
-                    {value: false, label: I18n.t('general.negative')}
+                    {value: true, label: t('general.affirmative')},
+                    {value: false, label: t('general.negative')}
                 ],
                 layouts: [:inline]
             )
         %>
 
         <fieldset class="input-group form-group">
-          <legend class="spacing-below-15"><em><%= I18n.t('aid_applications.edits.edit.eligibility.read_to_client') %></em></legend>
+          <legend class="spacing-below-15"><em><%= t('.eligibility.read_to_client') %></em></legend>
           <% [
-                 {method: :covid19_reduced_work_hours, label: I18n.t('aid_applications.edits.edit.eligibility.reduced_work_hours') },
-                 {method: :covid19_care_facility_closed, label: I18n.t('aid_applications.edits.edit.eligibility.care_facility_closed')},
-                 {method: :covid19_experiencing_symptoms, label: I18n.t('aid_applications.edits.edit.eligibility.experiencing_symptoms')},
-                 {method: :covid19_underlying_health_condition, label: I18n.t('aid_applications.edits.edit.eligibility.underlying_health_condition')},
-                 {method: :covid19_caregiver, label: I18n.t('aid_applications.edits.edit.eligibility.caregiver')}
+                 {method: :covid19_reduced_work_hours, label: t('.eligibility.reduced_work_hours') },
+                 {method: :covid19_care_facility_closed, label: t('.eligibility.care_facility_closed')},
+                 {method: :covid19_experiencing_symptoms, label: t('.eligibility.experiencing_symptoms')},
+                 {method: :covid19_underlying_health_condition, label: t('.eligibility.underlying_health_condition')},
+                 {method: :covid19_caregiver, label: t('.eligibility.caregiver')}
              ].each do |item| %>
             <label class="checkbox">
               <%= f.check_box(item[:method]) %>
@@ -48,80 +48,97 @@
 
         <hr>
 
-        <h2><%= I18n.t('aid_applications.edits.edit.applicant_information.title') %></h2>
-        <%= f.cfa_input_field :name, I18n.t('aid_applications.edits.edit.applicant_information.name') %>
-        <%= f.gcf_date_input :birthday, I18n.t('aid_applications.edits.edit.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
+        <h2><%= t('.applicant_information.title') %></h2>
+        <%= f.cfa_input_field :name, t('.applicant_information.name') %>
+        <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
 
         <fieldset>
-          <legend class="spacing-below-15"><em><%= I18n.t('aid_applications.edits.edit.contact_information.optional_questions_prompt') %></em></legend>
-          <%= f.cfa_input_field :preferred_language, I18n.t('aid_applications.edits.edit.applicant_information.preferred_language'), optional: "(#{I18n.t('general.optional')})" %>
-          <%= f.cfa_select :country_of_origin, I18n.t('aid_applications.edits.edit.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
-          <%= f.gcf_collection_check_boxes :racial_ethnic_identity, I18n.t('aid_applications.edits.edit.applicant_information.racial_ethnic_identity'), AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS %>
-          <%= f.cfa_select :sexual_orientation, I18n.t('aid_applications.edits.edit.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
-          <%= f.cfa_select :gender, I18n.t('aid_applications.edits.edit.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
+          <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
+          <%= f.cfa_input_field :preferred_language, t('.applicant_information.preferred_language'), optional: "(#{t('general.optional')})" %>
+          <%= f.cfa_select :country_of_origin, t('.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
+          <%= f.gcf_collection_check_boxes :racial_ethnic_identity, t('.applicant_information.racial_ethnic_identity'), AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS %>
+          <%= f.cfa_select :sexual_orientation, t('.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
+          <%= f.cfa_select :gender, t('.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
         </fieldset>
 
         <hr>
 
-        <h2><%= I18n.t('aid_applications.edits.edit.california_address.title') %></h2>
-        <p class="text--help"><%= I18n.t('aid_applications.edits.edit.california_address.address_required') %></p>
-        <%= f.cfa_input_field :street_address, I18n.t('aid_applications.edits.edit.california_address.street_address') %>
-        <%= f.cfa_input_field :city, I18n.t('aid_applications.edits.edit.california_address.city') %>
-        <%= f.cfa_input_field :zip_code, I18n.t('aid_applications.edits.edit.california_address.zip'), classes: ["form-width--zip"] %>
+        <h2><%= t('.california_address.title') %></h2>
+        <p class="text--help"><%= t('.california_address.address_required') %></p>
+        <%= f.cfa_input_field :street_address, t('.shared_address.street_address') %>
+        <%= f.cfa_input_field :apartment_number, t('.shared_address.apartment_number') %>
+        <%= f.cfa_input_field :city, t('.shared_address.city') %>
+        <%= f.cfa_input_field :zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
 
+        <%= f.button type: 'submit', name: 'form_action', value: 'allow_mailing_address', class: 'button button--secondary' do %>
+          <span class="icon icon-add" aria-hidden="true"></span> <%= t('.mailing_address.add_mailing_address') %>
+        <% end %>
         <hr>
 
-        <h2><%= I18n.t('aid_applications.edits.edit.contact_information.title') %></h2>
-        <p class="text--help"><%= I18n.t('aid_applications.edits.edit.contact_information.help_text') %></p>
+        <% if @aid_application.allow_mailing_address == true %>
+          <div class="mailing-address" id="mailing-address">
+            <h2><%= t('.mailing_address.title') %></h2>
+            <%= f.cfa_input_field :mailing_street_address, t('.shared_address.street_address') %>
+            <%= f.cfa_input_field :mailing_apartment_number, t('.shared_address.apartment_number') %>
+            <%= f.cfa_input_field :mailing_city, t('.shared_address.city') %>
+            <%= f.cfa_input_field :mailing_state, t('.shared_address.state') %>
+            <%= f.cfa_input_field :mailing_zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
+
+            <hr>
+          </div>
+        <% end %>
+
+        <h2><%= t('.contact_information.title') %></h2>
+        <p class="text--help"><%= t('.contact_information.help_text') %></p>
         <div class="question-with-follow-up">
           <div class="question-with-follow-up__question">
             <fieldset class="form-group">
-              <%= f.cfa_radio_set(:preferred_contact_channel, label_text: I18n.t('aid_applications.edits.edit.contact_information.preferred_contact_label'), collection: [
-                  {value: 'text', label: I18n.t('aid_applications.edits.edit.contact_information.preferred_contact_text'), input_html: {'data-follow-up' => '#preferred-contact-channel__text'}},
-                  {value: 'voice', label: I18n.t('aid_applications.edits.edit.contact_information.preferred_contact_voice'), input_html: {'data-follow-up' => '#preferred-contact-channel__voice'}},
-                  {value: 'email', label: I18n.t('aid_applications.edits.edit.contact_information.preferred_contact_email'), input_html: {'data-follow-up' => '#preferred-contact-channel__email'}},
+              <%= f.cfa_radio_set(:preferred_contact_channel, label_text: t('.contact_information.preferred_contact_label'), collection: [
+                  {value: 'text', label: t('.contact_information.preferred_contact_text'), input_html: {'data-follow-up' => '#preferred-contact-channel__text'}},
+                  {value: 'voice', label: t('.contact_information.preferred_contact_voice'), input_html: {'data-follow-up' => '#preferred-contact-channel__voice'}},
+                  {value: 'email', label: t('.contact_information.preferred_contact_email'), input_html: {'data-follow-up' => '#preferred-contact-channel__email'}},
               ]) %>
             </fieldset>
           </div>
 
           <div id="preferred-contact-channel__text" class="question-with-follow-up__follow-up">
-            <p><em><%= I18n.t('aid_applications.edits.edit.contact_information.read_to_client') %></em></p>
-            <p><%= I18n.t('aid_applications.edits.edit.contact_information.message_rates_apply') %></p>
-            <%= f.cfa_input_field(:text_phone_number, I18n.t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
+            <p><em><%= t('.contact_information.read_to_client') %></em></p>
+            <p><%= t('.contact_information.message_rates_apply') %></p>
+            <%= f.cfa_input_field(:text_phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
           </div>
           <div id="preferred-contact-channel__voice" class="question-with-follow-up__follow-up">
-            <%= f.cfa_input_field(:voice_phone_number, I18n.t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
+            <%= f.cfa_input_field(:voice_phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
           </div>
           <div id="preferred-contact-channel__email" class="question-with-follow-up__follow-up">
-            <%= f.cfa_input_field(:email, I18n.t('general.email_address'), type: 'email') %>
+            <%= f.cfa_input_field(:email, t('general.email_address'), type: 'email') %>
           </div>
         </div>
 
         <hr>
 
         <div class="additional-information-section">
-          <h2><%= I18n.t('aid_applications.edits.edit.additional_information.title') %></h2>
+          <h2><%= t('.additional_information.title') %></h2>
           <%= f.cfa_radio_set(
                   :receives_calfresh_or_calworks,
-                  label_text: I18n.t('aid_applications.edits.edit.additional_information.receives_calfresh_label'),
-                  help_text: I18n.t('aid_applications.edits.edit.additional_information.receives_calfresh_help_text'),
+                  label_text: t('.additional_information.receives_calfresh_label'),
+                  help_text: t('.additional_information.receives_calfresh_help_text'),
                   collection: [
-                      {value: true, label: I18n.t('general.affirmative')},
-                      {value: false, label: I18n.t('general.negative')}
+                      {value: true, label: t('general.affirmative')},
+                      {value: false, label: t('general.negative')}
                   ],
                   layouts: [:inline]
               )
           %>
 
           <fieldset class="input-group form-group">
-            <legend class="spacing-below-15"><strong><%= I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_legend') %></strong></legend>
+            <legend class="spacing-below-15"><strong><%= t('.additional_information.unmet_needs_legend') %></strong></legend>
             <% [
-                   {method: :unmet_food, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_food')},
-                   {method: :unmet_housing, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_housing')},
-                   {method: :unmet_childcare, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_childcare')},
-                   {method: :unmet_utilities, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_utilities')},
-                   {method: :unmet_transportation, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_transportation')},
-                   {method: :unmet_other, label: I18n.t('aid_applications.edits.edit.additional_information.unmet_needs_other')},
+                   {method: :unmet_food, label: t('.additional_information.unmet_needs_food')},
+                   {method: :unmet_housing, label: t('.additional_information.unmet_needs_housing')},
+                   {method: :unmet_childcare, label: t('.additional_information.unmet_needs_childcare')},
+                   {method: :unmet_utilities, label: t('.additional_information.unmet_needs_utilities')},
+                   {method: :unmet_transportation, label: t('.additional_information.unmet_needs_transportation')},
+                   {method: :unmet_other, label: t('.additional_information.unmet_needs_other')},
 
                ].each do |item| %>
               <label class="checkbox">
@@ -137,13 +154,13 @@
       <div class="form-card__footer">
         <div class="toolbar">
           <div class="toolbar__left">
-            <%= link_to I18n.t('general.cancel'), organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
+            <%= link_to t('general.cancel'), organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
           </div>
           <div class="toolbar__right">
             <% if @aid_application.submitted? %>
-              <%= f.button I18n.t('general.update'), type: 'submit', class: 'toolbar__item button button--primary' %>
+              <%= f.button t('general.update'), type: 'submit', class: 'toolbar__item button button--primary' %>
             <% else %>
-              <%= f.button I18n.t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+              <%= f.button t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
             <% end %>
           </div>
         </div>

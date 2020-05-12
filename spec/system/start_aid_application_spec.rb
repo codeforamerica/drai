@@ -40,8 +40,20 @@ describe 'Start aid application', type: :system do
     expect(page).to have_content "California address"
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
     fill_in "Street Address", with: "123 Main Street"
+    fill_in "Apartment, building, unit, etc. (optional)", with: "Apt. 1"
     fill_in "City", with: "Big City"
     fill_in "ZIP Code", with: "94103"
+
+    click_on "Add a separate mailing address"
+
+    expect(page).to have_content "Mailing address"
+    within '.mailing-address' do
+      fill_in "Street Address", with: "123 Rural Street"
+      fill_in "Apartment, building, unit, etc. (optional)", with: "Unit A"
+      fill_in "City", with: "Other Town"
+      fill_in "State", with: "Massachusetts"
+      fill_in "ZIP Code", with: "02130"
+    end
 
     expect(page).to have_content "Contact information"
     expect(page).to have_content "The applicant will be sent their Unique ID number and activation number."
@@ -74,8 +86,15 @@ describe 'Start aid application', type: :system do
                                  creator: assister,
                                  organization: assister.organization,
                                  street_address: "123 Main Street",
+                                 apartment_number: "Apt. 1",
                                  city: "Big City",
                                  zip_code: "94103",
+                                 allow_mailing_address: true,
+                                 mailing_street_address: "123 Rural Street",
+                                 mailing_apartment_number: "Unit A",
+                                 mailing_city: "Other Town",
+                                 mailing_zip_code: "02130",
+                                 mailing_state: "Massachusetts",
                                  phone_number: "5555555555",
                                  email: nil,
                                  preferred_contact_channel: "text",
