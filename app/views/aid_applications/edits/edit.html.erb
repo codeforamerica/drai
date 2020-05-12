@@ -150,6 +150,13 @@
             <% end %>
           </fieldset>
 
+          <fieldset class="input-group form-group">
+            <legend class="form-question spacing-below-15"><%= t('.additional_information.attestation_label') %></legend>
+            <p class="text--help"><em><%= t('.additional_information.read_to_client') %></em></p>
+            <p class="text--help"><%= t('.additional_information.attestation_help_text') %></p>
+            <%= f.cfa_checkbox :attestation, t('general.affirmative') %>
+          </fieldset>
+
       </div>
       </div>
 

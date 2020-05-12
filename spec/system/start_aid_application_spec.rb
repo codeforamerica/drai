@@ -123,7 +123,7 @@ describe 'Start aid application', type: :system, js: true do
                                  sexual_orientation: "Bisexual",
                                  gender: "Another gender identity",
                                  birthday: "01-01-1980".to_date,
-
+                                 attestation: true
                                )
 
     open_sms aid_application.phone_number

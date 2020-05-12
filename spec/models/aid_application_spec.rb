@@ -157,6 +157,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#attestation' do
+    it 'must be true' do
+      aid_application = build :aid_application, attestation: nil
+      expect(aid_application).not_to be_valid(:submit)
+    end
+  end
+
   describe '.query', truncate: :database do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application
