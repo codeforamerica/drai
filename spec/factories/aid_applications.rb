@@ -15,6 +15,8 @@ FactoryBot.define do
 
     receives_calfresh_or_calworks { true }
 
+    racial_ethnic_identity { [AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS.first] }
+
     trait :submitted do
       submitter { creator }
       submitted_at { Time.current }

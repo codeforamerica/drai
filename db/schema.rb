@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_211715) do
+ActiveRecord::Schema.define(version: 2020_05_11_224906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_211715) do
     t.date "birthday"
     t.text "preferred_language"
     t.text "country_of_origin"
-    t.text "racial_ethnic_identity"
     t.text "sexual_orientation"
     t.text "gender"
+    t.string "racial_ethnic_identity", array: true
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"

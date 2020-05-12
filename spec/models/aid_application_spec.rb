@@ -114,6 +114,14 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#racial_ethnic_identity' do
+    it 'is required' do
+      aid_application = build :aid_application, racial_ethnic_identity: nil
+      expect(aid_application).not_to be_valid(:submit)
+      expect(aid_application.errors[:racial_ethnic_identity]).to be_present
+    end
+  end
+
   describe '.query', truncate: :database do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application

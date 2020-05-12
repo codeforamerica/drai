@@ -52,6 +52,91 @@
 #
 class AidApplication < ApplicationRecord
   READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id']
+  DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
+  COUNTRY_OF_ORIGIN_OPTIONS = [
+    'Afghanistan',
+    'Argentina',
+    'Armenia',
+    'Bangladesh',
+    'Brazil',
+    'Cambodia',
+    'China, People\'s Republic',
+    'Colombia',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Ethiopia',
+    'Guatemala',
+    'Honduras',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Korea, South',
+    'Laos',
+    'Malaysia',
+    'Mexico',
+    'Myanmar',
+    'Nepal',
+    'Nicaragua',
+    'Pakistan',
+    'Peru',
+    'Philippines',
+    'Russia',
+    'Taiwan',
+    'Thailand',
+    'Ukraine',
+    'Vietnam',
+    'Other',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
+  ].freeze
+
+  RACIAL_OR_ETHNIC_IDENTITY_OPTIONS = [
+    DEMOGRAPHIC_OPTIONS_DEFAULT,
+    'American Indian or Alaska Native',
+    'Asian Indian',
+    'Black or African American (Hispanic or Latino)',
+    'Black or African American (non-Hispanic or Latino)',
+    'Cambodian',
+    'Chinese',
+    'Filipino',
+    'Guamanian',
+    'Hmong',
+    'Indigenous - Latin America',
+    'Japanese',
+    'Korean',
+    'Laotian',
+    'Native Hawaiian',
+    'Vietnamese',
+    'Other Asian',
+    'Thai',
+    'Samoan',
+    'White (Hispanic or Latino)',
+    'White (non-Hispanic or Latino)',
+    'Hispanic or Latino (any other race)',
+    'Other',
+  ].freeze
+
+  SEXUAL_ORIENTATION_OPTIONS = [
+    'Straight or heterosexual',
+    'Bisexual',
+    'Gay or lesbian',
+    'Queer',
+    'Another sexual orientation',
+    'Unknown',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
+  ].freeze
+
+  GENDER_OPTIONS = [
+    'Male',
+    'Female',
+    'Non-Binary (neither male nor female)',
+    'Transgender: Female to Male',
+    'Transgender: Male to Female',
+    'Another gender identity',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
+  ].freeze
+
 
   scope :submitted, -> { where.not(submitted_at: nil) }
 
@@ -88,7 +173,7 @@ class AidApplication < ApplicationRecord
     validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { preferred_contact_channel_email? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
-
+    validates :racial_ethnic_identity, presence: true
   end
 
   with_options if: :submitted_at do

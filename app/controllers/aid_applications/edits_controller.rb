@@ -2,6 +2,10 @@ module AidApplications
   class EditsController < BaseController
     def edit
       @aid_application = current_aid_application
+
+      @aid_application.country_of_origin ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
+      @aid_application.sexual_orientation ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
+      @aid_application.gender ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
     end
 
     def update
@@ -54,10 +58,12 @@ module AidApplications
           :birthday,
           :preferred_language,
           :country_of_origin,
-          :racial_ethnic_identity,
+          { racial_ethnic_identity: [] },
           :sexual_orientation,
           :gender,
-      )
+      ).each do |_, value|
+        value.delete('') # removes arrays with empty string from checkboxes
+      end
     end
   end
 end
