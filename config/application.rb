@@ -38,6 +38,6 @@ module Dafi
     config.action_mailer.default_url_options = {
       host: Rails.application.secrets.url_host,
     }
-
+    config.action_mailer.deliver_later_queue_name = 'default'
   end
 end

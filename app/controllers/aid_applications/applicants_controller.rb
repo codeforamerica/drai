@@ -16,13 +16,7 @@ module AidApplications
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
-          if @aid_application.sms_consent?
-            ApplicationTexter.basic_message(to: @aid_application.phone_number, body: I18n.t('text_message.app_id', app_id: @aid_application.application_number)).deliver_now
-          end
-
-          if @aid_application.email_consent?
-            ApplicationEmailer.basic_message(to: @aid_application.email, subject: I18n.t('email_message.app_id.subject', app_id: @aid_application.application_number), body: I18n.t('email_message.app_id.body_html', app_id: @aid_application.application_number)).deliver_now
-          end
+          SendApplicationNumberNotificationJob.perform_now(aid_application: @aid_application)
         end
       elsif params[:form_action] == 'allow_mailing_address'
         @aid_application.allow_mailing_address = true
