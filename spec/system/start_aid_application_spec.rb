@@ -92,6 +92,8 @@ describe 'Start aid application', type: :system, js: true do
 
     expect(page).to have_content 'Application submitted'
     expect(page).to have_content /APP-/
+    expect(page).to have_content 'Verification documents'
+    expect(page).to have_content 'Next Steps'
 
     aid_application = AidApplication.last
     expect(aid_application).to have_attributes(

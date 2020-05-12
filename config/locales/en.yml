@@ -301,17 +301,45 @@ en:
         title: Application submitted
         verifications:
           covid19_impact_accordion:
-            body: TODO
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Letter or notice that the applicant must care for a child or other person whose school, childcare facility or other caregiving facility is closed due to COVID-19</li>
+                <li>Letter or notice from employer indicating lost employment or severely reduced work hours due to COVID-19</li>
+                <li>
+                  Letter or notice from medical professional or other documentation that may show hardship based on any of the following:
+                  <ul class="list--numbered">
+                    <li>Has symptoms consistent with COVID-19</li>
+                    <li>Is at higher risk of serious illness from COVID-19 due to an underlying health condition or age and is therefore unable to work in order to adhere to physical distancing public health guidance</li>
+                    <li>Is a caregiver to a dependent or spouse who has symptoms consistent with COVID-19</li>
+                  </ul>
+                </li>
+              </ul>
             title: COVID-19 impact
           message: 'In order to process your application, we will need to verify the
             information you provided is accurate. You will need to submit the following
             documents through text, email, other systems implemented by the CBO, or
             in-person:'
           photo_id_accordion:
-            body: TODO
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Any state-issued identification card</li>
+                <li>Any state-issued driver’s license</li>
+                <li>Passport from any country</li>
+                <li>International identification document</li>
+                <li>School identification card</li>
+                <li>Work identification card</li>
+              </ul>
             title: Photo ID
           proof_of_address_accordion:
-            body: TODO
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Identification document with address listed, such as a state-issued driver’s license or state-issued identification card</li>
+                <li>Benefit letter from a government agency addressed to the applicant or showing the applicant resides in the household</li>
+                <li>Lease agreement showing applicant’s name</li>
+                <li>Utility bill addressed to applicant</li>
+                <li>Insurance cards showing applicant’s name</li>
+                <li>School enrollment papers with address, addressed to applicant or showing applicant’s name</li>
+              </ul>
             title: Proof of address
           title: Verification documents
   email_message:

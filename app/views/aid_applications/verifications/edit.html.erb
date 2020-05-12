@@ -7,12 +7,50 @@
       </header>
 
       <div class="form-card__content">
+        <h2><%= t('.verifications.title') %></h2>
+        <p><%= t('.verifications.message') %></p>
+        <div class="accordion">
+          <button href="#" class="accordion__button" aria-expanded="true" aria-controls="document_photo_id"><%= t('.verifications.photo_id_accordion.title') %></button>
+          <div class="accordion__content" id="document_photo_id">
+            <p><%= t('.verifications.photo_id_accordion.body_html') %></p>
+          </div>
+        </div>
+        <div class="accordion">
+          <button href="#" class="accordion__button" aria-expanded="true" aria-controls="document_proof_of_address"><%= t('.verifications.proof_of_address_accordion.title') %></button>
+          <div class="accordion__content" id="document_proof_of_address">
+            <p><%= t('.verifications.proof_of_address_accordion.body_html') %></p>
+          </div>
+        </div>
+        <div class="accordion">
+          <button href="#" class="accordion__button" aria-expanded="true" aria-controls="document_covid19_impact"><%= t('.verifications.covid19_impact_accordion.title') %></button>
+          <div class="accordion__content" id="document_covid19_impact">
+            <p><%= t('.verifications.covid19_impact_accordion.body_html') %></p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-card__content">
         <h2><%= t('.application_number.title') %></h2>
         <p><%= t('.application_number.message') %></p>
 
         <h3 class="notice text--centered">
           <%= @aid_application.application_number %>
         </h3>
+      </div>
+
+      <hr>
+
+      <div class="form-card__content">
+        <h2><%= t('.next_steps.title') %></h2>
+        <ul class="list--numbered">
+          <lix><%= t('.next_steps.step1') %></lix>
+          <li><%= t('.next_steps.step2') %></li>
+          <li><%= t('.next_steps.step3') %></li>
+          <li><%= t('.next_steps.step4') %></li>
+          <li><em><%= t('.next_steps.step5') %></em></li>
+        </ul>
       </div>
     </div>
   </div>
