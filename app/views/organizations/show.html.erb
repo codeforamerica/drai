@@ -1,3 +1,37 @@
 <%= render 'shared/tab_navigation' %>
 
-Actions and Stats go here
+<div class="grid">
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Submitted Apps</p>
+      <p class="statistic-card__number">
+        <%= @organization.submitted_aid_applications_count %>
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Approved Apps</p>
+      <p class="statistic-card__number">
+        XXX
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Disbursed Apps</p>
+      <p class="statistic-card__number">
+        XXX
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Remaining Cards</p>
+      <p class="statistic-card__number">
+        <%= @organization.total_payment_cards_count - @organization.submitted_aid_applications_count %>
+        <small><%= @organization.total_payment_cards_count %> Total</small>
+      </p>
+    </div>
+  </div>
+</div>

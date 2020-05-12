@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_224906) do
     t.text "name", null: false
     t.integer "users_count", default: 0, null: false
     t.integer "aid_applications_count", default: 0, null: false
+    t.integer "total_payment_cards_count", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|

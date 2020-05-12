@@ -8,7 +8,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>Users</th>
-        <th>Applications</th>
+        <th>Submitted</th>
+        <th>Approved</th>
       </tr>
       </thead>
       <tbody>
@@ -17,7 +18,12 @@
           <td><%= organization.id %></td>
           <td><%= link_to organization.name, organization_path(organization) %></td>
           <td><%= organization.users_count %></td>
-          <td><%= organization.aid_applications.count %></td>
+          <td>
+            <%= organization.submitted_aid_applications_count %> Apps
+          </td>
+          <td>
+            TODO
+          </td>
         </tr>
       <% end %>
       </tbody>
