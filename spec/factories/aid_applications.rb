@@ -10,6 +10,11 @@ FactoryBot.define do
     city { Faker::Address.city }
     zip_code { '94103' }
 
+    allow_mailing_address { true }
+    mailing_street_address { Faker::Address.street_address }
+    mailing_city { Faker::Address.city }
+    mailing_zip_code { '03226' }
+
     preferred_contact_channel { 'text' }
     phone_number { Faker::PhoneNumber.cell_phone }
 

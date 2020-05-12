@@ -12,6 +12,10 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.assign_attributes(aid_application_params)
 
+      if params[:form_action] == 'allow_mailing_address'
+        @aid_application.allow_mailing_address = true
+      end
+
       if params[:form_action] == 'submit'
         @aid_application.save_and_submit(submitter: current_user)
 
@@ -29,6 +33,8 @@ module AidApplications
       respond_with @aid_application, location: (lambda do
         if @aid_application.submitted?
           edit_organization_aid_application_verification_path(current_organization, @aid_application)
+        elsif params[:form_action] == 'allow_mailing_address'
+          edit_organization_aid_application_edit_path(current_organization, @aid_application, :anchor => "mailing-address")
         else
           edit_organization_aid_application_edit_path(current_organization, @aid_application)
         end
@@ -44,8 +50,15 @@ module AidApplications
           :covid19_underlying_health_condition,
           :covid19_caregiver,
           :street_address,
+          :apartment_number,
           :city,
           :zip_code,
+          :allow_mailing_address,
+          :mailing_street_address,
+          :mailing_apartment_number,
+          :mailing_city,
+          :mailing_state,
+          :mailing_zip_code,
           :preferred_contact_channel,
           :text_phone_number,
           :voice_phone_number,

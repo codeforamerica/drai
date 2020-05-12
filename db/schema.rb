@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2020_05_11_224906) do
     t.text "country_of_origin"
     t.text "sexual_orientation"
     t.text "gender"
+    t.text "apartment_number"
+    t.boolean "allow_mailing_address"
+    t.text "mailing_street_address"
+    t.text "mailing_apartment_number"
+    t.text "mailing_city"
+    t.text "mailing_state"
+    t.text "mailing_zip_code"
     t.string "racial_ethnic_identity", array: true
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"

@@ -59,9 +59,15 @@ en:
         california_address:
           title: "California address"
           address_required: "An address is required. Homeless clients can use a shelter or other address."
+        mailing_address:
+          title: "Mailing address"
+          add_mailing_address: "Add a separate mailing address"
+        shared_address:
           street_address: "Street Address"
+          apartment_number: "Apartment, building, unit, etc. (optional)"
           city: "City"
           zip: "ZIP Code"
+          state: "State"
         contact_information:
           title: "Contact information"
           help_text: "The applicant will be sent their Unique ID number and activation number."
@@ -117,6 +123,7 @@ en:
   activerecord:
     errors:
       messages:
+        zip_five_digits: "Must be a 5-digit ZIP Code"
         zip_code: "Must be a 5-digit ZIP Code in California"
         phone_number: "Make sure your phone number is 10 digits long"
         email: "Make sure to enter a valid email"

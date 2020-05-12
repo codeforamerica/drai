@@ -3,6 +3,8 @@
 # Table name: aid_applications
 #
 #  id                                  :bigint           not null, primary key
+#  allow_mailing_address               :boolean
+#  apartment_number                    :text
 #  application_number                  :string
 #  birthday                            :date
 #  city                                :text
@@ -14,11 +16,16 @@
 #  covid19_underlying_health_condition :boolean
 #  email                               :text
 #  gender                              :text
+#  mailing_apartment_number            :text
+#  mailing_city                        :text
+#  mailing_state                       :text
+#  mailing_street_address              :text
+#  mailing_zip_code                    :text
 #  name                                :text
 #  phone_number                        :text
 #  preferred_contact_channel           :string
 #  preferred_language                  :text
-#  racial_ethnic_identity              :text
+#  racial_ethnic_identity              :string           is an Array
 #  receives_calfresh_or_calworks       :boolean
 #  sexual_orientation                  :text
 #  street_address                      :text
@@ -167,6 +174,7 @@ class AidApplication < ApplicationRecord
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
+    validates :mailing_zip_code, five_digit_zip: true
 
     validates :preferred_contact_channel, presence: true
     validates :phone_number, presence: true, phone_number: true, if: -> { preferred_contact_channel_text? || preferred_contact_channel_voice? }
