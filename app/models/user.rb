@@ -45,14 +45,15 @@
 #  fk_rails_...  (organization_id => organizations.id)
 #
 class User < ApplicationRecord
+  PASSWORD_REGEX = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}\z/
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable,
          :database_authenticatable,
          :recoverable,
          :timeoutable,
-         :trackable,
-         :validatable
+         :trackable
 
   has_paper_trail
 
@@ -61,9 +62,12 @@ class User < ApplicationRecord
   has_many :aid_applications_created, class_name: 'AidApplication', inverse_of: :creator, foreign_key: :creator_id
   has_many :aid_applications_submitted, class_name: 'AidApplication', inverse_of: :submitter, foreign_key: :submitted_id
 
+  validates :email, presence: true, email: true, uniqueness: { case_sensitive: true }
+  validates :password, confirmation: true, format: { with: PASSWORD_REGEX, message: :password_complexity }, if: :password_required?
+  validates :password, presence: true, on: :account_setup, unless: :password_present?
+
   validates :admin, inclusion: { in: [false] }, if: -> { organization.present? }
   validates :supervisor, inclusion: { in: [false] }, if: -> { organization.blank? }
-  validates :password, presence: true, on: :account_setup, unless: :password_present?
   validates :organization, presence: true, unless: :admin?
 
   def status
@@ -88,11 +92,7 @@ class User < ApplicationRecord
   end
 
   def password_required?
-    if encrypted_password.present? || (encrypted_password_changed? && encrypted_password_was.present?) || !password.nil?
-      super
-    else
-      false
-    end
+    !(password.nil? && password_confirmation.nil?)
   end
 
   def password_present?

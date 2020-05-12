@@ -35,7 +35,7 @@ describe Account::SetupsController do
     before { sign_in user }
 
     it 'saves the users password' do
-      put :update, params: { user: { password: 'password' } }
+      put :update, params: { user: { password: 'Otherpassword@3' } }
 
       expect(user.reload.password_present?).to be true
       expect(response).to redirect_to organization_assisters_path(user.organization)

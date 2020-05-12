@@ -37,6 +37,7 @@ en:
         required_question: This question is required.
         zip_code: Must be a 5-digit ZIP Code in California
         zip_five_digits: Must be a 5-digit ZIP Code
+        password_complexity: "Complexity requirement not met."
   aid_applications:
     confirm_messages:
       edit:
@@ -415,6 +416,7 @@ en:
       day: Day
       month: Month
       year: Year
+    password_help: "Should be 8-70 characters long and include 1 uppercase, 1 lowercase, 1 digit, and 1 special character (#?!@$%^&*-)."
   text_message:
     activation: Your application for Disaster Assistance has been approved. The activation
       code for your payment card is ******. Call <card phone number> to activate your

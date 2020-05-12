@@ -9,16 +9,16 @@ describe 'Password reset', type: :system do
 
     within 'form' do
       fill_in 'Email', with: user.email
-      fill_in 'Password', with: 'password'
+      fill_in 'Password', with: 'Password!2'
       click_on 'Sign in'
     end
 
     click_on 'Account'
     click_on 'Change password'
 
-    fill_in 'Current password', with: 'password'
-    fill_in 'New password', with: 'qwerty'
-    fill_in 'Confirm new password', with: 'qwerty'
+    fill_in 'Current password', with: 'Password!2'
+    fill_in 'New password', with: 'Qwerty!2'
+    fill_in 'Confirm new password', with: 'Qwerty!2'
     click_on 'Update'
 
     expect(page).to have_content 'Your account has been updated.'
@@ -29,7 +29,7 @@ describe 'Password reset', type: :system do
 
     within 'form' do
       fill_in 'Email', with: user.email
-      fill_in 'Password', with: 'qwerty'
+      fill_in 'Password', with: 'Qwerty!2'
       click_on 'Sign in'
     end
 
@@ -47,7 +47,7 @@ describe 'Password reset', type: :system do
     open_email user.email
     current_email.click_link 'Change my password'
 
-    fill_in 'New password', with: 'abcdefg'
+    fill_in 'New password', with: 'Abcdefg!2'
     click_on 'Change my password'
 
     expect(page).to have_content 'Your password has been changed successfully. You are now signed in.'

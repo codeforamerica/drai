@@ -1,15 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '#password_required?' do
-    it 'is false if password is not set up' do
-      user = create :user, password: nil
-      expect(user.password_required?).to be false
-    end
+  it 'has a valid factory' do
+    user = build :user
+    expect(user).to be_valid
+  end
 
-    it 'is true if password has a previous value ' do
-      user = create :user, password: 'password'
-      expect(user.password_required?).to be true
+  describe '#password' do
+    it 'must contain at least 1 uppercase, 1 lowercase, 1 number and 1 special character' do
+      user = build :user, password: 'Password1!'
+      expect(user).to be_valid
+
+      user = build :user, password: 'password1!'
+      expect(user).not_to be_valid
+
+      user = build :user, password: 'PASSWORD1!'
+      expect(user).not_to be_valid
+
+      user = build :user, password: 'Passwordd!'
+      expect(user).not_to be_valid
+
+      user = build :user, password: 'Password12'
+      expect(user).not_to be_valid
     end
   end
 
