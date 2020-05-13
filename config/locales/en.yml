@@ -25,7 +25,8 @@ en:
     errors:
       messages:
         attestation_required: Attestation is required
-        attestation: "You must click 'Yes' to submit"
+        attestation: You must click 'Yes' to submit
+        birthday: Must be 18-years or older and born after 1900
         check_one_box_eligible: At least one box must be checked for the client to
           be eligible.
         confirmation_required: Confirmation is required.
@@ -54,7 +55,7 @@ en:
           The applicant must have their Activation Number to use their card.
         message_received: Message received
         notification: Application approved for <CLIENT NAME>
-        question: 'Does the applicant have their Activation Code? '
+        question: Does the applicant have their Activation Code?
         review: Review contact information
         title: Activation Code
     disbursements:
@@ -103,8 +104,8 @@ en:
           help_text: A valid document includes a Social Security Number card and a
             work authorization or Employment Authorization Document issued by U.S.
             Citizenship and Immigration Services.
-          label_text: 'Do you currently have a valid document that authorizes you
-            to work in the United States? '
+          label_text: Do you currently have a valid document that authorizes you
+            to work in the United States?
           read_to_client: Read the following to the applicant. They must meet at least
             one criteria. Check all boxes that apply.
           reduced_work_hours: Have you, or other adults in your household who provide
@@ -116,7 +117,7 @@ en:
             to work in order to comply with physical distancing?
         privacy:
           help_text: Read this to the applicant.
-          text: "I will be asking you several questions that will be used to verify
+          text: I will be asking you several questions that will be used to verify
             your eligibility for this assistance. We also will collect documentation
             from you to verify who is applying for this assistance. Your personal
             information is protected. It will be entered into an online portal that
@@ -125,7 +126,7 @@ en:
             the state government, but nothing that will identify you. Your information
             will not be shared with anyone else, and eventually it will be destroyed
             securely by everyone. \nBased on this information, do you want to move
-            forward with the application?"
+            forward with the application?
           title: Privacy script
     applicants:
       edit:
@@ -169,6 +170,7 @@ en:
             unknown: Unknown
           title: Applicant Information
         attestation:
+          read_to_client: "Read the following to the applicant:"
           statement: Do you attest that the information you provided is true and accurate,
             and do you understand that the  information provided, if misrepresented,
             or incomplete, may be grounds to deny your application?
@@ -228,32 +230,6 @@ en:
           city: "City"
           zip: "ZIP Code"
           state: "State"
-        contact_information:
-          title: "Contact information"
-          help_text: "The applicant will be sent their Unique ID number and activation number."
-          landline: "This is a landline"
-          optional_questions_prompt: "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
-          preferred_contact_label: "How would you like to receive these messages?"
-          preferred_contact_text: "Text message"
-          preferred_contact_voice: "Automated phone call"
-          preferred_contact_email: "Email"
-          read_to_client: "Read the following to the applicant:"
-          message_rates_apply: "Message and data rates may apply. You will be able to opt out by texting STOP at any time or texting HELP for more information. You will receive 2 messages per application."
-          email_address: "Email address (if available)"
-        additional_information:
-          title: "Additional Information"
-          receives_calfresh_label: "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?"
-          receives_calfresh_help_text: "A household is defined as individuals who live and purchase and prepare meals together."
-          read_to_client: "Read the following to the applicant:"
-          unmet_needs_legend: "What unmet needs does the applicant have?"
-          unmet_needs_food: "Food"
-          unmet_needs_housing: "Housing (i.e. difficulty paying rent or mortgage)"
-          unmet_needs_childcare: "Childcare"
-          unmet_needs_utilities: "Utilities"
-          unmet_needs_transportation: "Transportation"
-          unmet_needs_other: "Other unmet needs"
-          attestation_label: "Applicant attestation"
-          attestation_help_text: "Do you attest that the information you provided is true and accurate, and do you understand that the information provided, if misrepresented, or incomplete, may be grounds to deny your application?"
     index:
       action: Action
       add_app: Add new application

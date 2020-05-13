@@ -40,7 +40,6 @@ describe 'Start aid application', type: :system, js: true do
     select "Bisexual", from: "Sexual orientation"
     select "Another gender identity", from: "Gender"
 
-    expect(page).to have_content I18n.t("aid_applications.applicants.edit.contact_information.read_to_client")
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
     fill_in "Street Address", with: "123 Main Street"
     fill_in "Apartment, building, unit, etc. (optional)", with: "Apt. 1"
@@ -59,7 +58,6 @@ describe 'Start aid application', type: :system, js: true do
     end
 
     expect(page).to have_content "Contact information"
-    expect(page).to have_content "The applicant will be sent their Unique ID number and activation number."
 
     fill_in "Phone number", with: "555-555-5555"
     fill_in "Email address (if available)", with: "example@example.com"
@@ -70,7 +68,7 @@ describe 'Start aid application', type: :system, js: true do
     uncheck "This is a landline"
     expect(page).to have_field('Text message', disabled: false)
 
-    within_fieldset "How would you like to receive these messages?" do
+    within_fieldset "How would you like to recieve the messages with your Application Number and Activation Code?" do
       check "Text message"
     end
 
@@ -78,11 +76,11 @@ describe 'Start aid application', type: :system, js: true do
       expect(page).to have_content 'Message and data rates may apply'
     end
 
-    within_fieldset "Is anyone in the household currently receiving CalFresh or CalWORKs benefits?" do
+    within_fieldset "Is anyone in your household currently receiving CalFresh or CalWORKs benefits?" do
       choose "Yes"
     end
 
-    within_fieldset "What unmet needs does the applicant have?" do
+    within_fieldset "What unmet needs do you have?" do
       check "Childcare"
       check "Utilities"
     end

@@ -25,6 +25,10 @@ FactoryBot.define do
 
     attestation { true }
 
+    covid19_reduced_work_hours { true }
+
+    valid_work_authorization { false }
+
     trait :submitted do
       submitter { creator }
       submitted_at { Time.current }

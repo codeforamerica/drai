@@ -168,22 +168,27 @@ class AidApplication < ApplicationRecord
 
   validates :application_number, uniqueness: true, allow_nil: true
 
+  with_options on: :eligibility do
+    validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria}
+    validate :eligibility_required
+  end
   with_options on: :submit do
     validates :name, presence: true
-    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: 'Must be 18-years or older and born after 1900' }
+    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
     validates :mailing_zip_code, five_digit_zip: true
 
     validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: { message: I18n.t('activerecord.errors.messages.email') }, if: -> { email_consent? }
+    validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }
     validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
     validates :racial_ethnic_identity, presence: true
-    validates :attestation, inclusion: { in: [true], message: I18n.t('activerecord.errors.messages.attestation') }
+    validates :attestation, inclusion: { in: [true], message: :attestation }
   end
+
 
   with_options if: :submitted_at do
     validates :application_number, presence: true
@@ -203,6 +208,14 @@ class AidApplication < ApplicationRecord
         save
         valid?(:submit)
       end
+    end
+  end
+
+  def eligibility_required
+    checked_an_option = [covid19_care_facility_closed, covid19_caregiver, covid19_experiencing_symptoms,
+                         covid19_reduced_work_hours, covid19_underlying_health_condition].any?
+    if !checked_an_option
+      errors.add(:covid19_caregiver, I18n.t('activerecord.errors.messages.check_one_box_eligible'))
     end
   end
 

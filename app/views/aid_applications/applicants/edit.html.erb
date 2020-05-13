@@ -8,6 +8,7 @@
 
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
+
         <h2><%= t('.applicant_information.title') %></h2>
         <%= f.cfa_input_field :name, t('.applicant_information.name') %>
         <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
@@ -111,13 +112,13 @@
           </fieldset>
 
           <fieldset class="input-group form-group">
-            <legend class="form-question spacing-below-15"><%= t('.additional_information.attestation_label') %></legend>
-            <p class="text--help"><em><%= t('.additional_information.read_to_client') %></em></p>
-            <p class="text--help"><%= t('.additional_information.attestation_help_text') %></p>
+            <legend class="form-question spacing-below-15"><%= t('.attestation.title') %></legend>
+            <p class="text--help"><em><%= t('.attestation.read_to_client') %></em></p>
+            <p class="text--help"><%= t('.attestation.statement') %></p>
             <%= f.cfa_checkbox :attestation, t('general.affirmative') %>
           </fieldset>
 
-      </div>
+        </div>
       </div>
 
       <div class="form-card__footer">
