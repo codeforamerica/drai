@@ -28,7 +28,8 @@ describe AidApplications::EligibilitiesController do
           organization_id: assister.organization.id,
           aid_application: {
               valid_work_authorization: false,
-              covid19_reduced_work_hours: true
+              covid19_reduced_work_hours: true,
+              county_name: "San Francisco"
           }
       }
     end
@@ -42,6 +43,7 @@ describe AidApplications::EligibilitiesController do
       )
       expect(aid_application.valid_work_authorization).to eq false
       expect(aid_application.covid19_reduced_work_hours).to eq true
+      expect(aid_application.county_name).to eq "San Francisco"
     end
 
     it 'redirects to the applicant information page' do

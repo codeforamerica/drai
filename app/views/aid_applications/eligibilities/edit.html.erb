@@ -21,6 +21,10 @@
           <p><%= t('.privacy.text') %></p>
           <hr>
 
+          <h2><%= t('.service_criteria.title') %></h2>
+          <%= f.cfa_select :county_name, t('.service_criteria.county'), @aid_application.organization.county_names + ['None of the above'] %>
+          <hr>
+
           <h2><%= t('.eligibility.title') %></h2>
           <%= f.cfa_radio_set(
                   :valid_work_authorization,

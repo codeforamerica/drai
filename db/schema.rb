@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_215403) do
+ActiveRecord::Schema.define(version: 2020_05_13_230337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_215403) do
     t.text "mailing_zip_code"
     t.boolean "landline"
     t.boolean "attestation"
+    t.string "county_name"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_215403) do
     t.integer "users_count", default: 0, null: false
     t.integer "aid_applications_count", default: 0, null: false
     t.integer "total_payment_cards_count", default: 0, null: false
+    t.string "county_names", array: true
   end
 
   create_table "users", force: :cascade do |t|
