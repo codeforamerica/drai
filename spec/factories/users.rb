@@ -7,7 +7,7 @@ FactoryBot.define do
   factory :user do
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    password { 'password' }
+    password { 'Password!2' }
     confirmed_at { Time.current }
 
     organization

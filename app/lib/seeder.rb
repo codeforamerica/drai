@@ -20,7 +20,7 @@ class Seeder
     @admin_user ||= User.find_or_create_by!(email: 'admin@dafi.org') do |user|
       user.assign_attributes(
         name: "Admin Awesome",
-        password: 'qwerty',
+        password: 'Qwerty!2',
         admin: true,
         confirmed_at: Time.current
       )
@@ -40,7 +40,7 @@ class Seeder
       user.assign_attributes(
         name: 'Assister Thankful',
         organization: organization,
-        password: 'qwerty',
+        password: 'Qwerty!2',
         confirmed_at: Time.current
       )
     end
@@ -51,7 +51,7 @@ class Seeder
       user.assign_attributes(
         name: 'Supervisor Grateful',
         organization: organization,
-        password: 'qwerty',
+        password: 'Qwerty!2',
         supervisor: true,
         confirmed_at: Time.current
       )

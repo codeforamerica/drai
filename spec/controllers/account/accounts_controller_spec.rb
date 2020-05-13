@@ -44,7 +44,7 @@ describe Account::AccountsController do
 
     it 'saves the users password' do
       expect do
-        put :update, params: { user: { current_password: 'password', password: 'qwerty', password_confirmation: 'qwerty' } }
+        put :update, params: { user: { current_password: 'Password!2', password: 'Qwerty!2', password_confirmation: 'Qwerty!2' } }
       end.to change { user.reload.updated_at }
 
       expect(response).to redirect_to account_path

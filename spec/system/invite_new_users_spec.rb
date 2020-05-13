@@ -6,7 +6,7 @@ describe 'Account invitations', type: :system do
   let(:supervisor) { create :supervisor, organization: organization }
 
   let(:new_user_email) { 'daffyduck@dafi.org' }
-  let(:new_user_password) { 'password1' }
+  let(:new_user_password) { 'Password!2' }
 
   # log in
   # view list of assisters

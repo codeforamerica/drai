@@ -60,7 +60,7 @@ describe 'Deactivate Users', type: :system do
 
       within 'form' do
         fill_in 'Email', with: assister.email
-        fill_in 'Password', with: 'password'
+        fill_in 'Password', with: 'Password!2'
         click_on 'Sign in'
       end
 
