@@ -15,29 +15,6 @@ class AidApplicationsController < ApplicationController
     respond_with @aid_application, location: -> { edit_organization_aid_application_eligibility_path(current_organization, @aid_application) }
   end
 
-  def edit
-    @aid_application = current_organization.aid_applications.find(params[:id])
-  end
-
-  def update
-    @aid_application = current_organization.aid_applications.find(params[:id])
-    @aid_application.attributes = aid_application_params
-
-    @aid_application.save
-
-    if params[:form_action] == 'submit'
-      @aid_application.save(context: :submit)
-    end
-
-    respond_with @aid_application, location: (lambda do
-      if params[:form_action] == 'submit'
-        organization_aid_applications_path(current_organization)
-      else
-        edit_organization_aid_application_path(current_organization, @aid_application)
-      end
-    end)
-  end
-
   private
 
   def aid_applications
