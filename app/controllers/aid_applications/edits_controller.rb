@@ -44,12 +44,6 @@ module AidApplications
 
     def aid_application_params
       params.require(:aid_application).permit(
-          :valid_work_authorization,
-          :covid19_reduced_work_hours,
-          :covid19_care_facility_closed,
-          :covid19_experiencing_symptoms,
-          :covid19_underlying_health_condition,
-          :covid19_caregiver,
           :street_address,
           :apartment_number,
           :city,

@@ -12,16 +12,19 @@ describe 'Start aid application', type: :system, js: true do
     click_on "Applications"
     click_on "Add new application"
 
-    expect(page).to have_content "DAFI Application"
+    expect(page).to have_content "DRAI application"
     expect(page).to have_content "About this program"
     expect(page).to have_content "Privacy script"
+    expect(page).to have_content "Eligibility"
 
     within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do
       choose "No"
     end
 
-    expect(page).to have_content I18n.t('aid_applications.edits.edit.eligibility.read_to_client')
+    expect(page).to have_content I18n.t('aid_applications.eligibility_checks.edit.eligibility.read_to_client')
     check "Are you or have you experienced symptoms consistent with COVID-19?"
+
+    click_on "Continue"
 
     expect(page).to have_content "Applicant Information"
 
@@ -37,7 +40,7 @@ describe 'Start aid application', type: :system, js: true do
     select "Bisexual", from: "Sexual orientation"
     select "Another gender identity", from: "Gender"
 
-    expect(page).to have_content I18n.t("aid_applications.edits.edit.eligibility.read_to_client")
+    expect(page).to have_content I18n.t("aid_applications.edits.edit.contact_information.read_to_client")
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
     fill_in "Street Address", with: "123 Main Street"
     fill_in "Apartment, building, unit, etc. (optional)", with: "Apt. 1"

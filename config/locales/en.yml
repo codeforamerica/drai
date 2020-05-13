@@ -25,6 +25,7 @@ en:
     errors:
       messages:
         attestation_required: Attestation is required
+        attestation: "You must click 'Yes' to submit"
         check_one_box_eligible: At least one box must be checked for the client to
           be eligible.
         confirmation_required: Confirmation is required.
@@ -73,7 +74,7 @@ en:
         body: Someone with a matching name, date of birth and address has already
           applied for DRAI.
         title: This applicant has been identified as a duplicate.
-    edits:
+    eligibility_checks:
       edit:
         about_program:
           about_accordian:
@@ -89,6 +90,44 @@ en:
             are more than two undocumented adults in the household, they will need
             to apply on their own.
           title: About this program
+        eligibility:
+          care_facility_closed: Is the care facility, such as a school, childcare
+            facility or other adult living facility, where you usually send your child
+            or other person you care for, closed because of the COVID-19 outbreak?
+          caregiver: Are you a caregiver to a dependent, such as a child or elderly
+            parent, or a spouse who has or had symptoms consistent with COVID-19,
+            which made you unable to work?
+          experiencing_symptoms: Are you or have you experienced symptoms consistent
+            with COVID-19?
+          help_text: A valid document includes a Social Security Number card and a
+            work authorization or Employment Authorization Document issued by U.S.
+            Citizenship and Immigration Services.
+          label_text: 'Do you currently have a valid document that authorizes you
+            to work in the United States? '
+          read_to_client: Read the following to the applicant. They must meet at least
+            one criteria. Check all boxes that apply.
+          reduced_work_hours: Have you, or other adults in your household who provide
+            income to your household, lost their employment or had their work hours
+            significantly reduced because of the COVID-19 outbreak?
+          title: Eligibility
+          underlying_health_condition: Are you at higher risk of serious illness from
+            COVID-19 due to an underlying health condition or age, and therefore unable
+            to work in order to comply with physical distancing?
+        privacy:
+          help_text: Read this to the applicant.
+          text: "I will be asking you several questions that will be used to verify
+            your eligibility for this assistance. We also will collect documentation
+            from you to verify who is applying for this assistance. Your personal
+            information is protected. It will be entered into an online portal that
+            is administered by a nonprofit organization. It also will be held by our
+            organization. We will be sharing some general aggregate information with
+            the state government, but nothing that will identify you. Your information
+            will not be shared with anyone else, and eventually it will be destroyed
+            securely by everyone. \nBased on this information, do you want to move
+            forward with the application?"
+          title: Privacy script
+    edits:
+      edit:
         additional_information:
           receives_calfresh_help_text: A household is defined as individuals who live
             and purchase and prepare meals together.
@@ -158,29 +197,6 @@ en:
           preferred_contact_voice: Automated phone call
           read_to_client: 'Read to the applicant:'
           title: Contact information
-        eligibility:
-          care_facility_closed: Is the care facility, such as a school, childcare
-            facility or other adult living facility, where you usually send your child
-            or other person you care for, closed because of the COVID-19 outbreak?
-          caregiver: Are you a caregiver to a dependent, such as a child or elderly
-            parent, or a spouse who has or had symptoms consistent with COVID-19,
-            which made you unable to work?
-          experiencing_symptoms: Are you or have you experienced symptoms consistent
-            with COVID-19?
-          help_text: A valid document includes a Social Security Number card and a
-            work authorization or Employment Authorization Document issued by U.S.
-            Citizenship and Immigration Services.
-          label_text: 'Do you currently have a valid document that authorizes you
-            to work in the United States? '
-          read_to_client: Read the following to the applicant. They must meet at least
-            one criteria. Check all boxes that apply.
-          reduced_work_hours: Have you, or other adults in your household who provide
-            income to your household, lost their employment or had their work hours
-            significantly reduced because of the COVID-19 outbreak?
-          title: Eligibility
-          underlying_health_condition: Are you at higher risk of serious illness from
-            COVID-19 due to an underlying health condition or age, and therefore unable
-            to work in order to comply with physical distancing?
         language:
           languages:
             arabic: Arabic
@@ -197,19 +213,6 @@ en:
         organization_relationship:
           title: Confirm that the applicant is not an employee, contractor, or volunteer
             of this organization.
-        privacy:
-          help_text: Read this to the applicant.
-          text: "I will be asking you several questions that will be used to verify
-            your eligibility for this assistance. We also will collect documentation
-            from you to verify who is applying for this assistance. Your personal
-            information is protected. It will be entered into an online portal that
-            is administered by a nonprofit organization. It also will be held by our
-            organization. We will be sharing some general aggregate information with
-            the state government, but nothing that will identify you. Your information
-            will not be shared with anyone else, and eventually it will be destroyed
-            securely by everyone. \nBased on this information, do you want to move
-            forward with the application?"
-          title: Privacy script
         service_criteria:
           title: Service criteria
           zip_code:
@@ -332,25 +335,6 @@ en:
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
         <p>For help with your payment card, call <card phone number>.</p>
-  activerecord:
-    errors:
-      messages:
-        attestation: "You must click 'Yes' to submit"
-        zip_five_digits: "Must be a 5-digit ZIP Code"
-        zip_code: "Must be a 5-digit ZIP Code in California"
-        phone_number: "Make sure your phone number is 10 digits long"
-        email: "Make sure to enter a valid email"
-  general:
-    affirmative: "Yes"
-    negative: "No"
-    optional: "optional"
-    phone_number: "Phone number"
-    email_address: "Email address"
-    cancel: "Cancel"
-    update: "Update"
-    submit: "Submit"
-    sign_out: "Sign out"
-
   flash:
     actions:
       create:
@@ -382,6 +366,7 @@ en:
     sign_out: Sign out
     submit: Submit
     update: Update
+    drai_application: "DRAI application"
   hello: Hello world
   privacies:
     show:

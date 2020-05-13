@@ -12,7 +12,7 @@ class AidApplicationsController < ApplicationController
       organization: current_organization
     )
 
-    respond_with @aid_application, location: -> { organization_aid_application_edit_path(current_organization, @aid_application) }
+    respond_with @aid_application, location: -> { edit_organization_aid_application_eligibility_check_path(current_organization, @aid_application) }
   end
 
   def edit
