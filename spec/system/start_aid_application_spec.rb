@@ -13,7 +13,7 @@ describe 'Start aid application', type: :system, js: true do
     click_on "Add new application"
 
     expect(page).to have_content "DRAI application"
-    expect(page).to have_content "About this program"
+    expect(page).to have_content "About the DRAI program"
     expect(page).to have_content "Privacy script"
     expect(page).to have_content "Eligibility"
 
