@@ -39,6 +39,7 @@ en:
         zip_code: Must be a 5-digit ZIP Code in California
         zip_five_digits: Must be a 5-digit ZIP Code
         password_complexity: "Complexity requirement not met."
+        county_required: "If the client's county is not shown in this list then their county is outside your organization's service area. They must apply through an organization that serves their county."
   aid_applications:
     confirm_messages:
       edit:
@@ -128,6 +129,15 @@ en:
             securely by everyone. \nBased on this information, do you want to move
             forward with the application?
           title: Privacy script
+        service_criteria:
+          title: Service criteria
+          county: County
+          zip_code:
+            button: Look up
+            error: "<COUNTY> County is outside of your service area, refer applicant
+              to:"
+            notification: "<COUNTY> County is within your service area."
+            title: ZIP code
     applicants:
       edit:
         additional_information:
@@ -216,14 +226,6 @@ en:
         organization_relationship:
           title: Confirm that the applicant is not an employee, contractor, or volunteer
             of this organization.
-        service_criteria:
-          title: Service criteria
-          zip_code:
-            button: Look up
-            error: "<COUNTY> County is outside of your service area, refer applicant
-              to:"
-            notification: "<COUNTY> County is within your service area."
-            title: ZIP code
         shared_address:
           street_address: "Street Address"
           apartment_number: "Apartment, building, unit, etc. (optional)"

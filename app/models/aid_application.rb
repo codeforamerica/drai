@@ -171,7 +171,9 @@ class AidApplication < ApplicationRecord
   with_options on: :eligibility do
     validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria}
     validate :eligibility_required
+    validates :county_name, inclusion: { in: -> (aid_application) { aid_application.organization.county_names }, message: :county_required }
   end
+
   with_options on: :submit do
     validates :name, presence: true
     validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }

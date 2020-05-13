@@ -20,7 +20,8 @@ module AidApplications
           :covid19_care_facility_closed,
           :covid19_experiencing_symptoms,
           :covid19_underlying_health_condition,
-          :covid19_caregiver
+          :covid19_caregiver,
+          :county_name
       )
     end
   end

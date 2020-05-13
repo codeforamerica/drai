@@ -183,6 +183,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#county_name' do
+    it "must be one of the organization's county_names" do
+      aid_application = build :aid_application, county_name: "None of the above", organization: build(:organization, county_names: ["Alameda"])
+      expect(aid_application).not_to be_valid(:eligibility)
+    end
+  end
+
   describe '.query', truncate: :database do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application

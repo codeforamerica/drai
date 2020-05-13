@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Start aid application', type: :system, js: true do
-  let!(:assister) { create :assister }
+  let!(:assister) { create :assister, organization: build(:organization, county_names: ["San Francisco", "San Mateo"]) }
 
   specify do
     sign_in assister
@@ -15,6 +15,10 @@ describe 'Start aid application', type: :system, js: true do
     expect(page).to have_content "DRAI application"
     expect(page).to have_content "About the DRAI program"
     expect(page).to have_content "Privacy script"
+
+    expect(page).to have_content "Service criteria"
+    select "San Francisco", from: "County"
+
     expect(page).to have_content "Eligibility"
 
     within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do

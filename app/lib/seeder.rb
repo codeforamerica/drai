@@ -30,7 +30,8 @@ class Seeder
   def organization
     @organization ||= Organization.find_or_create_by!(name: 'Food Bank') do |organization|
       organization.assign_attributes(
-        total_payment_cards_count: 10
+        total_payment_cards_count: 10,
+        county_names: ["San Francisco", "San Mateo"]
       )
     end
   end
