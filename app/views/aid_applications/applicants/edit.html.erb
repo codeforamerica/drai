@@ -48,8 +48,8 @@
           </div>
         <% end %>
 
-        <h2><%= I18n.t('aid_applications.edits.edit.contact_information.title') %></h2>
-        <%= f.cfa_input_field(:phone_number, I18n.t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
+        <h2><%= t('.contact_information.title') %></h2>
+        <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
         <label class="checkbox checkbox-with-associated-field-to-disable">
           <%= f.check_box(:landline) %>
           <%= t('.contact_information.landline') %>
@@ -70,8 +70,8 @@
             <%= f.cfa_checkbox(:email_consent, t('.contact_information.preferred_contact_email')) %>
 
             <div id="preferred-contact-channel__text" class="question-with-follow-up__follow-up spacing-above-25">
-              <p><em><%= I18n.t('aid_applications.edits.edit.contact_information.read_to_client') %></em></p>
-              <p><%= I18n.t('aid_applications.edits.edit.contact_information.message_rates_apply') %></p>
+              <p><em><%= t('.contact_information.read_to_client') %></em></p>
+              <p><%= t('.contact_information.message_rates_apply') %></p>
             </div>
           </div>
         </fieldset>

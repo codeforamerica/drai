@@ -49,7 +49,7 @@ describe AidApplicationsController, type: :controller do
                                        creator: assister,
                                        organization: assister.organization
                                      )
-      expect(response).to redirect_to edit_organization_aid_application_eligibility_check_path(assister.organization, aid_application)
+      expect(response).to redirect_to edit_organization_aid_application_eligibility_path(assister.organization, aid_application)
     end
   end
 end

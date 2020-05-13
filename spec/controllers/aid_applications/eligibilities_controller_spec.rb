@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AidApplications::EligibilityChecksController do
+describe AidApplications::EligibilitiesController do
   let(:assister) { create :assister }
   let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
 
@@ -45,7 +45,7 @@ describe AidApplications::EligibilityChecksController do
     end
 
     it 'redirects to the applicant information page' do
-      expect(response).to redirect_to edit_organization_aid_application_edit_path(assister.organization, aid_application)
+      expect(response).to redirect_to edit_organization_aid_application_applicant_path(assister.organization, aid_application)
     end
   end
 end

@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     resources :assisters
     resources :aid_applications, only: [:index, :new, :create] do
       scope module: :aid_applications do
-        resource :eligibility_check, only: [:edit, :update], path_names: { edit: '' }
-        resource :edit, only: [:edit, :update], path_names: { edit: '' }
+        resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
+        resource :applicant, only: [:edit, :update], path_names: { edit: '' }
         resource :verification, only: [:edit, :update], path_names: { edit: '' }
         resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
       end

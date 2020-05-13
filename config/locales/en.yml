@@ -74,7 +74,7 @@ en:
         body: Someone with a matching name, date of birth and address has already
           applied for DRAI.
         title: This applicant has been identified as a duplicate.
-    eligibility_checks:
+    eligibilities:
       edit:
         about_program:
           about_accordian:
@@ -126,7 +126,7 @@ en:
             securely by everyone. \nBased on this information, do you want to move
             forward with the application?"
           title: Privacy script
-    edits:
+    applicants:
       edit:
         additional_information:
           receives_calfresh_help_text: A household is defined as individuals who live

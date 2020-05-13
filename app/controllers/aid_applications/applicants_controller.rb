@@ -1,5 +1,5 @@
 module AidApplications
-  class EditsController < BaseController
+  class ApplicantsController < BaseController
     def edit
       @aid_application = current_aid_application
 
@@ -35,9 +35,9 @@ module AidApplications
         if @aid_application.submitted?
           edit_organization_aid_application_verification_path(current_organization, @aid_application)
         elsif params[:form_action] == 'allow_mailing_address'
-          edit_organization_aid_application_edit_path(current_organization, @aid_application, :anchor => "mailing-address")
+          edit_organization_aid_application_applicant_path(current_organization, @aid_application, :anchor => "mailing-address")
         else
-          edit_organization_aid_application_edit_path(current_organization, @aid_application)
+          edit_organization_aid_application_applicant_path(current_organization, @aid_application)
         end
       end)
     end
