@@ -164,6 +164,25 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#valid_work_authorization' do
+    it 'must be false' do
+      aid_application = build :aid_application, valid_work_authorization: true
+      expect(aid_application).not_to be_valid(:eligibility)
+    end
+  end
+
+  describe '#eligibility_required' do
+    it 'must have at least one covid19 criteria checked' do
+      aid_application = build :aid_application,
+                                covid19_care_facility_closed: nil,
+                                covid19_caregiver: nil,
+                                covid19_experiencing_symptoms: nil,
+                                covid19_reduced_work_hours: nil,
+                                covid19_underlying_health_condition: nil
+      expect(aid_application).not_to be_valid(:eligibility)
+    end
+  end
+
   describe '.query', truncate: :database do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application
