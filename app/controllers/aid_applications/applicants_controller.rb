@@ -1,5 +1,5 @@
 module AidApplications
-  class EditsController < BaseController
+  class ApplicantsController < BaseController
     def edit
       @aid_application = current_aid_application
 
@@ -35,21 +35,15 @@ module AidApplications
         if @aid_application.submitted?
           edit_organization_aid_application_verification_path(current_organization, @aid_application)
         elsif params[:form_action] == 'allow_mailing_address'
-          edit_organization_aid_application_edit_path(current_organization, @aid_application, :anchor => "mailing-address")
+          edit_organization_aid_application_applicant_path(current_organization, @aid_application, :anchor => "mailing-address")
         else
-          edit_organization_aid_application_edit_path(current_organization, @aid_application)
+          edit_organization_aid_application_applicant_path(current_organization, @aid_application)
         end
       end)
     end
 
     def aid_application_params
       params.require(:aid_application).permit(
-          :valid_work_authorization,
-          :covid19_reduced_work_hours,
-          :covid19_care_facility_closed,
-          :covid19_experiencing_symptoms,
-          :covid19_underlying_health_condition,
-          :covid19_caregiver,
           :street_address,
           :apartment_number,
           :city,

@@ -6,14 +6,17 @@
 </p>
 
 <div class="tab-bar">
-  <%= link_to organization_aid_application_edit_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_edit_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
-    1. Apply <span class="icon-arrow_forward"></span>
+  <%= link_to edit_organization_aid_application_eligibility_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_eligibility_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+    1. Eligibility <span class="icon-arrow_forward"></span>
+  <% end %>
+  <%= link_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_applicant_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+    2. Applicant <span class="icon-arrow_forward"></span>
   <% end %>
   <%= link_to organization_aid_application_verification_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_verification_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
-    2. Verify <span class="icon-arrow_forward"></span>
+    3. Verify <span class="icon-arrow_forward"></span>
   <% end %>
   <%= link_to organization_aid_application_disbursement_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_disbursement_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
-    3. Disburse
+    4. Disburse
   <% end %>
   </div>
 

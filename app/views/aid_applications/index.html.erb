@@ -39,7 +39,7 @@
             <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
           <% end %>
           <td><%= (aid_application.submitter || aid_application.creator).name %></td>
-          <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_edit_path(aid_application.organization, aid_application) %>
+          <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_eligibility_path(aid_application.organization, aid_application) %>
         </tr>
       <% end %>
       </tbody>

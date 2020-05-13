@@ -1,0 +1,66 @@
+<%= render 'aid_applications/navigation' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h1><%= t('general.drai_application') %></h1>
+    </header>
+
+    <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+        <div class="form-card__content">
+          <div class="accordion">
+            <button href="#" class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.about_program.about_accordian.title') %></button>
+            <div class="accordion__content" id="about_program">
+              <p><%= t('.about_program.about_accordian.body') %></p>
+            </div>
+          </div>
+          <hr>
+
+          <h2><%= t('.privacy.title') %></h2>
+          <p class="text--help"><em><%= t('.privacy.help_text') %></em></p>
+          <p><%= t('.privacy.text') %></p>
+          <hr>
+
+          <h2><%= t('.eligibility.title') %></h2>
+          <%= f.cfa_radio_set(
+                  :valid_work_authorization,
+                  label_text: t('.eligibility.label_text'),
+                  help_text: t('.eligibility.help_text'),
+                  collection: [
+                      {value: true, label: t('general.affirmative')},
+                      {value: false, label: t('general.negative')}
+                  ],
+                  layouts: [:inline]
+              )
+          %>
+
+          <fieldset class="input-group form-group">
+            <legend class="spacing-below-15"><em><%= t('.eligibility.read_to_client') %></em></legend>
+            <% [
+                   {method: :covid19_reduced_work_hours, label: t('.eligibility.reduced_work_hours') },
+                   {method: :covid19_care_facility_closed, label: t('.eligibility.care_facility_closed')},
+                   {method: :covid19_experiencing_symptoms, label: t('.eligibility.experiencing_symptoms')},
+                   {method: :covid19_underlying_health_condition, label: t('.eligibility.underlying_health_condition')},
+                   {method: :covid19_caregiver, label: t('.eligibility.caregiver')}
+               ].each do |item| %>
+                <label class="checkbox">
+                  <%= f.check_box(item[:method]) %>
+                  <%= item[:label] %>
+                </label>
+            <% end %>
+          </fieldset>
+        </div>
+
+        <div class="form-card__footer">
+          <div class="toolbar">
+            <div class="toolbar__left">
+              <%= link_to t('general.cancel'), organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
+            </div>
+            <div class="toolbar__right">
+              <%= f.button t('general.continue'), type: 'submit', class: 'toolbar__item button button--primary' %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

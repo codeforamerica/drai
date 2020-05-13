@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AidApplications::EditsController do
+describe AidApplications::ApplicantsController do
   let(:assister) { create :assister }
   let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
 
