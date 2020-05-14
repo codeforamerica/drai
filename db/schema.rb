@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_230337) do
+ActiveRecord::Schema.define(version: 2020_05_14_004528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_230337) do
     t.text "country_of_origin"
     t.text "sexual_orientation"
     t.text "gender"
-    t.string "racial_ethnic_identity", array: true
+    t.string "racial_ethnic_identity", default: [], array: true
     t.boolean "sms_consent"
     t.boolean "email_consent"
     t.text "apartment_number"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_230337) do
     t.integer "users_count", default: 0, null: false
     t.integer "aid_applications_count", default: 0, null: false
     t.integer "total_payment_cards_count", default: 0, null: false
-    t.string "county_names", array: true
+    t.string "county_names", default: [], array: true
   end
 
   create_table "users", force: :cascade do |t|
