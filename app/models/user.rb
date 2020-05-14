@@ -4,6 +4,7 @@
 #
 #  id                               :bigint           not null, primary key
 #  admin                            :boolean          default(FALSE), not null
+#  aid_applications_approved_count  :bigint           default(0), not null
 #  aid_applications_count           :integer          default(0), not null
 #  aid_applications_created_count   :bigint           default(0), not null
 #  aid_applications_submitted_count :bigint           default(0), not null

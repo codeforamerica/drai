@@ -164,6 +164,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#no_cbo_association' do
+    it 'must be true' do
+      aid_application = build :aid_application, no_cbo_association: nil
+      expect(aid_application).not_to be_valid(:eligibility)
+    end
+  end
+
   describe '#valid_work_authorization' do
     it 'must be false' do
       aid_application = build :aid_application, valid_work_authorization: true

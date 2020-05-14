@@ -23,6 +23,7 @@ FactoryBot.define do
 
     racial_ethnic_identity { [AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS.first] }
 
+    no_cbo_association { true }
     attestation { true }
 
     covid19_reduced_work_hours { true }

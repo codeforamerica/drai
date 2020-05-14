@@ -4,6 +4,7 @@
 #
 #  id                        :bigint           not null, primary key
 #  aid_applications_count    :integer          default(0), not null
+#  county_names              :string           default([]), is an Array
 #  name                      :text             not null
 #  total_payment_cards_count :integer          default(0), not null
 #  users_count               :integer          default(0), not null

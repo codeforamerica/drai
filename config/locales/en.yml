@@ -25,7 +25,6 @@ en:
     errors:
       messages:
         attestation_required: Attestation is required
-        attestation: You must click 'Yes' to submit
         birthday: Must be 18-years or older and born after 1900
         check_one_box_eligible: At least one box must be checked for the client to
           be eligible.
@@ -93,6 +92,8 @@ en:
             are more than two undocumented adults in the household, they will need
             to apply on their own.
           title: About this program
+        confirmation:
+          label_text: Confirm that the applicant is not an employee, contractor or volunteer of this organization.
         eligibility:
           care_facility_closed: Is the care facility, such as a school, childcare
             facility or other adult living facility, where you usually send your child
