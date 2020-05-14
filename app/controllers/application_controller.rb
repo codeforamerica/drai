@@ -42,11 +42,20 @@ class ApplicationController < ActionController::Base
 
     if stored_location.present?
       stored_location
+    else
+      redirect_to_organization_home_page(user)
+    end
+  end
+
+  def redirect_to_organization_home_page(user)
+    if user.assister?
+      organization_aid_applications_path(user.organization)
     elsif user.organization.present?
       organization_path(user.organization)
     else
       organizations_path
     end
   end
+  helper_method :redirect_to_organization_home_page
 end
 

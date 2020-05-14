@@ -13,7 +13,6 @@ describe 'Approve aid application', type: :system do
   specify do
     sign_in supervisor
     visit root_path
-    click_on assister.organization.name
     click_on 'Applications'
 
     within '.searchbar' do

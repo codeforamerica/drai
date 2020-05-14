@@ -7,9 +7,6 @@ describe 'Start aid application', type: :system, js: true do
     sign_in assister
 
     visit root_path
-    click_on assister.organization.name
-
-    click_on "Applications"
     click_on "Add new application"
 
     expect(page).to have_content "DRAI application"

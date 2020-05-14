@@ -112,4 +112,8 @@ class User < ApplicationRecord
   def inactive_message
     deactivated_at.present? ? 'Account has been deactivated' : super
   end
+
+  def assister?
+    !admin && !supervisor
+  end
 end

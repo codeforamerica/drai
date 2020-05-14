@@ -17,7 +17,6 @@ describe 'Deactivate Users', type: :system do
     Capybara.using_session(:supervisor) do
       sign_in supervisor
       visit root_path
-      click_on organization.name
 
       click_on 'Assisters'
 
@@ -55,8 +54,6 @@ describe 'Deactivate Users', type: :system do
     Capybara.using_session(:assister) do
       visit root_path
       expect(page).not_to have_link 'Sign out'
-
-      click_on 'Sign in', match: :first
 
       within 'form' do
         fill_in 'Email', with: assister.email
