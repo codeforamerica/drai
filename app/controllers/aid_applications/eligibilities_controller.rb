@@ -15,6 +15,7 @@ module AidApplications
 
     def aid_application_params
       params.require(:aid_application).permit(
+          :no_cbo_association,
           :valid_work_authorization,
           :covid19_reduced_work_hours,
           :covid19_care_facility_closed,

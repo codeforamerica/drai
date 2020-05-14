@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_004528) do
+ActiveRecord::Schema.define(version: 2020_05_14_203017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
     t.boolean "landline"
     t.boolean "attestation"
     t.string "county_name"
+    t.boolean "no_cbo_association"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"

@@ -23,6 +23,9 @@
 
           <h2><%= t('.service_criteria.title') %></h2>
           <%= f.cfa_select :county_name, t('.service_criteria.county'), @aid_application.organization.county_names + ['None of the above'] %>
+
+          <p><%= t('.confirmation.label_text') %></p>
+          <%= f.cfa_checkbox :no_cbo_association, t('general.confirm') %>
           <hr>
 
           <h2><%= t('.eligibility.title') %></h2>

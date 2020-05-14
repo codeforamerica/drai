@@ -17,6 +17,8 @@ describe 'Start aid application', type: :system, js: true do
     expect(page).to have_content "Service criteria"
     select "San Francisco", from: "County"
 
+    check "Confirm"
+
     expect(page).to have_content "Eligibility"
 
     within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do

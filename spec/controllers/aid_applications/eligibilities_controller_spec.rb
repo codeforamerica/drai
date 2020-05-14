@@ -28,6 +28,7 @@ describe AidApplications::EligibilitiesController do
           organization_id: assister.organization.id,
           aid_application: {
               valid_work_authorization: false,
+              no_cbo_association: true,
               covid19_reduced_work_hours: true,
               county_name: "San Francisco"
           }

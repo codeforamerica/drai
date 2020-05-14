@@ -6,28 +6,34 @@
 #  allow_mailing_address               :boolean
 #  apartment_number                    :text
 #  application_number                  :string
+#  approved_at                         :datetime
+#  attestation                         :boolean
 #  birthday                            :date
 #  city                                :text
 #  country_of_origin                   :text
+#  county_name                         :string
 #  covid19_care_facility_closed        :boolean
 #  covid19_caregiver                   :boolean
 #  covid19_experiencing_symptoms       :boolean
 #  covid19_reduced_work_hours          :boolean
 #  covid19_underlying_health_condition :boolean
 #  email                               :text
+#  email_consent                       :boolean
 #  gender                              :text
+#  landline                            :boolean
 #  mailing_apartment_number            :text
 #  mailing_city                        :text
 #  mailing_state                       :text
 #  mailing_street_address              :text
 #  mailing_zip_code                    :text
 #  name                                :text
+#  no_cbo_association                  :boolean
 #  phone_number                        :text
-#  preferred_contact_channel           :string
 #  preferred_language                  :text
-#  racial_ethnic_identity              :string           is an Array
+#  racial_ethnic_identity              :string           default([]), is an Array
 #  receives_calfresh_or_calworks       :boolean
 #  sexual_orientation                  :text
+#  sms_consent                         :boolean
 #  street_address                      :text
 #  submitted_at                        :datetime
 #  unmet_childcare                     :boolean
@@ -40,6 +46,7 @@
 #  zip_code                            :text
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
+#  approver_id                         :bigint
 #  creator_id                          :bigint           not null
 #  organization_id                     :bigint           not null
 #  submitter_id                        :bigint
@@ -47,12 +54,14 @@
 # Indexes
 #
 #  index_aid_applications_on_application_number  (application_number) UNIQUE
+#  index_aid_applications_on_approver_id         (approver_id)
 #  index_aid_applications_on_creator_id          (creator_id)
 #  index_aid_applications_on_organization_id     (organization_id)
 #  index_aid_applications_on_submitter_id        (submitter_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (approver_id => users.id)
 #  fk_rails_...  (creator_id => users.id)
 #  fk_rails_...  (organization_id => organizations.id)
 #  fk_rails_...  (submitter_id => users.id)
@@ -173,6 +182,7 @@ class AidApplication < ApplicationRecord
   with_options on: :eligibility do
     validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria}
     validate :eligibility_required
+    validates :no_cbo_association, inclusion: { in: [true], message: :confirmation_required}
     validates :county_name, inclusion: { in: -> (aid_application) { aid_application.organization.county_names }, message: :county_required }
   end
 
@@ -190,7 +200,7 @@ class AidApplication < ApplicationRecord
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
     validates :racial_ethnic_identity, presence: true
-    validates :attestation, inclusion: { in: [true], message: :attestation }
+    validates :attestation, inclusion: { in: [true], message: :attestation_required }
   end
 
 
