@@ -11,8 +11,6 @@ RSpec.describe 'Search in admin panel', type: :system do
     sign_in assister
     visit root_path
 
-    click_on 'Applications'
-
     within '.searchbar' do
       fill_in "term", with: aid_application.name
       click_on "search_submit"

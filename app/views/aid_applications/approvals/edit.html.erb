@@ -11,7 +11,7 @@
       <div class="form-card__footer">
         <div class="toolbar">
           <div class="toolbar__left">
-            <%= link_to I18n.t('general.cancel'), organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
+            <%= link_to I18n.t('general.cancel'), organization_path(current_organization), class: 'toolbar__item button button--secondary' %>
           </div>
           <div class="toolbar__right">
             <% if @aid_application.approved? %>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:index, :show], param: :id do
     resources :assisters
-    resources :aid_applications, only: [:index, :new, :create] do
+    resources :aid_applications, only: [:create] do
       scope module: :aid_applications do
         resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
         resource :applicant, only: [:edit, :update], path_names: { edit: '' }

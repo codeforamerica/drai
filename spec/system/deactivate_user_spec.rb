@@ -42,7 +42,7 @@ describe 'Deactivate Users', type: :system do
       click_on 'Cancel'
 
       # Ensure that an application still shows the assister
-      click_on 'Applications'
+      first(:link, "Dashboard").click
       within "##{dom_id(aid_application)}" do
         expect(page).to have_content assister.name
       end
