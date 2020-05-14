@@ -1,6 +1,6 @@
 <% if current_organization %>
   <div id="dashboard-navigation" class="tab-bar">
-    <%= link_to "Dashboard", organization_path(current_organization) , class: "tab-bar__tab #{ current_path?(organization_path(current_organization)) ? 'is-selected' : '' }" %>
+    <%= link_to "Dashboard", organization_dashboard_path(current_organization) , class: "tab-bar__tab #{ current_path?(organization_dashboard_path(current_organization)) ? 'is-selected' : '' }" %>
     <% if !current_user.assister? %>
       <%= link_to "Assisters", organization_assisters_path(current_organization), class: "tab-bar__tab #{ current_path?(organization_assisters_path(current_organization)) ? 'is-selected' : '' }" %>
     <% end %>

@@ -16,7 +16,7 @@
       <% @organizations.each do |organization| %>
         <tr id="<%= dom_id(organization) %>">
           <td><%= organization.id %></td>
-          <td><%= link_to organization.name, organization_path(organization) %></td>
+          <td><%= link_to organization.name, organization_dashboard_path(organization) %></td>
           <td><%= organization.users_count %></td>
           <td>
             <%= organization.submitted_aid_applications_count %> Apps

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
     if current_organization && current_organization != current_user.organization
       Rails.logger.error "User ##{current_user.id} is not allowed to access #{request.path}"
-      redirect_to organization_path(current_user.organization)
+      redirect_to organization_dashboard_path(current_user.organization)
     end
   end
 
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     return if current_user.supervisor? || current_user.admin?
 
     Rails.logger.error "Non-Supervisor User ##{current_user.id} is not allowed to access #{request.path}"
-    redirect_to organization_path(current_user.organization)
+    redirect_to organization_dashboard_path(current_user.organization)
   end
 
   def authenticate_admin!(opts = {})
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     return if current_user.admin?
 
     Rails.logger.error "Non-Admin User ##{current_user.id} is not allowed to access #{request.path}"
-    redirect_to organization_path(current_user.organization)
+    redirect_to organization_dashboard_path(current_user.organization)
   end
 
   def after_sign_in_path_for(user)
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_organization_home_page(user)
     if user.organization.present?
-      organization_path(user.organization)
+      organization_dashboard_path(user.organization)
     else
       organizations_path
     end

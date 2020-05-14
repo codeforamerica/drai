@@ -26,7 +26,7 @@
           <td><%= aid_application.status_human %></td>
           <td><%= aid_application.application_number %></td>
           <td><%= aid_application.name %></td>
-          <td><%= link_to(aid_application.organization.name, organization_path(aid_application.organization)) %></td>
+          <td><%= link_to(aid_application.organization.name, organization_dashboard_path(aid_application.organization)) %></td>
           <td><%= (aid_application.submitter || aid_application.creator).name %></td>
           <td><%= link_to 'Update-Verify-Disburse', edit_organization_aid_application_eligibility_path(aid_application.organization, aid_application) %>
         </tr>

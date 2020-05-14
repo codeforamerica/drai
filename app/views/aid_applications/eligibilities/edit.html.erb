@@ -54,7 +54,7 @@
         <div class="form-card__footer">
           <div class="toolbar">
             <div class="toolbar__left">
-              <%= link_to t('general.cancel'), organization_path(current_organization), class: 'toolbar__item button button--secondary' %>
+              <%= link_to t('general.cancel'), organization_dashboard_path(current_organization), class: 'toolbar__item button button--secondary' %>
             </div>
             <div class="toolbar__right">
               <%= f.button t('general.continue'), type: 'submit', class: 'toolbar__item button button--primary' %>
