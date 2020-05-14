@@ -52,6 +52,15 @@
           <li><em><%= t('.next_steps.step5') %></em></li>
         </ul>
       </div>
+
+      <div class="form-card__footer">
+        <div class="toolbar">
+          <div class="toolbar__left"></div>
+          <div class="toolbar__right">
+            <%= link_to t('general.submit'), organization_path(current_organization), class: 'toolbar__item button button--primary' %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <% else %>

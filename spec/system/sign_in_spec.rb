@@ -13,7 +13,7 @@ describe 'Home page redirects to the signin page' do
       fill_in 'Password', with: 'Qwerty!2'
       click_button 'Sign in'
 
-      expect(page).to have_content "Add new application"
+      expect(page).to have_content "Start a new application"
     end
   end
 
@@ -29,7 +29,7 @@ describe 'Home page redirects to the signin page' do
       fill_in 'Password', with: 'Qwerty!2'
       click_button 'Sign in'
 
-      expect(page).to have_content "Submitted Apps"
+      expect(page).to have_content "Start a new application"
     end
   end
 
@@ -46,7 +46,7 @@ describe 'Home page redirects to the signin page' do
       fill_in 'Password', with: 'Qwerty!2'
       click_button 'Sign in'
 
-      expect(page).to have_content "Submitted Apps"
+      expect(page).to have_content "Start a new application"
     end
   end
 end

@@ -234,7 +234,7 @@ en:
           state: "State"
     index:
       action: Action
-      add_app: Add new application
+      add_app: Start a new application
       app_number: Application Number
       assister: Assister
       id: ID
