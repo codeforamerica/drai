@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 describe 'Home page redirects to the signin page' do
+  context 'admin' do
+    let!(:admin) { create(:admin, email: 'admin@dafi.org', password: 'Qwerty!2', admin: true, supervisor: false) }
+
+    it 'after sign in redirects to the list of organizations' do
+      visit root_path
+      expect(page).to have_content "Sign in"
+      expect(page).to have_content "Disaster Assistance For Immigrants"
+
+      fill_in 'Email Address', with: 'admin@dafi.org'
+      fill_in 'Password', with: 'Qwerty!2'
+      click_button 'Sign in'
+
+      expect(page).to have_content "All Organizations"
+    end
+  end
+
   context 'assister' do
     let!(:assister) { create(:assister, email: 'assister@foodbank.org', password: 'Qwerty!2', admin: false, supervisor: false) }
 
