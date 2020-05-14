@@ -1,6 +1,6 @@
 class ApplicationEmailer < ActionMailer::Base
   default from: "Disaster Assistance <no-reply@#{Rails.application.secrets.email_domain}>"
-  layout 'mailer'
+  layout 'emailer'
 
   def basic_message(to:, subject:, body:)
     mail(to: to, subject: subject, body: body) do |format|
