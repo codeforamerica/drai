@@ -17,7 +17,7 @@ class Seeder
   private
 
   def admin_user
-    @admin_user ||= User.find_or_create_by!(email: 'admin@dafi.org') do |user|
+    @admin_user ||= User.find_or_create_by!(email: 'admin@codeforamerica.org') do |user|
       user.assign_attributes(
         name: "Admin Awesome",
         password: 'Qwerty!2',
@@ -28,16 +28,16 @@ class Seeder
   end
 
   def organization
-    @organization ||= Organization.find_or_create_by!(name: 'Food Bank') do |organization|
+    @organization ||= Organization.find_or_create_by!(name: 'Legal Aid') do |organization|
       organization.assign_attributes(
-        total_payment_cards_count: 10,
+        total_payment_cards_count: 10000,
         county_names: ["San Francisco", "San Mateo"]
       )
     end
   end
 
   def assister
-    @assister ||= User.find_or_create_by!(email: 'assister@foodbank.org') do |user|
+    @assister ||= User.find_or_create_by!(email: 'assister@aid.org') do |user|
       user.assign_attributes(
         name: 'Assister Thankful',
         organization: organization,
@@ -48,7 +48,7 @@ class Seeder
   end
 
   def supervisor
-    @supervisor ||= User.find_or_create_by!(email: 'supervisor@foodbank.org') do |user|
+    @supervisor ||= User.find_or_create_by!(email: 'supervisor@aid.org') do |user|
       user.assign_attributes(
         name: 'Supervisor Grateful',
         organization: organization,
