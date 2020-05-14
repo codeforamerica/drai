@@ -15,8 +15,8 @@ RSpec.describe 'Search in admin panel', type: :system do
 
     within '.searchbar' do
       fill_in "term", with: aid_application.name
+      click_on "search_submit"
     end
-    click_on "search_submit"
 
     expect(page).to have_content aid_application.id.to_s
     expect(page).not_to have_content other_aid_application.id.to_s

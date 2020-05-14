@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
     t.string "racial_ethnic_identity", default: [], array: true
     t.boolean "sms_consent"
     t.boolean "email_consent"
+    t.datetime "approved_at"
+    t.bigint "approver_id"
     t.text "apartment_number"
     t.boolean "allow_mailing_address"
     t.text "mailing_street_address"
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
     t.boolean "attestation"
     t.string "county_name"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
+    t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
@@ -117,6 +120,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
     t.datetime "deactivated_at"
     t.bigint "aid_applications_created_count", default: 0, null: false
     t.bigint "aid_applications_submitted_count", default: 0, null: false
+    t.bigint "aid_applications_approved_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -138,6 +142,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
   end
 
   add_foreign_key "aid_applications", "organizations"
+  add_foreign_key "aid_applications", "users", column: "approver_id"
   add_foreign_key "aid_applications", "users", column: "creator_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
   add_foreign_key "users", "organizations"
@@ -145,7 +150,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_004528) do
 
   create_view "aid_application_searches", materialized: true, sql_definition: <<-SQL
       SELECT aid_applications.id AS aid_application_id,
-      ((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) AS searchable_data
+      (((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) || (COALESCE(aid_applications.application_number, ''::character varying))::text) AS searchable_data
      FROM aid_applications;
   SQL
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin

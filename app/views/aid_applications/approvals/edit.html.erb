@@ -1,0 +1,27 @@
+<%= render 'aid_applications/navigation' %>
+
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2>Approve "<%= @aid_application.application_number %>"</h2>
+    </header>
+
+    <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__footer">
+        <div class="toolbar">
+          <div class="toolbar__left">
+            <%= link_to I18n.t('general.cancel'), organization_aid_applications_path(current_organization), class: 'toolbar__item button button--secondary' %>
+          </div>
+          <div class="toolbar__right">
+            <% if @aid_application.approved? %>
+              <%= link_to %>
+            <% else %>
+              <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

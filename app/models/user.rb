@@ -61,6 +61,7 @@ class User < ApplicationRecord
   belongs_to :inviter, class_name: 'User', optional: true
   has_many :aid_applications_created, class_name: 'AidApplication', inverse_of: :creator, foreign_key: :creator_id
   has_many :aid_applications_submitted, class_name: 'AidApplication', inverse_of: :submitter, foreign_key: :submitted_id
+  has_many :aid_applications_approved, class_name: 'AidApplication', inverse_of: :approver, foreign_key: :approver_id
 
   validates :email, presence: true, email: true, uniqueness: { case_sensitive: true }
   validates :password, confirmation: true, format: { with: PASSWORD_REGEX, message: :password_complexity }, if: :password_required?
