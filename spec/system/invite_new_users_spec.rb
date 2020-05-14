@@ -87,13 +87,12 @@ describe 'Account invitations', type: :system do
     )
   end
 
-  it 'cannot be initiated by an assister' do
+  it 'assisters cannot see Assisters tab' do
     assister = create :assister
 
     sign_in assister
     visit root_path
 
-    click_on 'Assisters'
-    expect(page).not_to have_link 'Add new assister'
+    expect(page).not_to have_link 'Assisters'
   end
 end
