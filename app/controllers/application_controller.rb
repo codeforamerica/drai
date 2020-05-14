@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   def redirect_to_organization_home_page(user)
     if user.organization.present?
       organization_path(user.organization)
-    elsif
+    else
       organizations_path
     end
   end
