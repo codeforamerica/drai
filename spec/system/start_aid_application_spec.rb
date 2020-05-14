@@ -7,7 +7,8 @@ describe 'Start aid application', type: :system, js: true do
     sign_in assister
 
     visit root_path
-    click_on "Add new application"
+
+    click_on "Start a new application"
 
     expect(page).to have_content "DRAI application"
     expect(page).to have_content "About the DRAI program"
@@ -96,6 +97,10 @@ describe 'Start aid application', type: :system, js: true do
     expect(page).to have_content /APP-/
     expect(page).to have_content 'Verification documents'
     expect(page).to have_content 'Next Steps'
+
+    click_on 'Submit'
+
+    expect(page).to have_content 'Start a new application'
 
     aid_application = AidApplication.last
     expect(aid_application).to have_attributes(
