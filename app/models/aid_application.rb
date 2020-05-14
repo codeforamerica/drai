@@ -207,6 +207,18 @@ class AidApplication < ApplicationRecord
   alias_attribute :text_phone_number, :phone_number
   alias_attribute :voice_phone_number, :phone_number
 
+  def activation_code
+    '123456'
+  end
+
+  def payment_card
+    # TODO
+  end
+
+  def payment_card=(value)
+    # TODO
+  end
+
   def text_phone_number=(value)
     self.phone_number = value if preferred_contact_channel_text?
   end

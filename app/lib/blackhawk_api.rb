@@ -1,4 +1,26 @@
 class BlackhawkApi
+  PRODUCTION_HOST = 'https://marketplace.bhnapi.com'
+  CERTIFICATION_HOST = 'https://certification.marketplace.bhnapi.com'
+
+  PRODUCTION_IVR = '1-877-610-1075'
+  CERTIFICATION_IVR = '1-925-474-3705'
+
+  def self.api_host
+    if Rails.env.production?
+      PRODUCTION_HOST
+    else
+      CERTIFICATION_HOST
+    end
+  end
+
+  def self.ivr_phone_number
+    if Rails.env.production?
+      PRODUCTION_IVR
+    else
+      CERTIFICATION_IVR
+    end
+  end
+
   def self.activate(quote_number:, proxy_number:, activation_code:)
     return if Rails.application.secrets.blackhawk_client_id.blank? && Rails.application.secrets.blackhawk_client_secret.blank?
 
@@ -25,7 +47,7 @@ class BlackhawkApi
                    "activationCode": activation_code
                  }]
     request = Typhoeus.post(
-      "https://certification.marketplace.bhnapi.com/cards/v1/set-activation-codes",
+      "#{api_host}/cards/v1/set-activation-codes",
       headers: {
         'Authorization': "Bearer #{access_token}",
         'accept': 'application/json',
@@ -40,7 +62,7 @@ class BlackhawkApi
 
   def monitor
     request = Typhoeus.get(
-      "https://certification.marketplace.bhnapi.com/cards/monitor",
+      "#{api_host}/cards/monitor",
       headers: {
         'Authorization': "Bearer #{access_token}",
         'accept': 'application/json',
@@ -54,7 +76,7 @@ class BlackhawkApi
 
   def authenticate
     request = Typhoeus.post(
-      "https://certification.marketplace.bhnapi.com/api/auth",
+      "#{api_host}/api/auth",
       headers: {
         'Content-Type' => "application/x-www-form-urlencoded",
         'Accept' => 'application/json'
@@ -71,5 +93,9 @@ class BlackhawkApi
     authenticate if @access_token.blank?
 
     @access_token
+  end
+
+  def api_host
+    self.class.api_host
   end
 end
