@@ -69,7 +69,6 @@ describe 'Account invitations', type: :system do
   it 'can be initiated by a Supervisor' do
     sign_in supervisor
     visit root_path
-    click_on supervisor.organization.name
 
     click_on 'Assisters'
     click_on 'Add new assister'
@@ -93,7 +92,6 @@ describe 'Account invitations', type: :system do
 
     sign_in assister
     visit root_path
-    click_on assister.organization.name
 
     click_on 'Assisters'
     expect(page).not_to have_link 'Add new assister'

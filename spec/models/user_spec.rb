@@ -67,4 +67,21 @@ RSpec.describe User, type: :model do
       expect(user.active_for_authentication?).to eq false
     end
   end
+
+  describe '#assister?' do
+    it 'is false is the user is an admin' do
+      user = build :user, admin: true, organization: build(:organization)
+      expect(user.assister?).to eq false
+    end
+
+    it 'is false is the user is an supervisor' do
+      user = build :user, supervisor: true, organization: build(:organization)
+      expect(user.assister?).to eq false
+    end
+
+    it 'is true is the user is not an admin and not a supervisor' do
+      user = build :user, admin: false, supervisor: false, organization: build(:organization)
+      expect(user.assister?).to eq true
+    end
+  end
 end

@@ -5,7 +5,6 @@ describe 'Password reset', type: :system do
 
   it 'allows a user to reset their password' do
     visit root_path
-    click_on 'Sign in'
 
     within 'form' do
       fill_in 'Email', with: user.email
@@ -25,8 +24,6 @@ describe 'Password reset', type: :system do
 
     click_on 'Sign out', match: :first
 
-    click_on 'Sign in'
-
     within 'form' do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'Qwerty!2'
@@ -38,7 +35,6 @@ describe 'Password reset', type: :system do
 
   it 'allows a user to reset their password' do
     visit root_path
-    click_on 'Sign in'
     click_on 'Forgot your password?'
 
     fill_in 'Email', with: user.email
