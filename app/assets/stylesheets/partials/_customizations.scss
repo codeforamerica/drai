@@ -55,3 +55,8 @@
 .group-of-individual-checkboxes .form-group {
   margin-bottom: 0;
 }
+
+.go-live-banner {
+  @extend .demo-banner;
+  background-color: darkorange;
+}
