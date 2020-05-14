@@ -1,18 +1,18 @@
-.main-footer {
-  height: auto;
-
-  margin-top: -($footer-height * 1.5);
+.template--homepage .main-footer {
+  height: $footer-height * 2.5;
+  margin-top: -1px;
 
   @include media($tablet-up) {
-    margin-top: -($footer-height * 1.5);
+    margin-top: -1px;
+    height: $footer-height * 1.3;
   }
-}
 
-.main-footer__cfa-logo {
-  margin-top: 2em;
+  .main-footer__cfa-logo {
+    margin-top: 2em;
 
-  @include media($tablet-up) {
-    margin-top: 0;
-    float: right;
+    @include media($tablet-up) {
+      margin-top: 0;
+      float: right;
+    }
   }
 }
