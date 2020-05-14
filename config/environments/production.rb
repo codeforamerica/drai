@@ -63,10 +63,10 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    user_name: 'apikey',
-    password: Rails.application.secrets.sendgrid_api_key,
+    user_name: Rails.application.secrets.mailgun_username,
+    password: Rails.application.secrets.mailgun_password,
     domain: Rails.application.secrets.url_host,
-    address: 'smtp.sendgrid.net',
+    address: 'smtp.mailgun.org',
     port: 465,
     authentication: :plain,
     tls: true
