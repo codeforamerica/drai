@@ -20,7 +20,7 @@ describe 'Approve aid application', type: :system do
       click_on 'search_submit'
     end
 
-    click_on "Update-Verify-Disburse"
+    click_on aid_application.application_number
 
     within '#application-navigation' do
       click_on 'Approve'

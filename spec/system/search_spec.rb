@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Search in admin panel', type: :system do
   let!(:assister) { create :assister }
-  let!(:aid_application) { create :aid_application, organization: assister.organization }
-  let!(:other_aid_application) { create :aid_application, organization: assister.organization }
+  let!(:aid_application) { create :aid_application, :submitted, organization: assister.organization }
+  let!(:other_aid_application) { create :aid_application, :submitted, organization: assister.organization }
 
   before { AidApplicationSearch.refresh }
 
@@ -18,7 +18,7 @@ RSpec.describe 'Search in admin panel', type: :system do
       click_on "search_submit"
     end
 
-    expect(page).to have_content aid_application.id.to_s
-    expect(page).not_to have_content other_aid_application.id.to_s
+    expect(page).to have_content aid_application.application_number.to_s
+    expect(page).not_to have_content other_aid_application.application_number.to_s
   end
 end

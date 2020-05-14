@@ -18,7 +18,7 @@ class AidApplicationsController < ApplicationController
   private
 
   def aid_applications
-    applications = AidApplication.all.order(id: :desc).includes(:organization, :creator, :submitter)
+    applications = AidApplication.submitted.order(id: :desc).includes(:organization, :creator, :submitter)
 
     if current_organization
       applications = applications.where(organization: current_organization)
