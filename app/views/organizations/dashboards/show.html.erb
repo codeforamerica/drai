@@ -1,0 +1,82 @@
+<%= render 'shared/tab_navigation' %>
+
+<h1 class="spacing-above-25">Disaster Relief Assistance for Immigrants</h1>
+<div class="grid">
+  <div class="grid__item width-one-whole">
+    <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
+        <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
+    <% end %>
+  </div>
+</div>
+
+<div class="grid">
+  <h2 class="spacing-above-25">Dashboard</h2>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Submitted Apps</p>
+      <p class="statistic-card__number">
+        <%= current_organization.submitted_aid_applications_count %>
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Approved Apps</p>
+      <p class="statistic-card__number">
+        XXX
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Disbursed Apps</p>
+      <p class="statistic-card__number">
+        XXX
+      </p>
+    </div>
+  </div>
+  <div class="grid__item width-one-fourth">
+    <div class="statistic-card">
+      <p class="statistic-card__label">Remaining Cards</p>
+      <p class="statistic-card__number">
+        <%= current_organization.total_payment_cards_count - current_organization.submitted_aid_applications_count %>
+        <small><%= current_organization.total_payment_cards_count %> Total</small>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <h2 class="spacing-above-25">Applications</h2>
+  <div class="grid__item">
+    <%= render 'shared/search_bar', placeholder: 'Search applications' %>
+    <br>
+  </div>
+
+  <div class="grid__item width-one-whole">
+    <div class="data-table-container">
+      <table class="data-table js-sticky-header">
+        <thead>
+        <tr>
+          <th>Application Number</th>
+          <th>Date Submitted</th>
+          <th>Applicant</th>
+          <th>Assister</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @aid_applications.each do |aid_application| %>
+            <tr id="<%= dom_id(aid_application) %>">
+              <td><%= link_to aid_application.application_number, edit_organization_aid_application_eligibility_path(aid_application.organization, aid_application) %>
+              <td><%= aid_application.submitted_at.strftime("%m/%d/%y") %></td>
+              <td><%= aid_application.name %></td>
+              <td><%= (aid_application.submitter || aid_application.creator).name %></td>
+              <td><%= aid_application.status_human %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

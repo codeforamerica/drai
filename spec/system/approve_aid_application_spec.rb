@@ -13,14 +13,13 @@ describe 'Approve aid application', type: :system do
   specify do
     sign_in supervisor
     visit root_path
-    click_on 'Applications'
 
     within '.searchbar' do
       fill_in "term", with: aid_application.name
       click_on 'search_submit'
     end
 
-    click_on "Update-Verify-Disburse"
+    click_on aid_application.application_number
 
     within '#application-navigation' do
       click_on 'Approve'

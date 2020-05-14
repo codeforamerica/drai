@@ -26,7 +26,7 @@
           <% end %>
         </td>
         <% unless current_organization %>
-          <td><%= assister.organization ? link_to(assister.organization.name, organization_path(assister.organization)) : nil %></td>
+          <td><%= assister.organization ? link_to(assister.organization.name, organization_dashboard_path(assister.organization)) : nil %></td>
         <% end %>
         <td><%= assister.email %></td>
         <td><%= assister.status_human %></td>

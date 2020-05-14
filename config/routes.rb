@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   resources :aid_applications, only: [:index]
   resource :privacy, only: [:show]
 
-  resources :organizations, only: [:index, :show], param: :id do
+  resources :organizations, only: [:index], param: :id do
     resources :assisters
-    resources :aid_applications, only: [:index, :new, :create] do
+    resources :aid_applications, only: [:create] do
       scope module: :aid_applications do
         resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
         resource :applicant, only: [:edit, :update], path_names: { edit: '' }
@@ -27,6 +27,10 @@ Rails.application.routes.draw do
         resource :approval, only: [:edit, :update], path_names: { edit: '' }
         resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
       end
+    end
+
+    scope module: :organizations do
+      resource :dashboard, only: [:show]
     end
   end
 

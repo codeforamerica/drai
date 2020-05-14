@@ -4,7 +4,7 @@ describe 'Deactivate Users', type: :system do
   let!(:organization) { create :organization }
   let!(:supervisor) { create :supervisor, organization: organization }
   let!(:assister) { create :assister, organization: organization }
-  let!(:aid_application) { create :aid_application, creator: assister, organization: organization }
+  let!(:aid_application) { create :aid_application, :submitted, creator: assister, organization: organization }
 
   it 'can be initiated by a Site Admin' do
     # Sign as the assister (just to have an active session)
@@ -42,7 +42,7 @@ describe 'Deactivate Users', type: :system do
       click_on 'Cancel'
 
       # Ensure that an application still shows the assister
-      click_on 'Applications'
+      first(:link, "Dashboard").click
       within "##{dom_id(aid_application)}" do
         expect(page).to have_content assister.name
       end
