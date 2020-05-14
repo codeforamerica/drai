@@ -10,21 +10,17 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <div class="bottom-footer--body">
-      <div class="page-wrapper">
-        <%= render 'shared/demo_banner' if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
-        <%= render 'shared/go_live_banner' %>
-        <%= render 'shared/alerts' %>
-        <%= render 'shared/header' %>
+  <body class="template--homepage">
+    <div class="page-wrapper">
+      <%= render 'shared/demo_banner' if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
+      <%= render 'shared/go_live_banner' %>
+      <%= render 'shared/alerts' %>
+      <%= render 'shared/header' %>
 
-        <div class="grid">
-          <%= yield %>
-        </div>
+      <div class="grid">
+        <%= yield %>
       </div>
     </div>
-    <div id="bottom-footer--footer">
-      <%= render 'shared/footer' %>
-    </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
