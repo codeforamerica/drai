@@ -208,6 +208,17 @@ class AidApplication < ApplicationRecord
   scope :submitted, -> { where.not(submitted_at: nil) }
   scope :approved, -> { where.not(submitted_at: nil) }
 
+  scope :matching_submitted_apps, ->(aid_application) do
+    submitted
+      .where.not(id: aid_application.id)
+      .where(
+        name: aid_application.name,
+        birthday: aid_application.birthday,
+        zip_code: aid_application.zip_code,
+        street_address: aid_application.street_address
+      )
+  end
+
   belongs_to :organization, counter_cache: true
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true

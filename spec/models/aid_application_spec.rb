@@ -208,6 +208,24 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '.matching_submitted_apps' do
+    context 'there are existing submitted apps with the same name, birthday, zip code and street address' do
+      it 'returns the matching apps' do
+        name = "Fake Name"
+        birthday = 'January 1, 1980'
+        zip_code = '12345'
+        street_address = '123 Main St'
+        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
+        duplicate_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
+        _unsubmitted_matching_aid_application = create :aid_application, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
+        _submitted_street_address_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: 'other street address'
+        _submitted_name_does_not_match_aid_application = create :aid_application, :submitted, name: 'different name', birthday: birthday, zip_code: zip_code, street_address: street_address
+
+        expect(AidApplication.matching_submitted_apps(aid_application)).to eq [duplicate_aid_application]
+      end
+    end
+  end
+
   private
 
   def refresh_materialized_views
