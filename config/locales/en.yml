@@ -249,11 +249,10 @@ en:
         app_submitted: Application sucessfully submited
         app_verified: Application sucessfully verified.
         application_number:
-          confirm: Confirm that the applicant received the email or text message with
-            the Application Number.  If not, review the contact information and make
-            any necessary edits.
-          message: The client should write this number down. They will need it to
-            pick up the benefit in person.
+          confirm: If possible, confirm that the applicant received the email or text message with
+            the Application Number.  If necessary, review the contact information and make edits.
+          contact_method: Contact method confirmed
+          edit_contact: Edit contact information
           title: Application Number
         next_steps:
           message_html: |
