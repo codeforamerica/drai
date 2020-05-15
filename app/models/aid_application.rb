@@ -259,7 +259,7 @@ class AidApplication < ApplicationRecord
     validates :zip_code, presence: true, zip_code: true
     validates :mailing_zip_code, five_digit_zip: true
 
-    validates :phone_number, presence: true, phone_number: true
+    validates :phone_number, presence: true, phone_number: true, twilio_phone: true
     validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }
     validates :email_consent, presence: true, unless: -> { sms_consent? }
 

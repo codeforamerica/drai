@@ -19,13 +19,21 @@ describe ApplicationTexter do
 
   context 'when the default Rails delivery method is SMTP' do
     it 'uses the Twilio SMS delivery method' do
-      ApplicationTexter.basic_message(to: "123-456-7890", body: "hello").deliver_now
+      ApplicationTexter.basic_message(to: "123-456-7899", body: "hello").deliver_now
 
       expect(twilio_messages).to have_received(:create).with(
         messaging_service_sid: Rails.application.secrets.twilio_messaging_service_sid,
-        to: '+11234567890',
+        to: '+11234567899',
         body: 'hello'
       )
+    end
+
+    context 'when the phone number is one of our special fake phone numbers' do
+      it 'uses the Twilio SMS delivery method' do
+        ApplicationTexter.basic_message(to: "123-456-7890", body: "hello").deliver_now
+
+        expect(twilio_messages).not_to have_received(:create)
+      end
     end
   end
 
