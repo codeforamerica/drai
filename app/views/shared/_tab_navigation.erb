@@ -8,7 +8,7 @@
 <% else %>
   <div id="dashboard-navigation" class="tab-bar">
     <%= link_to "All Organizations", organizations_path, class: "tab-bar__tab #{ current_path?(controller: 'organizations', action: 'index') ? 'is-selected' : '' }" %>
-    <%= link_to "All Assisters", assisters_path, class: "tab-bar__tab #{ current_path?(controller: 'assisters', action: 'index') ? 'is-selected' : '' }" %>
+    <%= link_to "All Users", assisters_path, class: "tab-bar__tab #{ current_path?(controller: 'assisters', action: 'index') ? 'is-selected' : '' }" %>
     <%= link_to "All Applications", aid_applications_path, class: "tab-bar__tab #{ current_path?(controller: 'aid_applications', action: 'index') ? 'is-selected' : '' }" %>
   </div>
 <% end %>
