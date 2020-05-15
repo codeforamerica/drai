@@ -272,4 +272,12 @@ RSpec.describe AidApplication, type: :model do
       expect(tried_values.uniq.size).to eq 4
     end
   end
+
+  describe 'papertrail' do
+    it 'tracks changes' do
+      expect do
+        aid_application.update name: "something else"
+      end.to change { aid_application.reload.versions.count }.by(1)
+    end
+  end
 end
