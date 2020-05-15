@@ -1,0 +1,21 @@
+$footer-height: 150px;
+$footer-padding: 0;
+
+html,
+body {
+  height: 100%;
+}
+
+@media (min-width: $tablet-up) {
+  .wrapper-body {
+    height: auto;
+    margin-bottom: -($footer-height + $footer-padding);
+    min-height: 100%;
+    padding-bottom: $footer-height + $footer-padding;
+  }
+
+  .wrapper-footer {
+    height: $footer-height;
+    width: 100%;
+  }
+}
