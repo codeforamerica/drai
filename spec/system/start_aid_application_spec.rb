@@ -91,6 +91,9 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content 'Application submitted'
     expect(page).to have_content /APP-/
+
+    check "Contact method confirmed"
+
     expect(page).to have_content 'Verification documents'
     expect(page).to have_content 'Next Steps'
 

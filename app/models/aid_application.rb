@@ -10,6 +10,7 @@
 #  attestation                         :boolean
 #  birthday                            :date
 #  city                                :text
+#  contact_method_confirmed            :boolean
 #  country_of_origin                   :text
 #  county_name                         :string
 #  covid19_care_facility_closed        :boolean
