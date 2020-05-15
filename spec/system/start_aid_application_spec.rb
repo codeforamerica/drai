@@ -87,7 +87,9 @@ describe 'Start aid application', type: :system do
       check "Yes"
     end
 
-    click_on 'Submit'
+    perform_enqueued_jobs do
+      click_on 'Submit'
+    end
 
     expect(page).to have_content 'Application submitted'
     expect(page).to have_content /APP-/
