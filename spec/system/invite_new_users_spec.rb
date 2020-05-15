@@ -26,7 +26,9 @@ describe 'Account invitations', type: :system do
       select organization.name, from: 'Organization'
       fill_in 'Name', with: 'Daffy Duck'
       fill_in 'Email', with: new_user_email
-      click_on 'Invite assister'
+      perform_enqueued_jobs do
+        click_on 'Invite assister'
+      end
 
       expect(current_path).to eq assisters_path
       expect(page).to have_content "Sent invite to #{new_user_email}"
