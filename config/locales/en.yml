@@ -170,6 +170,7 @@ en:
             to answer.
           name: Full name
           preferred_language: Preferred language
+          preferred_language_help_text: Language in which service is being provided to applicant
           racial_ethnic_identity: Racial/ethnic identity
           sexual_orientation: Sexual orientation
           sexual_orientation_options:
