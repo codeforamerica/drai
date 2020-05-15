@@ -15,7 +15,7 @@
 
         <fieldset>
           <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
-          <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS, help_text: t('.applicant_information.preferred_language_help_text') %>
+          <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>
           <%= f.cfa_select :country_of_origin, t('.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
           <%= f.cfa_select :sexual_orientation, t('.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
           <%= f.cfa_select :gender, t('.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
