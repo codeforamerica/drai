@@ -212,10 +212,10 @@ class AidApplication < ApplicationRecord
     submitted
       .where.not(id: aid_application.id)
       .where(
-        name: aid_application.name,
+        name: aid_application.name.strip,
         birthday: aid_application.birthday,
-        zip_code: aid_application.zip_code,
-        street_address: aid_application.street_address
+        zip_code: aid_application.zip_code.strip,
+        street_address: aid_application.street_address.strip
       )
   end
 
@@ -234,7 +234,10 @@ class AidApplication < ApplicationRecord
                         :country_of_origin,
                         :racial_ethnic_identity,
                         :sexual_orientation,
-                        :gender
+                        :gender,
+                        :name,
+                        :street_address,
+                        :zip_code
 
   before_validation :strip_phone_number
   before_validation :sms_consent_only_if_not_landline
