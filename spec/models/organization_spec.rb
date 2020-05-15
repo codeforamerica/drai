@@ -21,4 +21,14 @@ RSpec.describe Organization, type: :model do
       expect(organization_with_counts.submitted_aid_applications_count).to eq 3
     end
   end
+
+  describe 'papertrail' do
+    let(:organization) { create :organization }
+
+    it 'tracks changes' do
+      expect do
+        organization.update name: "something else"
+      end.to change { organization.reload.versions.count }.by(1)
+    end
+  end
 end

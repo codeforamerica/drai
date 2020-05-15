@@ -153,6 +153,7 @@ class AidApplication < ApplicationRecord
     DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
+  has_paper_trail
 
   scope :submitted, -> { where.not(submitted_at: nil) }
   scope :approved, -> { where.not(submitted_at: nil) }

@@ -84,4 +84,14 @@ RSpec.describe User, type: :model do
       expect(user.assister?).to eq true
     end
   end
+
+  describe 'papertrail' do
+    let(:user) { create :user }
+
+    it 'tracks changes' do
+      expect do
+        user.update name: "something else"
+      end.to change { user.reload.versions.count }.by(1)
+    end
+  end
 end
