@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Start aid application', type: :system, js: true do
+describe 'Start aid application', type: :system do
   let!(:assister) { create :assister, organization: build(:organization, county_names: ["San Francisco", "San Mateo"]) }
 
   specify do
@@ -65,12 +65,6 @@ describe 'Start aid application', type: :system, js: true do
 
     fill_in "Phone number", with: "555-555-5555"
     fill_in "Email address (if available)", with: "example@example.com"
-
-    check "This is a landline"
-    expect(page).to have_field('Text message', disabled: true)
-
-    uncheck "This is a landline"
-    expect(page).to have_field('Text message', disabled: false)
 
     within_fieldset "How would you like to recieve the messages with your Application Number and Activation Code?" do
       check "Text message"
