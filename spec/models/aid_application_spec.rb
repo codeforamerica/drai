@@ -241,7 +241,22 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  private
+  describe '#disburse' do
+    let(:supervisor) { create :supervisor }
+    let(:payment_card) { create :payment_card }
+    let(:aid_application) { create :aid_application }
+
+    it 'attaches itself the the aid application and generates an activation code' do
+      aid_application.disburse(payment_card, disburser: supervisor)
+
+      expect(payment_card.aid_application).to eq aid_application
+      expect(payment_card.activation_code).to be_present
+      expect(payment_card.activation_code.size).to eq 6
+      expect(aid_application.payment_card).to eq payment_card
+      expect(aid_application.disbursed_at).to be_within(1.second).of Time.current
+      expect(aid_application.disburser).to eq supervisor
+    end
+  end
 
   def refresh_materialized_views
     AidApplicationSearch.refresh

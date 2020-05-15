@@ -11,6 +11,13 @@ class Seeder
     FactoryBot.create_list :aid_application, 2, :submitted, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 2, creator: assister, organization: organization
 
+    FactoryBot.create :payment_card, sequence_number: '123456'
+    FactoryBot.create :payment_card, sequence_number: '223456'
+    FactoryBot.create :payment_card, sequence_number: '323456'
+    FactoryBot.create :payment_card, sequence_number: '423456'
+    FactoryBot.create :payment_card, sequence_number: '523456'
+    FactoryBot.create :payment_card, sequence_number: '623456'
+
     refresh_search_views
   end
 

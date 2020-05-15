@@ -65,9 +65,12 @@ ActiveRecord::Schema.define(version: 2020_05_15_193954) do
     t.boolean "no_cbo_association"
     t.boolean "contact_method_confirmed"
     t.text "card_receipt_method"
+    t.datetime "disbursed_at"
+    t.bigint "disburser_id"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
+    t.index ["disburser_id"], name: "index_aid_applications_on_disburser_id"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end
@@ -97,6 +100,22 @@ ActiveRecord::Schema.define(version: 2020_05_15_193954) do
     t.string "county_names", default: [], array: true
   end
 
+  create_table "payment_cards", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "quote_number"
+    t.string "sequence_number"
+    t.string "proxy_number"
+    t.string "card_number"
+    t.string "client_order_number"
+    t.string "activation_code"
+    t.datetime "activation_code_assigned_at"
+    t.bigint "aid_application_id"
+    t.index ["aid_application_id"], name: "index_payment_cards_on_aid_application_id", unique: true
+    t.index ["proxy_number"], name: "index_payment_cards_on_proxy_number", unique: true
+    t.index ["sequence_number"], name: "index_payment_cards_on_sequence_number", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password"
@@ -124,6 +143,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_193954) do
     t.bigint "aid_applications_created_count", default: 0, null: false
     t.bigint "aid_applications_submitted_count", default: 0, null: false
     t.bigint "aid_applications_approved_count", default: 0, null: false
+    t.bigint "aid_applications_disbursed_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -147,7 +167,9 @@ ActiveRecord::Schema.define(version: 2020_05_15_193954) do
   add_foreign_key "aid_applications", "organizations"
   add_foreign_key "aid_applications", "users", column: "approver_id"
   add_foreign_key "aid_applications", "users", column: "creator_id"
+  add_foreign_key "aid_applications", "users", column: "disburser_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
+  add_foreign_key "payment_cards", "aid_applications"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"
 

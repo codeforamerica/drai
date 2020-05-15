@@ -35,5 +35,20 @@ FactoryBot.define do
       submitted_at { Time.current }
       application_number { generate_application_number }
     end
+
+    trait :approved do
+      submitted
+
+      approver { create :supervisor, organization: organization }
+      approved_at { Time.current }
+    end
+
+    trait :disbursed do
+      approved
+
+      payment_card
+      disbursed_at { Time.current }
+      disburser { approver }
+    end
   end
 end
