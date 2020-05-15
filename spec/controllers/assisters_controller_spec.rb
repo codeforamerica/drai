@@ -2,9 +2,12 @@ require 'rails_helper'
 
 describe AssistersController, type: :controller do
   let(:admin) { create :admin }
+  let!(:other_admins) { create_list :admin, 3}
   let(:supervisor) { create :supervisor }
   let!(:assister) { create :assister }
   let!(:another_assister) { create :assister }
+
+  render_views
 
   describe '#index' do
     context 'when an admin' do
@@ -14,7 +17,7 @@ describe AssistersController, type: :controller do
         get :index
 
         expect(response).to have_http_status :ok
-        expect(assigns(:assisters)).to contain_exactly(admin, assister, another_assister)
+        expect(assigns(:assisters)).to contain_exactly(admin, assister, another_assister, *other_admins)
       end
     end
 
