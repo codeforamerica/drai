@@ -59,7 +59,56 @@
 #
 class AidApplication < ApplicationRecord
   READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id', 'approved_at', 'approver_id']
-  DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
+  DEMOGRAPHIC_OPTIONS_DEFAULT = 'Prefer not to answer'.freeze
+  PREFERRED_LANGUAGE_OPTIONS = [
+    'American Sign Language',
+    '​Amharic​​​​​',
+    '​Arabic​​​​​',
+    '​Armenian',
+    '​Assyrian​​​​​',
+    '​Bengali​​​​​',
+    '​Burmese​​​​​',
+    '​Cambodian',
+    'Cantonese',
+    'English',
+    'Farsi',
+    'French',
+    'Gujarati',
+    'Hebrew',
+    'Hindi',
+    '​Ilocano',
+    'Italian',
+    'Japanese',
+    'Kanjobal',
+    'Korean',
+    'Lao',
+    'Mam',
+    'Mandarin',
+    'Mien',
+    'Mixteco',
+    'Pashtu',
+    'Polish',
+    'Portuguese',
+    'Punjabi',
+    '​Romanian',
+    'Russian',
+    'Samoan',
+    'Spanish',
+    'Tagalog',
+    'Thai',
+    'Tigrigna',
+    'Turkic',
+    'Turkish',
+    'Triqui',
+    'Urdu',
+    'Vietnamese',
+    'Zapoteco',
+    'Other Non-English',
+    'Other Sign Language',
+    'Other',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
+  ].freeze
+
   COUNTRY_OF_ORIGIN_OPTIONS = [
     'Afghanistan',
     'Argentina',

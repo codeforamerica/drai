@@ -3,6 +3,7 @@ module AidApplications
     def edit
       @aid_application = current_aid_application
 
+      @aid_application.preferred_language ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.country_of_origin ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.sexual_orientation ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.gender ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
