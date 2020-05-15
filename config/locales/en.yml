@@ -275,7 +275,8 @@ en:
           title: Next Steps
         receive_card:
           options:
-            deliver: Deliver
+            decide_later: Decide later
+            deliver: Deliver in person
             mail: Mail
             pick_up: Pick up
           subtitle: This can be edited later.

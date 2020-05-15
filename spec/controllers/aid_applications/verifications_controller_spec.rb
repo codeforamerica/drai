@@ -27,12 +27,13 @@ describe AidApplications::VerificationsController do
           aid_application_id: aid_application.id,
           organization_id: assister.organization.id,
           aid_application: {
-              contact_method_confirmed: true
+              contact_method_confirmed: true,
+              card_receipt_method: 'mail'
           }
       }
     end
 
-    it 'updates the aid application with contact method confirmed' do
+    it 'updates the aid application with params' do
       aid_application = assigns(:aid_application)
       expect(aid_application).to be_persisted
       expect(aid_application).to have_attributes(
@@ -40,6 +41,7 @@ describe AidApplications::VerificationsController do
                                      organization: assister.organization
       )
       expect(aid_application.contact_method_confirmed).to eq true
+      expect(aid_application.card_receipt_method).to eq 'mail'
     end
 
     it 'redirects to the dashboard page' do

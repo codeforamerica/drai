@@ -99,6 +99,10 @@ describe 'Start aid application', type: :system do
     expect(page).to have_content 'Verification documents'
     expect(page).to have_content 'Next Steps'
 
+    within_fieldset "How will the applicant get their card?" do
+      choose "Mail"
+    end
+
     click_on 'Submit'
 
     expect(page).to have_content 'Start a new application'
@@ -133,7 +137,9 @@ describe 'Start aid application', type: :system do
                                  sexual_orientation: "Bisexual",
                                  gender: "Another gender identity",
                                  birthday: "01-01-1980".to_date,
-                                 attestation: true
+                                 attestation: true,
+                                 contact_method_confirmed: true,
+
                                )
 
     open_sms aid_application.phone_number

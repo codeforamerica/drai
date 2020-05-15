@@ -28,11 +28,9 @@
               <p><%= t('.verifications.covid19_impact_accordion.body_html') %></p>
             </div>
           </div>
-        </div>
 
-        <hr>
+          <hr>
 
-        <div class="form-card__content">
           <h2><%= t('.application_number.title') %></h2>
 
           <h3 class="notice text--centered">
@@ -44,19 +42,29 @@
             <%= t('.application_number.edit_contact') %>
           <% end %>
           <%= f.cfa_checkbox :contact_method_confirmed, t('.application_number.contact_method') %>
-        </div>
 
-        <hr>
+          <hr>
 
-        <div class="form-card__content">
           <h2><%= t('.next_steps.title') %></h2>
-          <ul class="list--numbered">
+          <ol class="list--numbered">
             <li><%= t('.next_steps.step1') %></li>
             <li><%= t('.next_steps.step2') %></li>
             <li><%= t('.next_steps.step3') %></li>
             <li><%= t('.next_steps.step4') %></li>
             <li><em><%= t('.next_steps.step5') %></em></li>
-          </ul>
+          </ol>
+
+            <%= f.cfa_radio_set(
+                    :card_receipt_method,
+                    label_text: t('.receive_card.title'),
+                    help_text: t('.receive_card.subtitle'),
+                    collection: [
+                        {value: AidApplication::CARD_RECEIPT_PICK_UP, label: t('.receive_card.options.pick_up')},
+                        {value: AidApplication::CARD_RECEIPT_DELIVER, label: t('.receive_card.options.deliver')},
+                        {value: AidApplication::CARD_RECEIPT_MAIL, label: t('.receive_card.options.mail')},
+                        {value: AidApplication::CARD_RECEIPT_DECIDE_LATER, label: t('.receive_card.options.decide_later')}
+                    ])
+            %>
         </div>
 
         <div class="form-card__footer">
