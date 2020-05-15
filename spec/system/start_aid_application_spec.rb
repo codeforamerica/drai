@@ -38,11 +38,11 @@ describe 'Start aid application', type: :system, js: true do
     fill_in "aid_application[birthday(3i)]", with: "1"
 
     expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
-    fill_in "Preferred language (optional)", with: "Spanish"
+    select "Spanish", from: "Preferred language"
     check "Asian Indian"
-    check "Hispanic or Latino (any other race)"
     select "Bisexual", from: "Sexual orientation"
     select "Another gender identity", from: "Gender"
+    check "Hispanic or Latino (any other race)"
 
     expect(page).to have_content "An address is required. Homeless clients can use a shelter or other address."
     fill_in "Street Address", with: "123 Main Street"
@@ -129,7 +129,7 @@ describe 'Start aid application', type: :system, js: true do
                                  covid19_experiencing_symptoms: true,
                                  name: "Alice",
                                  preferred_language: "Spanish",
-                                 country_of_origin: 'Decline to state',
+                                 country_of_origin: 'Prefer not to answer',
                                  racial_ethnic_identity: ['Asian Indian', 'Hispanic or Latino (any other race)'],
                                  sexual_orientation: "Bisexual",
                                  gender: "Another gender identity",
