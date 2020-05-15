@@ -13,7 +13,9 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.assign_attributes(aid_application_params)
 
-      if params[:form_action] == 'submit'
+      app_is_duplicate = AidApplication.matching_submitted_apps(@aid_application).any?
+
+      if params[:form_action] == 'submit' && !app_is_duplicate
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
@@ -27,7 +29,9 @@ module AidApplications
       end
 
       respond_with @aid_application, location: (lambda do
-        if @aid_application.submitted?
+        if app_is_duplicate
+          organization_aid_application_duplicate_path(current_organization, @aid_application)
+        elsif @aid_application.submitted?
           edit_organization_aid_application_verification_path(current_organization, @aid_application)
         elsif params[:form_action] == 'allow_mailing_address'
           edit_organization_aid_application_applicant_path(current_organization, @aid_application, :anchor => "mailing-address")

@@ -1,0 +1,25 @@
+<%= render 'aid_applications/navigation' %>
+
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2><%= t('.title') %></h2>
+    </header>
+    <div class="form-card__content">
+      <p><%= t('.body') %></p>
+    </div>
+    <div class="form-card__footer">
+      <div class="toolbar">
+        <div class="toolbar__left">
+          <%= button_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), method: :get, class: 'button button--primary' do %>
+            <span class="icon icon-arrow_back" aria-hidden="true"></span> <%= t('general.go_back') %>
+          <% end %>
+        </div>
+        <div class="toolbar__right">
+          <%= button_to t('general.delete_application'), organization_aid_application_path(current_organization, current_aid_application), method: :delete, class: "button button--danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
