@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_193954) do
+ActiveRecord::Schema.define(version: 2020_05_16_224800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,8 +175,9 @@ ActiveRecord::Schema.define(version: 2020_05_15_193954) do
 
   create_view "aid_application_searches", materialized: true, sql_definition: <<-SQL
       SELECT aid_applications.id AS aid_application_id,
-      (((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) || (COALESCE(aid_applications.application_number, ''::character varying))::text) AS searchable_data
-     FROM aid_applications;
+      ((((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) || ' '::text) || (COALESCE(aid_applications.application_number, ''::character varying))::text) AS searchable_data
+     FROM aid_applications
+    WHERE (aid_applications.application_number IS NOT NULL);
   SQL
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin
   add_index "aid_application_searches", ["aid_application_id"], name: "index_aid_application_searches_on_aid_application_id", unique: true

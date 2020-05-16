@@ -18,7 +18,7 @@ describe 'Approve aid application', type: :system do
     visit root_path
 
     within '.searchbar' do
-      fill_in "term", with: aid_application.name
+      fill_in "term", with: aid_application.application_number
       click_on 'search_submit'
     end
 
