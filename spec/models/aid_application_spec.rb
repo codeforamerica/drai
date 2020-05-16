@@ -211,14 +211,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  describe '.query', truncate: :database do
+  describe '.query' do
     it 'performs a scoped query against associated AidApplicationSearch' do
-      aid_application = create :aid_application
-      other_aid_application = create :aid_application, city: 'Riverside'
+      aid_application = create :aid_application, :submitted, city: 'Riverside'
+      _other_aid_application = create :aid_application, :submitted, city:   'San Diego'
 
-      refresh_materialized_views do
-        expect(described_class.query('Riverside')).to eq [other_aid_application]
-      end
+      AidApplicationSearch.refresh
+      expect(described_class.query('Riverside')).to eq [aid_application]
     end
   end
 
@@ -256,11 +255,6 @@ RSpec.describe AidApplication, type: :model do
       expect(aid_application.disbursed_at).to be_within(1.second).of Time.current
       expect(aid_application.disburser).to eq supervisor
     end
-  end
-
-  def refresh_materialized_views
-    AidApplicationSearch.refresh
-    yield
   end
 
   describe '#save_and_submit' do
