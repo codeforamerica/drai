@@ -245,10 +245,14 @@ class AidApplication < ApplicationRecord
   validates :application_number, uniqueness: true, allow_nil: true
 
   with_options on: :eligibility do
-    validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria}
+    validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria }
     validate :eligibility_required
-    validates :no_cbo_association, inclusion: { in: [true], message: :confirmation_required}
+    validates :no_cbo_association, inclusion: { in: [true], message: :confirmation_required }
     validates :county_name, inclusion: { in: -> (aid_application) { aid_application.organization.county_names }, message: :county_required }
+  end
+
+  with_options on: :verification do
+    validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
   end
 
   with_options on: :submit do

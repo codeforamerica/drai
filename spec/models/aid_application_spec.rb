@@ -197,6 +197,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#contact_method_confirmed' do
+    it 'must be true' do
+      aid_application = build :aid_application, contact_method_confirmed: nil
+      expect(aid_application).not_to be_valid(:verification)
+    end
+  end
+
   describe '.query', truncate: :database do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application

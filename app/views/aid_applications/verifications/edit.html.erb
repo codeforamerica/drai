@@ -39,7 +39,7 @@
             <%= @aid_application.application_number %>
           </h3>
           <p class="with-padding-med"><em><%= t('.application_number.confirm') %></em></p>
-          <%= link_to(organization_dashboard_path(current_organization), class: 'button button--small button--secondary ') do %>
+          <%= link_to(edit_organization_aid_application_applicant_path(current_organization, @aid_application), class: 'button button--small button--secondary ') do %>
             <i class="button__icon--left icon-arrow_back"></i>
             <%= t('.application_number.edit_contact') %>
           <% end %>
