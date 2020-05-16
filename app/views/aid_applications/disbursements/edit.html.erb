@@ -1,3 +1,39 @@
 <%= render 'aid_applications/navigation' %>
 
-Placeholder for CBO to enter EBT card number that is being given to client.
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2><%= t('.title') %></h2>
+    </header>
+
+    <%= form_for(@search_card, url: { action: :update }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_input_field :sequence_number, t('.sequence_number') %>
+
+        <div class="accordion">
+          <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.sequence_number_help') %></button>
+          <div class="accordion__content" id="about_program">
+            <p>
+              <%#= image_tag('sequence_number_envelope') %>
+            </p>
+          </div>
+        </div>
+        <hr>
+
+        <p><em><%= t('.inform_application') %></em></p>
+        <p><%= t('.activation_trouble') %></p>
+        <p><%= t('.lost_card') %></p>
+      </div>
+
+      <div class="form-card__footer">
+        <div class="toolbar">
+          <div class="toolbar__left">
+          </div>
+          <div class="toolbar__right">
+            <%= f.button t('.disburse_card'), class: 'toolbar__item button button--primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

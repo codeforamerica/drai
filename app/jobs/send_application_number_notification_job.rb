@@ -1,6 +1,4 @@
 class SendApplicationNumberNotificationJob < ApplicationJob
-  queue_as :default
-
   def perform(aid_application:)
     if aid_application.sms_consent?
       ApplicationTexter.basic_message(

@@ -1,0 +1,15 @@
+<%= render 'aid_applications/navigation' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <div class="form-card__header">
+      <h1><%= t('.title') %></h1>
+    </div>
+
+    <div class="form-card__content">
+      <p>You’re done! This application is fully processed.</p>
+
+      <%= link_to t('.homepage_link'), organization_dashboard_path(current_organization), class: 'button button--primary' %>
+    </div>
+  </div>
+</div>

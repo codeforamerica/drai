@@ -231,6 +231,8 @@ class AidApplication < ApplicationRecord
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
   belongs_to :approver, class_name: 'User', inverse_of: :aid_applications_approved, counter_cache: :aid_applications_approved_count, optional: :true
+  belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
+  has_one :payment_card
   has_one :aid_application_search
 
   scope :query, ->(term) { select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term)) }
@@ -385,6 +387,18 @@ class AidApplication < ApplicationRecord
 
   def approved?
     approved_at.present?
+  end
+
+  def disburse(payment_card, disburser:)
+    payment_card.update!(
+      activation_code: payment_card.generate_activation_code,
+      aid_application: self
+    )
+
+    update!(
+      disbursed_at: Time.current,
+      disburser: disburser
+    )
   end
 
   private

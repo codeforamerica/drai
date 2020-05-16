@@ -1,6 +1,5 @@
 <%= render 'aid_applications/navigation' %>
 
-
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <header class="form-card__header">
@@ -14,11 +13,7 @@
             <%= link_to I18n.t('general.cancel'), organization_dashboard_path(current_organization), class: 'toolbar__item button button--secondary' %>
           </div>
           <div class="toolbar__right">
-            <% if @aid_application.approved? %>
-              <%= link_to %>
-            <% else %>
-              <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
-            <% end %>
+            <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
           </div>
         </div>
       </div>

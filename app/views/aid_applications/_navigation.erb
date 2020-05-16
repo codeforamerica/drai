@@ -21,9 +21,10 @@
     3. Approve <span class="icon-arrow_forward"></span>
   <% end %>
 
-  <%= link_to organization_aid_application_disbursement_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_disbursement_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
+  <% disbursement_tab_active = current_path?(organization_aid_application_disbursement_path(current_organization, current_aid_application)) || current_path?(organization_aid_application_finished_path(current_organization, current_aid_application)) %>
+  <%= link_to organization_aid_application_disbursement_path(current_organization, current_aid_application), class: "tab-bar__tab #{ disbursement_tab_active ? 'is-selected' : '' }" do %>
     4. Disburse
   <% end %>
-  </div>
+</div>
 
 <br>

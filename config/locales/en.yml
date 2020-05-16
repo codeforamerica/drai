@@ -39,6 +39,8 @@ en:
         zip_five_digits: Must be a 5-digit ZIP Code
         password_complexity: "Complexity requirement not met."
         county_required: "If the client's county is not shown in this list then their county is outside your organization's service area. They must apply through an organization that serves their county."
+        sequence_number_invalid: "This sequence number looks incorrect"
+        sequence_number_already_assigned: "This  sequence number has already been used"
   aid_applications:
     confirm_messages:
       edit:
@@ -64,6 +66,7 @@ en:
           please review the instruction and contact the card issuer through the phone
           number or website information listed on the payment card.
         disburse_card: Disburse card
+        sequence_number_help: Where to find the card sequence number
         inform_application: 'Inform the applicant:'
         lost_card: If you lose the card or the card is stolen, it cannot be replaced.
         method: What method was the card disbursed by?
@@ -325,11 +328,15 @@ en:
               </ul>
             title: Proof of address
           title: Verification documents
+    finisheds:
+      edit:
+        title: Card sucessfully disbursed
+        homepage_link: Return to home page
   email_message:
     activation:
       body_html: |
-        <p>Your application for Disaster Assistance has been approved. The activation code for your payment card is ******.</p>
-        <p>Call <card phone number> to activate your card.</p>
+        <p>Your application for Disaster Assistance has been approved. The activation code for your payment card is %{activation_code}.</p>
+        <p>Call %{ivr_phone_number} to activate your card.</p>
       subject: Disaster Assistance payment card activation code
     app_id:
       body_html: |
@@ -398,7 +405,7 @@ en:
     password_help: "Should be 8-70 characters long and include 1 uppercase, 1 lowercase, 1 digit, and 1 special character (#?!@$%^&*-)."
   text_message:
     activation: Your application for Disaster Assistance has been approved. The activation
-      code for your payment card is ******. Call <card phone number> to activate your
+      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to activate your
       card.
     app_id: Your application for financial assistance has been submitted. Your application
       ID number is %{app_id}. You will need this number and your verification documents
