@@ -8,6 +8,16 @@ describe Organizations::DashboardsController do
   let!(:application2) { create :aid_application, :submitted }
 
   describe '#show' do
+    context 'when invalid organization id' do
+      before { sign_in application1.creator }
+
+      it 'raises a not found error' do
+        expect do
+          get :show, params: { organization_id: application2.id + 99 }
+        end.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+
     context 'when an assister' do
       before { sign_in application1.creator }
 
