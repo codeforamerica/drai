@@ -27,8 +27,8 @@ FactoryBot.define do
     attestation { true }
 
     covid19_reduced_work_hours { true }
-
     valid_work_authorization { false }
+    card_receipt_method { 'Mail' }
 
     trait :submitted do
       submitter { creator }

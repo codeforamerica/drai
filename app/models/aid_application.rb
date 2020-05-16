@@ -9,6 +9,7 @@
 #  approved_at                         :datetime
 #  attestation                         :boolean
 #  birthday                            :date
+#  card_receipt_method                 :text
 #  city                                :text
 #  contact_method_confirmed            :boolean
 #  country_of_origin                   :text
@@ -203,6 +204,13 @@ class AidApplication < ApplicationRecord
     DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
+  CARD_RECEIPT_OPTIONS = [
+      CARD_RECEIPT_PICK_UP = "pick_up".freeze,
+      CARD_RECEIPT_DELIVER = "deliver_in_person".freeze,
+      CARD_RECEIPT_MAIL = "mail".freeze,
+      CARD_RECEIPT_DECIDE_LATER = "decide_later".freeze
+  ]
+
   has_paper_trail
 
   scope :submitted, -> { where.not(submitted_at: nil) }
@@ -253,6 +261,7 @@ class AidApplication < ApplicationRecord
 
   with_options on: :verification do
     validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
+    validates :card_receipt_method, inclusion: { in: CARD_RECEIPT_OPTIONS, message: :required_question }
   end
 
   with_options on: :submit do

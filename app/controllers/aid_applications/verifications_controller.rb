@@ -14,7 +14,10 @@ module AidApplications
     private
 
     def aid_application_params
-      params.require(:aid_application).permit(:contact_method_confirmed)
+      params.require(:aid_application).permit(
+          :contact_method_confirmed,
+          :card_receipt_method
+      )
     end
   end
 end

@@ -201,6 +201,13 @@ RSpec.describe AidApplication, type: :model do
     it 'must be true' do
       aid_application = build :aid_application, contact_method_confirmed: nil
       expect(aid_application).not_to be_valid(:verification)
+	end
+  end
+
+  describe '#card_receipt_method' do
+    it 'is required' do
+      aid_application = build :aid_application, card_receipt_method: nil
+      expect(aid_application).not_to be_valid(:verification)
     end
   end
 
