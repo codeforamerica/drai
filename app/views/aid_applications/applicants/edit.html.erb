@@ -45,6 +45,7 @@
             <%= f.cfa_input_field :mailing_state, t('.shared_address.state') %>
             <%= f.cfa_input_field :mailing_zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
 
+            <%= f.button t('.mailing_address.remove_mailing_address'), type: 'submit', name: 'form_action', value: 'remove_mailing_address', class: 'button button--danger' %>
             <hr>
           </div>
         <% end %>

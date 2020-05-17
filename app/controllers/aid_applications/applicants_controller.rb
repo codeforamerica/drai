@@ -24,6 +24,16 @@ module AidApplications
       elsif params[:form_action] == 'allow_mailing_address'
         @aid_application.allow_mailing_address = true
         @aid_application.save
+      elsif params[:form_action] == 'remove_mailing_address'
+        @aid_application.allow_mailing_address = false
+        @aid_application.update_attributes({
+                                             mailing_street_address: nil,
+                                             mailing_apartment_number: nil,
+                                             mailing_city: nil,
+                                             mailing_state: nil,
+                                             mailing_zip_code: nil
+                                           })
+        @aid_application.save
       else
         @aid_application.save(context: :submit)
       end

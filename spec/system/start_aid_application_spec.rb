@@ -61,6 +61,9 @@ describe 'Start aid application', type: :system do
       fill_in "ZIP Code", with: "02130"
     end
 
+    click_on "Remove mailing address"
+    expect(page).not_to have_content "Mailing address"
+
     expect(page).to have_content "Contact information"
 
     fill_in "Phone number", with: "555-555-5555"
@@ -115,12 +118,12 @@ describe 'Start aid application', type: :system do
                                  apartment_number: "Apt. 1",
                                  city: "Big City",
                                  zip_code: "94103",
-                                 allow_mailing_address: true,
-                                 mailing_street_address: "123 Rural Street",
-                                 mailing_apartment_number: "Unit A",
-                                 mailing_city: "Other Town",
-                                 mailing_zip_code: "02130",
-                                 mailing_state: "Massachusetts",
+                                 allow_mailing_address: false,
+                                 mailing_street_address: nil,
+                                 mailing_apartment_number: nil,
+                                 mailing_city: nil,
+                                 mailing_zip_code: nil,
+                                 mailing_state: nil,
                                  phone_number: "5555555555",
                                  email: "example@example.com",
                                  sms_consent: true,
@@ -139,7 +142,6 @@ describe 'Start aid application', type: :system do
                                  birthday: "01-01-1980".to_date,
                                  attestation: true,
                                  contact_method_confirmed: true,
-
                                )
 
     open_sms aid_application.phone_number
