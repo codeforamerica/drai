@@ -18,11 +18,13 @@ describe 'Start aid application', type: :system do
     select "San Francisco", from: "County"
 
     check "Confirm"
+    expect(find_field("Confirm")).to be_checked
 
     expect(page).to have_content "Eligibility"
 
     within_fieldset "Do you currently have a valid document that authorizes you to work in the United States?" do
       choose "No"
+      expect(find_field("No", checked: true)).to be_present
     end
 
     expect(page).to have_content I18n.t('aid_applications.eligibilities.edit.eligibility.read_to_client')
@@ -74,6 +76,7 @@ describe 'Start aid application', type: :system do
 
     within_fieldset "How would you like to recieve the messages with your Application Number and Activation Code?" do
       check "Text message"
+      expect(find_field("Text message", checked: true)).to be_present
     end
 
     within '#preferred-contact-channel__text' do
@@ -82,15 +85,20 @@ describe 'Start aid application', type: :system do
 
     within_fieldset "Is anyone in your household currently receiving CalFresh or CalWORKs benefits?" do
       choose "Yes"
+      expect(find_field("Yes", checked: true)).to be_present
     end
 
     within_fieldset "What unmet needs do you have?" do
       check "Childcare"
       check "Utilities"
+
+      expect(find_field("Childcare", checked: true)).to be_present
+      expect(find_field("Utilities", checked: true)).to be_present
     end
 
     within_fieldset "Applicant attestation" do
       check "Yes"
+      expect(find_field("Yes", checked: true)).to be_present
     end
 
     perform_enqueued_jobs do
@@ -107,6 +115,7 @@ describe 'Start aid application', type: :system do
 
     within_fieldset "How will the applicant get their card?" do
       choose "Mail"
+      expect(find_field("Mail", checked: true)).to be_present
     end
 
     click_on 'Submit'

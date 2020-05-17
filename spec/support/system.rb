@@ -1,5 +1,6 @@
 Capybara.default_max_wait_time = 2
 Capybara.server = :puma, { Silent: true }
+Capybara.disable_animation = true
 
 module SystemTestHelpers
   [

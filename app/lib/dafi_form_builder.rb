@@ -5,7 +5,6 @@ class DafiFormBuilder < Cfa::Styleguide::CfaFormBuilder
 
 # Expecting array of strings
   def gcf_collection_check_boxes(method, label_text, collection)
-
     formatted_label = label(
         method,
         label_contents(
@@ -20,11 +19,11 @@ class DafiFormBuilder < Cfa::Styleguide::CfaFormBuilder
     end
 
     html_output = <<~HTML
-          <div class="form-group#{error_state(object, method)}">
-            #{formatted_label}
-            #{checkboxes}
-            #{errors_for(object, method)}
-          </div>
+      <div class="form-group#{error_state(object, method)}">
+        #{formatted_label}
+        #{checkboxes}
+        #{errors_for(object, method)}
+      </div>
     HTML
 
     html_output.html_safe
@@ -98,6 +97,28 @@ class DafiFormBuilder < Cfa::Styleguide::CfaFormBuilder
       autocapitalize: 'off',
       spellcheck: 'false',
     }.merge(options))
+  end
+
+  def cfa_radio_button(method, collection, layouts)
+    classes = layouts.map { |layout| "input-group--#{layout}" }.join(" ")
+    options = { class: classes }.merge(error_attributes(method: method))
+
+    radio_collection = collection.map do |item|
+      item = { value: item, label: item } unless item.is_a?(Hash)
+
+      input_html = item.fetch(:input_html, {})
+
+      label(method, value: item[:value], class: 'radio-button') do
+        <<~HTML.html_safe
+          #{radio_button(method, item[:value], input_html)}
+          #{item[:label]}
+        HTML
+      end
+    end
+
+    @template.content_tag(:div, options) do
+      radio_collection.join.html_safe
+    end
   end
 
   def add_a11y_error_attributes(method, options)

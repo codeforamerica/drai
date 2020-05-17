@@ -9,7 +9,7 @@
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
         <div class="form-card__content">
           <div class="accordion">
-            <button href="#" class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.about_program.about_accordian.title') %></button>
+            <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.about_program.about_accordian.title') %></button>
             <div class="accordion__content" id="about_program">
               <p><%= t('.about_program.about_accordian.body') %></p>
             </div>
