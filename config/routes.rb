@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         member do
           delete 'deactivate'
           post 'reactivate'
+          post 'resend_confirmation_instructions'
         end
       end
       resources :aid_applications, only: [:create, :destroy]

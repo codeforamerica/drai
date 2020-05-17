@@ -13,6 +13,11 @@
       <%= button_to deactivate_organization_assister_path(user.organization, user), method: :delete, data: { confirm: "Are you sure you want to deactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
         Deactivate
       <% end %>
+      <% if user.confirmed_at.blank? %>
+        <%= button_to resend_confirmation_instructions_organization_assister_path(user.organization, user), method: :post, data: { confirm: "Are you sure you want to resend confirmation instructions for #{user.name} (#{user.email})?" }, class: 'button--link' do %>
+          Resend Confirmation Instructions
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
@@ -26,7 +31,7 @@
         <%= button_to reactivate_organization_assister_path(user.organization, user), method: :post, data: { confirm: "Are you sure you want to reactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
           Reactivate
         <% end %>
-        <% end %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

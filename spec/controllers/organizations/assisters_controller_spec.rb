@@ -141,4 +141,18 @@ describe Organizations::AssistersController, type: :controller do
       end
     end
   end
+
+  describe '#resend_confirmation_instructions' do
+    let(:supervisor) { create :supervisor }
+    let(:assister) { create :assister, organization: supervisor.organization, confirmed_at: nil }
+
+    before { sign_in supervisor }
+
+    it 'resends a confirmation email' do
+      expect do
+        post :resend_confirmation_instructions, params: { organization_id: supervisor.organization.id, id: assister.id }
+      end.to enqueue_email
+      expect(response).to redirect_to organization_assisters_path(supervisor.organization)
+    end
+  end
 end
