@@ -10,7 +10,7 @@
   <%= render 'table', users: @users do |user| %>
     <%= link_to "Edit", edit_organization_assister_path(user.organization, user) %>
     <% if user != current_user %>
-      <%= button_to organization_assister_path(user.organization, user), method: :delete, data: { confirm: "Are you sure you want to deactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
+      <%= button_to deactivate_organization_assister_path(user.organization, user), method: :delete, data: { confirm: "Are you sure you want to deactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
         Deactivate
       <% end %>
     <% end %>
@@ -22,6 +22,11 @@
     <h2>Deactivated workers</h2>
     <%= render 'table', users: @deactivated_users do |user| %>
       <%= link_to "Edit", edit_organization_assister_path(user.organization, user) %>
+      <% if user != current_user %>
+        <%= button_to reactivate_organization_assister_path(user.organization, user), method: :post, data: { confirm: "Are you sure you want to reactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
+          Reactivate
+        <% end %>
+        <% end %>
     <% end %>
   </div>
 <% end %>

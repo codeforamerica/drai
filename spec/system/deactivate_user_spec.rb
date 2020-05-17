@@ -27,7 +27,7 @@ describe 'Deactivate Users', type: :system do
 
       # Deactivate the Assister
       within "##{dom_id(assister)}" do
-        accept_confirm do
+        accept_alert do
           click_on 'Deactivate'
         end
       end
@@ -62,6 +62,20 @@ describe 'Deactivate Users', type: :system do
       end
 
       expect(page).to have_content 'Account has been deactivated'
+    end
+
+    Capybara.using_session(:supervisor) do
+      # Reactivate the user
+      click_on 'Manage workers'
+      within "##{dom_id(assister)}" do
+        accept_alert do
+          click_on 'Reactivate'
+        end
+      end
+
+      within "##{dom_id(assister)}" do
+        expect(page).to have_content 'Deactivate'
+      end
     end
   end
 end

@@ -3,15 +3,19 @@ Capybara.server = :puma, { Silent: true }
 
 module SystemTestHelpers
   [
+    :accept_alert,
+    :dismiss_alert,
     :accept_confirm,
     :dismiss_confirm,
     :accept_prompt,
     :dismiss_prompt,
+    :accept_modal,
+    :dismiss_modal,
   ].each do |driver_method|
     define_method(driver_method) do |text = nil, **options, &blk|
-      if Capybara.instance_methods(false).include?(driver_method)
-        super
-      else
+      begin
+        super(text, **options, &blk)
+      rescue Capybara::NotSupportedByDriverError
         blk.call
       end
     end

@@ -23,7 +23,12 @@ Rails.application.routes.draw do
   resources :organizations, only: [] do
     scope module: :organizations do
       resource :dashboard, only: [:show]
-      resources :assisters
+      resources :assisters, except: [:destroy] do
+        member do
+          delete 'deactivate'
+          post 'reactivate'
+        end
+      end
       resources :aid_applications, only: [:create, :destroy]
     end
 
