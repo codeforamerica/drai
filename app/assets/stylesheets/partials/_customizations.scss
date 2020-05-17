@@ -13,6 +13,18 @@
   padding: 2em 1.5rem;
 }
 
+.demo-banner {
+  a {
+    color: white;
+    font-weight: bold;
+
+    &:hover,
+    &:active {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
 // In Honeycrisp, this is nested inside .template--styleguide
 .tab-bar__tab.is-selected {
   background-color: $color-background;

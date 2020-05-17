@@ -10,7 +10,7 @@ describe 'Deactivate Users', type: :system do
 
     it 'shows the DEMO banner' do
       visit root_path
-      expect(page).to have_content 'This site is for example purposes only'
+      expect(page).to have_content 'This site is for demonstration purposes only.'
     end
   end
 
