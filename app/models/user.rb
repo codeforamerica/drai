@@ -65,6 +65,9 @@ class User < ApplicationRecord
   has_many :aid_applications_approved, class_name: 'AidApplication', inverse_of: :approver, foreign_key: :approver_id
   has_many :aid_applications_disbursed, class_name: 'AidApplication', inverse_of: :disburser, foreign_key: :disburser_id
 
+  scope :activated, -> { where(deactivated_at: nil) }
+  scope :deactivated, -> { where.not(deactivated_at: nil) }
+
   validates :email, presence: true, email: true, uniqueness: { case_sensitive: true }
   validates :password, confirmation: true, format: { with: PASSWORD_REGEX, message: :password_complexity }, if: :password_required?
   validates :password, presence: true, on: :account_setup, unless: :password_present?

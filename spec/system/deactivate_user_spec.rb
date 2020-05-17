@@ -18,7 +18,7 @@ describe 'Deactivate Users', type: :system do
       sign_in supervisor
       visit root_path
 
-      click_on 'Assisters'
+      click_on 'Manage workers'
 
       # Supervisor cannot deactivate themselves
       within "##{dom_id(supervisor)}" do
@@ -32,7 +32,7 @@ describe 'Deactivate Users', type: :system do
         end
       end
 
-      expect(page).to have_content 'Deactivated Assisters'
+      expect(page).to have_content 'Deactivated workers'
       within "#deactivated-assisters ##{dom_id(assister)}" do
         expect(page).to have_content assister.name
         expect(page).to have_content 'Deactivated'

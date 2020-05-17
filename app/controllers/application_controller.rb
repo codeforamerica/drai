@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
     if user.organization.present?
       organization_dashboard_path(user.organization)
     else
-      organizations_path
+      admin_organizations_path
     end
   end
   helper_method :redirect_to_organization_home_page
