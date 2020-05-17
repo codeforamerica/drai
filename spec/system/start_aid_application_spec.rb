@@ -56,7 +56,9 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content "Mailing address"
 
-    click_on "Remove mailing address"
+    accept_alert do
+      click_on "Remove mailing address"
+    end
     expect(page).not_to have_content "Mailing address"
 
     click_on "Add a separate mailing address"
