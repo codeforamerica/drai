@@ -47,9 +47,10 @@ FactoryBot.define do
     trait :disbursed do
       approved
 
-      payment_card
-      disbursed_at { Time.current }
-      disburser { approver }
+      after(:create) do |aid_application, evaluator|
+        payment_card = create(:payment_card)
+        aid_application.disburse(payment_card, disburser: aid_application.approver)
+      end
     end
   end
 end

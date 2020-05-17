@@ -1,19 +1,16 @@
 module Organizations
   class DashboardsController < BaseController
+    LIMIT = 200
+
     def show
-      @aid_applications = aid_applications
-    end
+      aid_applications_query = current_organization.aid_applications
+                                                   .includes(:organization, :creator, :submitter, :approver, :disburser)
+                                                   .submitted
+                                                   .order(id: :desc)
+                                                   .limit(LIMIT)
+      aid_applications_query = aid_applications_query.query(params[:term]) if params[:term].present?
 
-    private
-
-    def aid_applications
-      applications = AidApplication.submitted.order(id: :desc).includes(:organization, :creator, :submitter)
-
-      applications = applications.where(organization: current_organization)
-
-      applications = applications.query(params[:term]) if params[:term].present?
-
-      applications
+      @aid_applications = aid_applications_query
     end
   end
 end

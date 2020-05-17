@@ -17,8 +17,6 @@ class Organization < ApplicationRecord
   has_many :users
   has_many :aid_applications
 
-  default_scope { with_counts }
-
   scope :with_counts, lambda {
     select <<~SQL
       organizations.*,
@@ -32,7 +30,7 @@ class Organization < ApplicationRecord
     SQL
   }
 
-  def something
-    reload
+  def submitted_aid_applications_count
+    @submitted_aid_applications_count ||= attributes["submitted_aid_applications_count"] || aid_applications.submitted.count
   end
 end
