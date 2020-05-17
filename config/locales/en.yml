@@ -226,6 +226,7 @@ en:
           title: Application Language
         mailing_address:
           add_mailing_address: Add a separate mailing address
+          remove_mailing_address: 'Remove mailing address'
           title: Mailing address
         organization_relationship:
           title: Confirm that the applicant is not an employee, contractor, or volunteer

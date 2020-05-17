@@ -53,6 +53,12 @@ describe 'Start aid application', type: :system do
     click_on "Add a separate mailing address"
 
     expect(page).to have_content "Mailing address"
+
+    click_on "Remove mailing address"
+    expect(page).not_to have_content "Mailing address"
+
+    click_on "Add a separate mailing address"
+
     within '.mailing-address' do
       fill_in "Street Address", with: "123 Rural Street"
       fill_in "Apartment, building, unit, etc. (optional)", with: "Unit A"
@@ -139,7 +145,6 @@ describe 'Start aid application', type: :system do
                                  birthday: "01-01-1980".to_date,
                                  attestation: true,
                                  contact_method_confirmed: true,
-
                                )
 
     open_sms aid_application.phone_number

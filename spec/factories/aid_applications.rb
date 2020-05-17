@@ -13,6 +13,7 @@ FactoryBot.define do
     allow_mailing_address { true }
     mailing_street_address { Faker::Address.street_address }
     mailing_city { Faker::Address.city }
+    mailing_state { Faker::Address.state }
     mailing_zip_code { '03226' }
 
     phone_number { Faker::PhoneNumber.cell_phone }

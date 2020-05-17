@@ -53,13 +53,55 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#mailing_street_address' do
+    it 'is required' do
+      aid_application = build :aid_application, mailing_street_address: ''
+      expect(aid_application).not_to be_valid(:submit)
+    end
+
+    it 'is only required when allow_mailing_address is set to true' do
+      aid_application = build :aid_application, allow_mailing_address: false, mailing_street_address: ''
+      expect(aid_application).to be_valid(:submit)
+    end
+  end
+
+  describe '#mailing_city' do
+    it 'is required' do
+      aid_application = build :aid_application, mailing_city: ''
+      expect(aid_application).not_to be_valid(:submit)
+    end
+
+    it 'is only required when allow_mailing_address is set to true' do
+      aid_application = build :aid_application, allow_mailing_address: false, mailing_city: ''
+      expect(aid_application).to be_valid(:submit)
+    end
+  end
+
+  describe '#mailing_state' do
+    it 'is required' do
+      aid_application = build :aid_application, mailing_state: ''
+      expect(aid_application).not_to be_valid(:submit)
+    end
+
+    it 'is only required when allow_mailing_address is set to true' do
+      aid_application = build :aid_application, allow_mailing_address: false, mailing_state: ''
+      expect(aid_application).to be_valid(:submit)
+    end
+  end
+
   describe '#mailing_zip_code' do
     it 'must be 5 digits' do
       aid_application = build :aid_application, mailing_zip_code: '1234'
       expect(aid_application).not_to be_valid(:submit)
     end
+
     it 'can be outside of CA' do
       aid_application = build :aid_application, mailing_zip_code: '12345'
+      expect(aid_application).to be_valid(:submit)
+    end
+
+    it 'is only required when allow_mailing_address is set to true' do
+      aid_application = build :aid_application, allow_mailing_address: false, mailing_zip_code: ''
       expect(aid_application).to be_valid(:submit)
     end
   end
