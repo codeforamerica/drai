@@ -13,7 +13,7 @@ describe 'Home page redirects to the signin page' do
       fill_in 'Password', with: 'Qwerty!2'
       click_button 'Sign in'
 
-      expect(page).to have_content "All Organizations"
+      expect(page).to have_content "All organizations"
     end
   end
 

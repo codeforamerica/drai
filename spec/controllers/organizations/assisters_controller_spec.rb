@@ -1,39 +1,30 @@
 require 'rails_helper'
 
-describe AssistersController, type: :controller do
-  let(:admin) { create :admin }
-  let!(:other_admins) { create_list :admin, 3}
-  let(:supervisor) { create :supervisor }
-  let!(:assister) { create :assister }
+describe Organizations::AssistersController, type: :controller do
+  let!(:supervisor) { create :supervisor }
+  let!(:assister) { create :assister, organization: supervisor.organization }
   let!(:another_assister) { create :assister }
 
   render_views
 
   describe '#index' do
-    context 'when an admin' do
-      before { sign_in admin }
+    context 'when a supervisor' do
+      before { sign_in supervisor }
 
-      it 'renders out all assisters' do
-        get :index
+      it 'renders out all assisters in the same organization' do
+        get :index, params: { organization_id: supervisor.organization_id }
 
         expect(response).to have_http_status :ok
-        expect(assigns(:assisters)).to contain_exactly(admin, assister, another_assister, *other_admins)
+        expect(assigns(:users)).to contain_exactly(supervisor, assister)
       end
     end
 
     context 'when an assister' do
       before { sign_in assister }
 
-      it 'cannot access the All Assisters page' do
-        get :index
-        expect(response).to have_http_status :found
-      end
-
-      it 'renders out all assisters in the same organization' do
+      it 'redirects away' do
         get :index, params: { organization_id: assister.organization_id }
-
-        expect(response).to have_http_status :ok
-        expect(assigns(:assisters)).to contain_exactly(assister)
+        expect(response).to have_http_status :found
       end
     end
   end

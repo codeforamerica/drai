@@ -1,0 +1,27 @@
+<%= render 'organizations/tab_navigation' %>
+
+<div class="grid__item width-one-whole">
+  <%= link_to new_organization_assister_path(current_organization), class: 'button button--primary' do %>
+    <span class="icon icon-add" aria-hidden="true"></span> Add new assister
+  <% end %>
+</div>
+
+<div id="assisters" class="grid__item width-one-whole">
+  <%= render 'table', users: @users do |user| %>
+    <%= link_to "Edit", edit_organization_assister_path(user.organization, user) %>
+    <% if user != current_user %>
+      <%= button_to organization_assister_path(user.organization, user), method: :delete, data: { confirm: "Are you sure you want to deactivate #{user.name} (#{user.email})?" }, class: 'button--link' do %>
+        Deactivate
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if @deactivated_users.load.any? %>
+  <div id="deactivated-assisters" class="grid__item width-one-whole spacing-above-95">
+    <h2>Deactivated workers</h2>
+    <%= render 'table', users: @deactivated_users do |user| %>
+      <%= link_to "Edit", edit_organization_assister_path(user.organization, user) %>
+    <% end %>
+  </div>
+<% end %>

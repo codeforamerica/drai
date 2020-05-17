@@ -19,18 +19,20 @@ describe 'Account invitations', type: :system do
 
     Capybara.using_session(:admin) do
       sign_in admin
-      visit assisters_path
+      visit root_path
+      click_on "All organizations"
+      click_on organization.name
+      click_on "Manage workers"
 
       click_on 'Add new assister'
 
-      select organization.name, from: 'Organization'
       fill_in 'Name', with: 'Daffy Duck'
       fill_in 'Email', with: new_user_email
       perform_enqueued_jobs do
         click_on 'Invite assister'
       end
 
-      expect(current_path).to eq assisters_path
+      expect(current_path).to eq organization_assisters_path(organization)
       expect(page).to have_content "Sent invite to #{new_user_email}"
 
       new_user = User.last
@@ -60,6 +62,11 @@ describe 'Account invitations', type: :system do
     Capybara.using_session(:new_user) do
       fill_in 'Choose a password', with: new_user_password
       click_button 'Set up account'
+    end
+
+    Capybara.using_session(:admin) do
+      # reload the page and ensure that the status has changed
+      visit current_path
 
       within("##{dom_id(new_user)}") do
         expect(page).to have_content new_user_email
@@ -72,13 +79,14 @@ describe 'Account invitations', type: :system do
     sign_in supervisor
     visit root_path
 
-    click_on 'Assisters'
+    click_on 'Manage workers'
     click_on 'Add new assister'
 
     fill_in 'Name', with: 'Daffy Duck'
     fill_in 'Email', with: new_user_email
-    click_on 'Invite assister'
-
+    perform_enqueued_jobs do
+      click_on 'Invite assister'
+    end
     expect(current_path).to eq organization_assisters_path(supervisor.organization)
     expect(page).to have_content "Sent invite to #{new_user_email}"
 
@@ -87,6 +95,16 @@ describe 'Account invitations', type: :system do
       email: new_user_email,
       organization: supervisor.organization
     )
+
+    Capybara.using_session(:new_user) do
+      open_email new_user_email
+      current_email.click_link 'Set up your account'
+
+      fill_in 'Choose a password', with: new_user_password
+      click_button 'Set up account'
+
+      expect(page).to have_content 'Dashboard'
+    end
   end
 
   it 'assisters cannot see Assisters tab' do
@@ -95,6 +113,6 @@ describe 'Account invitations', type: :system do
     sign_in assister
     visit root_path
 
-    expect(page).not_to have_link 'Assisters'
+    expect(page).not_to have_link 'Manage workers'
   end
 end

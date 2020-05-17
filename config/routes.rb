@@ -12,12 +12,21 @@ Rails.application.routes.draw do
     resource 'setup', only: [:edit, :update], path_names: { edit: '' }
   end
 
-  resources :assisters
-  resources :aid_applications, only: [:index]
   resource :privacy, only: [:show]
 
-  resources :organizations, only: [:index], param: :id do
-    resources :assisters
+  namespace :admin do
+    resources :organizations, only: :index
+    resources :users, only: :index
+    resources :aid_applications, only: :index
+  end
+
+  resources :organizations, only: [] do
+    scope module: :organizations do
+      resource :dashboard, only: [:show]
+      resources :assisters
+      resources :aid_applications, only: [:create, :destroy]
+    end
+
     resources :aid_applications, only: [] do
       scope module: :aid_applications do
         resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
@@ -28,11 +37,6 @@ Rails.application.routes.draw do
         resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
         resource :finished, only: [:edit, :update], path_names: { edit: '' }
       end
-    end
-
-    scope module: :organizations do
-      resource :dashboard, only: [:show]
-      resources :aid_applications, only: [:create, :destroy]
     end
   end
 

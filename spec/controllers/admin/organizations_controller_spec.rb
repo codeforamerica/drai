@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe OrganizationsController do
+describe Admin::OrganizationsController do
   let(:assister) { create :assister }
   let(:other_assister) { create :assister }
   let(:admin) { create :admin }

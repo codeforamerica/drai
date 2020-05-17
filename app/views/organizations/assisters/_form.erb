@@ -2,16 +2,12 @@
   <%= f.cfa_input_field :name, "Name", classes: ["form-width--long"] %>
   <%= f.cfa_input_field :email, "Email Address", classes: ["form-width--long"] %>
 
-  <% unless current_organization %>
-    <%= f.cfa_select(:organization_id, "Organization", Organization.all.order(name: :asc).map { |org| [org.name, org.id] }, prompt: "Select Organization") %>
-  <% end %>
-
   <%= f.cfa_select :supervisor, "Role and Permissions", [['Assister', false], ['Supervisor', true]], help_text: "Supervisors have additional permissions to manage assisters and application information." %>
 <% end %>
 
 <% footer = capture_form do |f| %>
   <%= f.cfa_button button_label %>
-  <%= link_to "Cancel", current_organization ? organization_assisters_path(current_organization) : assisters_path %>
+  <%= link_to "Cancel", organization_assisters_path(current_organization) %>
 <% end %>
 
 <%= render 'shared/form_card',

@@ -1,0 +1,37 @@
+<%= render 'admin/tab_navigation' %>
+
+<div class="grid">
+  <div class="grid__item">
+    <%= render 'shared/search_bar', placeholder: 'Search applications' %>
+    <br>
+  </div>
+
+  <div class="grid__item width-one-whole">
+    <div class="data-table-container">
+      <table class="data-table js-sticky-header">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Application Number</th>
+          <th>Date Submitted</th>
+          <th>Applicant</th>
+          <th>Assister</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @aid_applications.each do |aid_application| %>
+          <tr id="<%= dom_id(aid_application) %>">
+            <td><%= aid_application.id %></td>
+            <td><%= link_to aid_application.application_number, edit_organization_aid_application_eligibility_path(aid_application.organization, aid_application) %>
+            <td><%= aid_application.submitted_at.strftime("%m/%d/%y") %></td>
+            <td><%= aid_application.name %></td>
+            <td><%= (aid_application.submitter || aid_application.creator).name %></td>
+            <td><%= aid_application.status_human %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

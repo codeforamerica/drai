@@ -1,12 +1,10 @@
-<%= render 'form', user: @user, title: "Edit assister", button_label: 'Edit assister' %>
-
 <div class="grid__item width-two-thirds shift-one-sixth">
   <br>
   <h3>Changelog</h3>
   <ul class="list--bulleted">
     <%
       showable_changes = [:name, :email, :supervisor, :deactivated_at]
-      versions = @user.versions.includes(:item).reorder(created_at: :desc).select { |v| v.changeset.any? { |(field, _values)| field.to_sym.in? showable_changes} }
+      versions = user.versions.includes(:item).reorder(created_at: :desc).select { |v| v.changeset.any? { |(field, _values)| field.to_sym.in? showable_changes} }
       actors_by_id = User.where(id: versions.pluck(:whodunnit).uniq).index_by(&:id)
     %>
 

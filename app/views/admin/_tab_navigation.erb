@@ -1,0 +1,6 @@
+<div id="dashboard-navigation" class="tab-bar">
+  <%= link_to "All organizations", admin_organizations_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/organizations', action: 'index') ? 'is-selected' : '' }" %>
+  <%= link_to "All users", admin_users_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/users', action: 'index') ? 'is-selected' : '' }" %>
+  <%= link_to "All applications", admin_aid_applications_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/aid_applications', action: 'index') ? 'is-selected' : '' }" %>
+</div>
+<br>

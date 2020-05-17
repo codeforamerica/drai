@@ -1,0 +1,46 @@
+<%= render 'admin/tab_navigation' %>
+
+<div id="assisters" class="grid__item width-one-whole">
+  <div class="data-table-container">
+    <table class="data-table js-sticky-header">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Org</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr id="<%= dom_id(user) %>">
+            <td><%= user.id %></td>
+            <td>
+              <%= user.name %>
+              <% if user.supervisor? %>
+                <span class="label ">Supervisor</span>
+              <% elsif user.admin? %>
+                <span class="label label--magenta">Admin</span>
+              <% end %>
+            </td>
+            <td>
+              <% if user.organization %>
+                <%= link_to(user.organization.name, organization_dashboard_path(user.organization)) %>
+              <% end %>
+            </td>
+            <td><%= user.email %></td>
+            <td><%= user.status_human %></td>
+            <td>
+              <% if user.organization %>
+                <%= link_to "Edit", edit_organization_assister_path(user.organization, user) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
