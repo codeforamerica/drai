@@ -1,8 +1,6 @@
-<h2>Application #<%= current_aid_application.id %></h2>
-
 <p>
-  <strong>Status</strong>: <%= current_aid_application.status_human %><br>
-  <strong>Application Number</strong>: <%= current_aid_application.application_number ? current_aid_application.application_number : 'Unassigned' %></strong><br>
+  <strong>Application Number</strong>: <%= current_aid_application.application_number ? current_aid_application.application_number : 'Unassigned' %></strong>
+  <span class="label"><%= current_aid_application.status_human %></span>
 </p>
 
 <div id="application-navigation" class="tab-bar">
