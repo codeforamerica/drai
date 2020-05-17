@@ -6,6 +6,14 @@
       <h1><%= t('general.drai_application') %></h1>
     </header>
 
+    <% if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
+      <div class="notice notice--error">
+        This site is for demonstration purposes only.
+        Do not enter any personal information!
+        If you need to submit an application go to <strong><%= link_to 'ca-drai.org', 'https://www.ca-drai.org' %></strong>.
+      </div>
+    <% end %>
+
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
 
