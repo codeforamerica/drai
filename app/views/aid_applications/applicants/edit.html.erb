@@ -24,19 +24,23 @@
 
         <hr>
 
-        <h2><%= t('.california_address.title') %></h2>
-        <p class="text--help"><%= t('.california_address.address_required') %></p>
-        <%= f.cfa_input_field :street_address, t('.shared_address.street_address') %>
-        <%= f.cfa_input_field :apartment_number, t('.shared_address.apartment_number') %>
-        <%= f.cfa_input_field :city, t('.shared_address.city') %>
-        <%= f.cfa_input_field :zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
+        <div class="address" id="address">
+          <h2><%= t('.california_address.title') %></h2>
+          <p class="text--help"><%= t('.california_address.address_required') %></p>
+          <%= f.cfa_input_field :street_address, t('.shared_address.street_address') %>
+          <%= f.cfa_input_field :apartment_number, t('.shared_address.apartment_number') %>
+          <%= f.cfa_input_field :city, t('.shared_address.city') %>
+          <%= f.cfa_input_field :zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
 
-        <%= f.button type: 'submit', name: 'form_action', value: 'allow_mailing_address', class: 'button button--secondary' do %>
-          <span class="icon icon-add" aria-hidden="true"></span> <%= t('.mailing_address.add_mailing_address') %>
-        <% end %>
+          <% unless @aid_application.allow_mailing_address %>
+            <%= f.button type: 'submit', name: 'form_action', value: 'allow_mailing_address', class: 'button button--secondary' do %>
+              <span class="icon icon-add" aria-hidden="true"></span> <%= t('.mailing_address.add_mailing_address') %>
+            <% end %>
+          <% end %>
+        </div>
         <hr>
 
-        <% if @aid_application.allow_mailing_address == true %>
+        <% if @aid_application.allow_mailing_address %>
           <div class="mailing-address" id="mailing-address">
             <h2><%= t('.mailing_address.title') %></h2>
             <%= f.cfa_input_field :mailing_street_address, t('.shared_address.street_address') %>

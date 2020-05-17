@@ -272,10 +272,13 @@ class AidApplication < ApplicationRecord
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
-    validates :mailing_street_address, presence: true, if: :allow_mailing_address
-    validates :mailing_city, presence: true, if: :allow_mailing_address
-    validates :mailing_state, presence: true, if: :allow_mailing_address
-    validates :mailing_zip_code, presence: true, five_digit_zip: true, if: :allow_mailing_address
+
+    with_options if: :allow_mailing_address? do
+      validates :mailing_street_address, presence: true
+      validates :mailing_city, presence: true
+      validates :mailing_state, presence: true
+      validates :mailing_zip_code, presence: true, five_digit_zip: true
+    end
 
     validates :phone_number, presence: true, phone_number: true
     validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }

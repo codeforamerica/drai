@@ -53,6 +53,12 @@ describe 'Start aid application', type: :system do
     click_on "Add a separate mailing address"
 
     expect(page).to have_content "Mailing address"
+
+    click_on "Remove mailing address"
+    expect(page).not_to have_content "Mailing address"
+
+    click_on "Add a separate mailing address"
+
     within '.mailing-address' do
       fill_in "Street Address", with: "123 Rural Street"
       fill_in "Apartment, building, unit, etc. (optional)", with: "Unit A"
@@ -60,9 +66,6 @@ describe 'Start aid application', type: :system do
       fill_in "State", with: "Massachusetts"
       fill_in "ZIP Code", with: "02130"
     end
-
-    click_on "Remove mailing address"
-    expect(page).not_to have_content "Mailing address"
 
     expect(page).to have_content "Contact information"
 
@@ -118,12 +121,12 @@ describe 'Start aid application', type: :system do
                                  apartment_number: "Apt. 1",
                                  city: "Big City",
                                  zip_code: "94103",
-                                 allow_mailing_address: false,
-                                 mailing_street_address: nil,
-                                 mailing_apartment_number: nil,
-                                 mailing_city: nil,
-                                 mailing_zip_code: nil,
-                                 mailing_state: nil,
+                                 allow_mailing_address: true,
+                                 mailing_street_address: "123 Rural Street",
+                                 mailing_apartment_number: "Unit A",
+                                 mailing_city: "Other Town",
+                                 mailing_zip_code: "02130",
+                                 mailing_state: "Massachusetts",
                                  phone_number: "5555555555",
                                  email: "example@example.com",
                                  sms_consent: true,
