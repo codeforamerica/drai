@@ -1,6 +1,5 @@
 <%= render 'aid_applications/navigation' %>
 
-
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <header class="form-card__header">
@@ -12,12 +11,16 @@
     <div class="form-card__footer">
       <div class="toolbar">
         <div class="toolbar__left">
-          <%= button_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), method: :get, class: 'button button--primary' do %>
+          <%= link_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), class: 'button button--primary' do %>
             <span class="icon icon-arrow_back" aria-hidden="true"></span> <%= t('general.go_back') %>
           <% end %>
         </div>
         <div class="toolbar__right">
-          <%= button_to t('general.delete_application'), organization_aid_application_path(current_organization, current_aid_application), method: :delete, class: "button button--danger" %>
+          <%= button_to t('general.delete_this_application'),
+                        organization_aid_application_path(current_organization, current_aid_application),
+                        method: :delete,
+                        class: "button button--danger",
+                        data: { confirm: "Are you sure you want to delete this application?" } %>
         </div>
       </div>
     </div>
