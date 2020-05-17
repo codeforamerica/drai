@@ -76,7 +76,7 @@ describe Organizations::AssistersController, type: :controller do
     end
   end
 
-  describe '#destroy' do
+  describe '#deactivate' do
     let(:supervisor) { create :supervisor }
     let(:assister) { create :assister, organization: supervisor.organization }
 
@@ -85,7 +85,7 @@ describe Organizations::AssistersController, type: :controller do
 
       it 'marks the user as deactivated' do
         expect do
-          delete :destroy, params: { organization_id: supervisor.organization.id, id: assister.id }
+          delete :deactivate, params: { organization_id: supervisor.organization.id, id: assister.id }
         end.to change { assister.reload.deactivated_at }.from(nil).to within(1.second).of Time.current
 
         expect(response).to redirect_to organization_assisters_path(supervisor.organization)
@@ -93,8 +93,8 @@ describe Organizations::AssistersController, type: :controller do
 
       it 'cannot perform on itself' do
         expect do
-          delete :destroy, params: { organization_id: supervisor.organization.id, id: supervisor.id }
-        end.not_to change { assister.reload.deactivated_at }
+          delete :deactivate, params: { organization_id: supervisor.organization.id, id: supervisor.id }
+        end.not_to change { supervisor.reload.deactivated_at }
       end
     end
 
@@ -103,7 +103,40 @@ describe Organizations::AssistersController, type: :controller do
 
       it 'does nothing' do
         expect do
-          delete :destroy, params: { organization_id: supervisor.organization.id, id: assister.id }
+          delete :deactivate, params: { organization_id: supervisor.organization.id, id: assister.id }
+        end.not_to change { assister.reload.deactivated_at }
+      end
+    end
+  end
+
+  describe '#reactivate' do
+    let(:supervisor) { create :supervisor }
+    let(:assister) { create :assister, organization: supervisor.organization, deactivated_at: 5.minutes.ago }
+
+    context 'when a supervisor' do
+      before { sign_in supervisor }
+
+      it 'marks the user as deactivated' do
+        expect do
+          post :reactivate, params: { organization_id: supervisor.organization.id, id: assister.id }
+        end.to change { assister.reload.deactivated_at }.to(nil)
+
+        expect(response).to redirect_to organization_assisters_path(supervisor.organization)
+      end
+
+      it 'cannot perform on itself' do
+        expect do
+          post :reactivate, params: { organization_id: supervisor.organization.id, id: supervisor.id }
+        end.not_to change { supervisor.reload.deactivated_at }
+      end
+    end
+
+    context 'when an assister' do
+      before { sign_in assister }
+
+      it 'does nothing' do
+        expect do
+          post :reactivate, params: { organization_id: supervisor.organization.id, id: assister.id }
         end.not_to change { assister.reload.deactivated_at }
       end
     end

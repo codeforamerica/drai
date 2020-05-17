@@ -1,7 +1,7 @@
 module Organizations
   class AssistersController < ApplicationController
     before_action :authenticate_supervisor!
-    before_action :prevent_self_action, only: :destroy
+    before_action :prevent_self_action, only: [:deactivate, :reactivate]
 
     def index
       users_query = current_organization.users.includes(:organization).order(id: :desc)
@@ -34,11 +34,18 @@ module Organizations
       respond_with @user, location: -> { organization_assisters_path(current_organization) }
     end
 
-    def destroy
+    def deactivate
       @user = user_from_params
       @user.update(deactivated_at: Time.current) if @user.deactivated_at.nil?
 
       respond_with @user, notice: "Deactivated #{@user.name}", location: -> { organization_assisters_path(current_organization) }
+    end
+
+    def reactivate
+      @user = user_from_params
+      @user.update(deactivated_at: nil) if @user.deactivated_at.present?
+
+      respond_with @user, notice: "Reactivated #{@user.name}", location: -> { organization_assisters_path(current_organization) }
     end
 
     private
