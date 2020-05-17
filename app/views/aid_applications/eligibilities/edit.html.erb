@@ -57,8 +57,11 @@
         <div class="form-card__footer">
           <div class="toolbar">
             <div class="toolbar__left">
-              <%= link_to t('general.cancel'), organization_dashboard_path(current_organization), class: 'toolbar__item button button--secondary' %>
-            </div>
+              <%= link_to t('general.delete_application'),
+                          organization_aid_application_path(current_organization, current_aid_application),
+                          method: :delete,
+                          class: "button button--danger",
+                          data: { confirm: "Are you sure you want to delete this application?" } %>            </div>
             <div class="toolbar__right">
               <%= f.button t('general.continue'), type: 'submit', class: 'toolbar__item button button--primary' %>
             </div>

@@ -371,7 +371,8 @@ en:
     confirm: Confirm
     continue: Continue
     delete: Delete
-    delete_application: Delete this application
+    delete_application: Delete application
+    delete_this_application: Delete this application
     disabled: Disabled
     email_address: Email address
     go_back: Go back
