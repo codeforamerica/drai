@@ -45,7 +45,7 @@ describe AidApplications::VerificationsController do
     end
 
     it 'redirects to the dashboard page' do
-      expect(response).to redirect_to organization_dashboard_path(assister.organization, aid_application)
+      expect(response).to redirect_to organization_dashboard_path(assister.organization)
     end
   end
 end
