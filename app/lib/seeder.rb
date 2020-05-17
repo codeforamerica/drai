@@ -8,15 +8,22 @@ class Seeder
     organization
     supervisor
     assister
-    FactoryBot.create_list :aid_application, 2, :submitted, creator: assister, organization: organization
-    FactoryBot.create_list :aid_application, 2, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 5, :disbursed, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 10, :approved, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 50, :submitted, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 5, creator: assister, organization: organization
 
-    FactoryBot.create :payment_card, sequence_number: '123456'
-    FactoryBot.create :payment_card, sequence_number: '223456'
-    FactoryBot.create :payment_card, sequence_number: '323456'
-    FactoryBot.create :payment_card, sequence_number: '423456'
-    FactoryBot.create :payment_card, sequence_number: '523456'
-    FactoryBot.create :payment_card, sequence_number: '623456'
+    %w[
+      123456
+      223456
+      323456
+      423456
+      523456
+      623456
+    ].each do |sequence_number|
+      next if PaymentCard.find_by(sequence_number: sequence_number)
+      FactoryBot.create(:payment_card, sequence_number: sequence_number)
+    end
 
     refresh_search_views
   end
