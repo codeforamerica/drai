@@ -375,7 +375,7 @@ class AidApplication < ApplicationRecord
 
   def status_human
     {
-      started: 'Started',
+      started: 'Unsubmitted',
       submitted: 'Submitted',
       approved: 'Approved',
     }.fetch(status)
