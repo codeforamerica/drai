@@ -1,7 +1,7 @@
 module Organizations
   class AssistersController < ApplicationController
     before_action :authenticate_supervisor!
-    before_action :prevent_self_action, only: [:deactivate, :reactivate]
+    before_action :prevent_self_action, only: [:deactivate, :reactivate, :resend_confirmation_instructions]
 
     def index
       users_query = current_organization.users.includes(:organization).order(id: :desc)
@@ -46,6 +46,14 @@ module Organizations
       @user.update(deactivated_at: nil) if @user.deactivated_at.present?
 
       respond_with @user, notice: "Reactivated #{@user.name}", location: -> { organization_assisters_path(current_organization) }
+    end
+
+    def resend_confirmation_instructions
+      @user = user_from_params
+      if @user.confirmed_at.blank?
+        @user.send_confirmation_instructions
+      end
+      respond_with @user, notice: "Resent confirmation for #{@user.name}", location: -> { organization_assisters_path(current_organization) }
     end
 
     private
