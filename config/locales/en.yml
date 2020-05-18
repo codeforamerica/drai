@@ -36,6 +36,7 @@ en:
         email: Make sure to enter a valid email
         landline_sms: Landlines cannot recieve text messages. Enter a cell phone number,
           or change the notice method.
+        not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
         phone_number: Make sure your phone number is 10 digits long
         required_question: This question is required.
