@@ -365,7 +365,7 @@ RSpec.describe AidApplication, type: :model do
       it 'sends an SMS' do
         expect do
           aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args).exactly(:twice)
       end
     end
 
@@ -386,7 +386,7 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_submission_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
-                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args).exactly(:twice)
       end
 
     end
