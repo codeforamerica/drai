@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AidApplications::VerificationsController do
+describe AidApplications::ConfirmationsController do
   let(:assister) { create :assister }
   let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
 
@@ -17,9 +17,6 @@ describe AidApplications::VerificationsController do
   end
 
   describe '#update' do
-    let(:assister) { create :assister }
-    let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
-
     before do
       sign_in aid_application.creator
 

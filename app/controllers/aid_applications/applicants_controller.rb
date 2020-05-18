@@ -48,6 +48,16 @@ module AidApplications
         end
 
         return respond_with @aid_application, location: -> { edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address") }
+      elsif params[:form_action] == 'verify' || params[:form_action] == 'verify_and_exit'
+        @aid_application.save(context: :submit)
+
+        return respond_with @aid_application, location: (lambda do
+          if params[:form_action] == 'verify_and_exit'
+            organization_dashboard_path(current_organization)
+          else
+            organization_aid_application_approval_path(current_organization, @aid_application)
+          end
+        end)
       else
         @aid_application.save(context: :submit)
       end
@@ -56,7 +66,7 @@ module AidApplications
         if app_is_duplicate
           organization_aid_application_duplicate_path(current_organization, @aid_application)
         elsif @aid_application.submitted?
-          edit_organization_aid_application_verification_path(current_organization, @aid_application)
+          edit_organization_aid_application_confirmation_path(current_organization, @aid_application)
         else
           edit_organization_aid_application_applicant_path(current_organization, @aid_application)
         end

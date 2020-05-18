@@ -145,6 +145,90 @@ en:
           state: State
           street_address: Street Address
           zip: ZIP Code
+    confirmations:
+      edit:
+        app_not_submitted: Application not yet submitted.
+        app_submitted: Application successfully submitted
+        app_verified: Application successfully verified.
+        application_number:
+          confirm: If possible, confirm that the applicant received the email or text
+            message with the Application Number.  If necessary, review the contact
+            information and make edits.
+          contact_method: Contact method confirmed
+          edit_contact: Edit contact information
+          title: Application Number
+        next_steps:
+          message_html: |
+            <ol>
+              <li>You need to submit the verification documents we discussed in the next five business days.</li>
+              <li>If we do not receive these documents, your application file will be closed and you will have to reapply.</li>
+              <li> We cannot guarantee that assistance will be available at a later date.</li>
+              <li>We will notify you once we approve your application and how it will be delivered to you.</li>
+              <li>Confirm delivery method with applicant.</li>
+            </ol>
+          step1: You need to submit the verification documents we discussed in the
+            next five business days.
+          step2: If we do not receive these documents, your application file will
+            be closed and you will have to reapply.
+          step3: We cannot guarantee that assistance will be available at a later
+            date.
+          step4: We will notify you once we approve your application and how it will
+            be delivered to you.
+          step5: Confirm delivery method with applicant.
+          title: Next Steps
+        receive_card:
+          options:
+            decide_later: Decide later
+            deliver: Deliver in person
+            mail: Mail
+            pick_up: Pick up
+          subtitle: This can be edited later.
+          title: How will the applicant get their card?
+        title: Application submitted
+        verifications:
+          covid19_impact_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Self-attestation that applicant has been impacted by COVID-19</li>
+                <li>Letter or notice that the applicant must care for a child or other person whose school, childcare facility or other caregiving facility is closed due to COVID-19</li>
+                <li>Letter or notice from employer indicating lost employment or severely reduced work hours due to COVID-19</li>
+                <li>
+                  <p>Letter or notice from medical professional or other documentation that may show hardship based on any of the following:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>Has symptoms consistent with COVID-19</li>
+                    <li>Is at higher risk of serious illness from COVID-19 due to an underlying health condition or age and is therefore unable to work in order to adhere to physical distancing public health guidance</li>
+                    <li>Is a caregiver to a dependent or spouse who has symptoms consistent with COVID-19</li>
+                  </ul>
+                </li>
+              </ul>
+            title: COVID-19 impact
+          message: 'In order to process your application, we will need to verify the
+                information you provided is accurate. You will need to submit the following
+                documents through text, email, other systems implemented by the CBO, or
+                in-person:'
+          photo_id_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Any state-issued identification card</li>
+                <li>Any state-issued driver’s license</li>
+                <li>Passport from any country</li>
+                <li>International identification document</li>
+                <li>School identification card</li>
+                <li>Work identification card</li>
+              </ul>
+            title: Photo ID
+          proof_of_address_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Identification document with address listed, such as a state-issued driver’s license or state-issued identification card</li>
+                <li>Benefit letter from a government agency addressed to the applicant or showing the applicant resides in the household</li>
+                <li>Lease agreement showing applicant’s name</li>
+                <li>Utility bill addressed to applicant</li>
+                <li>Insurance cards showing applicant’s name</li>
+                <li>School enrollment papers with address, addressed to applicant or showing applicant’s name</li>
+              </ul>
+            title: Proof of address
+          title: Verification documents
     confirm_messages:
       edit:
         activation_code_required: The client *must* have their Activation Code to
@@ -262,90 +346,6 @@ en:
       org: Org
       search_apps: Search applications
       status: Status
-    verifications:
-      edit:
-        app_not_submitted: Application not yet submitted.
-        app_submitted: Application successfully submitted
-        app_verified: Application successfully verified.
-        application_number:
-          confirm: If possible, confirm that the applicant received the email or text
-            message with the Application Number.  If necessary, review the contact
-            information and make edits.
-          contact_method: Contact method confirmed
-          edit_contact: Edit contact information
-          title: Application Number
-        next_steps:
-          message_html: |
-            <ol>
-              <li>You need to submit the verification documents we discussed in the next five business days.</li>
-              <li>If we do not receive these documents, your application file will be closed and you will have to reapply.</li>
-              <li> We cannot guarantee that assistance will be available at a later date.</li>
-              <li>We will notify you once we approve your application and how it will be delivered to you.</li>
-              <li>Confirm delivery method with applicant.</li>
-            </ol>
-          step1: You need to submit the verification documents we discussed in the
-            next five business days.
-          step2: If we do not receive these documents, your application file will
-            be closed and you will have to reapply.
-          step3: We cannot guarantee that assistance will be available at a later
-            date.
-          step4: We will notify you once we approve your application and how it will
-            be delivered to you.
-          step5: Confirm delivery method with applicant.
-          title: Next Steps
-        receive_card:
-          options:
-            decide_later: Decide later
-            deliver: Deliver in person
-            mail: Mail
-            pick_up: Pick up
-          subtitle: This can be edited later.
-          title: How will the applicant get their card?
-        title: Application submitted
-        verifications:
-          covid19_impact_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Self-attestation that applicant has been impacted by COVID-19</li>
-                <li>Letter or notice that the applicant must care for a child or other person whose school, childcare facility or other caregiving facility is closed due to COVID-19</li>
-                <li>Letter or notice from employer indicating lost employment or severely reduced work hours due to COVID-19</li>
-                <li>
-                  <p>Letter or notice from medical professional or other documentation that may show hardship based on any of the following:</p>
-                  <ul class="list--numbered" style="padding-bottom: 0">
-                    <li>Has symptoms consistent with COVID-19</li>
-                    <li>Is at higher risk of serious illness from COVID-19 due to an underlying health condition or age and is therefore unable to work in order to adhere to physical distancing public health guidance</li>
-                    <li>Is a caregiver to a dependent or spouse who has symptoms consistent with COVID-19</li>
-                  </ul>
-                </li>
-              </ul>
-            title: COVID-19 impact
-          message: 'In order to process your application, we will need to verify the
-            information you provided is accurate. You will need to submit the following
-            documents through text, email, other systems implemented by the CBO, or
-            in-person:'
-          photo_id_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Any state-issued identification card</li>
-                <li>Any state-issued driver’s license</li>
-                <li>Passport from any country</li>
-                <li>International identification document</li>
-                <li>School identification card</li>
-                <li>Work identification card</li>
-              </ul>
-            title: Photo ID
-          proof_of_address_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Identification document with address listed, such as a state-issued driver’s license or state-issued identification card</li>
-                <li>Benefit letter from a government agency addressed to the applicant or showing the applicant resides in the household</li>
-                <li>Lease agreement showing applicant’s name</li>
-                <li>Utility bill addressed to applicant</li>
-                <li>Insurance cards showing applicant’s name</li>
-                <li>School enrollment papers with address, addressed to applicant or showing applicant’s name</li>
-              </ul>
-            title: Proof of address
-          title: Verification documents
   email_message:
     activation:
       body_html: |
@@ -395,6 +395,7 @@ en:
     optional: optional
     phone_number: Phone number
     proceed: Proceed
+    save_and_exit: Save and exit
     sign_out: Sign out
     submit: Submit
     update: Update

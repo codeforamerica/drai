@@ -2,9 +2,15 @@
 
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
-    <header class="form-card__header">
-      <h1><%= t('general.drai_application') %></h1>
-    </header>
+    <% if params[:verify] %>
+      <header class="form-card__header text--error">
+        <h1>Verify</h1>
+      </header>
+    <% else %>
+      <header class="form-card__header">
+        <h1><%= t('general.drai_application') %></h1>
+      </header>
+    <% end %>
 
     <% if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
       <div class="notice notice--error">
@@ -14,7 +20,8 @@
       </div>
     <% end %>
 
-    <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+    <% form_url = params[:verify] ? organization_aid_application_verification_path(current_organization, @aid_application) : organization_aid_application_applicant_path(current_organization, @aid_application) %>
+    <%= form_for(@aid_application, url: form_url, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
 
         <h2><%= t('.applicant_information.title') %></h2>
@@ -150,22 +157,33 @@
       </div>
 
       <div class="form-card__footer">
-        <div class="toolbar">
-          <div class="toolbar__left">
-            <%= link_to t('general.delete_this_application'),
-                        organization_aid_application_path(current_organization, current_aid_application),
-                        method: :delete,
-                        class: "button button--danger",
-                        data: { confirm: "Are you sure you want to delete this application?" } %>
+        <% if params[:verify] %>
+          <div class="toolbar">
+            <div class="toolbar__left">
+              <%= f.button t('general.save_and_exit'), type: 'submit', name: 'form_action', value: 'verify_and_exit', class: 'toolbar__item button' %>
+            </div>
+            <div class="toolbar__right">
+              <%= f.button t('general.continue'), type: 'submit', name: 'form_action', value: 'verify', class: 'button button--primary' %>
+            </div>
           </div>
-          <div class="toolbar__right">
-            <% if @aid_application.submitted? %>
-              <%= f.button t('general.update'), type: 'submit', class: 'toolbar__item button button--primary' %>
-            <% else %>
-              <%= f.button t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
-            <% end %>
+        <% else %>
+          <div class="toolbar">
+            <div class="toolbar__left">
+              <%= link_to t('general.delete_this_application'),
+                          organization_aid_application_path(current_organization, current_aid_application),
+                          method: :delete,
+                          class: "button button--danger",
+                          data: { confirm: "Are you sure you want to delete this application?" } %>
+            </div>
+            <div class="toolbar__right">
+              <% if @aid_application.submitted? %>
+                <%= f.button t('general.update'), type: 'submit', class: 'toolbar__item button button--primary' %>
+              <% else %>
+                <%= f.button t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
