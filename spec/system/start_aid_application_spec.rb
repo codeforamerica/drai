@@ -39,8 +39,8 @@ describe 'Start aid application', type: :system do
     fill_in "aid_application[birthday(2i)]", with: "1"
     fill_in "aid_application[birthday(3i)]", with: "1"
 
-    expect(page).to have_content "The following questions are optional for the client to answer. If left blank, they will be recorded as 'prefer not to answer'."
-    select "Spanish", from: "Language in which service is being provided to applicant"
+    expect(page).to have_content I18n.t('aid_applications.applicants.edit.contact_information.optional_questions_prompt')
+    select "Spanish", from: I18n.t('aid_applications.applicants.edit.applicant_information.preferred_language')
     check "Asian Indian"
     select "Bisexual", from: "Sexual orientation"
     select "Another gender identity", from: "Gender"
@@ -149,7 +149,7 @@ describe 'Start aid application', type: :system do
                                  covid19_experiencing_symptoms: true,
                                  name: "Alice",
                                  preferred_language: "Spanish",
-                                 country_of_origin: 'Prefer not to answer',
+                                 country_of_origin: 'Decline to state',
                                  racial_ethnic_identity: ['Asian Indian', 'Hispanic or Latino (any other race)'],
                                  sexual_orientation: "Bisexual",
                                  gender: "Another gender identity",
