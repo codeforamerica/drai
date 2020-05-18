@@ -363,34 +363,47 @@ RSpec.describe AidApplication, type: :model do
       let(:preferred_language) { 'English' }
       let(:aid_application) { create :aid_application, :submitted, email_consent: false, preferred_language: preferred_language }
 
-      it 'sends an SMS welcome message and then application number message' do
-        expect do
-          aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args).exactly(:twice)
-      end
-
-      it 'sends an SMS in english' do
+      it 'sends an SMS welcome message and then SMS application number message' do
         expect do
           aid_application.send_submission_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
-          args: [{
-            to: aid_application.phone_number,
-            body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'en')
-          }]
+                                                                     args: [{
+                                                                              to: aid_application.phone_number,
+                                                                              body: I18n.t('text_message.subscribed', locale: 'en')
+                                                                            }]
+        )
+        expect do
+          aid_application.send_submission_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
+                                                                     args: [{
+                                                                              to: aid_application.phone_number,
+                                                                              body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'en')
+                                                                            }]
         )
       end
 
       context 'when the application has a preferred_language of Spanish' do
         let(:preferred_language) { 'Spanish' }
 
-        it 'sends an SMS in Spanish' do
+        it 'sends the SMS messages in Spanish' do
           expect do
             aid_application.send_submission_notification
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
                      .with("ApplicationTexter", "basic_message", "deliver_now",
                            args: [{
-                                      to: aid_application.phone_number, 
-                                      body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'es')
+                                    to: aid_application.phone_number,
+                                    body: I18n.t('text_message.subscribed', locale: 'es')
+                                  }]
+          )
+
+
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationTexter", "basic_message", "deliver_now",
+                           args: [{
+                                    to: aid_application.phone_number,
+                                    body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'es')
                                   }]
                      )
         end

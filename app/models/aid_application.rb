@@ -368,7 +368,7 @@ class AidApplication < ApplicationRecord
     if sms_consent?
       ApplicationTexter.basic_message(
           to: phone_number,
-          body: I18n.t('text_message.subscribed')
+          body: I18n.t('text_message.subscribed', locale: locale)
       ).deliver_later
 
       ApplicationTexter.basic_message(
