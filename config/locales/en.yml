@@ -104,6 +104,7 @@ en:
           message_rates_apply: Message and data rates may apply. You will be able
             to opt out by texting STOP at any time or texting HELP for more information.
             You will receive 3 messages per application.
+            Visit www.ca-drai.com/privacy for Privacy and SMS policies.
           optional_questions_prompt: The following questions are optional for the
             client to answer. If left blank, they will be recorded as 'decline to
             state'.
@@ -393,7 +394,7 @@ en:
   privacies:
     show:
       body_html: |
-        <ol>
+        <ol class="list--numbered">
           <li>When you opt-in to the service, we will send you an SMS message to confirm your signup.</li>
           <li>Code for America will send you notifications about the status of your application.</li>
           <li>You can cancel the SMS service at any time. Just text "STOP" to the short code. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us.</li>
