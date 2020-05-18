@@ -11,7 +11,7 @@ module AidApplications
       @aid_application.save_and_approve(approver: current_user)
 
       respond_with @aid_application, location: (lambda do
-        if Rails.env.production? || Rails.env.demo?
+        if Rails.env.production?
           # TODO: Finish Disbursement
           homepage_path(current_user)
         else

@@ -4,6 +4,8 @@ module AidApplications
     before_action do
       if current_aid_application.disbursed_at.present?
         redirect_to edit_organization_aid_application_finished_path(current_organization, current_aid_application)
+      elsif current_aid_application.approved_at.blank?
+        redirect_to organization_aid_application_approval_path(current_organization, current_aid_application)
       end
     end
 
@@ -38,8 +40,6 @@ module AidApplications
         )
         AssignActivationCodeJob.perform_later(payment_card: payment_card)
       end
-
-      current_aid_application.send_disbursement_notification
 
       redirect_to edit_organization_aid_application_finished_path(current_organization, current_aid_application)
     end

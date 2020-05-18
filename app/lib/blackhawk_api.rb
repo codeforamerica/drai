@@ -22,19 +22,19 @@ class BlackhawkApi
   end
 
   def self.activate(quote_number:, proxy_number:, activation_code:)
-    return if Rails.application.secrets.blackhawk_client_id.blank? && Rails.application.secrets.blackhawk_client_secret.blank?
+    return true if (Rails.env.development? && Rails.application.secrets.blackhawk_client_id.blank?)
 
-    new(
-      client_id: Rails.application.secrets.blackhawk_client_id,
-      client_secret: Rails.application.secrets.blackhawk_client_secret
-    ).activate(
+    new.activate(
       quote_number: quote_number,
       proxy_number: proxy_number,
       activation_code: activation_code
     )
   end
 
-  def initialize(client_id:, client_secret:)
+  def initialize(
+    client_id: Rails.application.secrets.blackhawk_client_id,
+    client_secret: Rails.application.secrets.blackhawk_client_secret
+  )
     @client_id = client_id
     @client_secret = client_secret
     @access_token = nil
@@ -75,11 +75,12 @@ class BlackhawkApi
   end
 
   def authenticate
+    # FYI, headers only work consistently with lowercase keys
     request = Typhoeus.post(
       "#{api_host}/api/auth",
       headers: {
-        'Content-Type' => "application/x-www-form-urlencoded",
-        'Accept' => 'application/json'
+        'content-type' => "application/x-www-form-urlencoded",
+        'accept' => 'application/json'
       },
       body: { grant_type: 'client_credentials' },
       userpwd: "#{@client_id}:#{@client_secret}"

@@ -12,7 +12,7 @@ RSpec.describe AssignActivationCodeJob, type: :job do
     described_class.perform_now(payment_card: payment_card)
 
     payment_card.reload
-    expect(payment_card.activation_code_assigned_at).to be_within(1.second).of Time.current
+    expect(payment_card.blackhawk_activation_code_assigned_at).to be_within(1.second).of Time.current
   end
 
   context 'when there is not an activation code' do
@@ -41,7 +41,7 @@ RSpec.describe AssignActivationCodeJob, type: :job do
 
   context 'when it has already been assigned' do
     before do
-      payment_card.update(activation_code_assigned_at: 5.minutes.ago)
+      payment_card.update(blackhawk_activation_code_assigned_at: 5.minutes.ago)
     end
 
     it 'raises an exception' do

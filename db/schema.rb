@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_224800) do
+ActiveRecord::Schema.define(version: 2020_05_18_182102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_224800) do
     t.string "card_number"
     t.string "client_order_number"
     t.string "activation_code"
-    t.datetime "activation_code_assigned_at"
+    t.datetime "blackhawk_activation_code_assigned_at"
     t.bigint "aid_application_id"
     t.index ["aid_application_id"], name: "index_payment_cards_on_aid_application_id", unique: true
     t.index ["proxy_number"], name: "index_payment_cards_on_proxy_number", unique: true
