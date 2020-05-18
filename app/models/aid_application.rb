@@ -373,7 +373,7 @@ class AidApplication < ApplicationRecord
 
       ApplicationTexter.basic_message(
         to: phone_number,
-        body: I18n.t('text_message.app_id', app_id: application_number)
+        body: I18n.t('text_message.app_id', app_id: application_number, locale: locale)
       ).deliver_later
     end
 
@@ -393,7 +393,8 @@ class AidApplication < ApplicationRecord
         body: I18n.t(
           'text_message.activation',
           activation_code: payment_card.activation_code,
-          ivr_phone_number: BlackhawkApi.ivr_phone_number
+          ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          locale: locale
         )
       ).deliver_later
     end
@@ -486,6 +487,27 @@ class AidApplication < ApplicationRecord
   def sms_consent_only_if_not_landline
     if sms_consent? && landline?
       self.sms_consent = false
+    end
+  end
+
+  def locale
+    case preferred_language
+    when "Spanish"
+      "es"
+    when "Cantonese"
+      "zh"
+    when "Mandarin"
+      "zh"
+    when "Arabic"
+      "ar"
+    when "Vietnamese"
+      "vi"
+    when "Korean"
+      "ko"
+    when "Tagalog"
+      "tl"
+    else
+      "en"
     end
   end
 end
