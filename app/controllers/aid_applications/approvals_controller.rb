@@ -17,7 +17,7 @@ module AidApplications
         else
           edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application)
         end
-      end)
+      end), notice: "#{@aid_application.application_number} has been approved."
     end
   end
 end
