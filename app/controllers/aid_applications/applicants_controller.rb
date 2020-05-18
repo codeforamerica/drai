@@ -19,7 +19,7 @@ module AidApplications
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
-          SendApplicationNumberNotificationJob.perform_later(aid_application: @aid_application)
+          @aid_application.send_submission_notification
         end
       elsif params[:form_action] == 'allow_mailing_address'
         @aid_application.allow_mailing_address = true

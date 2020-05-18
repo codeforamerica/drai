@@ -358,6 +358,74 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#send_submission_notification' do
+    context 'when SMS consent' do
+      let(:aid_application) { create :aid_application, :submitted, email_consent: false }
+
+      it 'sends an SMS' do
+        expect do
+          aid_application.send_submission_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+      end
+    end
+
+    context 'when email consent' do
+      let(:aid_application) { create :aid_application, :submitted, sms_consent: false }
+
+      it 'sends an email' do
+        expect do
+          aid_application.send_submission_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+      end
+    end
+
+    context 'when both consents' do
+      let(:aid_application) { create :aid_application, :submitted }
+
+      it 'sends both email and sms' do
+        expect do
+          aid_application.send_submission_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+      end
+
+    end
+  end
+
+  describe '#send_disbursement_notification' do
+    context 'when SMS consent' do
+      let(:aid_application) { create :aid_application, :disbursed, email_consent: false }
+
+      it 'sends an SMS' do
+        expect do
+          aid_application.send_disbursement_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+      end
+    end
+
+    context 'when email consent' do
+      let(:aid_application) { create :aid_application, :disbursed, sms_consent: false }
+
+      it 'sends an email' do
+        expect do
+          aid_application.send_disbursement_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+      end
+    end
+
+    context 'when both consents' do
+      let(:aid_application) { create :aid_application, :disbursed }
+
+      it 'sends both email and sms' do
+        expect do
+          aid_application.send_disbursement_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+      end
+
+    end
+  end
+
   describe 'papertrail' do
     it 'tracks changes' do
       expect do

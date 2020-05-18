@@ -364,6 +364,48 @@ class AidApplication < ApplicationRecord
     end
   end
 
+  def send_submission_notification
+    if sms_consent?
+      ApplicationTexter.basic_message(
+        to: phone_number,
+        body: I18n.t('text_message.app_id', app_id: application_number)
+      ).deliver_later
+    end
+
+    if email_consent?
+      ApplicationEmailer.basic_message(
+        to: email,
+        subject: I18n.t('email_message.app_id.subject', app_id: application_number),
+        body: I18n.t('email_message.app_id.body_html', app_id: application_number)
+      ).deliver_later
+    end
+  end
+
+  def send_disbursement_notification
+    if sms_consent?
+      ApplicationTexter.basic_message(
+        to: phone_number,
+        body: I18n.t(
+          'text_message.activation',
+          activation_code: payment_card.activation_code,
+          ivr_phone_number: BlackhawkApi.ivr_phone_number
+        )
+      ).deliver_later
+    end
+
+    if email_consent?
+      ApplicationEmailer.basic_message(
+        to: email,
+        subject: I18n.t('email_message.activation.subject'),
+        body: I18n.t(
+          'email_message.activation.body_html',
+          activation_code: payment_card.activation_code,
+          ivr_phone_number: BlackhawkApi.ivr_phone_number
+        )
+      ).deliver_later
+    end
+  end
+
   def readonly_attribute?(name)
     if name.in? READONLY_ONCE_SET
       attribute_was(name).present?
