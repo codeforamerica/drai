@@ -13,7 +13,6 @@
   <body>
     <div class="wrapper-body">
       <%= render 'shared/demo_banner' if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
-      <%= render 'shared/go_live_banner' %>
       <%= render 'shared/alerts' %>
       <%= render 'shared/header' %>
 
