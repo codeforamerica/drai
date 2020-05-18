@@ -231,6 +231,10 @@ class AidApplication < ApplicationRecord
       )
   end
 
+  scope :matching_approved_apps, ->(aid_application) do
+    approved.matching_submitted_apps(aid_application)
+  end
+
   belongs_to :organization, counter_cache: true
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
