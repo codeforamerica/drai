@@ -9,7 +9,7 @@ module Admin
                                  .submitted
                                  .order(id: :desc)
                                  .limit(LIMIT)
-      aid_applications_query = applications.query(params[:term]) if params[:term].present?
+      aid_applications_query = aid_applications_query.query(params[:term]) if params[:term].present?
       @aid_applications = aid_applications_query
     end
   end
