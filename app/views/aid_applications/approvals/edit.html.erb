@@ -16,7 +16,8 @@
     <% else %>
       <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
         <div class="form-card__footer">
-          <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+          <p><%= f.button "Approve and exit", type: "submit", name: 'form_action', value: 'approve_and_exit',  class: 'button button--primary' %></p>
+          <p><%= f.button "Approve and continue to disbursement", type: 'submit', name: 'form_action', value: 'submit', class: 'button button--primary' %></p>
 
           <br>
           <br>

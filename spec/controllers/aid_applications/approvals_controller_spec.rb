@@ -20,30 +20,13 @@ describe AidApplications::ApprovalsController do
       expect(aid_application.approver).to eq supervisor
     end
 
-    context 'when not in production' do
-      it 'redirects to the disbursements' do
-        put :update, params: {
-          aid_application_id: aid_application.id,
-          organization_id: supervisor.organization.id
-        }
+    it 'redirects to the disbursements' do
+      put :update, params: {
+        aid_application_id: aid_application.id,
+        organization_id: supervisor.organization.id
+      }
 
-        expect(response).to redirect_to edit_organization_aid_application_disbursement_path(supervisor.organization, aid_application)
-      end
-    end
-
-    context 'when in production' do
-      before do
-        allow(Rails.env).to receive(:production?).and_return(true)
-      end
-
-      it 'redirects to the homepage' do
-        put :update, params: {
-          aid_application_id: aid_application.id,
-          organization_id: supervisor.organization.id
-        }
-
-        expect(response).to redirect_to organization_dashboard_path(supervisor.organization)
-      end
+      expect(response).to redirect_to edit_organization_aid_application_disbursement_path(supervisor.organization, aid_application)
     end
   end
 end
