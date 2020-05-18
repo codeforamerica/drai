@@ -7,15 +7,15 @@ describe 'Session timeout' do
     sign_in assister
     visit root_path
 
-    Timecop.travel 14.minutes
+    Timecop.travel 29.minutes
     visit root_path
     expect(page).to have_link 'Sign out'
 
-    Timecop.travel 14.minutes
+    Timecop.travel 29.minutes
     visit root_path
     expect(page).to have_link 'Sign out'
 
-    Timecop.travel 16.minutes
+    Timecop.travel 31.minutes
     visit root_path
     expect(page).not_to have_link 'Sign out'
     expect(page).to have_content 'Your session expired. Please sign in again to continue.'
