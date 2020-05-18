@@ -367,6 +367,11 @@ class AidApplication < ApplicationRecord
   def send_submission_notification
     if sms_consent?
       ApplicationTexter.basic_message(
+          to: phone_number,
+          body: I18n.t('text_message.subscribed')
+      ).deliver_later
+
+      ApplicationTexter.basic_message(
         to: phone_number,
         body: I18n.t('text_message.app_id', app_id: application_number)
       ).deliver_later
