@@ -13,13 +13,7 @@ module Account
       @user.save(context: :account_setup)
 
       bypass_sign_in(@user) if @user.errors.empty?
-      respond_with @user, location: (lambda do
-        if @user.organization
-          organization_assisters_path(@user.organization)
-        else
-          assisters_path
-        end
-      end)
+      respond_with @user, location: -> { homepage_path(@user) }
     end
 
     private

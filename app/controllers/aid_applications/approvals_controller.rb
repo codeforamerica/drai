@@ -13,7 +13,7 @@ module AidApplications
       respond_with @aid_application, location: (lambda do
         if Rails.env.production? || Rails.env.demo?
           # TODO: Finish Disbursement
-          redirect_to_organization_home_page(current_user)
+          homepage_path(current_user)
         else
           edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application)
         end
