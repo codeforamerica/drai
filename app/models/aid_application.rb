@@ -214,7 +214,7 @@ class AidApplication < ApplicationRecord
   has_paper_trail
 
   scope :submitted, -> { where.not(submitted_at: nil) }
-  scope :approved, -> { where.not(submitted_at: nil) }
+  scope :approved, -> { where.not(approved_at: nil) }
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
@@ -225,6 +225,10 @@ class AidApplication < ApplicationRecord
         zip_code: aid_application.zip_code.strip,
         street_address: aid_application.street_address.strip
       )
+  end
+
+  scope :matching_approved_apps, ->(aid_application) do
+    approved.matching_submitted_apps(aid_application)
   end
 
   belongs_to :organization, counter_cache: true
