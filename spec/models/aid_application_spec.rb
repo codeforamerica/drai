@@ -5,6 +5,7 @@ RSpec.describe AidApplication, type: :model do
 
   it 'has a valid factory' do
     aid_application = build :aid_application
+    expect(aid_application).to be_valid(:eligibility)
     expect(aid_application).to be_valid(:submit)
   end
 

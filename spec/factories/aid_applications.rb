@@ -3,6 +3,14 @@ FactoryBot.define do
     creator { build :assister }
     organization { creator.organization }
 
+    # Eligibility
+    county_name { organization&.county_names&.first }
+    no_cbo_association { true }
+    covid19_reduced_work_hours { true }
+    valid_work_authorization { false }
+    attestation { true }
+
+    # Application
     name { Faker::Name.name }
     birthday { 'January 1, 1980' }
 
@@ -24,11 +32,6 @@ FactoryBot.define do
 
     racial_ethnic_identity { [AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS.first] }
 
-    no_cbo_association { true }
-    attestation { true }
-
-    covid19_reduced_work_hours { true }
-    valid_work_authorization { false }
     card_receipt_method { 'Mail' }
 
     trait :submitted do

@@ -1,14 +1,6 @@
 module AidApplications
   class DisbursementsController < BaseController
-    class SearchCard
-      include ActiveModel::Model
-      attr_accessor :sequence_number
-
-      def self.model_name
-        ActiveModel::Name.new(self, nil, "SearchCard")
-      end
-    end
-
+    before_action :authenticate_supervisor!
     before_action do
       if current_aid_application.disbursed_at.present?
         redirect_to edit_organization_aid_application_finished_path(current_organization, current_aid_application)
@@ -53,6 +45,15 @@ module AidApplications
 
     def search_card_params
       params.require(:search_card).permit(:sequence_number)
+    end
+
+    class SearchCard
+      include ActiveModel::Model
+      attr_accessor :sequence_number
+
+      def self.model_name
+        ActiveModel::Name.new(self, nil, "SearchCard")
+      end
     end
   end
 end

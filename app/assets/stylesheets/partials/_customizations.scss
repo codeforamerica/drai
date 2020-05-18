@@ -67,6 +67,8 @@
 
 .disabled {
   opacity: .5;
+  pointer-events: none;
+  cursor: default;
 }
 
 .group-of-individual-checkboxes .form-group {

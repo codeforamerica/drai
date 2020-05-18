@@ -37,6 +37,11 @@ class ApplicationController < ActionController::Base
     redirect_to organization_dashboard_path(current_user.organization)
   end
 
+  def supervisor_visible?
+    current_user.supervisor? || current_user.admin?
+  end
+  helper_method :supervisor_visible?
+
   def after_sign_in_path_for(user)
     stored_location = stored_location_for(user)
 
