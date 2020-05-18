@@ -39,6 +39,8 @@ module AidApplications
         AssignActivationCodeJob.perform_later(payment_card: payment_card)
       end
 
+      current_aid_application.send_disbursement_notification
+
       redirect_to edit_organization_aid_application_finished_path(current_organization, current_aid_application)
     end
 

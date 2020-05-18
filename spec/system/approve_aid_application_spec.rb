@@ -59,5 +59,11 @@ describe 'Approve aid application', type: :system do
       activation_code: payment_card.activation_code
     )
     expect(payment_card.activation_code_assigned_at).to be_within(1.second).of Time.current
+
+    open_sms aid_application.phone_number
+    expect(current_sms).to have_content payment_card.activation_code
+
+    open_email aid_application.email
+    expect(current_email).to have_content payment_card.activation_code
   end
 end

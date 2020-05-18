@@ -160,5 +160,8 @@ describe 'Start aid application', type: :system do
 
     open_sms aid_application.phone_number
     expect(current_sms).to have_content aid_application.application_number
+
+    open_email aid_application.email
+    expect(current_email).to be_nil
   end
 end
