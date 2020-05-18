@@ -1,0 +1,351 @@
+---
+tl:
+  activerecord:
+    errors:
+      messages:
+        attestation_required: Kinakailangn ang pagpapatotoo
+        check_one_box_eligible: Kailangan isang kahon ang i-tsek ng kliyente upang
+          maging karapat-dapat.
+        confirmation_required: Kinakailangan ang kumpirmasyon.
+        eligibility_criteria: Ang kliyente lamang na sumagot ng “Hindi” ay karapat-dapat
+          para sa DRAI
+        email: Siguraduhin na ipasok ang balidong email
+        landline_sms: Ang mga landlines ay hindi nakakatangap ng mensahe sa teks.
+          Ipasok ang numero ng telepono o palitan ang paraan ng abiso.
+        phone_number: Siguraduhin na ang iyong numero ng telepono ay 10 tambilang
+          ang haba
+        required_question: Kinakailangan ang katanungan na ito.
+        zip_code: Dapat 5-tambilang na ZIP Code sa California
+        zip_five_digits: Dapat 5-tambilang na Zip Code
+  aid_applications:
+    confirm_messages:
+      edit:
+        activation_code_required: Ang kliyente ay *dapat* magkaroon ng Kodigo ng Pagiging-aktibo
+          sa paggamit ng kanilang kard.
+        button: Ipadala ang Kodigo ng Pagiging-aktibo
+        contact_info: Ito ay magpapadala sa aplikante ng kanilang kodigo sa paraan
+          na kanilang pinili sa kanilang inisyal na aplikasyon.
+        edit: Baguhin ang Impormasyon ng Kontak
+        emergency_confirm: Sigurado ka bang nais mo ma-access ito?
+        emergency_info: Gamitin lamang ang access sa emerhensya kung ang kliyente
+          ay hindi nakatanggap mismo ng kanilang Kodigo ng Pagiging-aktibo. Ang isang
+          rekord nitong aksyon ay maitatala.
+        message_received: Natanggap ang Mensahe
+        notification: Ang aplikasyon ay naaprubahan para kay  <PANGALAN NG KLIYENTE>
+        question: Meron bang Kodigo ng Pagiging aktibo ang aplikante?
+        title: Kodigo ng Pagiging -aktibo
+    disbursements:
+      edit:
+        activation_trouble: Kung ikaw ay may mga problema sa pag-activate ng iyong
+          kard ng kabayaran, pag-aralan ang alituntunin at makipag-ugnay sa taga-isyu
+          ng kard sa pamamagitan ng numero ng telepono o impormasyon ng website na
+          nakalista sa kard ng kabayaran.
+        disburse_card: Naipamahaging kard
+        inform_application: 'Ipaalam sa aplikante:'
+        lost_card: Kung nawala mo ang iyong kard o nanakaw ang kard, hindi ito mapapalitan.
+        method: Sa anong paraan naipamahagi ang kard?
+        sequence_number: Numero ng Pagkakasunod ng Kard
+        title: Kumpletuhin ang pakikibahagi
+        when: Kailan naipamahagi ang kard?
+    duplicates:
+      show:
+        body: May isang tao na may magkasing pangalan, petsa ng kapanganakan at address
+          ang nag-aplay na para sa DRAI.
+        title: Ang aplikante na ito ay natukoy na isang doble.
+    edits:
+      edit:
+        about_program:
+          about_accordian:
+            body: Ito ay isang programa para sa walang dokumento na mga imigrante
+              upang makakuha ng pinansiyal na tulong sa panahon ng pandemiko. Ang
+              tulong ay isang $500 na debit kard bawat adulto. Ang mga tao na nag-aplay
+              ay kinakailangan na sumagot sa mga katanungan kung sila ba ay naapektuhan
+              ng COVID-19, at magbibigay din ng ilang personal na impormasyon. Kinakailangan
+              nilang magsumite ng mga dokumento na nagbibigay ng impormasyon na iyon.
+            title: Tungkol sa programang DRAI
+        additional_information:
+          receives_calfresh_help_text: Ang isang sambahayan ay nangangahulugan bilang
+            mga indibidwal na nakatira o namili at naghanda ng mga pagkain na magkakasama.
+          receives_calfresh_label: May sinuman ba sa iyong sambahayan ang kasalukuyang
+            tumatanggap ng CalFresh o CalWORKs n benepisyo?
+          title: Karagdagang impormasyon
+          unmet_needs_childcare: Pangangalaga sa Pabahay
+          unmet_needs_food: Pagkain
+          unmet_needs_housing: Pabahay ( i.e. kahirapan sa pagbayad ng paupahan o
+            mortgage)
+          unmet_needs_legend: Anong mga pangangailangan ang iyong hindi nakamit?
+          unmet_needs_none_of_the_above: Wala sa alinman sa itaas
+          unmet_needs_other: Ibang pangangailangn na hindi nakamit
+          unmet_needs_transportation: Transportasyon
+          unmet_needs_utilities: Mga Utilidad
+        applicant_information:
+          country_of_origin: Pinagmulan na bansa
+          dob: Araw ng Kapanganakan
+          gender: Kasarian
+          gender_options:
+            female: Babae
+            male: Lalaki
+            non_binary: Hindi Mawari ( hindi lalaki o babae)
+            other: Ibang pagkakakilanlan sa kasarian
+            transgender_female: 'Transgender: Lalaki sa Babae'
+            transgender_male: 'Transgender: Babae sa Lalaki'
+          help: Ang sumusunod ay para sa layunin ng demograpiya. Ang aplikante ay
+            maaaring tumanggi na sumagot.
+          name: Buong Pangalan
+          racial_ethnic_identity: Lahi/etnikong pagkakakilanlan
+          sexual_orientation: Orientasyon ng kasarian
+          title: Impormasyon ng Aplikante
+        attestation:
+          statement: Ikaw ba ay nagpapatotoo na ang impormasyon na ibinigay ay totoo
+            at tama, at naiintindihan na ang impormasyon na ibingay, kung mali ang
+            representasyon, o hindi kumpleto, ay maaaring maging basehan sa pagtanggi
+            ng iyong aplikasyon?
+          subtitle: 'Basahin sa Aplikante:'
+          title: Pagpapatotoo ng Aplikante
+        california_address:
+          address_required: Kinakailangan ang isang address. Ang mga walang tahanan
+            na mga kliyente ay maaring gumamit ng tuluyan o ibang address.
+          title: Address sa Residente
+        contact_information:
+          email_address: Address sa email (kung meron)
+          help_text: Pumili ng isa o pareho na paraan ng abiso. Papadalhan ang aplikante
+            ng kanilang Numero ng Aplikastyon at Code ng Kodigo ng Pagiging-aktibo
+            sa pamamagitan nitong paraan.
+          landline: Ito ay isang landline
+          message_rates_apply: Ang rata sa mensahe at data ay maaaring nalalapat.
+            Ikaw ay maaaring umalis sa pamamagitan ng pagteks ng HUMINTO sa anumang
+            oras o pagteks ng TULONG para sa karagdagang impormasyon. Ikaw ay makakatangap
+            ng 2 mga mensahe sa bawat aplikasyon.
+          phone_number_required: Kinakailangan ng lahat na magbigay ng numero ng telepono,
+            maliban sa paraan ng abiso.
+          preferred_contact_email: Email
+          preferred_contact_label: Paano mo nais na matanggap ang mga mensahe ng iyong
+            Numero ng Aplikasyon at Kodigo ng Pagiging-aktibo?
+          preferred_contact_text: Mensahe sa teksto
+          read_to_client: 'Basahin sa aplikante:'
+          title: Kontak na Impormasyon
+        eligibility:
+          care_facility_closed: Ang pasilidad ba ng pangangalaga, tulad ng paaralan,
+            pasilidad sa pangangalaga sa bata o ibang pasilidad na pinaninirahan ng
+            adulto, kung saan mo madalas pinapadala ang iyong anak o ibang tao para
+            sa pangangalaga, ay sarado dahil sa pagsiklab ng COVID-19?
+          caregiver: Ikaw ba ay isang tagapangalaga ng isang dependente, tulad ng
+            isang bata o nakatatandang magulang, o isang asawa na may o nagkaroon
+            ng patuloy na sintomas ng COVID-19, na nagdulot saiyo ng hindi pagtratrabaho?
+          experiencing_symptoms: Ikaw ba nakararanas o nakaranas ng patuloy na sintomas
+            ng COVID-19?
+          help_text: Kasama ng isang balidong dokumento ang Social Security Number
+            kard at ang awtorisasyon sa pagtrabaho o Dokumento ng Awtorisasyon sa
+            Pagtratrabaho o Employment Authorization Document na inisyu ng U.S. Citizenship
+            and Immigration Services
+          label_text: Ikaw ba ay may kasalukuyang balidong dokumento na pinapayagan
+            ka na magtrabaho sa Estados Unidos?
+          read_to_client: Basahin ang sumusunod sa aplikante. Kailangan nilang tugunan
+            ang isa sa pamantayan. I-tsek lahat ng mga kahon na nalalapat.
+          reduced_work_hours: Ikaw ba, o ibang mga adulto sa iyong sambahayan na nagbibigay
+            ng kita sa iyong sambahayan, ang nawalan ng trabaho o nabawasanan ang
+            oras ng pagtratrabaho dahil sa pagsiklab ng COVID-19?
+          title: Pagiging karapat-dapat
+          underlying_health_condition: Ikaw ba ay nasa mataas na panganib ng malubhang
+            sakit ng COVID-19 dahil sa kasalukuyang kondisyon sa kalusugan o edad,
+            at samakatuwid hindi makatrabaho upang sumunod sa kuitusan ng pagdistansiya
+            sa lipunan?
+        language:
+          languages:
+            arabic: Arabiko
+            chinese: Intsik (pinasimple)
+            english: Ingles
+            koren: Koreano
+            spanish: Espanyol
+            tagalog: Tagalog
+            vietnamese: Bietnamese
+          title: Aplikasyon ng Lengwahe
+        mailing_address:
+          add_mailing_address: Magdagdag ng hiwalay na address sa koreo
+          title: Address sa Koreo
+        organization_relationship:
+          title: Kumpirmahin na ang aplikante ay hindi empleyado, kontraktor, o boluntaryo
+            nitong organisasyon.
+        privacy:
+          help_text: Basahin ito sa aplikante.
+          text: "Ako ay magtatanong sa iyo ng ilang mga katanungan na magagamit upang
+            beripikahin ang iyong pagiging karapat-dapat para sa tulong na ito. Kami
+            rin ay mangongolekta ng dokumentasyon mula sa iyo upang beripikahin kung
+            sino ang nag-aaplay para sa tulong na ito. Ang iyong personal na impormasyon
+            ay protektado. Ito ay ipapasok sa isang online na portal na pinamamahalaan
+            ng isang walang kita na organsisasyon. Ito rin ay magaganap sa iyong organisasyon.
+            Kami ay makikibahagi ng ilang pangkalahatang pinagtipon na impormasyon
+            sa estado ng gobyerno, ngunit wala ang makikilala sa iyo. Ang iyong impormasyon
+            ay hindi ibabahagi sa sinuman, at ito ay sisirain sa kalaunan para sa
+            kaligtasan ng lahat.  Base sa impormasyon na ito, nais mo bang ipagpatuloy
+            ang aplikasyon?"
+          title: Pribadong iskript
+        service_criteria:
+          title: Pamantayan ng serbisyo
+          zip_code:
+            button: Tignan
+            error: "<COUNTY> Ang county ay nasa labas ng iyong lugar ng serbisyo,
+              isangguni ang aplikante sa:"
+            notification: "<COUNTY> Ang county ay nasa loob ng iyong lugar ng serbisyo."
+            title: ZIP code
+        shared_address:
+          apartment_number: Apartment, gusali, yunit, atbp (opsyonal)
+          city: Lungsod
+          state: Estado
+          street_address: Direksyon ng Kalye
+          zip: Zip Code
+    verifications:
+      edit:
+        app_not_submitted: Ang aplikasyon ay hindi pa naisumite.
+        app_submitted: Ang aplikasyon ay tagumpay na naisumite
+        app_verified: Ang aplikasyon ay matagumpy na naberipika.
+        application_number:
+          message: Kinakailangan isulat ng kliyente ang numero. Kinakailangan nila
+            upang i-pick up ang benepisyo nang personal.
+          title: Numero ng Aplikasyon
+        next_steps:
+          step1: Kinakailangan mong isumite ang mga dokumentasyon sa pagberipika na
+            ang ating tinalakay sa susunod na limang araw ng negosyo.
+          step2: Kung hindi naming natanggap ang mga dokumentong ito, ang iyong aplikasyon
+            na inihain ay maisasara at kailangan mo uling mag-aplay.
+          step3: Hindi namin garantisado na ang tulong ay magagamit sa ibang petsa
+            sa hinaharap.
+          step4: Aabisuhan ka naming kapag naaprubahan ang iyong aplikasyon at kung
+            paano ito maibibgay sa iyo.
+          step5: Kumpirmahin ang paraan ng pagdeliber sa aplikante
+          title: Susunod na mga Hakbang
+        receive_card:
+          options:
+            deliver: Deliber
+            mail: Koreo
+            pick_up: Pick-up
+          subtitle: Ito ay maaaring baguhin sa hinaharap.
+          title: Paano kukunin ng aplikante ang kanilang kard?
+        title: Naisumite ang aplikasyon
+        verifications:
+          covid19_impact_accordion:
+            body: "-Liham o abiso na ang aplikante ay kailangan mag-alaga ng bata
+              o ibang tao na ang paaralan, pasilidad sa pangangalaga sa bata o ibang
+              pasilidad sa pangangalaga ay sarado dahil sa COVID 19-Liham o abiso
+              mula sa pinagtratrabahuan na nakasaad ang kawalan ng trabaho o malaking
+              pagbawas ng oras sa trabaho dahil sa COVID-19-Liham o abiso mula
+              sa isang medikal na propesyonal o ibang dokumentasyon na nagpapakita
+              ng kahirapan base sa anuman sa sumsunod: a. May sintomas na kapareho
+              sa COVID-19b. May mataas sa panganib sa malubhang sakit mula sa
+              COVID-19 dahil sa kasalukuyang kondisyon sa kalusugan o edad at samakatuwid
+              hindi makatrabaho upang makasunod sa kautusan ng piskal na pagdistansiya
+              sa gabay ng pampublkong kalusugan"
+            title: Dulot ng COVID-9
+          message: 'Upang maiproseso ang iyong aplikasyon, kinakailangan naming na
+            beripikahin na tama ang impormasyon na ibinigay. Kinakailangan mong isumite
+            ang sumusunnod na dokumento sa pamamagitan ng teks, mail, o ibang sistema
+            na inimplementahan ng CBO, o sa personal:'
+          photo_id_accordion:
+            body: "-Anumang kard ng pagkakakilanlan na inisyu- ng- estado-Anumang
+              lisensiya sapag-drive na inisyu- ng- estado -Pasaporte mula sa ibang
+              bansa-Internasyonal na dokumento ng pagkakakilanlan-Kard ng
+              pagkakakilanlan sa paaralanKard ng pagkakakilanlan sa trabaho"
+            title: ID na may larawan
+          proof_of_address_accordion:
+            body: "-dokumento ng pagkakakilanlan na may nakalistang address, tulad
+              ng lisensiya sa pagdrive na inisyu-ng-estado o kard ng pagkakakilanlan
+              na inisyu-ng-estado-Liham ng benepisyo mula sa ahensiya ng gobyerno
+              na naka-address sa aplikante na nagpapakita na ang aplikante ay nakatira
+              sa sambahayan-Kasunduna sa pag-papaupa na nagpapakita ng pangalan
+              ng aplikante-Singil sa utilidad na naka-address sa aplikante-Kard
+              ng insurance na nagpapakita ng pangalan ng aplikante-Papel sa pagpapatala
+              sa paaralan na may address, na naka-address sa aplikante o nagpapakita
+              ng pangalan ng aplikante"
+            title: Patunay ng address
+          title: Mga dokumento para sa beripikasyon
+  email_message:
+    activation:
+      body_html: "<p> Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan. Ang kodigo ng pagiging aktibo para sa iyong kabayaran sa kard ay %{activation_code}.</p><p>Tumawag %{ivr_phone_number} upang maging aktibo ang iyong kard. </p>"
+      subject: Kodigo ng pagiging aktibo para sa kabayaran sa kard ng Tulong sa Sakuna
+    app_id:
+      body_html: "<p> Mabuhay!</p><p> Ang iyong aplikasyon para sa pinansiyal
+        na tulong ay naisumite. Ang iyong numero ng ID sa aplikasyon ay %{app_id}.</p><p>
+        Kinakailangan mo ang numero na ito at ang iyong mga beripikasyon na dokumento
+        upang makatanggap ng kabayaran sa kard. </p><p>- Ang Kuponan ng DRAI</p>
+        "
+      subject: Naisumite ang tulong sa aplikasyon %{app_id}
+    auto_response:
+      body_html: "<p> Ito ay isang awtomatikong tugon para sa Kodigo ng Tulong sa
+        Sakuna ng Amerika. </p><p> Para sa tulong sa iyong aplikasyon, tawagan
+        ang organisasyon na nakatulong sa iyong aplikasyon. </p><p> Para sa tulong
+        sa iyong kabayaran na kard, tumawag sa 1-877-610-1075.</p>"
+  general:
+    activate: Gawing Aktibo
+    affirmative: Oo
+    approve: Aprubahan
+    cancel: Kanselahin
+    cancel_application: Kanselahin ang aplikasyon
+    confirm: Kumpirmahin
+    continue: Ipagpatuloy
+    delete: Tanggalin
+    delete_application: Tanggalin ang aplikasyon na ito
+    disabled: Kapansanan
+    email_address: Address ng email
+    go_back: Bumalik
+    negative: Hindi
+    optional: opsyonal
+    phone_number: Numero ng telepono
+    proceed: Ipagpatuloy
+    sign_out: Magsign-out
+    submit: Isumite
+    update: I-update
+  privacies:
+    show:
+      body_html: "<ol><li> Kapag ikaw ay umalis sa serbisyo, kami ay magpapadala
+        ng isang mensahe sa SMS upang kumpirmahin ang iyong pagsign-up. </li><li>Ang
+        Kodigo ng Amerika ay magpapadala sa iyo ng notipikasyon tungkol sa iyong katayuan
+        sa iyong aplikasyon. </li><li> Maaari mong kanselahin ang serbisyo ng
+        SMS sa anumang oras. Iteks lamang ang “STOP” sa maiksing kodigo. Pagkatapos
+        mo maipadala ang mensahe sa SMS na “STOP” sa amin, kami ay magpapadala ng
+        mensahe sa SMS na kumukumpirma na ikaw ay hindi na naka-subscribe. Pagkatapos
+        nito, hindi ka na makakatangap ng mensahe na SMS mula sa amin. </li><li>Kung
+        sa anumang oras nakalimutan mo kung ano ang mga keyword na sinusuportahan,
+        iteks lang ang “HELP” para sa maiksing kodigo. Pagkatapos mo naipadala ang
+        mensahe sa SMS na “HELP” sa amin, kami ay tutugon sa mga alituntunin kung
+        paano gamitin ang serbisyo at kung paano mag-unsubscribe. </li><li>Ang
+        mga carriers ay hindi responsable para sa naatala at hindi naipadalang mga
+        mensahe </li><li> Lagi, ang rata sa mensahe at data ay nalalapat para
+        sa anumang mensahe na naipadala sa iyo mula sa amin at sa amin sa iyo. Kung
+        ikaw ay may mga katanungan tungkol sa iyong plano sa teks o data plan, pinakamabuti
+        na makipag-ugnay sa iyong wireless na tagapagkaloob. Sa lahat ng mga katanungan
+        tungkol sa mga serbisyo sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring
+        magpadala ng email sa help@ca-drai.org </li><li>Kung ikaw ay may mga katanungan
+        tungkol sa pagiging pribado, pakibasa ang aming alituntunin sa pagiging pribado:
+        ca-drai.org/privacy</li><li> para sa mga katanungan, email ca-drai@website.com</li></ol>"
+      title: Kodigo ng alituntunin ng mga Notipikasyon ng Relebong Tulong sa Sakuna
+        ng Amerika
+  shared:
+    date_select:
+      day: Araw
+      month: Buwan
+      year: Taon
+  text_message:
+    activation: Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan. Ang
+      kodigo ng pagiging aktibo para sa iyong kabayaran na kard ay %{activation_code}. Tumawag
+      sa %{ivr_phone_number} upang i-activate ang iyong kard.
+    app_id: Ang iyong aplikasyon para sa tulong pinansiyal ay naisumite. Ang iyong
+      numero ng ID sa aplikasyon ay %{app_id}. Kailangan mo ang numero na ito at ang
+      iyong beripikasyon na mga dokumentong upang makatanggap ng kabayaran sa kard.
+    auto_response: Ito ay isang automatikong tugon mula sa Kodigo ng Tulong sa Sakuna
+      ng Amerika. Para sa tulong sa iyong kaso, makipag-ugnay sa organisasyon na tumutulong
+      sa iyong aplikasyon. Dagdag na impormasyon sa https://ca-drai.org/privacy
+    help: Ito ay isang awtomatikong tugon mula sa Kodigo ng Tulong sa Sakuna ng Amerika.
+      Para sa tuong sa iyong kaso, makipag-ugnay sa organisasyon na tumutulong sa
+      iyong aplikasyon. Dagdag na impormasyon sa https://ca-drai.org/privacy. Sumagot
+      ng STOP para hindi mag-subscribe.
+    subscribed: Ikaw ay sumasang-ayon na makatanggap ng mensahe sa Tulong sa Sakuna.
+      Ikaw ay makakatanggap ng mahalagang impormasyon tungkol sa aplikasyon at kabayaran
+      mula sa numero na ito. Sumagot ng HELP para sa tulong. Sumagot ng STOP para
+      magsubscribe. Ang mga rata sa msg&data ay maaring nalalapat.
+    unsubscribed: Ikaw ay nag-unsubscribe mula sa mga mensahe sa Tulong sa Sakuna.
+      Ikaw ay hindi makakatangap ng anumang dagdag na mga mensahe mula sa numero na
+      ito. Sumagot ng START upang muling mag-subscribe.
+  voice_message:
+    auto_response: Ito ay isang awtomatikong mensahe mula sa Kodigo sa Tulong sa Sakuna
+      ng Amerika. Para sa tulong sa iyong aplikasyon, tumawag sa organisasyon na tumulong
+      sa iyong aplikasyon. Para sa tulong sa iyong kabayaran sa kard, tumawag sa 1-877-610-1075
