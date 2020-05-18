@@ -168,7 +168,7 @@ tl:
             nitong organisasyon.
         privacy:
           help_text: Basahin ito sa aplikante.
-          text: "Ako ay magtatanong sa iyo ng ilang mga katanungan na magagamit upang
+          text: Ako ay magtatanong sa iyo ng ilang mga katanungan na magagamit upang
             beripikahin ang iyong pagiging karapat-dapat para sa tulong na ito. Kami
             rin ay mangongolekta ng dokumentasyon mula sa iyo upang beripikahin kung
             sino ang nag-aaplay para sa tulong na ito. Ang iyong personal na impormasyon
@@ -178,7 +178,7 @@ tl:
             sa estado ng gobyerno, ngunit wala ang makikilala sa iyo. Ang iyong impormasyon
             ay hindi ibabahagi sa sinuman, at ito ay sisirain sa kalaunan para sa
             kaligtasan ng lahat.  Base sa impormasyon na ito, nais mo bang ipagpatuloy
-            ang aplikasyon?"
+            ang aplikasyon?
           title: Pribadong iskript
         service_criteria:
           title: Pamantayan ng serbisyo
@@ -228,13 +228,13 @@ tl:
               o ibang tao na ang paaralan, pasilidad sa pangangalaga sa bata o ibang
               pasilidad sa pangangalaga ay sarado dahil sa COVID 19-Liham o abiso
               mula sa pinagtratrabahuan na nakasaad ang kawalan ng trabaho o malaking
-              pagbawas ng oras sa trabaho dahil sa COVID-19-Liham o abiso mula
-              sa isang medikal na propesyonal o ibang dokumentasyon na nagpapakita
-              ng kahirapan base sa anuman sa sumsunod: a. May sintomas na kapareho
-              sa COVID-19b. May mataas sa panganib sa malubhang sakit mula sa
-              COVID-19 dahil sa kasalukuyang kondisyon sa kalusugan o edad at samakatuwid
-              hindi makatrabaho upang makasunod sa kautusan ng piskal na pagdistansiya
-              sa gabay ng pampublkong kalusugan"
+              pagbawas ng oras sa trabaho dahil sa COVID-19-Liham o abiso mula sa
+              isang medikal na propesyonal o ibang dokumentasyon na nagpapakita ng
+              kahirapan base sa anuman sa sumsunod: a. May sintomas na kapareho sa
+              COVID-19b. May mataas sa panganib sa malubhang sakit mula sa COVID-19
+              dahil sa kasalukuyang kondisyon sa kalusugan o edad at samakatuwid hindi
+              makatrabaho upang makasunod sa kautusan ng piskal na pagdistansiya sa
+              gabay ng pampublkong kalusugan"
             title: Dulot ng COVID-9
           message: 'Upang maiproseso ang iyong aplikasyon, kinakailangan naming na
             beripikahin na tama ang impormasyon na ibinigay. Kinakailangan mong isumite
@@ -243,37 +243,38 @@ tl:
           photo_id_accordion:
             body: "-Anumang kard ng pagkakakilanlan na inisyu- ng- estado-Anumang
               lisensiya sapag-drive na inisyu- ng- estado -Pasaporte mula sa ibang
-              bansa-Internasyonal na dokumento ng pagkakakilanlan-Kard ng
-              pagkakakilanlan sa paaralanKard ng pagkakakilanlan sa trabaho"
+              bansa-Internasyonal na dokumento ng pagkakakilanlan-Kard ng pagkakakilanlan
+              sa paaralanKard ng pagkakakilanlan sa trabaho"
             title: ID na may larawan
           proof_of_address_accordion:
             body: "-dokumento ng pagkakakilanlan na may nakalistang address, tulad
               ng lisensiya sa pagdrive na inisyu-ng-estado o kard ng pagkakakilanlan
               na inisyu-ng-estado-Liham ng benepisyo mula sa ahensiya ng gobyerno
               na naka-address sa aplikante na nagpapakita na ang aplikante ay nakatira
-              sa sambahayan-Kasunduna sa pag-papaupa na nagpapakita ng pangalan
-              ng aplikante-Singil sa utilidad na naka-address sa aplikante-Kard
-              ng insurance na nagpapakita ng pangalan ng aplikante-Papel sa pagpapatala
-              sa paaralan na may address, na naka-address sa aplikante o nagpapakita
-              ng pangalan ng aplikante"
+              sa sambahayan-Kasunduna sa pag-papaupa na nagpapakita ng pangalan ng
+              aplikante-Singil sa utilidad na naka-address sa aplikante-Kard ng insurance
+              na nagpapakita ng pangalan ng aplikante-Papel sa pagpapatala sa paaralan
+              na may address, na naka-address sa aplikante o nagpapakita ng pangalan
+              ng aplikante"
             title: Patunay ng address
           title: Mga dokumento para sa beripikasyon
   email_message:
     activation:
-      body_html: "<p> Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan. Ang kodigo ng pagiging aktibo para sa iyong kabayaran sa kard ay %{activation_code}.</p><p>Tumawag %{ivr_phone_number} upang maging aktibo ang iyong kard. </p>"
+      body_html: "<p> Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan.
+        Ang kodigo ng pagiging aktibo para sa iyong kabayaran sa kard ay %{activation_code}.</p><p>Tumawag
+        %{ivr_phone_number} upang maging aktibo ang iyong kard. </p>"
       subject: Kodigo ng pagiging aktibo para sa kabayaran sa kard ng Tulong sa Sakuna
     app_id:
-      body_html: "<p> Mabuhay!</p><p> Ang iyong aplikasyon para sa pinansiyal
-        na tulong ay naisumite. Ang iyong numero ng ID sa aplikasyon ay %{app_id}.</p><p>
-        Kinakailangan mo ang numero na ito at ang iyong mga beripikasyon na dokumento
-        upang makatanggap ng kabayaran sa kard. </p><p>- Ang Kuponan ng DRAI</p>
-        "
+      body_html: "<p> Mabuhay!</p><p> Ang iyong aplikasyon para sa pinansiyal na tulong
+        ay naisumite. Ang iyong numero ng ID sa aplikasyon ay %{app_id}.</p><p> Kinakailangan
+        mo ang numero na ito at ang iyong mga beripikasyon na dokumento upang makatanggap
+        ng kabayaran sa kard. </p><p>- Ang Kuponan ng DRAI</p> "
       subject: Naisumite ang tulong sa aplikasyon %{app_id}
     auto_response:
       body_html: "<p> Ito ay isang awtomatikong tugon para sa Kodigo ng Tulong sa
-        Sakuna ng Amerika. </p><p> Para sa tulong sa iyong aplikasyon, tawagan
-        ang organisasyon na nakatulong sa iyong aplikasyon. </p><p> Para sa tulong
-        sa iyong kabayaran na kard, tumawag sa 1-877-610-1075.</p>"
+        Sakuna ng Amerika. </p><p> Para sa tulong sa iyong aplikasyon, tawagan ang
+        organisasyon na nakatulong sa iyong aplikasyon. </p><p> Para sa tulong sa
+        iyong kabayaran na kard, tumawag sa 1-877-610-1075.</p>"
   general:
     activate: Gawing Aktibo
     affirmative: Oo
@@ -296,27 +297,27 @@ tl:
     update: I-update
   privacies:
     show:
-      body_html: "<ol><li> Kapag ikaw ay umalis sa serbisyo, kami ay magpapadala
-        ng isang mensahe sa SMS upang kumpirmahin ang iyong pagsign-up. </li><li>Ang
+      body_html: "<ol><li> Kapag ikaw ay umalis sa serbisyo, kami ay magpapadala ng
+        isang mensahe sa SMS upang kumpirmahin ang iyong pagsign-up. </li><li>Ang
         Kodigo ng Amerika ay magpapadala sa iyo ng notipikasyon tungkol sa iyong katayuan
-        sa iyong aplikasyon. </li><li> Maaari mong kanselahin ang serbisyo ng
-        SMS sa anumang oras. Iteks lamang ang “STOP” sa maiksing kodigo. Pagkatapos
-        mo maipadala ang mensahe sa SMS na “STOP” sa amin, kami ay magpapadala ng
-        mensahe sa SMS na kumukumpirma na ikaw ay hindi na naka-subscribe. Pagkatapos
-        nito, hindi ka na makakatangap ng mensahe na SMS mula sa amin. </li><li>Kung
-        sa anumang oras nakalimutan mo kung ano ang mga keyword na sinusuportahan,
-        iteks lang ang “HELP” para sa maiksing kodigo. Pagkatapos mo naipadala ang
-        mensahe sa SMS na “HELP” sa amin, kami ay tutugon sa mga alituntunin kung
-        paano gamitin ang serbisyo at kung paano mag-unsubscribe. </li><li>Ang
-        mga carriers ay hindi responsable para sa naatala at hindi naipadalang mga
-        mensahe </li><li> Lagi, ang rata sa mensahe at data ay nalalapat para
-        sa anumang mensahe na naipadala sa iyo mula sa amin at sa amin sa iyo. Kung
-        ikaw ay may mga katanungan tungkol sa iyong plano sa teks o data plan, pinakamabuti
-        na makipag-ugnay sa iyong wireless na tagapagkaloob. Sa lahat ng mga katanungan
-        tungkol sa mga serbisyo sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring
-        magpadala ng email sa help@ca-drai.org </li><li>Kung ikaw ay may mga katanungan
-        tungkol sa pagiging pribado, pakibasa ang aming alituntunin sa pagiging pribado:
-        ca-drai.org/privacy</li><li> para sa mga katanungan, email ca-drai@website.com</li></ol>"
+        sa iyong aplikasyon. </li><li> Maaari mong kanselahin ang serbisyo ng SMS
+        sa anumang oras. Iteks lamang ang “STOP” sa maiksing kodigo. Pagkatapos mo
+        maipadala ang mensahe sa SMS na “STOP” sa amin, kami ay magpapadala ng mensahe
+        sa SMS na kumukumpirma na ikaw ay hindi na naka-subscribe. Pagkatapos nito,
+        hindi ka na makakatangap ng mensahe na SMS mula sa amin. </li><li>Kung sa
+        anumang oras nakalimutan mo kung ano ang mga keyword na sinusuportahan, iteks
+        lang ang “HELP” para sa maiksing kodigo. Pagkatapos mo naipadala ang mensahe
+        sa SMS na “HELP” sa amin, kami ay tutugon sa mga alituntunin kung paano gamitin
+        ang serbisyo at kung paano mag-unsubscribe. </li><li>Ang mga carriers ay hindi
+        responsable para sa naatala at hindi naipadalang mga mensahe </li><li> Lagi,
+        ang rata sa mensahe at data ay nalalapat para sa anumang mensahe na naipadala
+        sa iyo mula sa amin at sa amin sa iyo. Kung ikaw ay may mga katanungan tungkol
+        sa iyong plano sa teks o data plan, pinakamabuti na makipag-ugnay sa iyong
+        wireless na tagapagkaloob. Sa lahat ng mga katanungan tungkol sa mga serbisyo
+        sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring magpadala ng email
+        sa help@ca-drai.org </li><li>Kung ikaw ay may mga katanungan tungkol sa pagiging
+        pribado, pakibasa ang aming alituntunin sa pagiging pribado: ca-drai.org/privacy</li><li>
+        para sa mga katanungan, email ca-drai@website.com</li></ol>"
       title: Kodigo ng alituntunin ng mga Notipikasyon ng Relebong Tulong sa Sakuna
         ng Amerika
   shared:
@@ -326,8 +327,8 @@ tl:
       year: Taon
   text_message:
     activation: Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan. Ang
-      kodigo ng pagiging aktibo para sa iyong kabayaran na kard ay %{activation_code}. Tumawag
-      sa %{ivr_phone_number} upang i-activate ang iyong kard.
+      kodigo ng pagiging aktibo para sa iyong kabayaran na kard ay %{activation_code}.
+      Tumawag sa %{ivr_phone_number} upang i-activate ang iyong kard.
     app_id: Ang iyong aplikasyon para sa tulong pinansiyal ay naisumite. Ang iyong
       numero ng ID sa aplikasyon ay %{app_id}. Kailangan mo ang numero na ito at ang
       iyong beripikasyon na mga dokumentong upang makatanggap ng kabayaran sa kard.
