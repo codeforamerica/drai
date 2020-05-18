@@ -9,24 +9,28 @@
   <% end %>
 
   <% enable_application_tab = current_aid_application.eligible? || current_aid_application.submitted? %>
-  <%= link_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_applicant_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_application_tab ? '' : 'disabled'}" do %>
+  <% on_application_tab =
+         current_path?(edit_organization_aid_application_applicant_path(current_organization, current_aid_application)) ||
+             current_path?(organization_aid_application_verification_path(current_organization, current_aid_application)) %>
+  <% application_tab_link = current_aid_application.submitted? ?  organization_aid_application_verification_path(current_organization, current_aid_application) : edit_organization_aid_application_applicant_path(current_organization, current_aid_application) %>
+  <%= link_to application_tab_link, class: "tab-bar__tab #{ on_application_tab ? 'is-selected' : '' } #{enable_application_tab ? '' : 'disabled'}" do %>
     2. Application
   <% end %>
 
   <% enable_verify_tab = current_aid_application.submitted? %>
-  <%= link_to organization_aid_application_verification_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_verification_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_verify_tab ? '' : 'disabled'}" do %>
+  <%= link_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_applicant_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_verify_tab ? '' : 'disabled'}" do %>
     3. Verify
   <% end %>
 
   <% enable_determination_tab = current_aid_application.submitted? && supervisor_visible? %>
   <%= link_to organization_aid_application_approval_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_approval_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_determination_tab ? '' : 'disabled'}" do %>
-    3. Determination
+    4. Determination
   <% end %>
 
   <% enable_disburse_tab = current_aid_application.approved? && supervisor_visible? %>
   <% disbursement_tab_selected = current_path?(organization_aid_application_disbursement_path(current_organization, current_aid_application)) || current_path?(organization_aid_application_finished_path(current_organization, current_aid_application)) %>
   <%= link_to organization_aid_application_disbursement_path(current_organization, current_aid_application), class: "tab-bar__tab #{ disbursement_tab_selected ? 'is-selected' : '' }  #{enable_disburse_tab ? '' : 'disabled'}" do %>
-    4. Disburse
+    5. Disburse
   <% end %>
 </div>
 
