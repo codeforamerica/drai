@@ -15,6 +15,12 @@ describe Admin::AidApplicationsController, type: :controller do
         expect(response).to have_http_status :ok
         expect(assigns(:aid_applications)).to contain_exactly(submitted_application)
       end
+
+      it 'has working search' do
+        get :index, params: { term: 'something' }
+
+        expect(response).to have_http_status :ok
+      end
     end
   end
 end
