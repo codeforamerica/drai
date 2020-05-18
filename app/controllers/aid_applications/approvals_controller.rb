@@ -10,7 +10,14 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.save_and_approve(approver: current_user)
 
-      respond_with @aid_application, location: -> { edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application) }
+      respond_with @aid_application, location: (lambda do
+        if Rails.env.production? || Rails.env.demo?
+          # TODO: Finish Disbursement
+          redirect_to_organization_home_page(current_user)
+        else
+          edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application)
+        end
+      end)
     end
   end
 end

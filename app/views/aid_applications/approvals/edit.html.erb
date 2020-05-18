@@ -3,24 +3,31 @@
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <header class="form-card__header">
-      <h2>Approve "<%= @aid_application.application_number %>"</h2>
+      <h1>Determination</h1>
     </header>
 
-    <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
-      <div class="form-card__footer">
-        <div class="toolbar">
-          <div class="toolbar__left">
-            <%= link_to t('general.delete_this_application'),
-                        organization_aid_application_path(current_organization, current_aid_application),
-                        method: :delete,
-                        class: "button button--danger",
-                        data: { confirm: "Are you sure you want to delete this application?" } %>
-          </div>
-          <div class="toolbar__right">
-            <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
-          </div>
+    <% if @aid_application.approved? %>
+      <p>Application was approved on <strong><%= @aid_application.approved_at.to_s(:month_day_year) %></strong> by
+        <strong><%= @aid_application.approver.name %></strong>.</p>
+
+      <% unless @aid_application.disbursed? %>
+        <p><%= link_to "Disburse Payment Card", edit_organization_aid_application_disbursement_path(current_organization, @aid_application) %></p>
+      <% end %>
+    <% else %>
+      <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+        <div class="form-card__footer">
+          <%= f.button I18n.t('general.approve'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+
+          <br>
+          <br>
+          <%= link_to t('general.delete_this_application'),
+                      organization_aid_application_path(current_organization, current_aid_application),
+                      method: :delete,
+                      class: "button button--danger",
+                      data: { confirm: "Are you sure you want to delete this application?" } %>
         </div>
-      </div>
+        </div>
+      <% end %>
     <% end %>
-  </div>
+    </div>
 </div>

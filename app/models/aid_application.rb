@@ -299,6 +299,10 @@ class AidApplication < ApplicationRecord
     validates :approver, presence: true
   end
 
+  with_options if: :disbursed_at do
+    validates :disburser, presence: true
+  end
+
   alias_attribute :text_phone_number, :phone_number
   alias_attribute :voice_phone_number, :phone_number
 
@@ -369,7 +373,9 @@ class AidApplication < ApplicationRecord
   end
 
   def status
-    if approved?
+    if disbursed?
+      :disbursed
+    elsif approved?
       :approved
     elsif submitted?
       :submitted
@@ -383,6 +389,7 @@ class AidApplication < ApplicationRecord
       started: 'Unsubmitted',
       submitted: 'Submitted',
       approved: 'Approved',
+      disbursed: 'Disbursed'
     }.fetch(status)
   end
 
@@ -400,6 +407,10 @@ class AidApplication < ApplicationRecord
 
   def approved?
     approved_at.present?
+  end
+
+  def disbursed?
+    disbursed_at.present?
   end
 
   def disburse(payment_card, disburser:)

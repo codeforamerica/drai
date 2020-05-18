@@ -23,7 +23,8 @@ module AidApplications
       end
 
       if @search_card.errors.any?
-        return render :edit
+        render :edit
+        return
       end
 
       PaymentCard.transaction(joinable: false, requires_new: true) do

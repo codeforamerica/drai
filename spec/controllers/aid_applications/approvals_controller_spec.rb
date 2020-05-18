@@ -4,10 +4,12 @@ describe AidApplications::ApprovalsController do
   let(:supervisor) { create :supervisor }
   let(:aid_application) { create :aid_application, :submitted, organization: supervisor.organization }
 
+  before do
+    sign_in supervisor
+  end
+
   describe '#update' do
     it 'marks application as approved' do
-      sign_in supervisor
-
       put :update, params: {
         aid_application_id: aid_application.id,
         organization_id: supervisor.organization.id
@@ -16,6 +18,32 @@ describe AidApplications::ApprovalsController do
       aid_application.reload
       expect(aid_application.approved_at).to be_within(1.second).of(Time.current)
       expect(aid_application.approver).to eq supervisor
+    end
+
+    context 'when not in production' do
+      it 'redirects to the disbursements' do
+        put :update, params: {
+          aid_application_id: aid_application.id,
+          organization_id: supervisor.organization.id
+        }
+
+        expect(response).to redirect_to edit_organization_aid_application_disbursement_path(supervisor.organization, aid_application)
+      end
+    end
+
+    context 'when in production' do
+      before do
+        allow(Rails.env).to receive(:production?).and_return(true)
+      end
+
+      it 'redirects to the homepage' do
+        put :update, params: {
+          aid_application_id: aid_application.id,
+          organization_id: supervisor.organization.id
+        }
+
+        expect(response).to redirect_to organization_dashboard_path(supervisor.organization)
+      end
     end
   end
 end
