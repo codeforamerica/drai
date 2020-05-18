@@ -1,6 +1,5 @@
 ---
 en:
-  TODO: Remove mailing address
   account:
     accounts:
       edit:
@@ -32,18 +31,18 @@ en:
         county_required: If the client's county is not shown in this list then their
           county is outside your organization's service area. They must apply through
           an organization that serves their county.
-        eligibility_criteria: Only a client who answers "No" is eligible for DRAI
-        email: Make sure to enter a valid email
-        landline_sms: Landlines cannot recieve text messages. Enter a cell phone number,
-          or change the notice method.
+        eligibility_criteria: Only a client who answers "No" is eligible for DRAI.
+        email: Make sure to enter a valid email.
+        landline_sms: Landlines cannot recieve text messages. Enter a cell phone number
+          or change the contact method.
         not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
-        phone_number: Make sure your phone number is 10 digits long
+        phone_number: Make sure your phone number is 10 digits long.
         required_question: This question is required.
-        sequence_number_already_assigned: This  sequence number has already been used
-        sequence_number_invalid: This sequence number looks incorrect
-        zip_code: Must be a 5-digit ZIP Code in California
-        zip_five_digits: Must be a 5-digit ZIP Code
+        sequence_number_already_assigned: This sequence number has already been used.
+        sequence_number_invalid: Make sure the sequence number is correct.
+        zip_code: Must be a 5-digit ZIP Code in California.
+        zip_five_digits: Must be a 5-digit ZIP Code.
   aid_applications:
     applicants:
       edit:
@@ -89,9 +88,9 @@ en:
         attestation:
           read_to_client: 'Read the following to the applicant:'
           statement: Do you attest that the information you provided is true and accurate,
-            and do you understand that the  information provided, if misrepresented,
+            and do you understand that the information provided, if misrepresented,
             or incomplete, may be grounds to deny your application?
-          subtitle: 'Read the the applicant:'
+          subtitle: 'Read to the applicant:'
           title: Applicant attestation
         california_address:
           address_required: An address is required. Homeless clients can use a shelter
@@ -104,10 +103,10 @@ en:
           landline: This is a landline
           message_rates_apply: Message and data rates may apply. You will be able
             to opt out by texting STOP at any time or texting HELP for more information.
-            You will receive 2 messages per application.
+            You will receive 3 messages per application.
           optional_questions_prompt: The following questions are optional for the
-            client to answer. If left blank, they will be recorded as 'prefer not
-            to answer'.
+            client to answer. If left blank, they will be recorded as 'decline to
+            state'.
           phone_number_required: Everyone must provide a phone number, regardless
             of notice method.
           preferred_contact_email: Email
@@ -124,7 +123,7 @@ en:
             english: English
             koren: Korean
             spanish: Spanish
-            tagalog: Tagolog
+            tagalog: Tagalog
             vietnamese: Vietnamese
           title: Application Language
         mailing_address:
@@ -148,10 +147,10 @@ en:
         contact_info: This will send the applicant their code by the method they selected
           during their initial application.
         edit: Edit contact information
-        emergency_confirm: Are you sure you want to access this?
-        emergency_info: Only use emergency access if the client cannot recieve the
-          Activation Code themselves. A record of this action will be recorded.
-        help: Approving the applicatin should trigger sending the Activation Number.
+        emergency_confirm: Are you sure you want to access a client's activation code?
+        emergency_info: Emergency access should only be used if the client cannot
+          receive the code themselves. This access will be recorded.
+        help: Approving the application should trigger sending the Activation Number.
           The applicant must have their Activation Number to use their card.
         message_received: Message received
         notification: Application approved for <CLIENT NAME>
@@ -181,20 +180,20 @@ en:
       edit:
         about_program:
           about_accordian:
-            body: This is a program for undocument immigrants to get financial assistance
-              during the pandemic. The assistance is one $500 debit card per adult.
-              People who apply will need to answer questions about how they’ve been
-              impacted by COVID-19, as well as provide some personal information.
-              They will need to submit documents proving that information.
+            body: This is a program for undocumented immigrants to get financial assistance
+              during the COVID-19 pandemic. The assistance is a one-time $500 debit
+              card per adult. People who apply will need to answer questions about
+              how they’ve been impacted by COVID-19, as well as provide some personal
+              information. They will need to submit documents proving that information.
             title: About the DRAI program
           text: This is a program for undocumented immigrants to get financial assistance
-            during the pandemic. The assistance is one $500 debit card per adult.
-            Two people who live together can apply together and get $1,000. If there
-            are more than two undocumented adults in the household, they will need
-            to apply on their own.
+            during the COVID-19 pandemic. The assistance is a one-time $500 debit
+            card per adult. Two people who live together can apply together and get
+            $1,000. If there are more than two undocumented adults in the household,
+            they will need to apply on their own.
           title: About this program
         confirmation:
-          label_text: Confirm that the applicant is not an employee, contractor or
+          label_text: Confirm that the applicant is not an employee, contractor, or
             volunteer of this organization.
         eligibility:
           care_facility_closed: Is the care facility, such as a school, childcare
@@ -229,8 +228,8 @@ en:
             organization. We will be sharing some general aggregate information with
             the state government, but nothing that will identify you. Your information
             will not be shared with anyone else, and eventually it will be destroyed
-            securely by everyone. \nBased on this information, do you want to move
-            forward with the application?
+            securely by everyone. \n \n Based on this information, do you want to
+            move forward with the application?
           title: Privacy script
         service_criteria:
           county: County
@@ -244,7 +243,7 @@ en:
     finisheds:
       edit:
         homepage_link: Return to home page
-        title: Card sucessfully disbursed
+        title: Card successfully disbursed
     index:
       action: Action
       add_app: Start a new application
@@ -258,8 +257,8 @@ en:
     verifications:
       edit:
         app_not_submitted: Application not yet submitted.
-        app_submitted: Application sucessfully submited
-        app_verified: Application sucessfully verified.
+        app_submitted: Application successfully submitted
+        app_verified: Application successfully verified.
         application_number:
           confirm: If possible, confirm that the applicant received the email or text
             message with the Application Number.  If necessary, review the contact
@@ -309,6 +308,7 @@ en:
                     <li>Is a caregiver to a dependent or spouse who has symptoms consistent with COVID-19</li>
                   </ul>
                 </li>
+                <li>Self-attestation that applicant has been impacted by COVID-19</li>
               </ul>
             title: COVID-19 impact
           message: 'In order to process your application, we will need to verify the
@@ -347,15 +347,15 @@ en:
     app_id:
       body_html: |
         <p>Hello!</p>
-        <p>Your application for financial assistance has been submitted. Your application ID number is %{app_id}.</p>
+        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}.</p>
         <p>You will need this number and your verification documents to receive the payment card.</p>
         <p>- The DRAI Team</p>
-      subject: Assistance application submitted %{app_id}
+      subject: Disaster Assistance Application Number and confirmation
     auto_response:
       body_html: |
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
-        <p>For help with your payment card, call <card phone number>.</p>
+        <p>For help with your payment card, call 1-877-610-1075.</p>
   flash:
     actions:
       create:
@@ -399,9 +399,9 @@ en:
           <li>You can cancel the SMS service at any time. Just text "STOP" to the short code. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us.</li>
           <li>If at any time you forget what keywords are supported, just text "HELP" to the short code. After you send the SMS message "HELP" to us, we will respond with instructions on how to use our service as well as how to unsubscribe.</li>
           <li>Carriers are not liable for delayed or undelivered messages</li>
-          <li>As always, message and data rates may apply for any messages sent to you from us and to us from you. You will receive 3 expected messages. If you have any questions about your text plan or data plan, it is best to contact your wireless provider. For all questions about the services provided by this short code, you can send an email to help@ca-drai.org</li>
+          <li>As always, message and data rates may apply for any messages sent to you from us and to us from you. You will receive 3 expected messages. If you have any questions about your text plan or data plan, it is best to contact your wireless provider. For all questions about the services provided by this short code, you can send an email to drai@codeforamerica.org</li>
           <li>If you have any questions regarding privacy, please read our privacy policy: ca-drai.org/privacy</li>
-          <li>For questions, email ca-drai@website.com</li>
+          <li>For questions, email drai@codeforamerica.org</li>
         </ol>
       title: Code for America Disaster Relief Aid Notifications Policy
   shared:
@@ -415,12 +415,12 @@ en:
     activation: Your application for Disaster Assistance has been approved. The activation
       code for your payment card is %{activation_code}. Call %{ivr_phone_number} to
       activate your card.
-    app_id: Your application for financial assistance has been submitted. Your application
+    app_id: Your application for Disaster Assistance has been submitted. Your application
       ID number is %{app_id}. You will need this number and your verification documents
       to receive the payment card.
     auto_response: This is an automated response from Code for America Disaster Assistance.
-      For help with your case, contact the organization that assisted your application.
-      More information at https://ca-drai.org/privacy.
+      For help with your application, call the organization that assisted your application.
+      For help with your payment card, call 1-877-610-1075.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
       More information at https://ca-drai.org/privacy. Reply STOP to unsubscribe.
@@ -432,4 +432,4 @@ en:
   voice_message:
     auto_response: This is an automated message from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
-      For help with your payment card, call <card phone number>.
+      For help with your payment card, call 1-877-610-1075.

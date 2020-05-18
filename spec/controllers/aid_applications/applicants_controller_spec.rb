@@ -19,17 +19,17 @@ describe AidApplications::ApplicantsController do
       context 'when the demographic fields are nil' do
         before { sign_in assister }
 
-        it 'defaults to Prefer not to answer' do
+        it 'defaults to Decline to state' do
           get :edit, params: {
               aid_application_id: aid_application.id,
               organization_id: assister.organization.id
           }
 
           aid_application = assigns(:aid_application)
-          expect(aid_application.preferred_language).to eq 'Prefer not to answer'
-          expect(aid_application.country_of_origin).to eq 'Prefer not to answer'
-          expect(aid_application.sexual_orientation).to eq 'Prefer not to answer'
-          expect(aid_application.gender).to eq 'Prefer not to answer'
+          expect(aid_application.preferred_language).to eq 'Decline to state'
+          expect(aid_application.country_of_origin).to eq 'Decline to state'
+          expect(aid_application.sexual_orientation).to eq 'Decline to state'
+          expect(aid_application.gender).to eq 'Decline to state'
         end
       end
 
