@@ -25,7 +25,7 @@ describe 'Approve aid application', type: :system do
     click_on aid_application.application_number
 
     within '#application-navigation' do
-      click_on 'Approve'
+      click_on 'Determination'
     end
 
     click_on 'Approve'

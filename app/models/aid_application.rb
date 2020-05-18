@@ -261,11 +261,6 @@ class AidApplication < ApplicationRecord
     validates :county_name, inclusion: { in: -> (aid_application) { aid_application.organization.county_names }, message: :county_required }
   end
 
-  with_options on: :verification do
-    validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
-    validates :card_receipt_method, inclusion: { in: CARD_RECEIPT_OPTIONS, message: :required_question }
-  end
-
   with_options on: :submit do
     validates :name, presence: true
     validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }
@@ -289,6 +284,10 @@ class AidApplication < ApplicationRecord
     validates :attestation, inclusion: { in: [true], message: :attestation_required }
   end
 
+  with_options on: :verification do
+    validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
+    validates :card_receipt_method, inclusion: { in: CARD_RECEIPT_OPTIONS, message: :required_question }
+  end
 
   with_options if: :submitted_at do
     validates :application_number, presence: true
@@ -370,10 +369,10 @@ class AidApplication < ApplicationRecord
   end
 
   def status
-    if submitted?
-      :submitted
-    elsif approved?
+    if approved?
       :approved
+    elsif submitted?
+      :submitted
     else
       :started
     end
@@ -385,6 +384,14 @@ class AidApplication < ApplicationRecord
       submitted: 'Submitted',
       approved: 'Approved',
     }.fetch(status)
+  end
+
+  def eligible?
+    old_errors = errors.dup
+    result = valid?(:eligibility)
+    errors.clear
+    errors.copy!(old_errors)
+    result
   end
 
   def submitted?
