@@ -221,7 +221,8 @@ en:
             to work in order to comply with physical distancing?
         privacy:
           help_text: Read this to the applicant.
-          text: I will be asking you several questions that will be used to verify
+          text_part1: |
+            I will be asking you several questions that will be used to verify
             your eligibility for this assistance. We also will collect documentation
             from you to verify who is applying for this assistance. Your personal
             information is protected. It will be entered into an online portal that
@@ -229,7 +230,9 @@ en:
             organization. We will be sharing some general aggregate information with
             the state government, but nothing that will identify you. Your information
             will not be shared with anyone else, and eventually it will be destroyed
-            securely by everyone. \n \n Based on this information, do you want to
+            securely by everyone.
+          text_part2:
+            Based on this information, do you want to
             move forward with the application?
           title: Privacy script
         service_criteria:
