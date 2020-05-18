@@ -298,17 +298,17 @@ en:
           covid19_impact_accordion:
             body_html: |
               <ul class="list--bulleted">
+                <li>Self-attestation that applicant has been impacted by COVID-19</li>
                 <li>Letter or notice that the applicant must care for a child or other person whose school, childcare facility or other caregiving facility is closed due to COVID-19</li>
                 <li>Letter or notice from employer indicating lost employment or severely reduced work hours due to COVID-19</li>
                 <li>
-                  Letter or notice from medical professional or other documentation that may show hardship based on any of the following:
-                  <ul class="list--numbered">
+                  <p>Letter or notice from medical professional or other documentation that may show hardship based on any of the following:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
                     <li>Has symptoms consistent with COVID-19</li>
                     <li>Is at higher risk of serious illness from COVID-19 due to an underlying health condition or age and is therefore unable to work in order to adhere to physical distancing public health guidance</li>
                     <li>Is a caregiver to a dependent or spouse who has symptoms consistent with COVID-19</li>
                   </ul>
                 </li>
-                <li>Self-attestation that applicant has been impacted by COVID-19</li>
               </ul>
             title: COVID-19 impact
           message: 'In order to process your application, we will need to verify the
@@ -359,14 +359,14 @@ en:
   flash:
     actions:
       create:
-        alert: 
-        notice: 
+        alert:
+        notice:
       destroy:
-        alert: 
-        notice: 
+        alert:
+        notice:
       update:
-        alert: 
-        notice: 
+        alert:
+        notice:
   general:
     activate: Activate
     affirmative: 'Yes'
