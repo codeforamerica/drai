@@ -9,6 +9,8 @@
     <div class="form-card__content">
       <p>You’re done! This application is fully processed.</p>
 
+      <p>A payment card <strong>(Sequence #<%= @aid_application.payment_card.sequence_number %>)</strong> for this application was disbursed on <strong><%= @aid_application.disbursed_at.to_s(:month_day_year) %></strong> by
+        <strong><%= @aid_application.disburser.name %></strong>.</p>
       <%= link_to t('.homepage_link'), organization_dashboard_path(current_organization), class: 'button button--primary' %>
     </div>
   </div>

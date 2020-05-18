@@ -58,7 +58,7 @@ describe 'Approve aid application', type: :system do
       proxy_number: payment_card.proxy_number,
       activation_code: payment_card.activation_code
     )
-    expect(payment_card.activation_code_assigned_at).to be_within(1.second).of Time.current
+    expect(payment_card.blackhawk_activation_code_assigned_at).to be_within(1.second).of Time.current
 
     open_sms aid_application.phone_number
     expect(current_sms).to have_content payment_card.activation_code

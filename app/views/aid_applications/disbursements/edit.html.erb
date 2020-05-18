@@ -3,10 +3,10 @@
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <header class="form-card__header">
-      <h2><%= t('.title') %></h2>
+      <h1><%= t('.title') %></h1>
     </header>
 
-    <% if Rails.env.production? || Rails.env.demo? %>
+    <% if Rails.env.production? %>
       <%# TODO: Finish Disbursement %>
       <p>Disbursement functionality coming soon.</p>
     <% else %>
@@ -18,7 +18,7 @@
             <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.sequence_number_help') %></button>
             <div class="accordion__content" id="about_program">
               <p>
-                <%#= image_tag('sequence_number_envelope') %>
+                <%= image_tag('payment_card_sequence_number.png', style: "border: 2px solid black;", alt: "Sequence number is located on the envelope address window to the right of the barcode.") %>
               </p>
             </div>
           </div>

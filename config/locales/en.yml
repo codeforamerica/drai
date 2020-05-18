@@ -170,7 +170,7 @@ en:
         print_signature: Print Signature Page
         sequence_number: Card Sequence Number
         sequence_number_help: Where to find the card sequence number
-        title: Complete disbursement
+        title: Disburse card
         when: When was the card disbursed?
     duplicates:
       show:

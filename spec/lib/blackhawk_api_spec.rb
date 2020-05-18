@@ -48,25 +48,23 @@ describe BlackhawkApi do
       allow(BlackhawkApi).to receive(:new).and_return(api)
     end
 
-    context 'when there are not Blackhawk client_id/client_secret ENV' do
+    context 'when in the Development environment' do
       before do
-        allow(Rails.application.secrets).to receive(:blackhawk_client_id).and_return(nil)
-        allow(Rails.application.secrets).to receive(:blackhawk_client_secret).and_return(nil)
+        allow(Rails.env).to receive(:development?).and_return(true)
       end
 
-      it 'does not make an API request' do
+      it 'does NOT make an API request' do
         described_class.activate(quote_number: '123', proxy_number: '123', activation_code: '123')
         expect(api).not_to have_received(:activate)
       end
     end
 
-    context 'when there is a Blackhawk client_id/client_secret ENV' do
+    context 'when NOT in development' do
       before do
-        allow(Rails.application.secrets).to receive(:blackhawk_client_id).and_return('123')
-        allow(Rails.application.secrets).to receive(:blackhawk_client_secret).and_return('abc')
+        allow(Rails.env).to receive(:development?).and_return(false)
       end
 
-      it 'does not make an API request' do
+      it 'makes an api request using the credentials that exist' do
         described_class.activate(quote_number: '123', proxy_number: '123', activation_code: '123')
         expect(api).to have_received(:activate)
       end

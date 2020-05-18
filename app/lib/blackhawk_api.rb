@@ -22,7 +22,7 @@ class BlackhawkApi
   end
 
   def self.activate(quote_number:, proxy_number:, activation_code:)
-    return if Rails.application.secrets.blackhawk_client_id.blank? && Rails.application.secrets.blackhawk_client_secret.blank?
+    return true if Rails.env.development?
 
     new(
       client_id: Rails.application.secrets.blackhawk_client_id,
