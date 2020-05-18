@@ -29,119 +29,21 @@ en:
         check_one_box_eligible: At least one box must be checked for the client to
           be eligible.
         confirmation_required: Confirmation is required.
+        county_required: If the client's county is not shown in this list then their
+          county is outside your organization's service area. They must apply through
+          an organization that serves their county.
         eligibility_criteria: Only a client who answers "No" is eligible for DRAI
         email: Make sure to enter a valid email
         landline_sms: Landlines cannot recieve text messages. Enter a cell phone number,
           or change the notice method.
+        password_complexity: Complexity requirement not met.
         phone_number: Make sure your phone number is 10 digits long
         required_question: This question is required.
+        sequence_number_already_assigned: This  sequence number has already been used
+        sequence_number_invalid: This sequence number looks incorrect
         zip_code: Must be a 5-digit ZIP Code in California
         zip_five_digits: Must be a 5-digit ZIP Code
-        password_complexity: "Complexity requirement not met."
-        county_required: "If the client's county is not shown in this list then their county is outside your organization's service area. They must apply through an organization that serves their county."
-        sequence_number_invalid: "This sequence number looks incorrect"
-        sequence_number_already_assigned: "This  sequence number has already been used"
   aid_applications:
-    confirm_messages:
-      edit:
-        activation_code_required: The client *must* have their Activation Code to
-          use their card.
-        button: Send Activation Code
-        contact_info: This will send the applicant their code by the method they selected
-          during their initial application.
-        edit: Edit contact information
-        emergency_confirm: Are you sure you want to access this?
-        emergency_info: Only use emergency access if the client cannot recieve the
-          Activation Code themselves. A record of this action will be recorded.
-        help: Approving the applicatin should trigger sending the Activation Number.
-          The applicant must have their Activation Number to use their card.
-        message_received: Message received
-        notification: Application approved for <CLIENT NAME>
-        question: Does the applicant have their Activation Code?
-        review: Review contact information
-        title: Activation Code
-    disbursements:
-      edit:
-        activation_trouble: If you have problems with activating the payment card,
-          please review the instruction and contact the card issuer through the phone
-          number or website information listed on the payment card.
-        disburse_card: Disburse card
-        sequence_number_help: Where to find the card sequence number
-        inform_application: 'Inform the applicant:'
-        lost_card: If you lose the card or the card is stolen, it cannot be replaced.
-        method: What method was the card disbursed by?
-        print_signature: Print Signature Page
-        sequence_number: Card Sequence Number
-        title: Complete disbursement
-        when: When was the card disbursed?
-    duplicates:
-      show:
-        body: Someone with a matching name, date of birth and address has already
-          applied for DRAI.
-        title: This applicant has been identified as a duplicate.
-    eligibilities:
-      edit:
-        about_program:
-          about_accordian:
-            body: This is a program for undocument immigrants to get financial assistance
-              during the pandemic. The assistance is one $500 debit card per adult.
-              People who apply will need to answer questions about how they’ve been
-              impacted by COVID-19, as well as provide some personal information.
-              They will need to submit documents proving that information.
-            title: About the DRAI program
-          text: This is a program for undocumented immigrants to get financial assistance
-            during the pandemic. The assistance is one $500 debit card per adult.
-            Two people who live together can apply together and get $1,000. If there
-            are more than two undocumented adults in the household, they will need
-            to apply on their own.
-          title: About this program
-        confirmation:
-          label_text: Confirm that the applicant is not an employee, contractor or volunteer of this organization.
-        eligibility:
-          care_facility_closed: Is the care facility, such as a school, childcare
-            facility or other adult living facility, where you usually send your child
-            or other person you care for, closed because of the COVID-19 outbreak?
-          caregiver: Are you a caregiver to a dependent, such as a child or elderly
-            parent, or a spouse who has or had symptoms consistent with COVID-19,
-            which made you unable to work?
-          experiencing_symptoms: Are you or have you experienced symptoms consistent
-            with COVID-19?
-          help_text: A valid document includes a Social Security Number card and a
-            work authorization or Employment Authorization Document issued by U.S.
-            Citizenship and Immigration Services.
-          label_text: Do you currently have a valid document that authorizes you
-            to work in the United States?
-          read_to_client: Read the following to the applicant. They must meet at least
-            one criteria. Check all boxes that apply.
-          reduced_work_hours: Have you, or other adults in your household who provide
-            income to your household, lost their employment or had their work hours
-            significantly reduced because of the COVID-19 outbreak?
-          title: Eligibility
-          underlying_health_condition: Are you at higher risk of serious illness from
-            COVID-19 due to an underlying health condition or age, and therefore unable
-            to work in order to comply with physical distancing?
-        privacy:
-          help_text: Read this to the applicant.
-          text: I will be asking you several questions that will be used to verify
-            your eligibility for this assistance. We also will collect documentation
-            from you to verify who is applying for this assistance. Your personal
-            information is protected. It will be entered into an online portal that
-            is administered by a nonprofit organization. It also will be held by our
-            organization. We will be sharing some general aggregate information with
-            the state government, but nothing that will identify you. Your information
-            will not be shared with anyone else, and eventually it will be destroyed
-            securely by everyone. \nBased on this information, do you want to move
-            forward with the application?
-          title: Privacy script
-        service_criteria:
-          title: Service criteria
-          county: County
-          zip_code:
-            button: Look up
-            error: "<COUNTY> County is outside of your service area, refer applicant
-              to:"
-            notification: "<COUNTY> County is within your service area."
-            title: ZIP code
     applicants:
       edit:
         additional_information:
@@ -184,7 +86,7 @@ en:
             unknown: Unknown
           title: Applicant Information
         attestation:
-          read_to_client: "Read the following to the applicant:"
+          read_to_client: 'Read the following to the applicant:'
           statement: Do you attest that the information you provided is true and accurate,
             and do you understand that the  information provided, if misrepresented,
             or incomplete, may be grounds to deny your application?
@@ -226,17 +128,122 @@ en:
           title: Application Language
         mailing_address:
           add_mailing_address: Add a separate mailing address
-          remove_mailing_address: 'Remove mailing address'
+          remove_mailing_address: Remove mailing address
           title: Mailing address
         organization_relationship:
           title: Confirm that the applicant is not an employee, contractor, or volunteer
             of this organization.
         shared_address:
-          street_address: "Street Address"
-          apartment_number: "Apartment, building, unit, etc. (optional)"
-          city: "City"
-          zip: "ZIP Code"
-          state: "State"
+          apartment_number: Apartment, building, unit, etc. (optional)
+          city: City
+          state: State
+          street_address: Street Address
+          zip: ZIP Code
+    confirm_messages:
+      edit:
+        activation_code_required: The client *must* have their Activation Code to
+          use their card.
+        button: Send Activation Code
+        contact_info: This will send the applicant their code by the method they selected
+          during their initial application.
+        edit: Edit contact information
+        emergency_confirm: Are you sure you want to access this?
+        emergency_info: Only use emergency access if the client cannot recieve the
+          Activation Code themselves. A record of this action will be recorded.
+        help: Approving the applicatin should trigger sending the Activation Number.
+          The applicant must have their Activation Number to use their card.
+        message_received: Message received
+        notification: Application approved for <CLIENT NAME>
+        question: Does the applicant have their Activation Code?
+        review: Review contact information
+        title: Activation Code
+    disbursements:
+      edit:
+        activation_trouble: If you have problems with activating the payment card,
+          please review the instruction and contact the card issuer through the phone
+          number or website information listed on the payment card.
+        disburse_card: Disburse card
+        inform_application: 'Inform the applicant:'
+        lost_card: If you lose the card or the card is stolen, it cannot be replaced.
+        method: What method was the card disbursed by?
+        print_signature: Print Signature Page
+        sequence_number: Card Sequence Number
+        sequence_number_help: Where to find the card sequence number
+        title: Complete disbursement
+        when: When was the card disbursed?
+    duplicates:
+      show:
+        body: Someone with a matching name, date of birth and address has already
+          applied for DRAI.
+        title: This applicant has been identified as a duplicate.
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: This is a program for undocument immigrants to get financial assistance
+              during the pandemic. The assistance is one $500 debit card per adult.
+              People who apply will need to answer questions about how they’ve been
+              impacted by COVID-19, as well as provide some personal information.
+              They will need to submit documents proving that information.
+            title: About the DRAI program
+          text: This is a program for undocumented immigrants to get financial assistance
+            during the pandemic. The assistance is one $500 debit card per adult.
+            Two people who live together can apply together and get $1,000. If there
+            are more than two undocumented adults in the household, they will need
+            to apply on their own.
+          title: About this program
+        confirmation:
+          label_text: Confirm that the applicant is not an employee, contractor or
+            volunteer of this organization.
+        eligibility:
+          care_facility_closed: Is the care facility, such as a school, childcare
+            facility or other adult living facility, where you usually send your child
+            or other person you care for, closed because of the COVID-19 outbreak?
+          caregiver: Are you a caregiver to a dependent, such as a child or elderly
+            parent, or a spouse who has or had symptoms consistent with COVID-19,
+            which made you unable to work?
+          experiencing_symptoms: Are you or have you experienced symptoms consistent
+            with COVID-19?
+          help_text: A valid document includes a Social Security Number card and a
+            work authorization or Employment Authorization Document issued by U.S.
+            Citizenship and Immigration Services.
+          label_text: Do you currently have a valid document that authorizes you to
+            work in the United States?
+          read_to_client: Read the following to the applicant. They must meet at least
+            one criteria. Check all boxes that apply.
+          reduced_work_hours: Have you, or other adults in your household who provide
+            income to your household, lost their employment or had their work hours
+            significantly reduced because of the COVID-19 outbreak?
+          title: Eligibility
+          underlying_health_condition: Are you at higher risk of serious illness from
+            COVID-19 due to an underlying health condition or age, and therefore unable
+            to work in order to comply with physical distancing?
+        privacy:
+          help_text: Read this to the applicant.
+          text: I will be asking you several questions that will be used to verify
+            your eligibility for this assistance. We also will collect documentation
+            from you to verify who is applying for this assistance. Your personal
+            information is protected. It will be entered into an online portal that
+            is administered by a nonprofit organization. It also will be held by our
+            organization. We will be sharing some general aggregate information with
+            the state government, but nothing that will identify you. Your information
+            will not be shared with anyone else, and eventually it will be destroyed
+            securely by everyone. \nBased on this information, do you want to move
+            forward with the application?
+          title: Privacy script
+        service_criteria:
+          county: County
+          title: Service criteria
+          zip_code:
+            button: Look up
+            error: "<COUNTY> County is outside of your service area, refer applicant
+              to:"
+            notification: "<COUNTY> County is within your service area."
+            title: ZIP code
+    finisheds:
+      edit:
+        homepage_link: Return to home page
+        title: Card sucessfully disbursed
     index:
       action: Action
       add_app: Start a new application
@@ -253,8 +260,9 @@ en:
         app_submitted: Application sucessfully submited
         app_verified: Application sucessfully verified.
         application_number:
-          confirm: If possible, confirm that the applicant received the email or text message with
-            the Application Number.  If necessary, review the contact information and make edits.
+          confirm: If possible, confirm that the applicant received the email or text
+            message with the Application Number.  If necessary, review the contact
+            information and make edits.
           contact_method: Contact method confirmed
           edit_contact: Edit contact information
           title: Application Number
@@ -329,10 +337,6 @@ en:
               </ul>
             title: Proof of address
           title: Verification documents
-    finisheds:
-      edit:
-        title: Card sucessfully disbursed
-        homepage_link: Return to home page
   email_message:
     activation:
       body_html: |
@@ -354,14 +358,14 @@ en:
   flash:
     actions:
       create:
-        alert:
-        notice:
+        alert: 
+        notice: 
       destroy:
-        alert:
-        notice:
+        alert: 
+        notice: 
       update:
-        alert:
-        notice:
+        alert: 
+        notice: 
   general:
     activate: Activate
     affirmative: 'Yes'
@@ -374,6 +378,7 @@ en:
     delete_application: Delete application
     delete_this_application: Delete this application
     disabled: Disabled
+    drai_application: DRAI application
     email_address: Email address
     go_back: Go back
     negative: 'No'
@@ -383,7 +388,6 @@ en:
     sign_out: Sign out
     submit: Submit
     update: Update
-    drai_application: "DRAI application"
   hello: Hello world
   privacies:
     show:
@@ -404,11 +408,12 @@ en:
       day: Day
       month: Month
       year: Year
-    password_help: "Should be 8-70 characters long and include 1 uppercase, 1 lowercase, 1 digit, and 1 special character (#?!@$%^&*-)."
+    password_help: Should be 8-70 characters long and include 1 uppercase, 1 lowercase,
+      1 digit, and 1 special character (#?!@$%^&*-).
   text_message:
     activation: Your application for Disaster Assistance has been approved. The activation
-      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to activate your
-      card.
+      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to
+      activate your card.
     app_id: Your application for financial assistance has been submitted. Your application
       ID number is %{app_id}. You will need this number and your verification documents
       to receive the payment card.
