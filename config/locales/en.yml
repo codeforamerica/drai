@@ -103,8 +103,8 @@ en:
           landline: This is a landline
           message_rates_apply: Message and data rates may apply. You will be able
             to opt out by texting STOP at any time or texting HELP for more information.
-            You will receive 3 messages per application.
-            Visit www.ca-drai.com/privacy for Privacy and SMS policies.
+            You will receive 3 messages per application. Visit www.ca-drai.com/privacy
+            for Privacy and SMS policies.
           optional_questions_prompt: The following questions are optional for the
             client to answer. If left blank, they will be recorded as 'decline to
             state'.
@@ -231,9 +231,8 @@ en:
             the state government, but nothing that will identify you. Your information
             will not be shared with anyone else, and eventually it will be destroyed
             securely by everyone.
-          text_part2:
-            Based on this information, do you want to
-            move forward with the application?
+          text_part2: Based on this information, do you want to move forward with
+            the application?
           title: Privacy script
         service_criteria:
           county: County

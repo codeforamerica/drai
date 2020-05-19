@@ -1,0 +1,276 @@
+---
+ko:
+  activerecord:
+    errors:
+      messages:
+        attestation_required: 증명이 필요합니다.
+        check_one_box_eligible: 의뢰인이 신청 자격을 갖추려면 최소한 한 가지 이상 사항에 표시해야 합니다.
+        confirmation_required: 확인이 필요합니다.
+        eligibility_criteria: "“아니요”라고 답변한 의뢰인에 한해 DRAI(이민자 대상 재난구호지원) 신청 자격이 있습니다."
+        email: 유효한 이메일을 입력하였는지 확인하여 주십시오.
+        landline_sms: 유선 전화번호로는 문자 메시지를 수신할 수 없습니다. 이동 통신 전화 번호를 입력하거나 통지 알림 설정 방법을
+          변경하십시오.
+        phone_number: 전화번호가 10자리 맞는지 확인하여 주십시오.
+        required_question: 이 질문은 필수 사항입니다.
+        zip_code: 반드시 캘리포니아의 5자리 짚코드 우편번호여야 합니다.
+        zip_five_digits: 반드시 5자리 짚코드 우편번호여야 합니다.
+  aid_applications:
+    confirm_messages:
+      edit:
+        activation_code_required: 의뢰인이 카드를 사용하려면 *반드시* 활성화 코드가 있어야 합니다.
+        button: 활성화 코드를 전송합니다.
+        contact_info: 초기 신청 과정에서 신청인이 선택한 방법으로 신청인에게 코드를 전송합니다.
+        edit: 연락처 정보를 수정합니다.
+        emergency_confirm: 여기에 액세스 하는 것을 확인하시겠습니까?
+        emergency_info: 의뢰인이 활성화 코드를 수령할 수 없는 경우에만 긴급 액세스를 사용하십시오. 이 작업을 수행한 사실이 기록됩니다.
+        message_received: 메시지를 수신하였습니다.
+        notification: "<의뢰인 성명>의 신청서가 승인되었습니다."
+        question: 신청인에게 활성화 코드가 있습니까?
+        title: 활성화 코드
+    disbursements:
+      edit:
+        activation_trouble: 귀하가 지급 카드를 활성화하는 데 문제가 있는 경우, 설명서를 검토한 후, 지급 카드에 명시되어
+          있는 전화 번호 또는 웹 사이트 정보를 참조하여 카드 발급 기관에 문의하십시오.
+        disburse_card: 카드를 지급하십시오.
+        inform_application: 신청인에게 통지하십시오.
+        lost_card: 카드를 분실하거나 카드가 도난당한 경우, 카드는 교체 발급되지 않습니다.
+        method: 카드는 어떤 방법으로 지급되었습니까?
+        sequence_number: 카드 일련 번호
+        title: 지급을 완료하십시오.
+        when: 카드 지급일은 언제 입니까?
+    duplicates:
+      show:
+        body: 동일한 성명, 생년월일 및 주소로 이미 다른 사람이 DRAI(이민자 대상 재해 구호 지원)를 신청했습니다.
+        title: 본 신청인은 중복 신청한 것으로 확인되었습니다.
+    edits:
+      edit:
+        about_program:
+          about_accordian:
+            body: 본 프로그램은 서류 미비 이민자들이 범유행성 전염병 발발 기간 동안 재정 지원을 받을 수 있는 프로그램입니다. 지원
+              형태는 성인 1 인 당 $500 달러의 직불 카드 발급입니다. 신청인은 코로나바이러스 감염증(COVID-19)으로 입은 피해
+              정도를 묻는 질문에 답변하고 몇가지 개인 정보를 제공해야합니다. 신청인은 해당 정보를 증명할 수 있는 서류를 제출해야 합니다.
+            title: DRAI(이민자대상 재난 구호 지원)프로그램 소개
+        additional_information:
+          receives_calfresh_help_text: 한 가구의 정의는 함께 살면서 식료품 구입과 식사 준비를 함께 하는 개인들입니다.
+          receives_calfresh_label: 귀하는 가구 구성원 중 현재 CalFresh(칼프레쉬) 또는 CalWORKs(칼웍스)
+            복지 수당 혜택을 수령하는 사람이 있습니까?
+          title: 추가 정보
+          unmet_needs_childcare: 보육
+          unmet_needs_food: 식료품
+          unmet_needs_housing: 주택(가령 렌트비나 주택융자금 상환을 하지 못하고 있는 경우)
+          unmet_needs_legend: '귀하가 필요한 것 중 충족되지 않은 요구 사항이 있습니까? '
+          unmet_needs_none_of_the_above: 위에 해당 사항 없음
+          unmet_needs_other: 기타 충족되지 않은 필요 사항
+          unmet_needs_transportation: 교통
+          unmet_needs_utilities: 공과금
+        applicant_information:
+          country_of_origin: 출신 국가
+          dob: 생년월일
+          gender: 성별
+          gender_options:
+            female: 여
+            male: 남
+            non_binary: 중성(남성이나 여성으로 구분되지 않음)
+            other: 기타 성 정체성
+            transgender_female: '성전환자: 남성에서 여성으로'
+            transgender_male: '성전환자: 여성에서 남성으로'
+          help: 다음은 인구 통계를 목적으로 하는 질문입니다. 신청인은 답변을 거부할수 있습니다.
+          name: 성명
+          racial_ethnic_identity: 인종/민족 정체성
+          sexual_orientation: 성적 지향
+          title: 신청인 정보
+        attestation:
+          statement: 귀하는 귀하가 제공한 정보가 진실하고 정확함을 증명하고, 제공한 정보가 그릇되거나 불완전한 경우 귀하의 신청서
+            승인 거부 사유가 될 수 있다는 사실을 이해합니까?
+          subtitle: 신청인에게 다음을 읽어 주십시오.
+          title: 신청인 증명
+        california_address:
+          address_required: 주소가 있어야 합니다. 노숙인 의뢰인은 쉼터 주소나 다른 주소를 사용할 수 있습니다.
+          title: 거주지 주소
+        contact_information:
+          email_address: 이메일 주소(사용하고 있는 경우)
+          help_text: 통지수령 방법 중 하나 또는 둘 모두를 선택하십시오. 신청인은 선택한 방법으로 신청 번호와 활성화 코드를 수령하게
+            됩니다.
+          landline: 유선전화 번호입니다.
+          message_rates_apply: 문자 및 데이터 요금이 적용될 수 있습니다. 귀하는 언제든지 “STOP”(중지)이라고 문자를
+            보내 수신 동의 선택을 해지하거나 “HELP”(도움)라고 문자를 보내 보다 자세한 안내 메시지를 수신할 수 있습니다.  신청서
+            당 2 통의 문자 메시지가 수신됩니다.
+          phone_number_required: 통지 방법과 무관하게 모든 신청인은 전화 번호를 제공해야합니다.
+          preferred_contact_email: 이메일
+          preferred_contact_label: 귀하의 어떤 방법으로 신청서 번호 및 활성화 코드 발송 메시지를 수령하고 싶으십니까?
+          preferred_contact_text: 문자 메시지
+          read_to_client: 신청인에게 다음을 읽어주십시오.
+          title: 연락처 정보
+        eligibility:
+          care_facility_closed: 자녀 또는 귀하가 돌보는 사람을 맡아주던 학교, 보육 시설 또는 기타 성인 거주 시설과 같은
+            보살핌 시설이 코로나바이러스 감염증(COVID-19)으로 인해 휴원 또는 휴업하였습니까?
+          caregiver: 귀하는 코로나바이러스 감염증(COVID-19)과 일치하는 증상을 앓았거나 앓고 있는어린 자녀 또는 노부모와 같은
+            부양 가족을 돌보는 간병인이거나,배우자를 간병하기 위해 일을 하지 못하고 있는 상태입니까?
+          experiencing_symptoms: 본인이 코로나바이러스 감염증(COVID-19)와 일치하는 증상을 앓았거나 현재 앓고 있습니까?
+          help_text: 유효한 서류는  소셜 번호 카드와  노동허가증, 또는 미국이민서비스사무국(USCIS)이 발급한 고용 허가 서류
+            등입니다.
+          label_text: 귀하는 현재 미국에서 유효한 노동허가 서류가 있습니까?
+          read_to_client: 신청인에게 다음의 내용을 읽어 주십시오 신청인은 다음 사항 중 최소한 한 가지 의 기준을 충족해야 합니다.
+            해당하는 모든 사항을 표시하십시오
+          reduced_work_hours: 귀하, 또는 귀하의 가구 구성원 중 가구에 소득을 제공하는 성인이 코로나바이러스 감염증(COVID-19)
+            발발로 인하여 직장을 잃었거나, 근무 시간이 상당 시간 감축되었습니까?
+          title: 자격
+          underlying_health_condition: 귀하는 기저 질환이나 연령으로 인해 코로나바이러스 감염증(COVID-19) 감염
+            시, 심각한 질병으로 발전할 수 있는 고위험군에 해당하며, 이에 물리적 사회적 거리두기를 실천하기 위해 일을 하지 못하는 상태입니까?
+        language:
+          languages:
+            arabic: 아랍어
+            chinese: 중국어(간체)
+            english: 영어
+            koren: 한국어
+            spanish: 스페인어
+            tagalog: 타갈로그어
+            vietnamese: 베트남어
+          title: 신청서 언어
+        mailing_address:
+          add_mailing_address: 별도의 우편물 수령지 주소 추가
+          title: 우편물 수령지 주소
+        organization_relationship:
+          title: 신청인이 본 단체의 직원, 계약자(하청업자), 또는 자원봉사자가 아님을 확인하십시오.
+        privacy:
+          help_text: 신청인에게 다음의 내용을 읽어주십시오.
+          text: '제가 드리게 되는 몇개의 질문들은 귀하의 본 지원 프로그램 신청 자격을 확인하는데 사용됩니다. 아울러 저희는 본 지원
+            프로그램 신청인이 제공하는 정보를 확인할 수 있는 서류를 수집합니다.귀하의 개인 정보는 보호됩니다. 귀하가 제공하는 정보는 비영리
+            단체에서 운영 관리하는 인터넷 포털 사이트에 입력됩니다. 이 정보는 저희 단체도 보유합니다. 저희는 주 정부와 몇가지 일반적인
+            집계 정보를 공유하지만   그 정보로는 귀하를 식별할 수 없습니다. 귀하의 정보는 타인에게 공개되지 않으며 궁극적으로 모든 사람이
+            안전하게 파기합니다.이러한 정보를 바탕으로, 귀하는 프로그램 신청을 진행하기를 원하십니까? '
+          title: 개인정보 고지
+        service_criteria:
+          title: 서비스 기준
+          zip_code:
+            button: 검색
+            error: " <카운티> 카운티가 귀하의 서비스 제공 지역 외 지역입니다. 신청인에게 다음과 같이 안내하십시오: "
+            notification: "<카운티> 카운티가 귀하의 서비스 제공 지역 내 지역입니다. "
+            title: 우편번호 짚코드
+        shared_address:
+          apartment_number: 아파트 호수, 건물 동 번호, 방 호수, 등(선택적)
+          city: 시
+          state: 주
+          street_address: 거리 주소
+          zip: 우편번호 짚코드
+    verifications:
+      edit:
+        app_not_submitted: 신청서가 아직 접수되지 않았습니다.
+        app_submitted: 신청서가 성공적으로 접수되었습니다.
+        app_verified: 신청서가 성공적으로 검증되었습니다.
+        application_number:
+          message: 의뢰인은 이 번호를 적어 두어야 합니다. 직접 내방하여 혜택 수령 시, 이 번호가 필요합니다.
+          title: 신청서 번호
+        next_steps:
+          step1: 우리가 상의한 증빙 서류를 업무일 기준 으로 앞을  5 일안에 제출해야 합니다.
+          step2: 기한 내에 우리가 해당 서류를 접수하지 못하면, 귀하의 신청서는 종료되고 귀하는 재신청을 해야 합니다.
+          step3: 우리는 나중에도 지원이 가능하다고 보장할 수 없습니다.
+          step4: 귀하의 신청서가 승인되고 나면 저희가 귀하에게 이를 통지하고 귀하의 수령방법을 안내할 것입니다.
+          step5: 신청인과 전달 방법을 확인하십시오.
+          title: 다음 단계
+        receive_card:
+          options:
+            deliver: 배송
+            mail: 우편
+            pick_up: 직접 수령
+          subtitle: 이는 나중에 수정될 수 있습니다.
+          title: 신청인은 어떤 방법으로 카드를 수령할 것입니까?
+        title: 신청서가 접수되었습니다.
+        verifications:
+          covid19_impact_accordion:
+            body: "- 코로나바이러스 감염증(COVID-10)으로 인해 학교, 보육 시설 또는 기타 보살핌 시설이 휴업을 하게 됨으로써,
+              신청인이 어린이 또는 다른 사람을 반드시 돌보아야 한다고 안내한 통지서나 서신- 코로나바이러스 감염증(COVID-10)으로
+              인해 고용 해제 또는 근무 시간을 대폭 감축해야 한다고 안내한 고용주가 발송한 통지서나 편지- 의료 전문가가 발송한 통지서나
+              편지 또는 다음 중 하나에 근거하여 어려움을 겪고 있다고 보여지는 기타 서류:a. 코로나바이러스 감염증(COVID-10)과
+              일치하는 증상이 있습니다b. 기저 질병 또는 연령으로 인해 코로나바이러스 감염증(COVID-19) 감염 시, 심각한 질병으로
+              발전할 수 있는 고위험군에 해당하며 공중 보건 사무국 지침에 따른 물리적인 사회적 거리두기를 준수하기 위해 일을 하지 못하고
+              있습니다.c. 코로나바이러스 감염증(COVID-10)과 일치하는 증상을 앓고 있는 부양 가족 또는 배우자의 간병인입니다."
+            title: 코로나바이러스 감염증(COVID-10) 영향
+          message: 귀하의 신청서를 처리하려면 귀하가 제공한 정보의 진위여부를 확인해야합니다. 귀하는 문자, 이메일, CBO가 구현한
+            다른 시스템 또는 직접 내방하여 다음에 해당하는 서류를 제출해야 합니다.
+          photo_id_accordion:
+            body: "-미국의 주 정부가 발급한 신분증-미국의 주 정부 발급한 운전 면허증-미국 외 국가가 발급한 여권-국제 통용 신분
+              확인 문서-학교가 발급한 학생증-직장에서 발급한 사원증 "
+            title: 사진이 있는 신분증
+          proof_of_address_accordion:
+            body: "-미국의 주 정부가 발급한 운전 면허증 또는 미국의 주 정부가 발급한 신분증을 포함하여 신청인의 주소가 기재된 신분
+              확인 문서-정부 기관이 신청인의 거주지 주소로 발송하였거나 신청인이 함께 거주하고 있는 가구의 주소지를 명시하여 발송한 복지
+              혜택 통지서-신청인의 성명이 기재된 임대 계약서-신청인에게 주소지고 발송된 공공 요금 청구서-신청인의 성명이 기재된 보험증-신청인의
+              주소지로 신청인에게 발송된 또는 신청인의 성명이 기재된 학교 수강 등록 서류"
+            title: 주소지 증빙 서류
+          title: 증빙 서류
+  email_message:
+    activation:
+      body_html: "<p>귀하의 재난 지원(Disaster Assistance) 신청서가 승인되었습니다. 귀하의 지급 카드 활성화 코드는
+        %{activation_code}입니다.</ p><p><카드 전화 번호>로 전화하여 카드를 활성화하십시오.</p>"
+      subject: '재난 지원(Disaster Assistance) 지급 카드 활성화 코드 '
+    app_id:
+      body_html: "<p>안녕하세요!</ p><p>귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수(ID) 번호는 % {app_id}입니다.</
+        p><p>귀하의 지급 카드를 수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.</ p><p>-DRAI(이민자 대상 재난구호지원)
+        팀</ p>"
+      subject: 지원 신청서가 접수되었습니다 %{app_id}
+    auto_response:
+      body_html: "<p>본 문자는 Code for America(미국을 위한 코드) 재난 지원(Disaster Assistance)에서
+        발송하는 자동 응답 서비스입니다.</ p><p>귀하의 신청서 에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오.</
+        p><p>지급 카드 관련 도움이 필요하면 1-877-610-1075로 문의하십시오.</ p>"
+  general:
+    activate: 활성화
+    affirmative: 예
+    approve: 승인
+    cancel: 취소
+    cancel_application: 신청서 취소
+    confirm: 확인
+    continue: 계속
+    delete: 삭제
+    delete_application: 본 신청서를 삭제합니다.
+    disabled: 기능 끄기
+    email_address: 이메일 주소
+    go_back: 되돌아가기
+    negative: 아니요
+    optional: 선택사항
+    phone_number: 전화번호
+    proceed: 진행
+    sign_out: 로그아웃
+    submit: 제출
+    update: 업데이트
+  privacies:
+    show:
+      body_html: '<ol><li>서비스 가입을 선택하면, 가입 확인 문자가 SMS 메시지로 전송됩니다.</ li><li>Code for
+        America(미국을 위한 코드)에서 귀하의 신청서 처리 상태에 대한 알림을 전송해 드립니다.</ li><li>언제든지 SMS 수신
+        서비스 이용을 해지할 수 있습니다. 문자전용번호로 "STOP"(중지)이라는 문자를 전송하십시오. 귀하가 우리에게 SMS 메시지를 "STOP"(중지)하라는
+        문자를 전송하면, 우리는 귀하에게 수신 서비스가 해지되었음을 확인하는 SMS 메시지를 전송합니다. 이후부터 귀하는 우리가 전송하는 SMS
+        메시지를 수신하지 않게 됩니다.</ li><li>귀하가 어떤 키워드가 지원되는지 기억나지 않는 경우, 언제라도 문자전용번호로"HELP"(도움)라는
+        문자를 전송하십시오. 귀하가 우리에게 SMS 메시지로 "HELP"(도움)이라는 문자를 전송하면, 우리는 서비스 이용 방법 및 수신 거부
+        방법에 대한 안내를 문자로 발송합니다.</ li><li>이동 통신사는 전송이 지연되거나 전송되지 않은 메시지에 대한 책임을 지지 않습니다.</
+        li><li>예외없이, 귀하가 우리에게 메시지를 전송하거나 우리가 전송한 메시지를 수신할 때마다 문자 데이터 요금이 적용됩니다. 귀하는
+        3통의 예상 문자를 수신하게 됩니다. 귀하의 문자 요금제 또는 데이터 요금제에 관한 궁금한 사항은 귀하의 무선 통신 제공 업체에 문의하는
+        것이 가장 좋습니다. 문자전용번호로 안내하는 서비스에 대한 모든 문의사항은 help@ca-drai.org로 이메일을 보내주십시오.</
+        li><li>개인 정보 보호 관련 문의는 우리의 개인 정보 보호 정책: ca-drai.org/privacy를 참조하시기 바랍니다.</
+        li><li>궁금한 사항은 ca-drai@website.com으로 이메일을 보내 주십시오.</ li></ ol>'
+      title: Code for America(미국을 위한 코드) 재난 구호 원조(America Disaster Relief Aid) 통지
+        정책
+  shared:
+    date_select:
+      day: 일
+      month: 월
+      year: 년
+  text_message:
+    activation: 귀하의 재난 지원(Disaster Assistance) 신청서가 승인되었습니다. 지급 카드의 활성화 코드는 %{activation_code}입니다.
+      %{ivr_phone_number}로 전화하여 카드를 활성화하십시오.
+    app_id: 귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수(ID) 번호는 % {app_id}입니다. 귀하의 지급 카드를 수령하려면,
+      이 접수 번호와 귀하의 증빙 서류가 필요합니다.
+    auto_response: 본 문자는 Code for America(미국을 위한 코드) 재난 지원(Disaster Assistance)에서
+      발송하는 자동 응답 서비스입니다. 귀하의 신청서문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 보다
+      자세한 내용은 https://ca-drai.org/privacy를 참조하십시오.
+    help: 본 문자는 Code for America(미국을 위한 코드) 재난 지원(Disaster Assistance)에서 발송하는 자동 응답
+      서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 보다 자세한 내용은 https://ca-drai.org/privacy를
+      참조하십시오. 문자 수신 서비스를 해지하려면 “STOP”(중지)라는 회신 문자를 보내십시오
+    subscribed: 귀하는 재난 지원(Disaster Assistance) 문자 서비스 이용 수신에 동의하였습니다. 이 번호로 귀하의 신청서
+      및 지급 관련 정보가 전송됩니다. 도움이 필요하면 “HELP” (도움)이라고 회신 문자를 보내십시오. 문자 수신 서비스를 해지하려면 “STOP”(중지)라는
+      회신 문자를 보내십시오. 문자   데이터 요금이 적용될 수 있습니다.
+    unsubscribed: 귀하는 재난 지원(Disaster Assistance) 문자 서비스를 해지하였습니다. 이 번호로 더 이상 문자를 수신되지
+      않게 됩니다. 서비스를 다시 이용하려면 “START”(시작)이라는 회신문자를 전송하십시오.
+  voice_message:
+    auto_response: 본 문자는 Code for America(미국을 위한 코드) 재난 지원(Disaster Assistance)에서
+      발송하는 자동 응답 서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 지급
+      카드 관련 도움이 필요하면 1-877-610-1075로 문의하십시오.
