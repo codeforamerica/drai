@@ -33,7 +33,9 @@ en:
           an organization that serves their county.
         eligibility_criteria: Only a client who answers "No" is eligible for DRAI.
         email: Make sure to enter a valid email.
-        landline_sms: Landlines cannot recieve text messages. Enter a cell phone number
+        email_invalid: Please confirm the email address is correct.
+        mailgun_email_invalid: Please confirm the email address is correct.
+        landline_sms: Landlines cannot receive text messages. Enter a cell phone number
           or change the contact method.
         not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
@@ -111,12 +113,13 @@ en:
           phone_number_required: Everyone must provide a phone number, regardless
             of notice method.
           preferred_contact_email: Email
-          preferred_contact_label: How would you like to recieve the messages with
+          preferred_contact_label: How would you like to receive the messages with
             your Application Number and Activation Code?
           preferred_contact_text: Text message
           preferred_contact_voice: Automated phone call
           read_to_client: 'Read to the applicant:'
           title: Contact information
+          confirmed_invalid_email: I have confirmed with the client that their email is recorded correctly. Misspellings and typos will prevent them from receiving benefits.
         language:
           languages:
             arabic: Arabic

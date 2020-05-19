@@ -66,19 +66,13 @@
         <% end %>
 
         <h2><%= t('.contact_information.title') %></h2>
-        <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }) %>
-        <label class="checkbox checkbox-with-associated-field-to-disable">
-          <%= f.check_box(:landline) %>
-          <%= t('.contact_information.landline') %>
-        </label>
-        <%= f.cfa_input_field(:email, t('.contact_information.email_address'), type: 'email') %>
-
-        <p class="text--help"><%= t('.contact_information.help_text') %></p>
 
         <fieldset>
           <legend class="form-question">
             <%= t('.contact_information.preferred_contact_label') %>
           </legend>
+
+          <p class="text--help"><%= t('.contact_information.help_text') %></p>
 
           <div class="question-with-follow-up">
             <div class="question-with-follow-up__question associated-field-to-disable">
@@ -92,6 +86,24 @@
             </div>
           </div>
         </fieldset>
+
+        <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }, classes: ['spacing-below-0']) %>
+        <label class="checkbox checkbox-with-associated-field-to-disable">
+          <%= f.check_box(:landline) %>
+          <%= t('.contact_information.landline') %>
+        </label>
+
+        <br>
+        <br>
+
+        <%= f.cfa_input_field(:email, t('.contact_information.email_address'), type: 'email') %>
+
+        <% if @aid_application.error_message?(:email, :mailgun_email_invalid) || @aid_application.confirmed_invalid_email? %>
+          <label class="checkbox">
+            <%= f.check_box(:confirmed_invalid_email) %>
+            <%= t('.contact_information.confirmed_invalid_email') %>
+          </label>
+        <% end %>
 
         <hr>
 

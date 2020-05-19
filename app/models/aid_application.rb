@@ -277,6 +277,7 @@ class AidApplication < ApplicationRecord
 
     validates :phone_number, presence: true, phone_number: true
     validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }
+    validates :email, mailgun_email: true, if: -> { email.present? && email_consent? && !confirmed_invalid_email? }
     validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }

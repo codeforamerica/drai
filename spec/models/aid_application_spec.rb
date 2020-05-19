@@ -167,6 +167,18 @@ RSpec.describe AidApplication, type: :model do
         expect(aid_application).to be_valid(:submit)
       end
     end
+
+    describe 'mailgun validation' do
+      it 'contains errors if the email changes to something mailgun rejects' do
+        allow(MailgunEmailValidator).to receive(:valid?).and_return(false)
+
+        aid_application = build :aid_application, email_consent: true, email: 'e@example.com'
+        aid_application.valid?(:submit)
+        expect(aid_application.errors[:email]).to be_present
+
+        expect(aid_application.error_message?(:email,:mailgun_email_invalid)).to be true
+      end
+    end
   end
 
   describe 'landline' do
