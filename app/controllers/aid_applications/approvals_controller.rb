@@ -10,14 +10,11 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.save_and_approve(approver: current_user)
 
-      respond_with @aid_application, location: (lambda do
-        if Rails.env.production?
-          # TODO: Finish Disbursement
-          homepage_path(current_user)
-        else
-          edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application)
-        end
-      end), notice: "#{@aid_application.application_number} has been approved."
+      if params['form_action'] == 'approve_and_exit'
+        respond_with @aid_application, location: organization_dashboard_path(current_organization), notice: "#{@aid_application.application_number} has been approved."
+      else
+        respond_with @aid_application, location: edit_organization_aid_application_disbursement_path(@aid_application.organization, @aid_application)
+      end
     end
   end
 end

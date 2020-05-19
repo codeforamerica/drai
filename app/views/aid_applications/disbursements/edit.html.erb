@@ -6,39 +6,34 @@
       <h1><%= t('.title') %></h1>
     </header>
 
-    <% if Rails.env.production? %>
-      <%# TODO: Finish Disbursement %>
-      <p>Disbursement functionality coming soon.</p>
-    <% else %>
-      <%= form_for(@search_card, url: { action: :update }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
-        <div class="form-card__content">
-          <%= f.cfa_input_field :sequence_number, t('.sequence_number') %>
+    <%= form_for(@search_card, url: { action: :update }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_input_field :sequence_number, t('.sequence_number') %>
 
-          <div class="accordion">
-            <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.sequence_number_help') %></button>
-            <div class="accordion__content" id="about_program">
-              <p>
-                <%= image_tag('payment_card_sequence_number.png', style: "border: 2px solid black;", alt: "Sequence number is located on the envelope address window to the right of the barcode.") %>
-              </p>
-            </div>
-          </div>
-          <hr>
-
-          <p><em><%= t('.inform_application') %></em></p>
-          <p><%= t('.activation_trouble') %></p>
-          <p><%= t('.lost_card') %></p>
-        </div>
-
-        <div class="form-card__footer">
-          <div class="toolbar">
-            <div class="toolbar__left">
-            </div>
-            <div class="toolbar__right">
-              <%= f.button t('.disburse_card'), class: 'toolbar__item button button--primary' %>
-            </div>
+        <div class="accordion">
+          <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.sequence_number_help') %></button>
+          <div class="accordion__content" id="about_program">
+            <p>
+              <%= image_tag('payment_card_sequence_number.png', style: "border: 2px solid black;", alt: "Sequence number is located on the envelope address window to the right of the barcode.") %>
+            </p>
           </div>
         </div>
-      <% end %>
-    <% end %>
+        <hr>
+
+        <p><em><%= t('.inform_application') %></em></p>
+        <p><%= t('.activation_trouble') %></p>
+        <p><%= t('.lost_card') %></p>
+      </div>
+
+      <div class="form-card__footer">
+        <div class="toolbar">
+          <div class="toolbar__left">
+          </div>
+          <div class="toolbar__right">
+            <%= f.button t('.disburse_card'), class: 'toolbar__item button button--primary' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
   </div>
 </div>

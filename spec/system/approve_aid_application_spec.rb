@@ -28,7 +28,8 @@ describe 'Approve aid application', type: :system do
       click_on 'Determination'
     end
 
-    click_on 'Approve'
+    expect(page).to have_content 'Approve and exit'
+    click_on 'Approve and continue to disbursement'
 
     aid_application.reload
     expect(aid_application.approved_at).to be_within(1.second).of(Time.current)
