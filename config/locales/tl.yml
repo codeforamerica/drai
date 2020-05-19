@@ -128,6 +128,7 @@ tl:
           title: Aplikasyon ng Lengwahe
         mailing_address:
           add_mailing_address: Magdagdag ng hiwalay na address sa koreo
+          remove_mailing_address: Tanggalin ang address sa koreo
           title: Address sa Koreo
         organization_relationship:
           title: Kumpirmahin na ang aplikante ay hindi empleyado, kontraktor, o boluntaryo
@@ -343,7 +344,7 @@ tl:
     confirm: Kumpirmahin
     continue: Ipagpatuloy
     delete: Tanggalin
-    delete_application: Tanggalin ang aplikasyon na ito
+    delete_this_application: Tanggalin ang aplikasyon na ito
     disabled: Kapansanan
     email_address: Address ng email
     go_back: Bumalik

@@ -90,6 +90,7 @@ es:
           title: Idioma de la solicitud
         mailing_address:
           add_mailing_address: Agregar una dirección postal distinta
+          remove_mailing_address: Eliminar dirección postal
           title: Dirección postal
         organization_relationship:
           title: Verifique que el solicitante no sea un empleado, contratista o voluntario
@@ -285,7 +286,7 @@ es:
     confirm: Confirmar
     continue: Continuar
     delete: Eliminar
-    delete_application: Eliminar esta solicitud
+    delete_this_application: Eliminar esta solicitud
     disabled: Desactivada
     email_address: Dirección de correo electrónico
     go_back: Regresar

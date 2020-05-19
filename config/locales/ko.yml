@@ -102,6 +102,7 @@ ko:
           title: 신청서 언어
         mailing_address:
           add_mailing_address: 별도의 우편물 수령지 주소 추가
+          remove_mailing_address: 우편물 수령지 주소 삭제
           title: 우편물 수령지 주소
         organization_relationship:
           title: 신청인이 본 단체의 직원, 계약자(하청업자), 또는 자원봉사자가 아님을 확인하십시오.
@@ -262,7 +263,7 @@ ko:
     confirm: 확인
     continue: 계속
     delete: 삭제
-    delete_application: 본 신청서를 삭제합니다.
+    delete_this_application: 본 신청서를 삭제합니다.
     disabled: 기능 끄기
     email_address: 이메일 주소
     go_back: 되돌아가기
