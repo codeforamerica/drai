@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :new_user, class: User do
     name { Faker::Name.name }
-    email { Faker::Internet.email }
+    email { Faker::Internet.email(name: name, domain: 'example.com') }
   end
 
   factory :user do
     name { Faker::Name.name }
-    email { Faker::Internet.email }
+    email { Faker::Internet.email(name: name, domain: 'example.com') }
     password { 'Password!2' }
     confirmed_at { Time.current }
 
