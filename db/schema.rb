@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_004825) do
+ActiveRecord::Schema.define(version: 2020_05_19_231847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,9 @@ ActiveRecord::Schema.define(version: 2020_05_19_004825) do
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["disburser_id"], name: "index_aid_applications_on_disburser_id"
+    t.index ["organization_id", "approved_at", "disbursed_at"], name: "index_aid_applications_org_id_approved_at_disbursed_at"
+    t.index ["organization_id", "disbursed_at"], name: "index_aid_applications_org_id_disbursed_at"
+    t.index ["organization_id", "submitted_at", "approved_at"], name: "index_aid_applications_org_id_submitted_at_approved_at"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end

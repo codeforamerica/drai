@@ -10,6 +10,8 @@
         <th>Users</th>
         <th>Submitted</th>
         <th>Approved</th>
+        <th>Disbursed</th>
+        <th>Available</th>
       </tr>
       </thead>
       <tbody>
@@ -18,12 +20,10 @@
           <td><%= organization.id %></td>
           <td><%= link_to organization.name, organization_dashboard_path(organization) %></td>
           <td><%= organization.users_count %></td>
-          <td>
-            <%= organization.submitted_aid_applications_count %> Apps
-          </td>
-          <td>
-            TODO
-          </td>
+          <td><%= organization.submitted_aid_applications_count %></td>
+          <td><%= organization.approved_aid_applications_count %></td>
+          <td><%= organization.disbursed_aid_applications_count %></td>
+          <td><%= organization.total_payment_cards_count - organization.total_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
         </tr>
       <% end %>
       </tbody>

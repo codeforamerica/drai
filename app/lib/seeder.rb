@@ -25,6 +25,28 @@ class Seeder
       FactoryBot.create(:payment_card, sequence_number: sequence_number)
     end
 
+    FactoryBot.create_list(:organization, 3).each do |org|
+      supervisors = FactoryBot.create_list :supervisor, 2, organization: org
+      assisters = FactoryBot.create_list :assister, 5, organization: org, inviter: supervisors.sample
+
+      FactoryBot.create_list :aid_application, rand(5..10),
+                             :submitted,
+                             organization: org,
+                             creator: assisters.sample
+
+      FactoryBot.create_list :aid_application, rand(5..10),
+                             :approved,
+                             organization: org,
+                             creator: assisters.sample,
+                             approver: supervisors.sample
+
+      FactoryBot.create_list :aid_application, rand(5..10),
+                             :disbursed,
+                             organization: org,
+                             creator: assisters.sample,
+                             approver: supervisors.sample
+    end
+
     refresh_search_views
   end
 
