@@ -76,7 +76,7 @@ describe 'Start aid application', type: :system do
     fill_in "Phone number", with: "555-555-5555"
     fill_in "Email address (if available)", with: "example@example.com"
 
-    within_fieldset "How would you like to recieve the messages with your Application Number and Activation Code?" do
+    within_fieldset "How would you like to receive the messages with your Application Number and Activation Code?" do
       check "Text message"
       expect(find_field("Text message", checked: true)).to be_present
     end

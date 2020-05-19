@@ -80,6 +80,7 @@ module AidApplications
         :phone_number,
         :landline,
         :email,
+        :confirmed_invalid_email,
         :receives_calfresh_or_calworks,
         :unmet_food,
         :unmet_housing,
