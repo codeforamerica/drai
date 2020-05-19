@@ -40,8 +40,9 @@ Rails.application.routes.draw do
       resources :aid_applications, only: [] do
         scope module: :aid_applications do
           resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
-          resource :applicant, only: [:edit, :update], path_names: { edit: '' }
-          resource :verification, only: [:edit, :update], path_names: { edit: '' }
+          resource :applicant, only: [:edit, :update], path_names: { edit: '' }, defaults: { verify: false }
+          resource :confirmation, only: [:edit, :update], path_names: { edit: '' }
+          resource :verification, controller: :applicants, only: [:edit, :update], path_names: { edit: '' }, defaults: { verify: true }
           resource :approval, only: [:edit, :update], path_names: { edit: '' }
           resource :duplicate, only: [:show]
           resource :disbursement, only: [:edit, :update], path_names: { edit: '' }

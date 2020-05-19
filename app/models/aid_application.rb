@@ -262,8 +262,6 @@ class AidApplication < ApplicationRecord
   end
 
   with_options on: :submit do
-    validates :name, presence: true
-    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
@@ -281,11 +279,16 @@ class AidApplication < ApplicationRecord
     validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :receives_calfresh_or_calworks, inclusion: { in: [true, false] }
-    validates :racial_ethnic_identity, presence: true
     validates :attestation, inclusion: { in: [true], message: :attestation_required }
   end
 
-  with_options on: :verification do
+  with_options on: [:submit, :verification] do
+    validates :name, presence: true
+    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }
+    validates :racial_ethnic_identity, presence: true
+  end
+
+  with_options on: :confirmation do
     validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
     validates :card_receipt_method, inclusion: { in: CARD_RECEIPT_OPTIONS, message: :required_question }
   end

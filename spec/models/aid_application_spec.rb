@@ -255,14 +255,14 @@ RSpec.describe AidApplication, type: :model do
   describe '#contact_method_confirmed' do
     it 'must be true' do
       aid_application = build :aid_application, contact_method_confirmed: nil
-      expect(aid_application).not_to be_valid(:verification)
+      expect(aid_application).not_to be_valid(:confirmation)
 	end
   end
 
   describe '#card_receipt_method' do
     it 'is required' do
       aid_application = build :aid_application, card_receipt_method: nil
-      expect(aid_application).not_to be_valid(:verification)
+      expect(aid_application).not_to be_valid(:confirmation)
     end
   end
 
