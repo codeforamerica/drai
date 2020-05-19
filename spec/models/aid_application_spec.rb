@@ -535,23 +535,70 @@ RSpec.describe AidApplication, type: :model do
     end
 
     context 'when email consent' do
-      let(:aid_application) { create :aid_application, :submitted, sms_consent: false }
+      let(:preferred_language) { 'English' }
+      let(:aid_application) { create :aid_application, :submitted, sms_consent: false, preferred_language: preferred_language }
 
-      it 'sends an email' do
+      it 'sends an email with the application number message' do
         expect do
           aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", "basic_message", "deliver_now",
+                                                                     args: [{
+                                                                                to: aid_application.email,
+                                                                                subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
+                                                                                body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'en')
+                                                                            }]
+        )
       end
-    end
 
-    context 'when both consents' do
-      let(:aid_application) { create :aid_application, :submitted }
+      context 'when the application has a preferred_language of Cantonese' do
+        let(:preferred_language) { 'Cantonese' }
 
-      it 'sends both email and sms' do
-        expect do
-          aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
-                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args).exactly(:twice)
+        it 'sends the email messages in Cantonese' do
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationEmailer", "basic_message", "deliver_now",
+                           args: [{
+                                      to: aid_application.email,
+                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'zh'),
+                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'zh')
+                                  }]
+                     )
+        end
+      end
+
+      context 'when the application has a preferred_language of Spanish' do
+        let(:preferred_language) { 'Spanish' }
+
+        it 'sends the email messages in Spanish' do
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationEmailer", "basic_message", "deliver_now",
+                           args: [{
+                                      to: aid_application.email,
+                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'es'),
+                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'es')
+                                  }]
+                     )
+        end
+      end
+
+      context 'when the application has a preferred_language with no translations (ie: Japanese)' do
+        let(:preferred_language) { 'Japanese' }
+
+        it 'sends the email messages in English' do
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationEmailer", "basic_message", "deliver_now",
+                           args: [{
+                                      to: aid_application.email,
+                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
+                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'en')
+                                  }]
+                     )
+        end
       end
     end
   end

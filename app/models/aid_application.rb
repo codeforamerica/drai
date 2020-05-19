@@ -381,11 +381,12 @@ class AidApplication < ApplicationRecord
     if email_consent?
       ApplicationEmailer.basic_message(
         to: email,
-        subject: I18n.t('email_message.app_id.subject', app_id: application_number),
-        body: I18n.t('email_message.app_id.body_html', app_id: application_number)
+        subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
+        body: I18n.t('email_message.app_id.body_html', app_id: application_number, locale: locale)
       ).deliver_later
     end
   end
+
 
   def send_disbursement_notification
     if sms_consent?
@@ -403,11 +404,12 @@ class AidApplication < ApplicationRecord
     if email_consent?
       ApplicationEmailer.basic_message(
         to: email,
-        subject: I18n.t('email_message.activation.subject'),
+        subject: I18n.t('email_message.activation.subject', locale: locale),
         body: I18n.t(
           'email_message.activation.body_html',
           activation_code: payment_card.activation_code,
-          ivr_phone_number: BlackhawkApi.ivr_phone_number
+          ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          locale: locale
         )
       ).deliver_later
     end
