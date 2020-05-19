@@ -356,7 +356,7 @@ en:
         <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}.</p>
         <p>You will need this number and your verification documents to receive the payment card.</p>
         <p>- The DRAI Team</p>
-      subject: Disaster Assistance Application Number and confirmation
+      subject: Assistance application submitted %{app_id}
     auto_response:
       body_html: |
         <p>This is an automated response from Code for America Disaster Assistance.</p>
