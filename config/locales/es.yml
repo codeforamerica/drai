@@ -200,6 +200,7 @@ es:
         app_submitted: Solicitud entregada correctamente.
         app_verified: Solicitud verificada.
         application_number:
+          edit_contact: Modificar información de contacto
           message: El cliente deberá anotar este número. Lo necesitará para recoger
             la asistencia en persona.
           title: Número de solicitud
@@ -224,18 +225,19 @@ es:
         title: Solicitud entregada
         verifications:
           covid19_impact_accordion:
-            body: "-Carta o aviso de que el solicitante debe cuidar a un niño u otra
-              persona cuya escuela, centro de cuidado infantil u otro centro de cuidado
-              está cerrado debido a la COVID-19\r\n-Carta o aviso del empleador que
-              indica la pérdida del empleo o la reducción de las horas de trabajo
-              debido a la COVID-19\r\n-Carta o aviso de un profesional médico u otra
-              documentación que pueda mostrar dificultades basadas en cualquiera de
-              los siguientes: \r\na. Tiene síntomas consistentes con la COVID-19\r\nb.
-              Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido
-              a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir
-              con las pautas de la salud pública de distanciamiento social no puede
-              trabajar\r\nc. Es un cuidador de un dependiente o cónyuge que tiene
-              síntomas consistentes con la COVID-19"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Carta o aviso de que el solicitante debe cuidar a un niño u otra persona cuya escuela, centro de cuidado infantil u otro centro de cuidado está cerrado debido a la COVID-19</li>
+                <li>Carta o aviso del empleador que indica la pérdida del empleo o la reducción de las horas de trabajo debido a la COVID-19</li>
+                <li>
+                  <p>Carta o aviso de un profesional médico u otra documentación que pueda mostrar dificultades basadas en cualquiera de los siguientes:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>Tiene síntomas consistentes con la COVID-19</li>
+                    <li>Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir con las pautas de la salud pública de distanciamiento social no puede trabajar</li>
+                    <li>Es un cuidador de un dependiente o cónyuge que tiene síntomas consistentes con la COVID-19</li>
+                  </ul>
+                </li>
+              </ul>
             title: Impacto de la COVID-19
           message: Para poder procesar su solicitud, necesitaremos verificar que la
             información que usted proporcionó sea verdadera. Necesitará entregar los
@@ -243,27 +245,33 @@ es:
             otros sistemas implementados por la organización sin ánimo de lucro o
             en persona.
           photo_id_accordion:
-            body: "-Cualquier tarjeta de identificación emitida por una agencia estatal\r\n-Cualquier
-              licencia de conducir emitida por una agencia estatal\r\n-Pasaporte de
-              cualquier país\r\n-Documento de identificación internacional\r\n-Tarjeta
-              de identificación de la escuela\r\n-Tarjeta de identificación del trabajo\r"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Cualquier tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Cualquier licencia de conducir emitida por una agencia estatal</li>
+                <li>Pasaporte de cualquier país</li>
+                <li>Documento de identificación internacional</li>
+                <li>Tarjeta de identificación de la escuela</li>
+                <li>Tarjeta de identificación del trabajo</li>
+              </ul>
             title: Identificación con fotografía
           proof_of_address_accordion:
-            body: "-Documento de identificación con la dirección indicada, como una
-              licencia de conducir o tarjeta de identificación emitida por una agencia
-              estatal\r\n-Carta de beneficios de una agencia gubernamental dirigida
-              al solicitante o que muestre que el solicitante vive en el hogar\r\n-Contrato
-              de arrendamiento que muestre el nombre del solicitante\r\n-Factura de
-              servicios públicos dirigida al solicitante\r\n-Tarjetas de seguro con
-              el nombre del solicitante\r\n-Papeles de inscripción de la escuela con
-              la dirección, dirigidos al solicitante o que tengan el nombre del solicitante\r"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Documento de identificación con la dirección indicada, como una licencia de conducir o tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Carta de beneficios de una agencia gubernamental dirigida al solicitante o que muestre que el solicitante vive en el hogar</li>
+                <li>Contrato de arrendamiento que muestre el nombre del solicitante</li>
+                <li>Factura de servicios públicos dirigida al solicitante</li>
+                <li>Tarjetas de seguro con el nombre del solicitante</li>
+                <li>Papeles de inscripción de la escuela con la dirección, dirigidos al solicitante o que tengan el nombre del solicitante</li>
+              </ul>
             title: Comprobante de domicilio
           title: Documentos de verificación
   email_message:
     activation:
       body_html: "<p>Su solicitud para asistencia por desastre ha sido aprobada. El
-        código de activación para su tarjeta de pago es %{activation_code}.</p>\r\n<p>Llame al
-        %{ivr_phone_number} para activar su tarjeta.</p>\r"
+        código de activación para su tarjeta de pago es %{activation_code}.</p><p>Llame
+        al %{ivr_phone_number} para activar su tarjeta.</p>"
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     app_id:
       body_html: |
@@ -274,9 +282,9 @@ es:
       subject: Solicitud de asistencia entregada %{app_id}
     auto_response:
       body_html: "<p>Esta es una respuesta automatizada de la asistencia por desastre
-        de la organización Code for America.</p>\r\n<p>Para obtener ayuda con su caso,
-        comuníquese con la organización que le ayudó con su solicitud.</p>\r\n<p>Para
-        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>\r"
+        de la organización Code for America.</p><p>Para obtener ayuda con su caso,
+        comuníquese con la organización que le ayudó con su solicitud.</p><p>Para
+        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>"
   general:
     activate: Activar
     affirmative: Sí
