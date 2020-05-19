@@ -97,10 +97,11 @@
         <br>
 
         <%= f.cfa_input_field(:email, t('.contact_information.email_address'), type: 'email') %>
-        <% if @aid_application.errors[:email].include?(I18n.t(MailgunEmailValidator::ERROR_MESSAGE_KEY)) %>
+
+        <% if @aid_application.error_message?(:email, :mailgun_email_invalid) || @aid_application.confirmed_invalid_email? %>
           <label class="checkbox">
             <%= f.check_box(:confirmed_invalid_email) %>
-            I have confirmed with the client that their email is recorded correctly. Misspellings and typos will prevent them from receiving benefits.
+            <%= t('.contact_information.confirmed_invalid_email') %>
           </label>
         <% end %>
 

@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 describe MailgunEmailValidator do
-  subject { described_class.new(attributes: [:email_address]) }
+  class ValidatableRecord
+    include ActiveModel::Validations
+    attr_accessor :email_address
+  end
 
-  let(:member) { OpenStruct.new(errors: { email_address: [] }) }
+  subject { described_class.new(attributes: [:email]) }
+
+  let(:member) { ValidatableRecord.new }
   let(:fake_email_address) { 'a@cfa.bloop' }
   let(:response) do
     {
@@ -64,13 +69,14 @@ describe MailgunEmailValidator do
     before do
       stub_request(:get, "https://api.mailgun.net/v4/address/validate?address=#{fake_email_address}")
         .to_return(status: 401, body: '')
-      allow(Raven).to receive(:capture_exception)
+
+      allow(Raven).to receive(:capture_message)
     end
 
     it 'returns true and sends the error to sentry' do
       subject.validate_each(member, :email_address, fake_email_address)
       expect(member.errors[:email_address]).not_to be_present
-      expect(Raven).to have_received(:capture_exception).with(MailgunEmailValidator::UnsuccessfulRequestException)
+      expect(Raven).to have_received(:capture_message)
     end
   end
 end
