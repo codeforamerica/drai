@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :aid_applications, only: :index
   end
 
+
   resources :organizations, only: [] do
     scope module: :organizations do
       resource :dashboard, only: [:show]
@@ -33,15 +34,20 @@ Rails.application.routes.draw do
       resources :aid_applications, only: [:create, :destroy]
     end
 
-    resources :aid_applications, only: [] do
-      scope module: :aid_applications do
-        resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
-        resource :applicant, only: [:edit, :update], path_names: { edit: '' }
-        resource :verification, only: [:edit, :update], path_names: { edit: '' }
-        resource :approval, only: [:edit, :update], path_names: { edit: '' }
-        resource :duplicate, only: [:show]
-        resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
-        resource :finished, only: [:edit, :update], path_names: { edit: '' }
+
+    # All routes in this scope will be prefixed with /locale if an available locale is set. See default_url_options in
+    # application_controller.rb and http://guides.rubyonrails.org/i18n.html for more info on this approach.
+    scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+      resources :aid_applications, only: [] do
+        scope module: :aid_applications do
+          resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
+          resource :applicant, only: [:edit, :update], path_names: { edit: '' }
+          resource :verification, only: [:edit, :update], path_names: { edit: '' }
+          resource :approval, only: [:edit, :update], path_names: { edit: '' }
+          resource :duplicate, only: [:show]
+          resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
+          resource :finished, only: [:edit, :update], path_names: { edit: '' }
+        end
       end
     end
   end

@@ -17,51 +17,8 @@ es:
         zip_code: Debe ser un código postal de 5 dígitos en California.
         zip_five_digits: Debe ser un código postal de 5 dígitos.
   aid_applications:
-    confirm_messages:
+    applicants:
       edit:
-        activation_code_required: El cliente *debe* tener su código de activación
-          para poder usar su tarjeta.
-        button: Enviar código de activación
-        contact_info: Esto le enviará al solicitante su código a través del método
-          que seleccionó durante su solicitud inicial.
-        edit: Modificar información de contacto
-        emergency_confirm: "¿Está seguro de que quiere acceder a esto?"
-        emergency_info: Solamente use el acceso de emergencia si el cliente no puede
-          recibir el código de acceso por sí mismo. Se mantendrá un registro de esta
-          acción.
-        message_received: Mensaje recibido
-        notification: Solicitud aprobada para <CLIENT NAME>
-        question: "¿El solicitante tiene su código de activación?"
-        title: Código de activación
-    disbursements:
-      edit:
-        activation_trouble: Si tiene problemas para activar la tarjeta de pago, por
-          favor, revise las instrucciones y comuníquese con el emisor de la tarjeta
-          a través del número de teléfono o la información del sitio web que están
-          en la tarjeta de pago.
-        disburse_card: Emitir tarjeta
-        inform_application: 'Informe al solicitante que:'
-        lost_card: Si pierde la tarjeta o se la roban, no puede ser reemplazada.
-        method: "¿A través de qué método se emitió la tarjeta?"
-        sequence_number: Número de secuencia de la tarjeta
-        title: Completar emisión de la tarjeta
-        when: "¿Cuándo se emitió la tarjeta?"
-    duplicates:
-      show:
-        body: Alguien con el mismo nombre, fecha de nacimiento y dirección ya ha solicitado
-          asistencia DRAI.
-        title: Se ha determinado que ya existe una solicitud para este solicitante.
-    edits:
-      edit:
-        about_program:
-          about_accordian:
-            body: Este es un programa que proporcionará asistencia económica a los
-              inmigrantes indocumentados durante la pandemia. La asistencia es una
-              tarjeta de débito con un saldo de $500 por adulto. Las personas que
-              soliciten la asistencia tendrán que responder a preguntas sobre cómo
-              han sido afectadas por la COVID-19 y necesitarán proporcionar información
-              personal. Tendrán que entregar documentos que respalden esta información.
-            title: Acerca del programa DRAI
         additional_information:
           receives_calfresh_help_text: Un hogar está compuesto por personas que viven
             juntas y compran y preparan comidas juntas.
@@ -121,6 +78,73 @@ es:
           preferred_contact_text: Mensaje de texto
           read_to_client: 'Lea esto al solicitante:'
           title: Información de contacto
+        language:
+          languages:
+            arabic: Árabe
+            chinese: Chino (simplificado)
+            english: Inglés
+            koren: Coreano
+            spanish: Español
+            tagalog: Tagalo
+            vietnamese: Vietnamita
+          title: Idioma de la solicitud
+        mailing_address:
+          add_mailing_address: Agregar una dirección postal distinta
+          title: Dirección postal
+        organization_relationship:
+          title: Verifique que el solicitante no sea un empleado, contratista o voluntario
+            de esta organización.
+        shared_address:
+          apartment_number: Apartamento, edificio, unidad, etc. (opcional)
+          city: Ciudad
+          state: Estado
+          street_address: Dirección (calle)
+          zip: Código postal
+    confirm_messages:
+      edit:
+        activation_code_required: El cliente *debe* tener su código de activación
+          para poder usar su tarjeta.
+        button: Enviar código de activación
+        contact_info: Esto le enviará al solicitante su código a través del método
+          que seleccionó durante su solicitud inicial.
+        edit: Modificar información de contacto
+        emergency_confirm: "¿Está seguro de que quiere acceder a esto?"
+        emergency_info: Solamente use el acceso de emergencia si el cliente no puede
+          recibir el código de acceso por sí mismo. Se mantendrá un registro de esta
+          acción.
+        message_received: Mensaje recibido
+        notification: Solicitud aprobada para <CLIENT NAME>
+        question: "¿El solicitante tiene su código de activación?"
+        title: Código de activación
+    disbursements:
+      edit:
+        activation_trouble: Si tiene problemas para activar la tarjeta de pago, por
+          favor, revise las instrucciones y comuníquese con el emisor de la tarjeta
+          a través del número de teléfono o la información del sitio web que están
+          en la tarjeta de pago.
+        disburse_card: Emitir tarjeta
+        inform_application: 'Informe al solicitante que:'
+        lost_card: Si pierde la tarjeta o se la roban, no puede ser reemplazada.
+        method: "¿A través de qué método se emitió la tarjeta?"
+        sequence_number: Número de secuencia de la tarjeta
+        title: Completar emisión de la tarjeta
+        when: "¿Cuándo se emitió la tarjeta?"
+    duplicates:
+      show:
+        body: Alguien con el mismo nombre, fecha de nacimiento y dirección ya ha solicitado
+          asistencia DRAI.
+        title: Se ha determinado que ya existe una solicitud para este solicitante.
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: Este es un programa que proporcionará asistencia económica a los
+              inmigrantes indocumentados durante la pandemia. La asistencia es una
+              tarjeta de débito con un saldo de $500 por adulto. Las personas que
+              soliciten la asistencia tendrán que responder a preguntas sobre cómo
+              han sido afectadas por la COVID-19 y necesitarán proporcionar información
+              personal. Tendrán que entregar documentos que respalden esta información.
+            title: Acerca del programa DRAI
         eligibility:
           care_facility_closed: Debido al brote del COVID-19, ¿está cerrado el centro
             de cuidado al que normalmente lleva a su hijo u otra persona? (Por ejemplo,
@@ -147,34 +171,19 @@ es:
             del COVID-19 debido a su edad o una enfermedad relacionada y, por lo tanto,
             no puede trabajar y al mismo tiempo cumplir con los requisitos de distanciamiento
             social?"
-        language:
-          languages:
-            arabic: Árabe
-            chinese: Chino (simplificado)
-            english: Inglés
-            koren: Coreano
-            spanish: Español
-            tagalog: Tagalo
-            vietnamese: Vietnamita
-          title: Idioma de la solicitud
-        mailing_address:
-          add_mailing_address: Agregar una dirección postal distinta
-          title: Dirección postal
-        organization_relationship:
-          title: Verifique que el solicitante no sea un empleado, contratista o voluntario
-            de esta organización.
         privacy:
           help_text: Lea esto al solicitante.
-          text: "Le voy a hacer varias preguntas que se usarán para verificar su elegibilidad
-            para esta asistencia. También recopilaremos su documentación para verificar
-            quién está solicitando esta asistencia. Su información personal está protegida.
-            Se ingresará en un portal en línea administrado por una organización comunitaria
-            sin ánimo de lucro. Nuestra organización también guardará esta información.
-            Compartiremos información general acumulada con el gobierno estatal, pero
-            no compartiremos nada que lo identifique a usted. Su información no será
-            compartida con nadie más y eventualmente todas las entidades que la poseen
-            la destruirán de una manera segura. \n Basándose en esta información,
-            ¿desea seguir adelante con la solicitud?"
+          text_part1: Le voy a hacer varias preguntas que se usarán para verificar
+            su elegibilidad para esta asistencia. También recopilaremos su documentación
+            para verificar quién está solicitando esta asistencia. Su información
+            personal está protegida. Se ingresará en un portal en línea administrado
+            por una organización comunitaria sin ánimo de lucro. Nuestra organización
+            también guardará esta información. Compartiremos información general acumulada
+            con el gobierno estatal, pero no compartiremos nada que lo identifique
+            a usted. Su información no será compartida con nadie más y eventualmente
+            todas las entidades que la poseen la destruirán de una manera segura.
+          text_part2: Basándose en esta información, ¿desea seguir adelante con la
+            solicitud?
           title: Guion de privacidad
         service_criteria:
           title: Criterios para el servicio
@@ -184,12 +193,6 @@ es:
               al solicitante a:"
             notification: "<COUNTY> El condado está dentro de su área de servicio."
             title: Código postal
-        shared_address:
-          apartment_number: Apartamento, edificio, unidad, etc. (opcional)
-          city: Ciudad
-          state: Estado
-          street_address: Dirección (calle)
-          zip: Código postal
     verifications:
       edit:
         app_not_submitted: Solicitud aún no entregada.
@@ -287,6 +290,7 @@ es:
     email_address: Dirección de correo electrónico
     go_back: Regresar
     negative: 'No'
+    none_of_the_above: Ninguna de las anteriores
     optional: Opcional
     phone_number: Número de teléfono
     proceed: Avanzar
