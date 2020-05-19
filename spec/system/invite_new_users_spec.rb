@@ -32,7 +32,7 @@ describe 'Account invitations', type: :system do
         click_on 'Invite assister'
       end
 
-      expect(current_path).to eq organization_assisters_path(organization)
+      expect(current_path).to eq organization_assisters_path(organization, locale: :en)
       expect(page).to have_content "Sent invite to #{new_user_email}"
 
       new_user = User.last
@@ -87,7 +87,7 @@ describe 'Account invitations', type: :system do
     perform_enqueued_jobs do
       click_on 'Invite assister'
     end
-    expect(current_path).to eq organization_assisters_path(supervisor.organization)
+    expect(current_path).to eq organization_assisters_path(supervisor.organization, locale: :en)
     expect(page).to have_content "Sent invite to #{new_user_email}"
 
     new_user = User.last

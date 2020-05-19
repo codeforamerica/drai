@@ -18,41 +18,7 @@ tl:
         zip_code: Dapat 5-tambilang na ZIP Code sa California
         zip_five_digits: Dapat 5-tambilang na Zip Code
   aid_applications:
-    confirm_messages:
-      edit:
-        activation_code_required: Ang kliyente ay *dapat* magkaroon ng Kodigo ng Pagiging-aktibo
-          sa paggamit ng kanilang kard.
-        button: Ipadala ang Kodigo ng Pagiging-aktibo
-        contact_info: Ito ay magpapadala sa aplikante ng kanilang kodigo sa paraan
-          na kanilang pinili sa kanilang inisyal na aplikasyon.
-        edit: Baguhin ang Impormasyon ng Kontak
-        emergency_confirm: Sigurado ka bang nais mo ma-access ito?
-        emergency_info: Gamitin lamang ang access sa emerhensya kung ang kliyente
-          ay hindi nakatanggap mismo ng kanilang Kodigo ng Pagiging-aktibo. Ang isang
-          rekord nitong aksyon ay maitatala.
-        message_received: Natanggap ang Mensahe
-        notification: Ang aplikasyon ay naaprubahan para kay  <PANGALAN NG KLIYENTE>
-        question: Meron bang Kodigo ng Pagiging aktibo ang aplikante?
-        title: Kodigo ng Pagiging -aktibo
-    disbursements:
-      edit:
-        activation_trouble: Kung ikaw ay may mga problema sa pag-activate ng iyong
-          kard ng kabayaran, pag-aralan ang alituntunin at makipag-ugnay sa taga-isyu
-          ng kard sa pamamagitan ng numero ng telepono o impormasyon ng website na
-          nakalista sa kard ng kabayaran.
-        disburse_card: Naipamahaging kard
-        inform_application: 'Ipaalam sa aplikante:'
-        lost_card: Kung nawala mo ang iyong kard o nanakaw ang kard, hindi ito mapapalitan.
-        method: Sa anong paraan naipamahagi ang kard?
-        sequence_number: Numero ng Pagkakasunod ng Kard
-        title: Kumpletuhin ang pakikibahagi
-        when: Kailan naipamahagi ang kard?
-    duplicates:
-      show:
-        body: May isang tao na may magkasing pangalan, petsa ng kapanganakan at address
-          ang nag-aplay na para sa DRAI.
-        title: Ang aplikante na ito ay natukoy na isang doble.
-    edits:
+    applicants:
       edit:
         about_program:
           about_accordian:
@@ -162,6 +128,7 @@ tl:
           title: Aplikasyon ng Lengwahe
         mailing_address:
           add_mailing_address: Magdagdag ng hiwalay na address sa koreo
+          remove_mailing_address: Tanggalin ang address sa koreo
           title: Address sa Koreo
         organization_relationship:
           title: Kumpirmahin na ang aplikante ay hindi empleyado, kontraktor, o boluntaryo
@@ -194,12 +161,106 @@ tl:
           state: Estado
           street_address: Direksyon ng Kalye
           zip: Zip Code
+    confirm_messages:
+      edit:
+        activation_code_required: Ang kliyente ay *dapat* magkaroon ng Kodigo ng Pagiging-aktibo
+          sa paggamit ng kanilang kard.
+        button: Ipadala ang Kodigo ng Pagiging-aktibo
+        contact_info: Ito ay magpapadala sa aplikante ng kanilang kodigo sa paraan
+          na kanilang pinili sa kanilang inisyal na aplikasyon.
+        edit: Baguhin ang Impormasyon ng Kontak
+        emergency_confirm: Sigurado ka bang nais mo ma-access ito?
+        emergency_info: Gamitin lamang ang access sa emerhensya kung ang kliyente
+          ay hindi nakatanggap mismo ng kanilang Kodigo ng Pagiging-aktibo. Ang isang
+          rekord nitong aksyon ay maitatala.
+        message_received: Natanggap ang Mensahe
+        notification: Ang aplikasyon ay naaprubahan para kay  <PANGALAN NG KLIYENTE>
+        question: Meron bang Kodigo ng Pagiging aktibo ang aplikante?
+        title: Kodigo ng Pagiging -aktibo
+    disbursements:
+      edit:
+        activation_trouble: Kung ikaw ay may mga problema sa pag-activate ng iyong
+          kard ng kabayaran, pag-aralan ang alituntunin at makipag-ugnay sa taga-isyu
+          ng kard sa pamamagitan ng numero ng telepono o impormasyon ng website na
+          nakalista sa kard ng kabayaran.
+        disburse_card: Naipamahaging kard
+        inform_application: 'Ipaalam sa aplikante:'
+        lost_card: Kung nawala mo ang iyong kard o nanakaw ang kard, hindi ito mapapalitan.
+        method: Sa anong paraan naipamahagi ang kard?
+        sequence_number: Numero ng Pagkakasunod ng Kard
+        title: Kumpletuhin ang pakikibahagi
+        when: Kailan naipamahagi ang kard?
+    duplicates:
+      show:
+        body: May isang tao na may magkasing pangalan, petsa ng kapanganakan at address
+          ang nag-aplay na para sa DRAI.
+        title: Ang aplikante na ito ay natukoy na isang doble.
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: Ito ay isang programa para sa walang dokumento na mga imigrante
+              upang makakuha ng pinansiyal na tulong sa panahon ng pandemiko. Ang
+              tulong ay isang $500 na debit kard bawat adulto. Ang mga tao na nag-aplay
+              ay kinakailangan na sumagot sa mga katanungan kung sila ba ay naapektuhan
+              ng COVID-19, at magbibigay din ng ilang personal na impormasyon. Kinakailangan
+              nilang magsumite ng mga dokumento na nagbibigay ng impormasyon na iyon.
+            title: Tungkol sa programang DRAI
+        eligibility:
+          care_facility_closed: Ang pasilidad ba ng pangangalaga, tulad ng paaralan,
+            pasilidad sa pangangalaga sa bata o ibang pasilidad na pinaninirahan ng
+            adulto, kung saan mo madalas pinapadala ang iyong anak o ibang tao para
+            sa pangangalaga, ay sarado dahil sa pagsiklab ng COVID-19?
+          caregiver: Ikaw ba ay isang tagapangalaga ng isang dependente, tulad ng
+            isang bata o nakatatandang magulang, o isang asawa na may o nagkaroon
+            ng patuloy na sintomas ng COVID-19, na nagdulot saiyo ng hindi pagtratrabaho?
+          experiencing_symptoms: Ikaw ba nakararanas o nakaranas ng patuloy na sintomas
+            ng COVID-19?
+          help_text: Kasama ng isang balidong dokumento ang Social Security Number
+            kard at ang awtorisasyon sa pagtrabaho o Dokumento ng Awtorisasyon sa
+            Pagtratrabaho o Employment Authorization Document na inisyu ng U.S. Citizenship
+            and Immigration Services
+          label_text: Ikaw ba ay may kasalukuyang balidong dokumento na pinapayagan
+            ka na magtrabaho sa Estados Unidos?
+          read_to_client: Basahin ang sumusunod sa aplikante. Kailangan nilang tugunan
+            ang isa sa pamantayan. I-tsek lahat ng mga kahon na nalalapat.
+          reduced_work_hours: Ikaw ba, o ibang mga adulto sa iyong sambahayan na nagbibigay
+            ng kita sa iyong sambahayan, ang nawalan ng trabaho o nabawasanan ang
+            oras ng pagtratrabaho dahil sa pagsiklab ng COVID-19?
+          title: Pagiging karapat-dapat
+          underlying_health_condition: Ikaw ba ay nasa mataas na panganib ng malubhang
+            sakit ng COVID-19 dahil sa kasalukuyang kondisyon sa kalusugan o edad,
+            at samakatuwid hindi makatrabaho upang sumunod sa kuitusan ng pagdistansiya
+            sa lipunan?
+        privacy:
+          help_text: Basahin ito sa aplikante.
+          text_part1: Ako ay magtatanong sa iyo ng ilang mga katanungan na magagamit
+            upang beripikahin ang iyong pagiging karapat-dapat para sa tulong na ito.
+            Kami rin ay mangongolekta ng dokumentasyon mula sa iyo upang beripikahin
+            kung sino ang nag-aaplay para sa tulong na ito. Ang iyong personal na
+            impormasyon ay protektado. Ito ay ipapasok sa isang online na portal na
+            pinamamahalaan ng isang walang kita na organsisasyon. Ito rin ay magaganap
+            sa iyong organisasyon. Kami ay makikibahagi ng ilang pangkalahatang pinagtipon
+            na impormasyon sa estado ng gobyerno, ngunit wala ang makikilala sa iyo.
+            Ang iyong impormasyon ay hindi ibabahagi sa sinuman, at ito ay sisirain
+            sa kalaunan para sa kaligtasan ng lahat.
+          text_part2: Base sa impormasyon na ito, nais mo bang ipagpatuloy ang aplikasyon?
+          title: Pribadong iskript
+        service_criteria:
+          title: Pamantayan ng serbisyo
+          zip_code:
+            button: Tignan
+            error: "<COUNTY> Ang county ay nasa labas ng iyong lugar ng serbisyo,
+              isangguni ang aplikante sa:"
+            notification: "<COUNTY> Ang county ay nasa loob ng iyong lugar ng serbisyo."
+            title: ZIP code
     verifications:
       edit:
         app_not_submitted: Ang aplikasyon ay hindi pa naisumite.
         app_submitted: Ang aplikasyon ay tagumpay na naisumite
         app_verified: Ang aplikasyon ay matagumpy na naberipika.
         application_number:
+          edit_contact: Baguhin ang Impormasyon ng Kontak
           message: Kinakailangan isulat ng kliyente ang numero. Kinakailangan nila
             upang i-pick up ang benepisyo nang personal.
           title: Numero ng Aplikasyon
@@ -224,38 +285,48 @@ tl:
         title: Naisumite ang aplikasyon
         verifications:
           covid19_impact_accordion:
-            body: "-Liham o abiso na ang aplikante ay kailangan mag-alaga ng bata
-              o ibang tao na ang paaralan, pasilidad sa pangangalaga sa bata o ibang
-              pasilidad sa pangangalaga ay sarado dahil sa COVID 19-Liham o abiso
-              mula sa pinagtratrabahuan na nakasaad ang kawalan ng trabaho o malaking
-              pagbawas ng oras sa trabaho dahil sa COVID-19-Liham o abiso mula sa
-              isang medikal na propesyonal o ibang dokumentasyon na nagpapakita ng
-              kahirapan base sa anuman sa sumsunod: a. May sintomas na kapareho sa
-              COVID-19b. May mataas sa panganib sa malubhang sakit mula sa COVID-19
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Liham o abiso na ang aplikante ay kailangan mag</li>
+                <li>alaga ng bata o ibang tao na ang paaralan, pasilidad sa pangangalaga sa bata o ibang pasilidad sa pangangalaga ay sarado dahil sa COVID 19</li>
+                <li>Liham o abiso mula sa pinagtratrabahuan na nakasaad ang kawalan ng trabaho o malaking pagbawas ng oras sa trabaho dahil sa COVID-19</li>
+                <li>
+                  <p>Liham o abiso mula sa isang medikal na propesyonal o ibang dokumentasyon na nagpapakita ng kahirapan base sa anuman sa sumsunod:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>May sintomas na kapareho sa COVID-19</li>
+                    <li>May mataas sa panganib sa malubhang sakit mula sa COVID-19
               dahil sa kasalukuyang kondisyon sa kalusugan o edad at samakatuwid hindi
               makatrabaho upang makasunod sa kautusan ng piskal na pagdistansiya sa
-              gabay ng pampublkong kalusugan"
+              gabay ng pampublkong kalusugan</li>
+                  </ul>
+                </li>
+              </ul>
             title: Dulot ng COVID-9
           message: 'Upang maiproseso ang iyong aplikasyon, kinakailangan naming na
             beripikahin na tama ang impormasyon na ibinigay. Kinakailangan mong isumite
             ang sumusunnod na dokumento sa pamamagitan ng teks, mail, o ibang sistema
             na inimplementahan ng CBO, o sa personal:'
           photo_id_accordion:
-            body: "-Anumang kard ng pagkakakilanlan na inisyu- ng- estado-Anumang
-              lisensiya sapag-drive na inisyu- ng- estado -Pasaporte mula sa ibang
-              bansa-Internasyonal na dokumento ng pagkakakilanlan-Kard ng pagkakakilanlan
-              sa paaralanKard ng pagkakakilanlan sa trabaho"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Anumang kard ng pagkakakilanlan na inisyu- ng- estado</li>
+                <li>Anumang lisensiya sapag-drive na inisyu- ng- estado</li>
+                <li>Pasaporte mula sa ibang bansa</li>
+                <li>Internasyonal na dokumento ng pagkakakilanlan</li>
+                <li>Kard ng pagkakakilanlan sa paaralan</li>
+                <li>Kard ng pagkakakilanlan sa trabaho</li>
+              </ul>
             title: ID na may larawan
           proof_of_address_accordion:
-            body: "-dokumento ng pagkakakilanlan na may nakalistang address, tulad
-              ng lisensiya sa pagdrive na inisyu-ng-estado o kard ng pagkakakilanlan
-              na inisyu-ng-estado-Liham ng benepisyo mula sa ahensiya ng gobyerno
-              na naka-address sa aplikante na nagpapakita na ang aplikante ay nakatira
-              sa sambahayan-Kasunduna sa pag-papaupa na nagpapakita ng pangalan ng
-              aplikante-Singil sa utilidad na naka-address sa aplikante-Kard ng insurance
-              na nagpapakita ng pangalan ng aplikante-Papel sa pagpapatala sa paaralan
-              na may address, na naka-address sa aplikante o nagpapakita ng pangalan
-              ng aplikante"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>dokumento ng pagkakakilanlan na may nakalistang address, tulad ng lisensiya sa pagdrive na inisyu-ng-estado o kard ng pagkakakilanlan na inisyu-ng-estado</li>
+                <li>Liham ng benepisyo mula sa ahensiya ng gobyerno na naka-address sa aplikante na nagpapakita na ang aplikante ay nakatira sa sambahayan</li>
+                <li>Kasunduna sa pag-papaupa na nagpapakita ng pangalan ng aplikante</li>
+                <li>Singil sa utilidad na naka-address sa aplikante</li>
+                <li>Kard ng insurance na nagpapakita ng pangalan ng aplikante</li>
+                <li>Papel sa pagpapatala sa paaralan na may address, na naka-address sa aplikante o nagpapakita ng pangalan ng aplikante</li>
+              </ul>
             title: Patunay ng address
           title: Mga dokumento para sa beripikasyon
   email_message:
@@ -284,11 +355,12 @@ tl:
     confirm: Kumpirmahin
     continue: Ipagpatuloy
     delete: Tanggalin
-    delete_application: Tanggalin ang aplikasyon na ito
+    delete_this_application: Tanggalin ang aplikasyon na ito
     disabled: Kapansanan
     email_address: Address ng email
     go_back: Bumalik
     negative: Hindi
+    none_of_the_above: Wala sa alinman sa itaas
     optional: opsyonal
     phone_number: Numero ng telepono
     proceed: Ipagpatuloy

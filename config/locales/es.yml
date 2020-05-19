@@ -17,51 +17,8 @@ es:
         zip_code: Debe ser un código postal de 5 dígitos en California.
         zip_five_digits: Debe ser un código postal de 5 dígitos.
   aid_applications:
-    confirm_messages:
+    applicants:
       edit:
-        activation_code_required: El cliente *debe* tener su código de activación
-          para poder usar su tarjeta.
-        button: Enviar código de activación
-        contact_info: Esto le enviará al solicitante su código a través del método
-          que seleccionó durante su solicitud inicial.
-        edit: Modificar información de contacto
-        emergency_confirm: "¿Está seguro de que quiere acceder a esto?"
-        emergency_info: Solamente use el acceso de emergencia si el cliente no puede
-          recibir el código de acceso por sí mismo. Se mantendrá un registro de esta
-          acción.
-        message_received: Mensaje recibido
-        notification: Solicitud aprobada para <CLIENT NAME>
-        question: "¿El solicitante tiene su código de activación?"
-        title: Código de activación
-    disbursements:
-      edit:
-        activation_trouble: Si tiene problemas para activar la tarjeta de pago, por
-          favor, revise las instrucciones y comuníquese con el emisor de la tarjeta
-          a través del número de teléfono o la información del sitio web que están
-          en la tarjeta de pago.
-        disburse_card: Emitir tarjeta
-        inform_application: 'Informe al solicitante que:'
-        lost_card: Si pierde la tarjeta o se la roban, no puede ser reemplazada.
-        method: "¿A través de qué método se emitió la tarjeta?"
-        sequence_number: Número de secuencia de la tarjeta
-        title: Completar emisión de la tarjeta
-        when: "¿Cuándo se emitió la tarjeta?"
-    duplicates:
-      show:
-        body: Alguien con el mismo nombre, fecha de nacimiento y dirección ya ha solicitado
-          asistencia DRAI.
-        title: Se ha determinado que ya existe una solicitud para este solicitante.
-    edits:
-      edit:
-        about_program:
-          about_accordian:
-            body: Este es un programa que proporcionará asistencia económica a los
-              inmigrantes indocumentados durante la pandemia. La asistencia es una
-              tarjeta de débito con un saldo de $500 por adulto. Las personas que
-              soliciten la asistencia tendrán que responder a preguntas sobre cómo
-              han sido afectadas por la COVID-19 y necesitarán proporcionar información
-              personal. Tendrán que entregar documentos que respalden esta información.
-            title: Acerca del programa DRAI
         additional_information:
           receives_calfresh_help_text: Un hogar está compuesto por personas que viven
             juntas y compran y preparan comidas juntas.
@@ -121,6 +78,74 @@ es:
           preferred_contact_text: Mensaje de texto
           read_to_client: 'Lea esto al solicitante:'
           title: Información de contacto
+        language:
+          languages:
+            arabic: Árabe
+            chinese: Chino (simplificado)
+            english: Inglés
+            koren: Coreano
+            spanish: Español
+            tagalog: Tagalo
+            vietnamese: Vietnamita
+          title: Idioma de la solicitud
+        mailing_address:
+          add_mailing_address: Agregar una dirección postal distinta
+          remove_mailing_address: Eliminar dirección postal
+          title: Dirección postal
+        organization_relationship:
+          title: Verifique que el solicitante no sea un empleado, contratista o voluntario
+            de esta organización.
+        shared_address:
+          apartment_number: Apartamento, edificio, unidad, etc. (opcional)
+          city: Ciudad
+          state: Estado
+          street_address: Dirección (calle)
+          zip: Código postal
+    confirm_messages:
+      edit:
+        activation_code_required: El cliente *debe* tener su código de activación
+          para poder usar su tarjeta.
+        button: Enviar código de activación
+        contact_info: Esto le enviará al solicitante su código a través del método
+          que seleccionó durante su solicitud inicial.
+        edit: Modificar información de contacto
+        emergency_confirm: "¿Está seguro de que quiere acceder a esto?"
+        emergency_info: Solamente use el acceso de emergencia si el cliente no puede
+          recibir el código de acceso por sí mismo. Se mantendrá un registro de esta
+          acción.
+        message_received: Mensaje recibido
+        notification: Solicitud aprobada para <CLIENT NAME>
+        question: "¿El solicitante tiene su código de activación?"
+        title: Código de activación
+    disbursements:
+      edit:
+        activation_trouble: Si tiene problemas para activar la tarjeta de pago, por
+          favor, revise las instrucciones y comuníquese con el emisor de la tarjeta
+          a través del número de teléfono o la información del sitio web que están
+          en la tarjeta de pago.
+        disburse_card: Emitir tarjeta
+        inform_application: 'Informe al solicitante que:'
+        lost_card: Si pierde la tarjeta o se la roban, no puede ser reemplazada.
+        method: "¿A través de qué método se emitió la tarjeta?"
+        sequence_number: Número de secuencia de la tarjeta
+        title: Completar emisión de la tarjeta
+        when: "¿Cuándo se emitió la tarjeta?"
+    duplicates:
+      show:
+        body: Alguien con el mismo nombre, fecha de nacimiento y dirección ya ha solicitado
+          asistencia DRAI.
+        title: Se ha determinado que ya existe una solicitud para este solicitante.
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: Este es un programa que proporcionará asistencia económica a los
+              inmigrantes indocumentados durante la pandemia. La asistencia es una
+              tarjeta de débito con un saldo de $500 por adulto. Las personas que
+              soliciten la asistencia tendrán que responder a preguntas sobre cómo
+              han sido afectadas por la COVID-19 y necesitarán proporcionar información
+              personal. Tendrán que entregar documentos que respalden esta información.
+            title: Acerca del programa DRAI
         eligibility:
           care_facility_closed: Debido al brote del COVID-19, ¿está cerrado el centro
             de cuidado al que normalmente lleva a su hijo u otra persona? (Por ejemplo,
@@ -147,34 +172,19 @@ es:
             del COVID-19 debido a su edad o una enfermedad relacionada y, por lo tanto,
             no puede trabajar y al mismo tiempo cumplir con los requisitos de distanciamiento
             social?"
-        language:
-          languages:
-            arabic: Árabe
-            chinese: Chino (simplificado)
-            english: Inglés
-            koren: Coreano
-            spanish: Español
-            tagalog: Tagalo
-            vietnamese: Vietnamita
-          title: Idioma de la solicitud
-        mailing_address:
-          add_mailing_address: Agregar una dirección postal distinta
-          title: Dirección postal
-        organization_relationship:
-          title: Verifique que el solicitante no sea un empleado, contratista o voluntario
-            de esta organización.
         privacy:
           help_text: Lea esto al solicitante.
-          text: "Le voy a hacer varias preguntas que se usarán para verificar su elegibilidad
-            para esta asistencia. También recopilaremos su documentación para verificar
-            quién está solicitando esta asistencia. Su información personal está protegida.
-            Se ingresará en un portal en línea administrado por una organización comunitaria
-            sin ánimo de lucro. Nuestra organización también guardará esta información.
-            Compartiremos información general acumulada con el gobierno estatal, pero
-            no compartiremos nada que lo identifique a usted. Su información no será
-            compartida con nadie más y eventualmente todas las entidades que la poseen
-            la destruirán de una manera segura. \n Basándose en esta información,
-            ¿desea seguir adelante con la solicitud?"
+          text_part1: Le voy a hacer varias preguntas que se usarán para verificar
+            su elegibilidad para esta asistencia. También recopilaremos su documentación
+            para verificar quién está solicitando esta asistencia. Su información
+            personal está protegida. Se ingresará en un portal en línea administrado
+            por una organización comunitaria sin ánimo de lucro. Nuestra organización
+            también guardará esta información. Compartiremos información general acumulada
+            con el gobierno estatal, pero no compartiremos nada que lo identifique
+            a usted. Su información no será compartida con nadie más y eventualmente
+            todas las entidades que la poseen la destruirán de una manera segura.
+          text_part2: Basándose en esta información, ¿desea seguir adelante con la
+            solicitud?
           title: Guion de privacidad
         service_criteria:
           title: Criterios para el servicio
@@ -184,18 +194,13 @@ es:
               al solicitante a:"
             notification: "<COUNTY> El condado está dentro de su área de servicio."
             title: Código postal
-        shared_address:
-          apartment_number: Apartamento, edificio, unidad, etc. (opcional)
-          city: Ciudad
-          state: Estado
-          street_address: Dirección (calle)
-          zip: Código postal
     verifications:
       edit:
         app_not_submitted: Solicitud aún no entregada.
         app_submitted: Solicitud entregada correctamente.
         app_verified: Solicitud verificada.
         application_number:
+          edit_contact: Modificar información de contacto
           message: El cliente deberá anotar este número. Lo necesitará para recoger
             la asistencia en persona.
           title: Número de solicitud
@@ -220,18 +225,19 @@ es:
         title: Solicitud entregada
         verifications:
           covid19_impact_accordion:
-            body: "-Carta o aviso de que el solicitante debe cuidar a un niño u otra
-              persona cuya escuela, centro de cuidado infantil u otro centro de cuidado
-              está cerrado debido a la COVID-19\r\n-Carta o aviso del empleador que
-              indica la pérdida del empleo o la reducción de las horas de trabajo
-              debido a la COVID-19\r\n-Carta o aviso de un profesional médico u otra
-              documentación que pueda mostrar dificultades basadas en cualquiera de
-              los siguientes: \r\na. Tiene síntomas consistentes con la COVID-19\r\nb.
-              Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido
-              a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir
-              con las pautas de la salud pública de distanciamiento social no puede
-              trabajar\r\nc. Es un cuidador de un dependiente o cónyuge que tiene
-              síntomas consistentes con la COVID-19"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Carta o aviso de que el solicitante debe cuidar a un niño u otra persona cuya escuela, centro de cuidado infantil u otro centro de cuidado está cerrado debido a la COVID-19</li>
+                <li>Carta o aviso del empleador que indica la pérdida del empleo o la reducción de las horas de trabajo debido a la COVID-19</li>
+                <li>
+                  <p>Carta o aviso de un profesional médico u otra documentación que pueda mostrar dificultades basadas en cualquiera de los siguientes:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>Tiene síntomas consistentes con la COVID-19</li>
+                    <li>Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir con las pautas de la salud pública de distanciamiento social no puede trabajar</li>
+                    <li>Es un cuidador de un dependiente o cónyuge que tiene síntomas consistentes con la COVID-19</li>
+                  </ul>
+                </li>
+              </ul>
             title: Impacto de la COVID-19
           message: Para poder procesar su solicitud, necesitaremos verificar que la
             información que usted proporcionó sea verdadera. Necesitará entregar los
@@ -239,27 +245,33 @@ es:
             otros sistemas implementados por la organización sin ánimo de lucro o
             en persona.
           photo_id_accordion:
-            body: "-Cualquier tarjeta de identificación emitida por una agencia estatal\r\n-Cualquier
-              licencia de conducir emitida por una agencia estatal\r\n-Pasaporte de
-              cualquier país\r\n-Documento de identificación internacional\r\n-Tarjeta
-              de identificación de la escuela\r\n-Tarjeta de identificación del trabajo\r"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Cualquier tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Cualquier licencia de conducir emitida por una agencia estatal</li>
+                <li>Pasaporte de cualquier país</li>
+                <li>Documento de identificación internacional</li>
+                <li>Tarjeta de identificación de la escuela</li>
+                <li>Tarjeta de identificación del trabajo</li>
+              </ul>
             title: Identificación con fotografía
           proof_of_address_accordion:
-            body: "-Documento de identificación con la dirección indicada, como una
-              licencia de conducir o tarjeta de identificación emitida por una agencia
-              estatal\r\n-Carta de beneficios de una agencia gubernamental dirigida
-              al solicitante o que muestre que el solicitante vive en el hogar\r\n-Contrato
-              de arrendamiento que muestre el nombre del solicitante\r\n-Factura de
-              servicios públicos dirigida al solicitante\r\n-Tarjetas de seguro con
-              el nombre del solicitante\r\n-Papeles de inscripción de la escuela con
-              la dirección, dirigidos al solicitante o que tengan el nombre del solicitante\r"
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Documento de identificación con la dirección indicada, como una licencia de conducir o tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Carta de beneficios de una agencia gubernamental dirigida al solicitante o que muestre que el solicitante vive en el hogar</li>
+                <li>Contrato de arrendamiento que muestre el nombre del solicitante</li>
+                <li>Factura de servicios públicos dirigida al solicitante</li>
+                <li>Tarjetas de seguro con el nombre del solicitante</li>
+                <li>Papeles de inscripción de la escuela con la dirección, dirigidos al solicitante o que tengan el nombre del solicitante</li>
+              </ul>
             title: Comprobante de domicilio
           title: Documentos de verificación
   email_message:
     activation:
       body_html: "<p>Su solicitud para asistencia por desastre ha sido aprobada. El
-        código de activación para su tarjeta de pago es %{activation_code}.</p>\r\n<p>Llame al
-        %{ivr_phone_number} para activar su tarjeta.</p>\r"
+        código de activación para su tarjeta de pago es %{activation_code}.</p><p>Llame
+        al %{ivr_phone_number} para activar su tarjeta.</p>"
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     app_id:
       body_html: |
@@ -270,9 +282,9 @@ es:
       subject: Solicitud de asistencia entregada %{app_id}
     auto_response:
       body_html: "<p>Esta es una respuesta automatizada de la asistencia por desastre
-        de la organización Code for America.</p>\r\n<p>Para obtener ayuda con su caso,
-        comuníquese con la organización que le ayudó con su solicitud.</p>\r\n<p>Para
-        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>\r"
+        de la organización Code for America.</p><p>Para obtener ayuda con su caso,
+        comuníquese con la organización que le ayudó con su solicitud.</p><p>Para
+        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>"
   general:
     activate: Activar
     affirmative: Sí
@@ -282,11 +294,12 @@ es:
     confirm: Confirmar
     continue: Continuar
     delete: Eliminar
-    delete_application: Eliminar esta solicitud
+    delete_this_application: Eliminar esta solicitud
     disabled: Desactivada
     email_address: Dirección de correo electrónico
     go_back: Regresar
     negative: 'No'
+    none_of_the_above: Ninguna de las anteriores
     optional: Opcional
     phone_number: Número de teléfono
     proceed: Avanzar

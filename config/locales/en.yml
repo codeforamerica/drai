@@ -34,9 +34,9 @@ en:
         eligibility_criteria: Only a client who answers "No" is eligible for DRAI.
         email: Make sure to enter a valid email.
         email_invalid: Please confirm the email address is correct.
-        mailgun_email_invalid: Please confirm the email address is correct.
         landline_sms: Landlines cannot receive text messages. Enter a cell phone number
           or change the contact method.
+        mailgun_email_invalid: Please confirm the email address is correct.
         not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
         phone_number: Make sure your phone number is 10 digits long.
@@ -99,6 +99,9 @@ en:
             or other address.
           title: Residential address
         contact_information:
+          confirmed_invalid_email: I have confirmed with the client that their email
+            is recorded correctly. Misspellings and typos will prevent them from receiving
+            benefits.
           email_address: Email address (if available)
           help_text: Select one or both notice methods. The applicant will be sent
             their Application Number and Activation Code by this method.
@@ -119,7 +122,6 @@ en:
           preferred_contact_voice: Automated phone call
           read_to_client: 'Read to the applicant:'
           title: Contact information
-          confirmed_invalid_email: I have confirmed with the client that their email is recorded correctly. Misspellings and typos will prevent them from receiving benefits.
         language:
           languages:
             arabic: Arabic
@@ -389,6 +391,7 @@ en:
     email_address: Email address
     go_back: Go back
     negative: 'No'
+    none_of_the_above: None of the above
     optional: optional
     phone_number: Phone number
     proceed: Proceed
