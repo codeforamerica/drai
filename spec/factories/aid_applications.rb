@@ -25,11 +25,11 @@ FactoryBot.define do
     mailing_zip_code { '03226' }
 
     sms_consent { true }
-    phone_number { Faker::PhoneNumber.cell_phone }
+    phone_number { "1234567890" }
     landline { false }
 
     email_consent { true }
-    email { Faker::Internet.email(name: name) }
+    email { Faker::Internet.email(name: name, domain: 'example.com') }
 
     receives_calfresh_or_calworks { true }
 
