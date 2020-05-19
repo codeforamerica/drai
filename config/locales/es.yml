@@ -258,8 +258,8 @@ es:
   email_message:
     activation:
       body_html: "<p>Su solicitud para asistencia por desastre ha sido aprobada. El
-        código de activación para su tarjeta de pago es ******.</p>\r\n<p>Llame al
-        <card phone number> para activar su tarjeta.</p>\r"
+        código de activación para su tarjeta de pago es %{activation_code}.</p>\r\n<p>Llame al
+        %{ivr_phone_number} para activar su tarjeta.</p>\r"
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     app_id:
       body_html: |
