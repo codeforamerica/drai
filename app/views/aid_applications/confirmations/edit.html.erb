@@ -7,6 +7,26 @@
 
     <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
+        <fieldset class="form-group group-of-input-fields">
+          <legend><h2><%= t('.application_number.message_received') %></h2></legend>
+          <p class="text--help"><%= t('.application_number.sent_to', application_number: @aid_application.application_number) %></p>
+          <% if @aid_application.sms_consent? %>
+            <%= f.cfa_input_field :phone_number,  t('general.phone_number'), options: { data: { enable_on_change: '#contact-info-button' } } %>
+          <% end %>
+          <% if @aid_application.email_consent? %>
+            <%= f.cfa_input_field :email,  t('general.email_address'), options: { data: { enable_on_change: '#contact-info-button' } } %>
+          <% end %>
+          <br>
+          <%= f.button t('.application_number.edit_contact'), id: 'contact-info-button', type: 'submit', name: 'form_action', value: 'update_and_resend', class: 'button button--small' %>
+        </fieldset>
+
+        <p class="with-padding-med"><em><%= t('.application_number.confirm') %></em></p>
+        <%= f.cfa_checkbox :contact_method_confirmed, t('.application_number.contact_method') %>
+
+        <p><strong><%= t('.application_number.title') %></strong> <%= @aid_application.application_number %></p>
+
+        <hr>
+
         <h2><%= t('.verifications.title') %></h2>
         <p><%= t('.verifications.message') %></p>
         <div class="accordion">
@@ -27,20 +47,6 @@
             <p><%= t('.verifications.covid19_impact_accordion.body_html') %></p>
           </div>
         </div>
-
-        <hr>
-
-        <h2><%= t('.application_number.title') %></h2>
-
-        <h3 class="notice text--centered">
-          <%= @aid_application.application_number %>
-        </h3>
-        <p class="with-padding-med"><em><%= t('.application_number.confirm') %></em></p>
-        <%= link_to(edit_organization_aid_application_applicant_path(current_organization, @aid_application), class: 'button button--small button--secondary ') do %>
-          <i class="button__icon--left icon-arrow_back"></i>
-          <%= t('.application_number.edit_contact') %>
-        <% end %>
-        <%= f.cfa_checkbox :contact_method_confirmed, t('.application_number.contact_method') %>
 
         <hr>
 

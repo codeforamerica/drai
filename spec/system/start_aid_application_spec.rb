@@ -107,7 +107,7 @@ describe 'Start aid application', type: :system do
       click_on 'Submit'
     end
 
-    expect(page).to have_content 'Application submitted'
+    expect(page).to have_content I18n.t('aid_applications.confirmations.edit.title')
     expect(page).to have_content /APP-/
 
     check "Contact method confirmed"

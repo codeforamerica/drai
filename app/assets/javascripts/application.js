@@ -28,3 +28,21 @@ var toggleDisabledField = (function() {
 $(document).ready(function() {
     toggleDisabledField.init();
 });
+
+
+$(document).ready(function() {
+    var $inputs = $("input[data-enable-on-change]");
+
+    $inputs.each(function() {
+        $input = $(this);
+        var $button = $($input.attr('data-enable-on-change'));
+        $button.toggleClass('disabled', true);
+    });
+
+    $inputs.bind('change keydown keypress', function(e) {
+        var $input = $(e.target);
+
+        var $button = $($input.attr('data-enable-on-change'));
+        $button.toggleClass('disabled', false);
+    });
+});

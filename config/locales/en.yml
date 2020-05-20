@@ -155,8 +155,10 @@ en:
             message with the Application Number.  If necessary, review the contact
             information and make edits.
           contact_method: Contact method confirmed
-          edit_contact: Edit contact information
-          title: Application Number
+          edit_contact: Update and re-send
+          message_received: Did the applicant receive a message?
+          sent_to: 'The Application Number (%{application_number}) was sent to:'
+          title: 'Application Number:'
         next_steps:
           message_html: |
             <ol>
@@ -184,7 +186,7 @@ en:
             pick_up: Pick up
           subtitle: This can be edited later.
           title: How will the applicant get their card?
-        title: Application submitted
+        title: Review and submit
         verifications:
           covid19_impact_accordion:
             body_html: |

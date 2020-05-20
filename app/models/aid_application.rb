@@ -280,6 +280,10 @@ class AidApplication < ApplicationRecord
   end
 
   with_options on: :submit do
+    validates :name, presence: true
+    validates :birthday, presence: true, inclusion: {in: -> (_member) {'01/01/1900'.to_date..18.years.ago}, message: :birthday}
+    validates :racial_ethnic_identity, presence: true
+
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
@@ -291,8 +295,6 @@ class AidApplication < ApplicationRecord
       validates :mailing_zip_code, presence: true, five_digit_zip: true
     end
 
-    validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: {message: :email}, if: -> {email_consent?}
     validates :email, mailgun_email: true, if: -> {email.present? && email_consent? && !confirmed_invalid_email?}
     validates :email_consent, presence: true, unless: -> {sms_consent?}
 
@@ -300,10 +302,9 @@ class AidApplication < ApplicationRecord
     validates :attestation, inclusion: {in: [true], message: :attestation_required}
   end
 
-  with_options on: [:submit, :verification] do
-    validates :name, presence: true
-    validates :birthday, presence: true, inclusion: {in: -> (_member) {'01/01/1900'.to_date..18.years.ago}, message: :birthday}
-    validates :racial_ethnic_identity, presence: true
+  with_options on: [:submit, :contact_information] do
+    validates :phone_number, presence: true, phone_number: true
+    validates :email, presence: true, email: {message: :email}, if: -> {email_consent?}
   end
 
   with_options on: :confirmation do
