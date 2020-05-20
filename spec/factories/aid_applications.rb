@@ -24,6 +24,8 @@ FactoryBot.define do
     mailing_state { Faker::Address.state }
     mailing_zip_code { '03226' }
 
+    unmet_housing { true }
+
     sms_consent { true }
     phone_number { "1234567890" }
     landline { false }

@@ -128,7 +128,7 @@
               )
           %>
 
-          <fieldset class="input-group form-group">
+          <fieldset class="input-group form-group group-of-individual-checkboxes">
             <legend class="spacing-below-15"><strong><%= t('.additional_information.unmet_needs_legend') %></strong></legend>
             <% [
                    {method: :unmet_food, label: t('.additional_information.unmet_needs_food')},
@@ -139,10 +139,7 @@
                    {method: :unmet_other, label: t('.additional_information.unmet_needs_other')},
 
                ].each do |item| %>
-              <label class="checkbox">
-                <%= f.check_box(item[:method]) %>
-                <%= item[:label] %>
-              </label>
+                <%= f.cfa_checkbox(item[:method], item[:label]) %>
             <% end %>
           </fieldset>
 
