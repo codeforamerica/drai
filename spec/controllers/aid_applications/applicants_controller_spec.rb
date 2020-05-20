@@ -58,6 +58,23 @@ describe AidApplications::ApplicantsController do
           expect(aid_application.gender).to eq 'Transgender: Female to Male'
         end
       end
+
+      context 'when locale is already set on the aid application' do
+        before do
+          sign_in assister
+        end
+
+        it 'auto-selects the associated language' do
+          get :edit, params: {
+              aid_application_id: aid_application.id,
+              organization_id: assister.organization.id,
+              locale: :ar
+          }
+
+          aid_application = assigns(:aid_application)
+          expect(aid_application.preferred_language).to eq 'Arabic'
+        end
+      end
     end
   end
 
