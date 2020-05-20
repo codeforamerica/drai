@@ -15,7 +15,7 @@ module AidApplications
 
       app_is_duplicate = AidApplication.matching_submitted_apps(@aid_application).any?
 
-      if params[:form_action] == 'submit' && !app_is_duplicate
+      if params[:form_action] == 'submit' && !app_is_duplicate && !@aid_application.submitted?
         @aid_application.save_and_submit(submitter: current_user)
 
         if @aid_application.errors.empty?
