@@ -1,7 +1,23 @@
-<p>
-  <strong>Application Number</strong>: <%= current_aid_application.application_number ? current_aid_application.application_number : 'Unassigned' %>
-  <span class="label"><%= current_aid_application.status_human %></span>
-</p>
+<div class="toolbar">
+  <div class="toolbar__left">
+    <p>
+      <strong>Application Number</strong>: <%= current_aid_application.application_number ? current_aid_application.application_number : 'Unassigned' %>
+      <span class="label"><%= current_aid_application.status_human %></span>
+    </p>
+  </div>
+
+  <div class="toolbar__right">
+    <%= form_with(method: "get") do |f| %>
+        <% locales = [
+            [t('aid_applications.applicants.edit.language.languages.english'), :en],
+            [t('aid_applications.applicants.edit.language.languages.spanish'), :es],
+            [t('aid_applications.applicants.edit.language.languages.koren'), :ko],
+            [t('aid_applications.applicants.edit.language.languages.tagalog'), :tl],
+        ] %>
+        <%= f.select :new_locale, locales, { selected: I18n.locale }, { onchange: 'this.form.submit();' } %>
+    <% end %>
+  </div>
+</div>
 
 <div id="application-navigation" class="tab-bar">
   <%= link_to edit_organization_aid_application_eligibility_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_eligibility_path(current_organization, current_aid_application)) ? 'is-selected' : '' }" do %>
@@ -33,5 +49,4 @@
     5. Disburse
   <% end %>
 </div>
-
 <br>
