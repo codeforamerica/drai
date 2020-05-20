@@ -2,6 +2,7 @@
   <%= link_to "Dashboard", organization_dashboard_path(current_organization) , class: "tab-bar__tab #{ current_path?(organization_dashboard_path(current_organization)) ? 'is-selected' : '' }" %>
   <% if supervisor? %>
     <%= link_to "Manage workers", organization_assisters_path(current_organization), class: "tab-bar__tab #{ current_path?(organization_assisters_path(current_organization)) ? 'is-selected' : '' }" %>
+    <%= link_to "Download data", organization_export_path(current_organization), class: "tab-bar__tab #{ current_path?(organization_export_path(current_organization)) ? 'is-selected' : '' }" %>
   <% end %>
 </div>
 <br>
