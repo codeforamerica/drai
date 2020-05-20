@@ -12,5 +12,9 @@ module Organizations
 
       @aid_applications = aid_applications_query
     end
+
+    def current_organization
+      @_current_organization ||= Organization.with_counts.find(params[:organization_id])
+    end
   end
 end

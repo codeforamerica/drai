@@ -214,7 +214,11 @@ class AidApplication < ApplicationRecord
   has_paper_trail
 
   scope :submitted, -> { where.not(submitted_at: nil) }
-  scope :approved, -> { where.not(submitted_at: nil) }
+  scope :approved, -> { where.not(approved_at: nil) }
+  scope :disbursed, -> { where.not(disbursed_at: nil) }
+  scope :only_submitted, -> { submitted.where(approved_at: nil) }
+  scope :only_approved, -> { approved.where(disbursed_at: nil) }
+  scope :only_disbursed, -> { disbursed }
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted

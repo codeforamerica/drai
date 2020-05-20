@@ -26,11 +26,47 @@ class Organization < ApplicationRecord
         WHERE
           organization_id = organizations.id AND
           submitted_at IS NOT NULL
-      ) AS submitted_aid_applications_count
+      ) AS total_aid_applications_count,
+      organizations.*,
+      (
+        SELECT COUNT(aid_applications.id)
+        FROM aid_applications
+        WHERE
+          organization_id = organizations.id AND
+          submitted_at IS NOT NULL
+          AND approved_at IS NULL
+      ) AS submitted_aid_applications_count,
+      (
+        SELECT COUNT(aid_applications.id)
+        FROM aid_applications
+        WHERE
+          organization_id = organizations.id AND
+          approved_at IS NOT NULL
+          AND disbursed_at IS NULL
+      ) AS approved_aid_applications_count,
+      (
+        SELECT COUNT(aid_applications.id)
+        FROM aid_applications
+        WHERE
+          organization_id = organizations.id AND
+          disbursed_at IS NOT NULL
+      ) AS disbursed_aid_applications_count
     SQL
   }
 
+  def total_aid_applications_count
+    @total_aid_applications_count ||= attributes["total_aid_applications_count"] || aid_applications.submitted.count
+  end
+
   def submitted_aid_applications_count
-    @submitted_aid_applications_count ||= attributes["submitted_aid_applications_count"] || aid_applications.submitted.count
+    @submitted_aid_applications_count ||= attributes["submitted_aid_applications_count"] || aid_applications.only_submitted.count
+  end
+
+  def approved_aid_applications_count
+    @approved_aid_applications_count ||= attributes["approved_aid_applications_count"] || aid_applications.only_approved.count
+  end
+
+  def disbursed_aid_applications_count
+    @disbursed_aid_applications_count ||= attributes["disbursed_aid_applications_count"] || aid_applications.only_disbursed.count
   end
 end
