@@ -68,11 +68,11 @@ describe AidApplications::ApplicantsController do
           get :edit, params: {
               aid_application_id: aid_application.id,
               organization_id: assister.organization.id,
-              locale: :zh
+              locale: :ar
           }
 
           aid_application = assigns(:aid_application)
-          expect(aid_application.preferred_language).to eq 'Mandarin'
+          expect(aid_application.preferred_language).to eq 'Arabic'
         end
       end
     end

@@ -74,7 +74,7 @@ class AidApplication < ApplicationRecord
   PREFERRED_LANGUAGE_OPTIONS = [
       'American Sign Language',
       '​Amharic​​​​​',
-      '​Arabic​​​​​',
+      'Arabic',
       '​Armenian',
       '​Assyrian​​​​​',
       '​Bengali​​​​​',

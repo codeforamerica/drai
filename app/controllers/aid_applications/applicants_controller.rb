@@ -3,7 +3,7 @@ module AidApplications
     def edit
       @aid_application = current_aid_application
 
-      @aid_application.preferred_language = set_preferred_language
+      @aid_application.preferred_language ||= set_preferred_language
       @aid_application.country_of_origin ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.sexual_orientation ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.gender ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
@@ -112,9 +112,7 @@ module AidApplications
     end
 
     def set_preferred_language
-      if @aid_application.preferred_language.present?
-        @aid_application.preferred_language
-      elsif params[:locale].present?
+      if params[:locale].present?
         AidApplication::LOCALE_LANGUAGE_MAPPING[params[:locale]]
       else
         AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
