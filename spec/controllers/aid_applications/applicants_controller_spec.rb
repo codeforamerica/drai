@@ -103,8 +103,8 @@ describe AidApplications::ApplicantsController do
     end
 
     context 'when submit form action' do
+      let!(:aid_application_attributes) {attributes_for(:aid_application, organization: nil, creator: nil)}
       it 'submits the application' do
-        aid_application_attributes = attributes_for(:aid_application, organization: nil, creator: nil)
 
         expect do
           put :update, params: {
@@ -116,6 +116,21 @@ describe AidApplications::ApplicantsController do
         end.to change { aid_application.reload.submitted_at }.from(nil).to(within(1.second).of(Time.current))
            .and change { aid_application.reload.submitter }.from(nil).to(assister)
            .and change { aid_application.reload.application_number }.from(nil).to(anything)
+      end
+
+      context 'when the aid application is already submitted' do
+        let!(:aid_application) { create :aid_application, :submitted, organization: assister.organization, creator: assister }
+
+        it 'does send any messages' do
+          expect do
+            put :update, params: {
+                aid_application_id: aid_application.id,
+                organization_id: assister.organization.id,
+                aid_application: attributes_for(:aid_application, organization: nil, creator: nil),
+                form_action: 'submit'
+            }
+          end.not_to have_enqueued_job(ActionMailer::MailDeliveryJob)
+        end
       end
     end
   end
