@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_231847) do
+ActiveRecord::Schema.define(version: 2020_05_20_185547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 2020_05_19_231847) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "export_logs", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "organization_id"
+    t.bigint "exporter_id"
+    t.index ["exporter_id"], name: "index_export_logs_on_exporter_id"
+    t.index ["organization_id"], name: "index_export_logs_on_organization_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -173,6 +182,8 @@ ActiveRecord::Schema.define(version: 2020_05_19_231847) do
   add_foreign_key "aid_applications", "users", column: "creator_id"
   add_foreign_key "aid_applications", "users", column: "disburser_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
+  add_foreign_key "export_logs", "organizations"
+  add_foreign_key "export_logs", "users", column: "exporter_id"
   add_foreign_key "payment_cards", "aid_applications"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"

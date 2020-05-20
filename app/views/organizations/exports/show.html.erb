@@ -1,0 +1,45 @@
+<%= render 'organizations/tab_navigation' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h1>Download Data</h1>
+    </header>
+
+    <div class="form-card__content">
+      <p>This data will be downloaded in a CSV, which can be opened in a spreadsheet program.</p>
+
+      <br>
+
+      <%= button_to({ action: :create }, method: :post, class: 'button button--primary') do %>
+        Download CSV
+      <% end %>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <h2>Export Audit Log</h2>
+
+  <div class="data-table-container">
+    <table class="data-table js-sticky-header">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>User</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @export_logs.each do |export_log| %>
+        <tr id="<%= dom_id(export_log) %>">
+          <td><%= export_log.created_at %></td>
+          <td><%= export_log.exporter.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

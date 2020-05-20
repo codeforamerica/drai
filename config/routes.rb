@@ -34,6 +34,7 @@ Rails.application.routes.draw do
             post 'resend_confirmation_instructions'
           end
         end
+        resource :export, only: [:show, :create]
         resources :aid_applications, only: [:create, :destroy]
       end
 

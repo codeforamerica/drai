@@ -328,6 +328,16 @@ class AidApplication < ApplicationRecord
   alias_attribute :text_phone_number, :phone_number
   alias_attribute :voice_phone_number, :phone_number
 
+  # https://shift.infinite.red/fast-csv-report-generation-with-postgres-in-rails-d444d9b915ab?source=post_page-----c4b7bc112049----------------------
+  def self.stream_rows(raw_sql, options = "WITH CSV HEADER")
+    conn = ActiveRecord::Base.connection.raw_connection
+    conn.copy_data "COPY (#{raw_sql}) TO STDOUT #{options};" do
+      while row = conn.get_copy_data
+        yield row
+      end
+    end
+  end
+
   def text_phone_number=(value)
     self.phone_number = value if preferred_contact_channel_text?
   end
