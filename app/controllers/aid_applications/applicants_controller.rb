@@ -3,7 +3,7 @@ module AidApplications
     def edit
       @aid_application = current_aid_application
 
-      @aid_application.preferred_language ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
+      @aid_application.preferred_language = set_preferred_language
       @aid_application.country_of_origin ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.sexual_orientation ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       @aid_application.gender ||= AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
@@ -30,15 +30,15 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: -> { edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "mailing-address") }
+        return respond_with @aid_application, location: -> {edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "mailing-address")}
       elsif params[:form_action] == 'remove_mailing_address'
         @aid_application.assign_attributes(
-          allow_mailing_address: false,
-          mailing_street_address: nil,
-          mailing_apartment_number: nil,
-          mailing_city: nil,
-          mailing_state: nil,
-          mailing_zip_code: nil
+            allow_mailing_address: false,
+            mailing_street_address: nil,
+            mailing_apartment_number: nil,
+            mailing_city: nil,
+            mailing_state: nil,
+            mailing_zip_code: nil
         )
 
         if @aid_application.submitted?
@@ -47,7 +47,7 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: -> { edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address") }
+        return respond_with @aid_application, location: -> {edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address")}
       elsif params[:form_action] == 'verify' || params[:form_action] == 'verify_and_exit'
         @aid_application.save(context: :submit)
 
@@ -75,39 +75,49 @@ module AidApplications
 
     def aid_application_params
       params.require(:aid_application).permit(
-        :street_address,
-        :apartment_number,
-        :city,
-        :zip_code,
-        :allow_mailing_address,
-        :mailing_street_address,
-        :mailing_apartment_number,
-        :mailing_city,
-        :mailing_state,
-        :mailing_zip_code,
-        :sms_consent,
-        :email_consent,
-        :phone_number,
-        :landline,
-        :email,
-        :confirmed_invalid_email,
-        :receives_calfresh_or_calworks,
-        :unmet_food,
-        :unmet_housing,
-        :unmet_childcare,
-        :unmet_utilities,
-        :unmet_transportation,
-        :unmet_other,
-        :name,
-        :birthday,
-        :preferred_language,
-        :country_of_origin,
-        { racial_ethnic_identity: [] },
-        :sexual_orientation,
-        :gender,
-        :attestation
+          :street_address,
+          :apartment_number,
+          :city,
+          :zip_code,
+          :allow_mailing_address,
+          :mailing_street_address,
+          :mailing_apartment_number,
+          :mailing_city,
+          :mailing_state,
+          :mailing_zip_code,
+          :sms_consent,
+          :email_consent,
+          :phone_number,
+          :landline,
+          :email,
+          :confirmed_invalid_email,
+          :receives_calfresh_or_calworks,
+          :unmet_food,
+          :unmet_housing,
+          :unmet_childcare,
+          :unmet_utilities,
+          :unmet_transportation,
+          :unmet_other,
+          :name,
+          :birthday,
+          :preferred_language,
+          :country_of_origin,
+          {racial_ethnic_identity: []},
+          :sexual_orientation,
+          :gender,
+          :attestation
       ).each do |_, value|
         value.delete('') # removes arrays with empty string from checkboxes
+      end
+    end
+
+    def set_preferred_language
+      if @aid_application.preferred_language.present?
+        @aid_application.preferred_language
+      elsif params[:locale].present?
+        AidApplication::LOCALE_LANGUAGE_MAPPING[params[:locale]]
+      else
+        AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       end
     end
   end
