@@ -31,20 +31,20 @@ en:
         county_required: If the client's county is not shown in this list then their
           county is outside your organization's service area. They must apply through
           an organization that serves their county.
-        eligibility_criteria: Only a client who answers "No" is eligible for DRAI.
-        email: Make sure to enter a valid email.
+        eligibility_criteria: Only a client who answers "No" is eligible for DRAI
+        email: Make sure to enter a valid email
         email_invalid: Please confirm the email address is correct.
-        landline_sms: Landlines cannot receive text messages. Enter a cell phone number
-          or change the contact method.
+        landline_sms: Landlines cannot recieve text messages. Enter a cell phone number,
+          or change the notice method.
         mailgun_email_invalid: Please confirm the email address is correct.
         not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
-        phone_number: Make sure your phone number is 10 digits long.
+        phone_number: Make sure your phone number is 10 digits long
         required_question: This question is required.
         sequence_number_already_assigned: This sequence number has already been used.
         sequence_number_invalid: Make sure the sequence number is correct.
-        zip_code: Must be a 5-digit ZIP Code in California.
-        zip_five_digits: Must be a 5-digit ZIP Code.
+        zip_code: Must be a 5-digit ZIP Code in California
+        zip_five_digits: Must be a 5-digit ZIP Code
   aid_applications:
     applicants:
       edit:
@@ -145,6 +145,23 @@ en:
           state: State
           street_address: Street Address
           zip: ZIP Code
+    confirm_messages:
+      edit:
+        activation_code_required_html: "The client <strong>must</strong> have their Activation Code to use their card."
+        button: Send Activation Code
+        contact_info: This will send the applicant their code by the method they selected
+          during their initial application.
+        edit: Edit contact information
+        emergency_confirm: Are you sure you want to access this?
+        emergency_info: Only use emergency access if the client cannot recieve the
+          Activation Code themselves. A record of this action will be recorded.
+        help: Approving the application should trigger sending the Activation Number.
+          The applicant must have their Activation Number to use their card.
+        message_received: Message received
+        notification: Application approved for <CLIENT NAME>
+        question: 'Does the applicant have their Activation Code? '
+        review: Review contact information
+        title: Activation Code
     confirmations:
       edit:
         app_not_submitted: Application not yet submitted.
@@ -204,10 +221,7 @@ en:
                 </li>
               </ul>
             title: COVID-19 impact
-          message: 'In order to process your application, we will need to verify the
-                information you provided is accurate. You will need to submit the following
-                documents through text, email, other systems implemented by the CBO, or
-                in-person:'
+          message: 'In order to process your application, we will need to verify the information you provided is accurate. You will need to submit the following documents through text, email, other systems implemented by the CBO, or in-person:'
           photo_id_accordion:
             body_html: |
               <ul class="list--bulleted">
@@ -231,24 +245,6 @@ en:
               </ul>
             title: Proof of address
           title: Verification documents
-    confirm_messages:
-      edit:
-        activation_code_required: The client *must* have their Activation Code to
-          use their card.
-        button: Send Activation Code
-        contact_info: This will send the applicant their code by the method they selected
-          during their initial application.
-        edit: Edit contact information
-        emergency_confirm: Are you sure you want to access a client's activation code?
-        emergency_info: Emergency access should only be used if the client cannot
-          receive the code themselves. This access will be recorded.
-        help: Approving the application should trigger sending the Activation Number.
-          The applicant must have their Activation Number to use their card.
-        message_received: Message received
-        notification: Application approved for <CLIENT NAME>
-        question: Does the applicant have their Activation Code?
-        review: Review contact information
-        title: Activation Code
     disbursements:
       edit:
         activation_trouble: If you have problems with activating the payment card,
@@ -261,13 +257,143 @@ en:
         print_signature: Print Signature Page
         sequence_number: Card Sequence Number
         sequence_number_help: Where to find the card sequence number
-        title: Disburse card
+        title: Complete disbursement
         when: When was the card disbursed?
     duplicates:
       show:
         body: Someone with a matching name, date of birth and address has already
           applied for DRAI.
         title: This applicant has been identified as a duplicate.
+    edits:
+      edit:
+        about_program:
+          about_accordian:
+            body: This is a program for undocument immigrants to get financial assistance
+              during the pandemic. The assistance is one $500 debit card per adult.
+              People who apply will need to answer questions about how they’ve been
+              impacted by COVID-19, as well as provide some personal information.
+              They will need to submit documents proving that information.
+            title: About the DRAI program
+        additional_information:
+          receives_calfresh_help_text: A household is defined as individuals who live
+            and purchase and prepare meals together.
+          receives_calfresh_label: Is anyone in your household currently receiving
+            CalFresh or CalWORKs benefits?
+          title: Additional Information
+          unmet_needs_childcare: Childcare
+          unmet_needs_food: Food
+          unmet_needs_housing: Housing (i.e. difficulty paying rent or mortgage)
+          unmet_needs_legend: What unmet needs do you have?
+          unmet_needs_none_of_the_above: None of the above
+          unmet_needs_other: Other unmet needs
+          unmet_needs_transportation: Transportation
+          unmet_needs_utilities: Utilities
+        applicant_information:
+          country_of_origin: Country of origin
+          dob: Date of birth
+          gender: Gender
+          gender_options:
+            female: Female
+            male: Male
+            non_binary: Non-Binary (neither male nor female)
+            other: Another gender identity
+            transgender_female: 'Transgender: Male to Female'
+            transgender_male: 'Transgender: Female to Male'
+          help: The following are for demographic purposes. The applicant can decline to answer.
+          name: Full name
+          racial_ethnic_identity: Racial/ethnic identity
+          sexual_orientation: Sexual orientation
+          title: Applicant Information
+        attestation:
+          statement: 'Do you attest that the information you provided is true and accurate, and do you understand that the  information provided, if misrepresented, or incomplete, may be grounds to deny your application?'
+          subtitle: 'Read the the applicant:'
+          title: Applicant attestation
+        california_address:
+          address_required: An address is required. Homeless clients can use a shelter
+            or other address.
+          title: Residential address
+        contact_information:
+          email_address: Email address (if available)
+          help_text: Select one or both notice methods. The applicant will be sent
+            their Application Number and Activation Code by this method.
+          landline: This is a landline
+          message_rates_apply: Message and data rates may apply. You will be able
+            to opt out by texting STOP at any time or texting HELP for more information.
+            You will receive 2 messages per application.
+          phone_number_required: Everyone must provide a phone number, regardless
+            of notice method.
+          preferred_contact_email: Email
+          preferred_contact_label: How would you like to recieve the messages with
+            your Application Number and Activation Code?
+          preferred_contact_text: Text message
+          read_to_client: 'Read to the applicant:'
+          title: Contact information
+        eligibility:
+          care_facility_closed: Is the care facility, such as a school, childcare
+            facility or other adult living facility, where you usually send your child
+            or other person you care for, closed because of the COVID-19 outbreak?
+          caregiver: Are you a caregiver to a dependent, such as a child or elderly
+            parent, or a spouse who has or had symptoms consistent with COVID-19,
+            which made you unable to work?
+          experiencing_symptoms: Are you or have you experienced symptoms consistent
+            with COVID-19?
+          help_text: A valid document includes a Social Security Number card and a
+            work authorization or Employment Authorization Document issued by U.S.
+            Citizenship and Immigration Services.
+          label_text: 'Do you currently have a valid document that authorizes you
+            to work in the United States? '
+          read_to_client: Read the following to the applicant. They must meet at least
+            one criteria. Check all boxes that apply.
+          reduced_work_hours: Have you, or other adults in your household who provide
+            income to your household, lost their employment or had their work hours
+            significantly reduced because of the COVID-19 outbreak?
+          title: Eligibility
+          underlying_health_condition: Are you at higher risk of serious illness from
+            COVID-19 due to an underlying health condition or age, and therefore unable
+            to work in order to comply with physical distancing?
+        language:
+          languages:
+            arabic: Arabic
+            chinese: Chinese (simplified)
+            english: English
+            koren: Korean
+            spanish: Spanish
+            tagalog: Tagolog
+            vietnamese: Vietnamese
+          title: Application Language
+        mailing_address:
+          add_mailing_address: Add a separate mailing address
+          remove_mailing_address: Remove mailing address
+          title: Mailing address
+        organization_relationship:
+          title: Confirm that the applicant is not an employee, contractor, or volunteer
+            of this organization.
+        privacy:
+          help_text: Read this to the applicant.
+          text: "I will be asking you several questions that will be used to verify
+            your eligibility for this assistance. We also will collect documentation
+            from you to verify who is applying for this assistance. Your personal
+            information is protected. It will be entered into an online portal that
+            is administered by a nonprofit organization. It also will be held by our
+            organization. We will be sharing some general aggregate information with
+            the state government, but nothing that will identify you. Your information
+            will not be shared with anyone else, and eventually it will be destroyed
+            securely by everyone. \nBased on this information, do you want to move
+            forward with the application?"
+          title: Privacy script
+        service_criteria:
+          title: Service criteria
+          zip_code:
+            button: Look up
+            error: "%{county} County is outside of your service area, refer applicant to:"
+            notification: "%{county} County is within your service area."
+            title: ZIP code
+        shared_address:
+          apartment_number: Apartment, building, unit, etc. (optional)
+          city: City
+          state: State
+          street_address: Street Address
+          zip: ZIP Code
     eligibilities:
       edit:
         about_program:
@@ -331,9 +457,9 @@ en:
           title: Service criteria
           zip_code:
             button: Look up
-            error: "<COUNTY> County is outside of your service area, refer applicant
+            error: "%{county} County is outside of your service area, refer applicant
               to:"
-            notification: "<COUNTY> County is within your service area."
+            notification: "%{county} County is within your service area."
             title: ZIP code
     finisheds:
       edit:
@@ -349,6 +475,74 @@ en:
       org: Org
       search_apps: Search applications
       status: Status
+    verifications:
+      edit:
+        app_not_submitted: Application not yet submitted.
+        app_submitted: Application sucessfully submited
+        app_verified: Application sucessfully verified.
+        application_number:
+          confirm: Confirm that the applicant received the email or text message with
+            the Application Number.  If not, review the contact information and make
+            any necessary edits.
+          message: The client should write this number down. They will need it to
+            pick up the benefit in person.
+          title: Application Number
+        next_steps:
+          step1: You need to submit the verification documents we discussed in the
+            next five business days.
+          step2: If we do not receive these documents, your application file will
+            be closed and you will have to reapply.
+          step3: We cannot guarantee that assistance will be available at a later
+            date.
+          step4: We will notify you once we approve your application and how it will
+            be delivered to you.
+          step5: Confirm delivery method with applicant.
+          title: Next Steps
+        receive_card:
+          options:
+            deliver: Deliver
+            mail: Mail
+            pick_up: Pick up
+          subtitle: This can be edited later.
+          title: How will the applicant get their card?
+        title: Application submitted
+        verifications:
+          covid19_impact_accordion:
+            body: "- Letter or notice that the applicant must care for a child or
+              other person whose school, childcare facility or other caregiving facility
+              is closed due to COVID-19\n- Letter or notice from employer indicating
+              lost employment or severely reduced work hours due to COVID-19\n- Letter
+              or notice from medical professional or other documentation that may
+              show hardship based on any of the following:\na. Has symptoms consistent
+              with COVID-19\nb. Is at higher risk of serious illness from COVID-19
+              due to an underlying health condition or age and is therefore unable
+              to work in order to adhere to physical distancing public health guidance
+              \nc. Is a caregiver to a dependent or spouse who has symptoms consistent
+              with COVID-19"
+            title: COVID-19 impact
+          message: 'In order to process your application, we will need to verify the
+            information you provided is accurate. You will need to submit the following
+            documents through text, email, other systems implemented by the CBO, or
+            in-person:'
+          photo_id_accordion:
+            body: |-
+              - Any state-issued identification card
+              - Any state-issued driver’s license
+              - Passport from any country
+              - International identification document
+              - School identification card
+              - Work identification card
+            title: Photo ID
+          proof_of_address_accordion:
+            body: |-
+              - Identification document with address listed, such as a state-issued driver’s license or state-issued identification card
+              - Benefit letter from a government agency addressed to the applicant or showing the applicant resides in the household
+              - Lease agreement showing applicant’s name
+              - Utility bill addressed to applicant
+              - Insurance cards showing applicant’s name
+              - School enrollment papers with address, addressed to applicant or showing applicant’s name
+            title: Proof of address
+          title: Verification documents
   email_message:
     activation:
       body_html: |
@@ -358,7 +552,7 @@ en:
     app_id:
       body_html: |
         <p>Hello!</p>
-        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}.</p>
+        <p>Your application for financial assistance has been submitted. Your application ID number is %{app_id}.</p>
         <p>You will need this number and your verification documents to receive the payment card.</p>
         <p>- The DRAI Team</p>
       subject: Assistance application submitted %{app_id}
@@ -366,18 +560,18 @@ en:
       body_html: |
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
-        <p>For help with your payment card, call 1-877-610-1075.</p>
+        <p>For help with your payment card, call <card phone number>.</p>
   flash:
     actions:
       create:
-        alert:
-        notice:
+        alert: 
+        notice: 
       destroy:
-        alert:
-        notice:
+        alert: 
+        notice: 
       update:
-        alert:
-        notice:
+        alert: 
+        notice: 
   general:
     activate: Activate
     affirmative: 'Yes'
@@ -387,7 +581,7 @@ en:
     confirm: Confirm
     continue: Continue
     delete: Delete
-    delete_application: Delete application
+    delete_application: Delete this application
     delete_this_application: Delete this application
     disabled: Disabled
     drai_application: DRAI application
@@ -406,7 +600,7 @@ en:
   privacies:
     show:
       body_html: |
-        <ol class="list--numbered">
+        <ol>
           <li>When you opt-in to the service, we will send you an SMS message to confirm your signup.</li>
           <li>Code for America will send you notifications about the status of your application.</li>
           <li>You can cancel the SMS service at any time. Just text "STOP" to the short code. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us.</li>
@@ -425,14 +619,13 @@ en:
       1 digit, and 1 special character (#?!@$%^&*-).
   text_message:
     activation: Your application for Disaster Assistance has been approved. The activation
-      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to
-      activate your card.
-    app_id: Your application for Disaster Assistance has been submitted. Your application
+      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to activate your card.
+    app_id: Your application for financial assistance has been submitted. Your application
       ID number is %{app_id}. You will need this number and your verification documents
       to receive the payment card.
     auto_response: This is an automated response from Code for America Disaster Assistance.
-      For help with your application, call the organization that assisted your application.
-      For help with your payment card, call 1-877-610-1075.
+      For help with your case, contact the organization that assisted your application.
+      More information at https://ca-drai.org/privacy.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
       More information at https://ca-drai.org/privacy. Reply STOP to unsubscribe.
@@ -444,4 +637,4 @@ en:
   voice_message:
     auto_response: This is an automated message from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
-      For help with your payment card, call 1-877-610-1075.
+      For help with your payment card, call %{ivr_phone_number}.

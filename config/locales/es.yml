@@ -135,6 +135,146 @@ es:
         body: Alguien con el mismo nombre, fecha de nacimiento y dirección ya ha solicitado
           asistencia DRAI.
         title: Se ha determinado que ya existe una solicitud para este solicitante.
+    edits:
+      edit:
+        about_program:
+          about_accordian:
+            body: Este es un programa que proporcionará asistencia económica a los
+              inmigrantes indocumentados durante la pandemia. La asistencia es una
+              tarjeta de débito con un saldo de $500 por adulto. Las personas que
+              soliciten la asistencia tendrán que responder a preguntas sobre cómo
+              han sido afectadas por la COVID-19 y necesitarán proporcionar información
+              personal. Tendrán que entregar documentos que respalden esta información.
+            title: Acerca del programa DRAI
+        additional_information:
+          receives_calfresh_help_text: Un hogar está compuesto por personas que viven
+            juntas y compran y preparan comidas juntas.
+          receives_calfresh_label: "¿Hay alguien en su hogar que actualmente recibe
+            beneficios de CalFresh o CalWORKs?"
+          title: Información adicional
+          unmet_needs_childcare: Cuidado infantil
+          unmet_needs_food: Alimentos
+          unmet_needs_housing: Vivienda (es decir, dificultad para pagar el alquiler
+            o la hipoteca)
+          unmet_needs_legend: "¿Qué necesidades tiene que no han sido satisfechas?"
+          unmet_needs_none_of_the_above: Ninguna de las anteriores
+          unmet_needs_other: Otras necesidades no satisfechas
+          unmet_needs_transportation: Transporte
+          unmet_needs_utilities: Servicios públicos
+        applicant_information:
+          country_of_origin: País de origen
+          dob: Fecha de nacimiento
+          gender: Género
+          gender_options:
+            female: Mujer
+            male: Hombre
+            non_binary: No-binario (ni hombre ni mujer)
+            other: Otra identidad de género
+            transgender_female: 'Transgénero: Hombre a mujer'
+            transgender_male: 'Transgénero: Mujer a hombre'
+          help: La siguiente sección es para fines demográficos. El solicitante puede
+            negarse a responder.
+          name: Nombre completo
+          racial_ethnic_identity: Identidad racial/étnica
+          sexual_orientation: Orientación sexual
+          title: Información del solicitante
+        attestation:
+          statement: "¿Certifica usted que la información que proporcionó es verdadera
+            y correcta, y comprende que si la información proporcionada es falsa o
+            está incompleta, esto puede ser motivo para denegar su solicitud?"
+          subtitle: 'Lea esto al solicitante:'
+          title: Certificación del solicitante
+        california_address:
+          address_required: Se requiere una dirección. Los clientes sin hogar pueden
+            usar la dirección de un albergue u otro lugar.
+          title: Dirección de domicilio
+        contact_information:
+          email_address: Dirección de correo electrónico (si hay alguna)
+          help_text: Seleccione uno o ambos métodos de notificación. Se le enviarán
+            su número de solicitud y código de activación al solicitante a través
+            de este método.
+          landline: Esta es una línea fija.
+          message_rates_apply: Tarifas de mensajes y datos pueden ser aplicadas. Podrá
+            optar por no recibir mensajes de texto enviando ALTO en cualquier momento
+            o enviando AYUDA para más información. Recibirá 2 mensajes por solicitud.
+          phone_number_required: Todos deben proporcionar un número de teléfono, independientemente
+            del método de la notificación que elijan.
+          preferred_contact_email: Correo electrónico
+          preferred_contact_label: "¿Cómo le gustaría recibir los mensajes con su
+            número de solicitud y código de activación?"
+          preferred_contact_text: Mensaje de texto
+          read_to_client: 'Lea esto al solicitante:'
+          title: Información de contacto
+        eligibility:
+          care_facility_closed: Debido al brote del COVID-19, ¿está cerrado el centro
+            de cuidado al que normalmente lleva a su hijo u otra persona? (Por ejemplo,
+            la escuela, un centro de cuidado infantil u otro centro de cuidado para
+            adultos.)
+          caregiver: "¿Es usted cuidador de un dependiente, como un niño, una persona
+            mayor o un cónyuge que tiene o tuvo síntomas consistentes con la COVID-19,
+            lo que le impidió a usted trabajar?"
+          experiencing_symptoms: "¿Tiene o ha tenido síntomas consistentes con el
+            COVID-19?"
+          help_text: Un documento válido incluye una tarjeta con el número de Seguro
+            Social y una autorización de trabajo o un documento de autorización de
+            empleo emitida por la Oficina de Servicios de Ciudadanía e Inmigración
+            de los EE. UU. (USCIS).
+          label_text: "¿Tiene usted actualmente un documento válido que lo autorice
+            para trabajar en los Estado Unidos?"
+          read_to_client: Lea lo siguiente al solicitante, que debe cumplir al menos
+            uno de los criterios. Marque todas las casillas que apliquen.
+          reduced_work_hours: "¿Usted, o alguno de los otros adultos en su hogar que
+            proporcionan ingresos para su hogar, perdió su empleo o le redujeron sus
+            horas de trabajo significativamente debido al brote del COVID-19?"
+          title: Elegibilidad
+          underlying_health_condition: "¿Tiene un mayor riesgo de enfermarse gravemente
+            del COVID-19 debido a su edad o una enfermedad relacionada y, por lo tanto,
+            no puede trabajar y al mismo tiempo cumplir con los requisitos de distanciamiento
+            social?"
+        language:
+          languages:
+            arabic: Árabe
+            chinese: Chino (simplificado)
+            english: Inglés
+            koren: Coreano
+            spanish: Español
+            tagalog: Tagalo
+            vietnamese: Vietnamita
+          title: Idioma de la solicitud
+        mailing_address:
+          add_mailing_address: Agregar una dirección postal distinta
+          remove_mailing_address: Eliminar dirección postal
+          title: Dirección postal
+        organization_relationship:
+          title: Verifique que el solicitante no sea un empleado, contratista o voluntario
+            de esta organización.
+        privacy:
+          help_text: Lea esto al solicitante.
+          text: "Le voy a hacer varias preguntas que se usarán para verificar su elegibilidad
+            para esta asistencia. También recopilaremos su documentación para verificar
+            quién está solicitando esta asistencia. Su información personal está protegida.
+            Se ingresará en un portal en línea administrado por una organización comunitaria
+            sin ánimo de lucro. Nuestra organización también guardará esta información.
+            Compartiremos información general acumulada con el gobierno estatal, pero
+            no compartiremos nada que lo identifique a usted. Su información no será
+            compartida con nadie más y eventualmente todas las entidades que la poseen
+            la destruirán de una manera segura. \n Basándose en esta información,
+            ¿desea seguir adelante con la solicitud?"
+          title: Guion de privacidad
+        service_criteria:
+          title: Criterios para el servicio
+          zip_code:
+            button: Buscar
+            error: "<COUNTY> El condado está fuera de su área de servicio, remita
+              al solicitante a:"
+            notification: "<COUNTY> El condado está dentro de su área de servicio."
+            title: Código postal
+        shared_address:
+          apartment_number: Apartamento, edificio, unidad, etc. (opcional)
+          city: Ciudad
+          state: Estado
+          street_address: Dirección (calle)
+          zip: Código postal
     eligibilities:
       edit:
         about_program:
@@ -200,6 +340,9 @@ es:
         app_submitted: Solicitud entregada correctamente.
         app_verified: Solicitud verificada.
         application_number:
+          confirm: Verifique que el solicitante recibió el correo electrónico o mensaje
+            de texto con el número de solicitud. Si no, revise la información de contacto
+            y realice las modificaciones necesarias.
           edit_contact: Modificar información de contacto
           message: El cliente deberá anotar este número. Lo necesitará para recoger
             la asistencia en persona.
@@ -269,9 +412,10 @@ es:
           title: Documentos de verificación
   email_message:
     activation:
-      body_html: "<p>Su solicitud para asistencia por desastre ha sido aprobada. El
-        código de activación para su tarjeta de pago es %{activation_code}.</p><p>Llame
-        al %{ivr_phone_number} para activar su tarjeta.</p>"
+      body_html: |
+        <p>Su solicitud para asistencia por desastre ha sido aprobada. El
+        código de activación para su tarjeta de pago es %{activation_code}.</p>
+        <p>Llame al %{ivr_phone_number} para activar su tarjeta.</p>
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     app_id:
       body_html: |
@@ -279,12 +423,12 @@ es:
         <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}.</p>
         <p>Necesitará este número y sus documentos de verificación para recibir la tarjeta de pago.</p>
         <p>- El equipo de DRAI</p>
-      subject: Solicitud de asistencia entregada %{app_id}
+      subject: "Solicitud de asistencia entregada %{app_id}"
     auto_response:
-      body_html: "<p>Esta es una respuesta automatizada de la asistencia por desastre
-        de la organización Code for America.</p><p>Para obtener ayuda con su caso,
-        comuníquese con la organización que le ayudó con su solicitud.</p><p>Para
-        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>"
+      body_html:|
+      <p>Esta es una respuesta automatizada de la asistencia por desastre de la organización Code for America.</p>
+      <p>Para obtener ayuda con su caso, comuníquese con la organización que le ayudó con su solicitud.</p>
+      <p>Para obtener ayuda con su tarjeta de pago, llame al <card phone number>.</p>"
   general:
     activate: Activar
     affirmative: Sí
@@ -294,8 +438,10 @@ es:
     confirm: Confirmar
     continue: Continuar
     delete: Eliminar
+    delete_application: Eliminar esta solicitud
     delete_this_application: Eliminar esta solicitud
     disabled: Desactivada
+    drai_application: 
     email_address: Dirección de correo electrónico
     go_back: Regresar
     negative: 'No'
@@ -308,7 +454,7 @@ es:
     update: Actualizar
   privacies:
     show:
-      body_html: |-
+      body_html: |
         <ol>
          <li>Cuando opte por el servicio, le enviaremos un mensaje de texto para confirmar su suscripción.</li>
          <li>Code for America le enviará notificaciones sobre el estado de su solicitud.</li>
@@ -327,9 +473,7 @@ es:
       month: Mes
       year: Año
   text_message:
-    activation: Su solicitud para asistencia por desastre ha sido aprobada. El código
-      de activación para su tarjeta de pago es %{activation_code}. Llame al %{ivr_phone_number}
-      para activar su tarjeta.
+    activation: Su solicitud para asistencia por desastre ha sido aprobada. El código de activación para su tarjeta de pago es %{activation_code}. Llame al %{ivr_phone_number} para activar su tarjeta.
     app_id: Su solicitud para asistencia económica ha sido entregada. El número de
       identificación de su solicitud es %{app_id}. Necesitará este número y sus documentos
       de verificación para recibir la tarjeta de pago.
@@ -352,4 +496,4 @@ es:
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud.  Para obtener ayuda con su
-      tarjeta de pago, llame al 1-877-610-1075.
+      tarjeta de pago, llame al %{ivr_phone_number}.
