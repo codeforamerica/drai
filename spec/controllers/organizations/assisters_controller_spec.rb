@@ -155,4 +155,18 @@ describe Organizations::AssistersController, type: :controller do
       expect(response).to redirect_to organization_assisters_path(supervisor.organization)
     end
   end
+
+  describe '#send_password_reset_instructions' do
+    let(:supervisor) { create :supervisor }
+    let(:assister) { create :assister, organization: supervisor.organization }
+
+    before { sign_in supervisor }
+
+    it 'sends a password reset' do
+      expect do
+        post :send_password_reset_instructions, params: { organization_id: supervisor.organization.id, id: assister.id }
+      end.to enqueue_email
+      expect(response).to redirect_to organization_assisters_path(supervisor.organization)
+    end
+  end
 end

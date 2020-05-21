@@ -32,6 +32,7 @@ Rails.application.routes.draw do
             delete 'deactivate'
             post 'reactivate'
             post 'resend_confirmation_instructions'
+            post 'send_password_reset_instructions'
           end
         end
         resource :export, only: [:show, :create]
