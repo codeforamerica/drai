@@ -1,66 +1,68 @@
 <%= render 'organizations/tab_navigation' %>
 
-<h1 class="spacing-above-25">Disaster Relief Assistance for Immigrants</h1>
-<div class="grid">
-  <div class="grid__item width-one-whole">
-    <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
-      <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
-    <% end %>
-  </div>
-</div>
-
-<h2 class="spacing-above-25">Dashboard</h2>
-
-<div class="grid">
-  <div class="grid__item width-one-third">
-    <div class="statistic-card">
-      <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
-      <p class="statistic-card__number">
-        <%= number_with_delimiter current_organization.total_payment_cards_count - current_organization.total_aid_applications_count %>
-        <small style="font-size: 14px;"> / <%= number_with_delimiter current_organization.total_payment_cards_count %></small>
-      </p>
+<% if params[:page].blank? %>
+  <h1 class="spacing-above-25">Disaster Relief Assistance for Immigrants</h1>
+  <div class="grid">
+    <div class="grid__item width-one-whole">
+      <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
+        <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
+      <% end %>
     </div>
   </div>
 
-  <div class="grid__item width-one-third">
-    <div class="statistic-card">
-      <p class="statistic-card__label">Committed Cards <br>(Submitted + Approved)</p>
-      <p class="statistic-card__number">
-        <%= number_with_delimiter current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count %>
-        <small style="font-size: 14px">&nbsp;</small>
-      </p>
+  <h2 class="spacing-above-25">Dashboard</h2>
+
+  <div class="grid">
+    <div class="grid__item width-one-third">
+      <div class="statistic-card">
+        <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
+        <p class="statistic-card__number">
+          <%= number_with_delimiter current_organization.total_payment_cards_count - current_organization.total_aid_applications_count %>
+          <small style="font-size: 14px;"> / <%= number_with_delimiter current_organization.total_payment_cards_count %></small>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid__item width-one-third">
+      <div class="statistic-card">
+        <p class="statistic-card__label">Committed Cards <br>(Submitted + Approved)</p>
+        <p class="statistic-card__number">
+          <%= number_with_delimiter current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count %>
+          <small style="font-size: 14px">&nbsp;</small>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid__item width-one-third">
+      <div class="statistic-card">
+        <p class="statistic-card__label">Disbursed Cards<br>&nbsp;</p>
+        <p class="statistic-card__number">
+          <%= current_organization.disbursed_aid_applications_count %>
+          <small style="font-size: 14px;">&nbsp;</small>
+        </p>
+      </div>
     </div>
   </div>
 
-  <div class="grid__item width-one-third">
-    <div class="statistic-card">
-      <p class="statistic-card__label">Disbursed Cards<br>&nbsp;</p>
-      <p class="statistic-card__number">
-        <%= current_organization.disbursed_aid_applications_count %>
-        <small style="font-size: 14px;">&nbsp;</small>
-      </p>
+  <div class="grid">
+    <div class="grid__item width-one-third">
+      <div class="statistic-card">
+        <p class="statistic-card__label">Submitted pending Approval</p>
+        <p class="statistic-card__number">
+          <%= number_with_delimiter current_organization.submitted_aid_applications_count %>
+        </p>
+      </div>
+    </div>
+    <div class="grid__item width-one-third">
+      <div class="statistic-card">
+        <p class="statistic-card__label">Approved pending Disbursement</p>
+        <p class="statistic-card__number">
+          <%= number_with_delimiter current_organization.approved_aid_applications_count %>
+        </p>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="grid">
-  <div class="grid__item width-one-third">
-    <div class="statistic-card">
-      <p class="statistic-card__label">Submitted pending Approval</p>
-      <p class="statistic-card__number">
-        <%= number_with_delimiter current_organization.submitted_aid_applications_count %>
-      </p>
-    </div>
-  </div>
-  <div class="grid__item width-one-third">
-    <div class="statistic-card">
-      <p class="statistic-card__label">Approved pending Disbursement</p>
-      <p class="statistic-card__number">
-        <%= number_with_delimiter current_organization.approved_aid_applications_count %>
-      </p>
-    </div>
-  </div>
-</div>
+<% end %>
 
 <div class="grid">
   <h2 class="spacing-above-25">Applications</h2>
@@ -69,7 +71,11 @@
     <br>
   </div>
 
-  <div class="grid__item width-one-whole">
+  <% if params[:page].present? %>
+    <%= paginate @aid_applications %>
+  <% end %>
+
+    <div class="grid__item width-one-whole">
     <div class="data-table-container">
       <table class="data-table js-sticky-header">
         <thead>
@@ -95,4 +101,6 @@
       </table>
     </div>
   </div>
+
+  <%= paginate @aid_applications %>
 </div>

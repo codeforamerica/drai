@@ -8,9 +8,9 @@ class Seeder
     organization
     supervisor
     assister
-    FactoryBot.create_list :aid_application, 5, :disbursed, creator: assister, organization: organization
-    FactoryBot.create_list :aid_application, 10, :approved, creator: assister, organization: organization
-    FactoryBot.create_list :aid_application, 50, :submitted, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 20, :disbursed, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 50, :approved, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 100, :submitted, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 5, creator: assister, organization: organization
 
     %w[
