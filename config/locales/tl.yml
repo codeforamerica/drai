@@ -74,7 +74,7 @@ tl:
           title: Address sa Residente
         contact_information:
           email_address: Address sa email (kung meron)
-          help_text: Pumili ng isa o pareho na paraan ng abiso. Papadalhan ang aplikante
+          body: Pumili ng isa o pareho na paraan ng abiso. Papadalhan ang aplikante
             ng kanilang Numero ng Aplikastyon at Code ng Kodigo ng Pagiging-aktibo
             sa pamamagitan nitong paraan.
           landline: Ito ay isang landline

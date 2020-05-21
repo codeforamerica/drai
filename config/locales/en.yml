@@ -103,7 +103,7 @@ en:
             is recorded correctly. Misspellings and typos will prevent them from receiving
             benefits.
           email_address: Email address (if available)
-          help_text: Select one or both notice methods. The applicant will be sent
+          body: Select one or both notice methods. The applicant will be sent
             their Application Number and Activation Code by this method.
           landline: This is a landline
           message_rates_apply: Message and data rates may apply. You will be able
