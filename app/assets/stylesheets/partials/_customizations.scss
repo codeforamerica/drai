@@ -74,3 +74,13 @@
 .list--numbered {
   padding-bottom: 2em;
 }
+
+.form-group-with-following-item {
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .form-group-following-item {
+    margin-bottom: $s60;
+  }
+}

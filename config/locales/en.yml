@@ -327,6 +327,7 @@ en:
           title: Privacy script
         service_criteria:
           county: County
+          see_referral_information: See referral information
           title: Service criteria
           zip_code:
             button: Look up
