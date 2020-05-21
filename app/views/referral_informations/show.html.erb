@@ -10,12 +10,12 @@
       </tr>
       </thead>
       <tbody>
-      <% Organization.all.each do |organization| %>
-          <tr id="<%= dom_id(organization) %>">
-            <td><%= organization.name %></td>
-            <td><%= organization.contact_information %></td>
-            <td><%= organization.county_names.to_a.join(', ') %></td>
-          </tr>
+      <% Organization.all.order(name: :asc).each do |organization| %>
+        <tr id="<%= dom_id(organization) %>">
+          <td><%= organization.name %></td>
+          <td><%= organization.contact_information %></td>
+          <td><%= organization.county_names.to_a.join(', ') %></td>
+        </tr>
       <% end %>
       </tbody>
     </table>
