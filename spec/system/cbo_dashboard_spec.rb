@@ -12,8 +12,8 @@ RSpec.describe 'CBO dashboard', type: :system do
     visit root_path
 
     within '.searchbar' do
-      fill_in "term", with: aid_application.name
-      click_on "search_submit"
+      fill_in "q", with: aid_application.name
+      click_on "Search"
     end
 
     expect(page).to have_content aid_application.application_number.to_s

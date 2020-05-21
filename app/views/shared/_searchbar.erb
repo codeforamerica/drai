@@ -1,0 +1,48 @@
+<%= form_with method: "get", local: true do |f| %>
+  <div class="toolbar">
+    <div class="toolbar__left">
+      <div class="searchbar form-width--searchbar">
+        <%= text_field_tag "q",
+                           params[:q],
+                           placeholder: placeholder,
+                           class: "searchbar__input",
+                           autofocus: true %>
+
+        <label class="searchbar__button">
+          <span class="icon icon-arrow_forward"></span>
+          <button type="submit">
+            <span class="sr-only">Search</span>
+          </button>
+        </label>
+      </div>
+    </div>
+
+    <div class="toolbar__right">
+      <div class="form-group">
+        <label class="sr-only" for="status">
+          <p class="form-question">Filter</p>
+        </label>
+        <div class="select">
+          <% statuses = [
+              ['All', nil],
+              ['Submitted', :submitted],
+              ['Approved', :approved],
+              ['Disbursed', :disbursed],
+          ] %>
+          <%= f.select :status, statuses, { selected: params[:status] }, { onchange: 'this.form.submit();', class: ['select__element'] } %>
+        </div>
+
+        <label class="sr-only" for="order">
+          <p class="form-question">Order</p>
+        </label>
+        <div class="select">
+          <% statuses = [
+              ['Newest', :desc],
+              ['Oldest', :asc],
+          ] %>
+          <%= f.select :order, statuses, { selected: params[:order] }, { onchange: 'this.form.submit();', class: ['select__element'] } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

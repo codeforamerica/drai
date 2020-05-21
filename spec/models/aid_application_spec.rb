@@ -17,6 +17,45 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '.filter_by_params' do
+    let(:assister) { create :assister }
+    let!(:disbursed_app) { create :aid_application, :disbursed, creator: assister }
+    let!(:approved_app) { create :aid_application, :approved, creator: assister }
+    let!(:submitted_app) { create :aid_application, :submitted, creator: assister }
+
+    before do
+      AidApplicationSearch.refresh
+    end
+
+    it 'handles blank params' do
+      expect(described_class.filter_by_params({})).to eq([submitted_app, approved_app, disbursed_app])
+    end
+
+    it ' filters by status' do
+      expect(described_class.filter_by_params({status: 'approved'})).to eq([approved_app])
+    end
+
+    it 'filters by status garbage' do
+      expect(described_class.filter_by_params({status: 'garbage'})).to eq([submitted_app, approved_app, disbursed_app])
+    end
+
+    it 'orders by status value' do
+      expect(described_class.filter_by_params({order: 'asc'})).to eq([disbursed_app, approved_app, submitted_app])
+    end
+
+    it 'searches' do
+      expect(described_class.filter_by_params({q: approved_app.application_number})).to eq([approved_app])
+    end
+
+    it 'filters by search and status' do
+      expect(described_class.filter_by_params({q: approved_app.application_number, status: 'disbursed'})).to eq([])
+    end
+
+    it 'does it all' do
+      expect(described_class.filter_by_params({q: 'APP', status: 'disbursed', order: 'desc'})).to eq([disbursed_app])
+    end
+  end
+
   describe '#creator' do
     it 'is required' do
       aid_application.creator = nil
@@ -280,51 +319,13 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  describe '.query' do
+  describe '.search' do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application, :submitted, city: 'Riverside'
       _other_aid_application = create :aid_application, :submitted, city:   'San Diego'
 
       AidApplicationSearch.refresh
-      expect(described_class.query('Riverside')).to eq [aid_application]
-    end
-  end
-
-  describe '.order_by' do
-    it 'orders by submitted_at if no status is passed' do
-      earlier_submitted_aid_application = create :aid_application, :submitted, submitted_at: 2.days.ago
-      later_submitted_aid_application = create :aid_application, :submitted, submitted_at: 1.day.ago
-
-      ordered_applications = described_class.order_by("")
-      expect(ordered_applications.first).to eq later_submitted_aid_application
-      expect(ordered_applications.last).to eq earlier_submitted_aid_application
-    end
-
-    it 'orders by submitted_at if submitted is passed' do
-      earlier_submitted_aid_application = create :aid_application, :submitted, submitted_at: 2.days.ago
-      later_submitted_aid_application = create :aid_application, :submitted, submitted_at: 1.day.ago
-
-      ordered_applications = described_class.order_by(:submitted)
-      expect(ordered_applications.first).to eq later_submitted_aid_application
-      expect(ordered_applications.last).to eq earlier_submitted_aid_application
-    end
-
-    it 'orders by approved_at if only_approved is passed' do
-      earlier_approved_aid_application = create :aid_application, :approved, approved_at: 2.days.ago
-      later_approved_aid_application = create :aid_application, :approved, approved_at: 1.day.ago
-
-      ordered_applications = described_class.order_by(:approved)
-      expect(ordered_applications.first).to eq later_approved_aid_application
-      expect(ordered_applications.last).to eq earlier_approved_aid_application
-    end
-
-    it 'orders by disbursed_at if only_disbursed is passed' do
-      earlier_disbursed_aid_application = create :aid_application, :disbursed, disbursed_at: 2.days.ago
-      later_disbursed_aid_application = create :aid_application, :disbursed, disbursed_at: 1.day.ago
-
-      ordered_applications = described_class.order_by(:disbursed)
-      expect(ordered_applications.first).to eq later_disbursed_aid_application
-      expect(ordered_applications.last).to eq earlier_disbursed_aid_application
+      expect(described_class.search('Riverside')).to eq [aid_application]
     end
   end
 

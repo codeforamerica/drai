@@ -229,10 +229,31 @@ class AidApplication < ApplicationRecord
   scope :only_submitted, -> { submitted.where(approved_at: nil) }
   scope :only_approved, -> { approved.where(disbursed_at: nil) }
   scope :only_disbursed, -> { disbursed }
-  scope :order_by, ->(status) do
-    status = status.blank? ? :submitted : status
-    order("#{status}_at": :desc)
-  end
+
+  scope :query, ->(term) {select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term))}
+  scope :filter_by_params, (lambda do |params|
+    filter_query = self
+
+    if params[:q].present?
+      filter_query = filter_query.query(params[:q])
+    end
+
+    if params[:status].in? ['submitted', 'approved', 'disbursed']
+      status = params[:status]
+      filter_query = filter_query.send("only_#{status}")
+    else
+      status = 'submitted'
+    end
+
+    if params[:order].in? ['desc', 'asc']
+      order = params[:order]
+    else
+      order = 'desc'
+    end
+    filter_query = filter_query.order("#{status}_at" => order)
+
+    filter_query
+  end)
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
@@ -256,8 +277,6 @@ class AidApplication < ApplicationRecord
   belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
   has_one :payment_card
   has_one :aid_application_search
-
-  scope :query, ->(term) {select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term))}
 
   enum preferred_contact_channel: {text: "text", voice: "voice", email: "email"}, _prefix: "preferred_contact_channel"
 
