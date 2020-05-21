@@ -1,7 +1,7 @@
 module Organizations
   class AssistersController < ApplicationController
     before_action :authenticate_supervisor!
-    before_action :prevent_self_action, only: [:deactivate, :reactivate, :resend_confirmation_instructions]
+    before_action :prevent_self_action, only: [:deactivate, :reactivate, :resend_confirmation_instructions, :send_password_reset_instructions]
 
     def index
       users_query = current_organization.users.includes(:organization).order(id: :desc)
@@ -54,6 +54,14 @@ module Organizations
         @user.send_confirmation_instructions
       end
       respond_with @user, notice: "Resent confirmation for #{@user.name}", location: -> { organization_assisters_path(current_organization) }
+    end
+
+    def send_password_reset_instructions
+      @user = user_from_params
+      if @user.confirmed_at.present?
+        @user.send_reset_password_instructions
+      end
+      respond_with @user, notice: "Sent password reset for #{@user.name}", location: -> { organization_assisters_path(current_organization) }
     end
 
     private
