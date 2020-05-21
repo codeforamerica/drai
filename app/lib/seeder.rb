@@ -67,7 +67,8 @@ class Seeder
     @organization ||= Organization.find_or_create_by!(name: 'Legal Aid') do |organization|
       organization.assign_attributes(
         total_payment_cards_count: 10000,
-        county_names: ["San Francisco", "San Mateo"]
+        county_names: ["San Francisco", "San Mateo"],
+        contact_information: 'San Francisco County: (555) 111-2222, San Mateo: (555) 444-5555'
       )
     end
   end
