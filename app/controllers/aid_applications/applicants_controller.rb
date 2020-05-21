@@ -1,5 +1,11 @@
 module AidApplications
   class ApplicantsController < BaseController
+    before_action do
+      if params[:verify]
+        authenticate_supervisor!
+      end
+    end
+
     def edit
       @aid_application = current_aid_application
 
