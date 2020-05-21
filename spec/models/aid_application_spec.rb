@@ -233,6 +233,20 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#unmet_needs_required' do
+    it 'is must have at least one unmet need checked' do
+      aid_application = build :aid_application,
+                              unmet_childcare: nil,
+                              unmet_food: nil,
+                              unmet_housing: nil,
+                              unmet_other: nil,
+                              unmet_transportation: nil,
+                              unmet_utilities: nil
+
+      expect(aid_application).not_to be_valid(:submit)
+    end
+  end
+
   describe '#eligibility_required' do
     it 'must have at least one covid19 criteria checked' do
       aid_application = build :aid_application,

@@ -298,7 +298,8 @@ class AidApplication < ApplicationRecord
     validates :email, mailgun_email: true, if: -> {email.present? && email_consent? && !confirmed_invalid_email?}
     validates :email_consent, presence: true, unless: -> {sms_consent?}
 
-    validates :receives_calfresh_or_calworks, inclusion: {in: [true, false]}
+    validates :receives_calfresh_or_calworks, inclusion: {in: [true, false], message: :check_one_box_eligible}
+    validate :unmet_needs_required
     validates :attestation, inclusion: {in: [true], message: :attestation_required}
   end
 
@@ -380,6 +381,14 @@ class AidApplication < ApplicationRecord
                          covid19_reduced_work_hours, covid19_underlying_health_condition].any?
     if !checked_an_option
       errors.add(:covid19_caregiver, I18n.t('activerecord.errors.messages.check_one_box_eligible'))
+    end
+  end
+
+  def unmet_needs_required
+    checked_an_option = [unmet_childcare, unmet_food, unmet_housing,
+                         unmet_other, unmet_transportation, unmet_utilities].any?
+    if !checked_an_option
+      errors.add(:unmet_other, I18n.t('activerecord.errors.messages.check_one_box_eligible'))
     end
   end
 
