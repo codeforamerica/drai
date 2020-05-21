@@ -290,6 +290,44 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '.order_by' do
+    it 'orders by submitted_at if no status is passed' do
+      earlier_submitted_aid_application = create :aid_application, :submitted, submitted_at: 2.days.ago
+      later_submitted_aid_application = create :aid_application, :submitted, submitted_at: 1.day.ago
+
+      ordered_applications = described_class.order_by("")
+      expect(ordered_applications.first).to eq later_submitted_aid_application
+      expect(ordered_applications.last).to eq earlier_submitted_aid_application
+    end
+
+    it 'orders by submitted_at if submitted is passed' do
+      earlier_submitted_aid_application = create :aid_application, :submitted, submitted_at: 2.days.ago
+      later_submitted_aid_application = create :aid_application, :submitted, submitted_at: 1.day.ago
+
+      ordered_applications = described_class.order_by(:submitted)
+      expect(ordered_applications.first).to eq later_submitted_aid_application
+      expect(ordered_applications.last).to eq earlier_submitted_aid_application
+    end
+
+    it 'orders by approved_at if only_approved is passed' do
+      earlier_approved_aid_application = create :aid_application, :approved, approved_at: 2.days.ago
+      later_approved_aid_application = create :aid_application, :approved, approved_at: 1.day.ago
+
+      ordered_applications = described_class.order_by(:approved)
+      expect(ordered_applications.first).to eq later_approved_aid_application
+      expect(ordered_applications.last).to eq earlier_approved_aid_application
+    end
+
+    it 'orders by disbursed_at if only_disbursed is passed' do
+      earlier_disbursed_aid_application = create :aid_application, :disbursed, disbursed_at: 2.days.ago
+      later_disbursed_aid_application = create :aid_application, :disbursed, disbursed_at: 1.day.ago
+
+      ordered_applications = described_class.order_by(:disbursed)
+      expect(ordered_applications.first).to eq later_disbursed_aid_application
+      expect(ordered_applications.last).to eq earlier_disbursed_aid_application
+    end
+  end
+
   describe '.matching_submitted_apps' do
     context 'there are existing submitted apps with the same name, birthday, zip code and street address' do
       it 'returns the matching apps' do

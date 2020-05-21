@@ -229,6 +229,10 @@ class AidApplication < ApplicationRecord
   scope :only_submitted, -> { submitted.where(approved_at: nil) }
   scope :only_approved, -> { approved.where(disbursed_at: nil) }
   scope :only_disbursed, -> { disbursed }
+  scope :order_by, ->(status) do
+    status = status.blank? ? :submitted : status
+    order("#{status}_at": :desc)
+  end
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted

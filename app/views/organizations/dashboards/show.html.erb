@@ -66,10 +66,31 @@
 
 <div class="grid">
   <h2 class="spacing-above-25">Applications</h2>
-  <div class="grid__item">
-    <%= render 'shared/search_bar', placeholder: 'Search applications' %>
-    <br>
+  <div class="toolbar">
+    <div class="toolbar__left">
+      <%= render 'shared/search_bar', placeholder: 'Search applications' %>
+    </div>
+
+    <div class="toolbar__right">
+      <div class="form-group">
+        <label class="sr-only" for="status">
+          <p class="form-question">Filter</p>
+        </label>
+        <div class="select">
+          <%= form_with(method: "get") do |f| %>
+              <% statuses = [
+                  ['All', nil],
+                  ['Submitted', :submitted],
+                  ['Approved', :approved],
+                  ['Disbursed', :disbursed],
+              ] %>
+              <%= f.select :status, statuses, { selected: params[:status] }, { onchange: 'this.form.submit();', class: ['select__element'] } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+  <br>
 
   <% if params[:page].present? %>
     <%= paginate @aid_applications %>

@@ -5,8 +5,11 @@ module Organizations
                                                    .includes(:organization, :creator, :submitter, :approver, :disburser)
                                                    .submitted
                                                    .page(params[:page])
-                                                   .order(id: :desc)
+                                                   .order_by(params[:status])
+                                                   .limit(LIMIT)
+
       aid_applications_query = aid_applications_query.query(params[:term]) if params[:term].present?
+      aid_applications_query = aid_applications_query.send(:"only_#{params[:status]}") if params[:status].present?
 
       @aid_applications = aid_applications_query
     end
