@@ -257,13 +257,26 @@ class AidApplication < ApplicationRecord
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
-        .where.not(id: aid_application.id)
-        .where(
-            name: aid_application.name.strip,
-            birthday: aid_application.birthday,
-            zip_code: aid_application.zip_code.strip,
-            street_address: aid_application.street_address.strip
-        )
+      .where.not(id: aid_application.id)
+      .where('lower(name) = ?', aid_application.name.strip.downcase)
+      .where(
+        birthday: aid_application.birthday,
+        zip_code: aid_application.zip_code.strip
+      )
+      .match_by_address(aid_application)
+  end
+
+  scope :match_by_address, ->(aid_application) do
+    result = all
+    street_address_starts_with_number = aid_application.street_address.match(/^(\d*)\s/)
+    if street_address_starts_with_number
+      result = result.where("street_address like ?", "#{street_address_starts_with_number[1]}%")
+
+      if aid_application.apartment_number.present?
+        result = result.where('lower(apartment_number) = ?', aid_application.apartment_number.strip.downcase)
+      end
+    end
+    result
   end
 
   scope :matching_approved_apps, ->(aid_application) do
@@ -288,7 +301,8 @@ class AidApplication < ApplicationRecord
                         :gender,
                         :name,
                         :street_address,
-                        :zip_code
+                        :zip_code,
+                        :apartment_number
 
   before_validation :strip_phone_number
   before_validation :sms_consent_only_if_not_landline

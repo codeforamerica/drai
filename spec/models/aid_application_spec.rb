@@ -330,20 +330,33 @@ RSpec.describe AidApplication, type: :model do
   end
 
   describe '.matching_submitted_apps' do
+    let(:name) { "Fake Name" }
+    let(:birthday) { 'January 1, 1980' }
+    let(:zip_code) { '12345' }
+
     context 'there are existing submitted apps with the same name, birthday, zip code and street address' do
       it 'returns the matching apps' do
-        name = "Fake Name"
-        birthday = 'January 1, 1980'
-        zip_code = '12345'
         street_address = '123 Main St'
-        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
-        duplicate_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
-        _unsubmitted_matching_aid_application = create :aid_application, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
-        _submitted_street_address_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: 'other street address'
-        _submitted_name_does_not_match_aid_application = create :aid_application, :submitted, name: 'different name', birthday: birthday, zip_code: zip_code, street_address: street_address
-        extra_white_space_in_fields_aid_application = create :aid_application, :submitted, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}"
+        apartment_number = '6'
+        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        duplicate_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '123 N Main St', apartment_number: apartment_number
+        _unsubmitted_matching_aid_application = create :aid_application, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        _submitted_street_address_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '456 Pine 123 St', apartment_number: apartment_number
+        _submitted_apartment_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: '14'
+        _submitted_name_does_not_match_aid_application = create :aid_application, :submitted, name: 'different name', birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        extra_white_space_in_fields_aid_application = create :aid_application, :submitted, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}", apartment_number: apartment_number
+        different_cases_aid_application = create :aid_application, :submitted, name: name.upcase, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
 
-        expect(AidApplication.matching_submitted_apps(aid_application)).to eq [duplicate_aid_application, extra_white_space_in_fields_aid_application]
+        expect(AidApplication.matching_submitted_apps(aid_application)).to eq [duplicate_aid_application, extra_white_space_in_fields_aid_application, different_cases_aid_application]
+      end
+    end
+
+    context "the application's street address does not start with a number" do
+      it 'only matches duplicates by name, birthday, and zip code' do
+        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '5th and Howard'
+        duplicate_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '123 Main St'
+
+        expect(AidApplication.matching_submitted_apps(aid_application)).to eq [duplicate_aid_application]
       end
     end
   end
