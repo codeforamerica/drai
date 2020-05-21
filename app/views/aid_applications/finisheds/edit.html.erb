@@ -3,15 +3,27 @@
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <div class="form-card__header">
-      <h1><%= t('.title') %></h1>
+      <h1>Card successfully disbursed</h1>
     </div>
 
     <div class="form-card__content">
       <p>You’re done! This application is fully processed.</p>
 
-      <p>A payment card <strong>(Sequence #<%= @aid_application.payment_card.sequence_number %>)</strong> for this application was disbursed on <strong><%= @aid_application.disbursed_at.to_s(:month_day_year) %></strong> by
-        <strong><%= @aid_application.disburser.name %></strong>.</p>
-      <%= link_to t('.homepage_link'), organization_dashboard_path(current_organization), class: 'button button--primary' %>
+      <%= link_to "Return to home page", organization_dashboard_path(current_organization), class: 'button button--primary' %>
     </div>
   </div>
+
+  <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+    <div class="form-card">
+      <h2>Activation code</h2>
+
+      <div class="form-card__content notice--success">
+        <p>The applicant has been sent their Activation Code via <strong><%= activation_code_notification_description(@aid_application) %></strong>.</p>
+      </div>
+
+      <p>The client <strong>must</strong> have their Activation Code to use their card.</p>
+
+      <%= f.button "Re-send Activation Code", type: 'submit', name: 'form_action', value: 'resend_code', class: 'button button--primary' %>
+    </div>
+  <% end %>
 </div>

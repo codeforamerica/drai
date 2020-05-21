@@ -28,4 +28,16 @@ module ApplicationHelper
   def supervisor?
     current_user.try(:supervisor?) || current_user.try(:admin?)
   end
+
+  def activation_code_notification_description(aid_application)
+    if aid_application.sms_consent? && aid_application.email_consent?
+      "text message at #{aid_application.phone_number} and email at #{aid_application.email}"
+    elsif aid_application.sms_consent?
+      "text message at #{aid_application.phone_number}"
+    elsif aid_application.email_consent?
+      "email at #{aid_application.email}"
+    else
+      "no contact info"
+    end
+  end
 end
