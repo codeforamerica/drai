@@ -1,2 +1,339 @@
 ---
 vi:
+  activerecord:
+    errors:
+      messages:
+        attestation_required: Việc xác nhận là bắt buộc
+        check_one_box_eligible: Ít nhất một ô vuông phải được đánh dấu thì thân chủ
+          mới đủ điều kiện.
+        confirmation_required: Việc xác nhận là bắt buộc.
+        eligibility_criteria: Chỉ có thân chủ trả lời "Không" mới đủ điều kiện cho
+          chương trình DRAI
+        email: Đảm bảo nhập email hợp lệ
+        landline_sms: Điện thoại cố định không thể nhận tin nhắn. Nhập số điện thoại
+          di động hoặc thay đổi phương thức thông báo.
+        phone_number: Đảm bảo số điện thoại của quý vị dài 10 chữ số
+        required_question: Câu hỏi này là bắt buộc.
+        zip_code: Phải là mã bưu chính gồm 5 chữ số ở California
+        zip_five_digits: Phải là mã bưu chính gồm 5 chữ số
+  aid_applications:
+    confirm_messages:
+      edit:
+        activation_code_required: Thân chủ *phải* có Mã Kích Hoạt thì mới sử dụng
+          được thẻ của họ.
+        button: Gửi Mã Kích Hoạt
+        contact_info: Thao tác này sẽ gửi mã kích hoạt cho đương đơn theo phương thức
+          mà họ đã chọn trong lần đăng ký ban đầu.
+        edit: Chỉnh sửa thông tin liên lạc
+        emergency_confirm: Quý vị chắc chắn muốn truy cập nội dung này?
+        emergency_info: Chỉ sử dụng truy cập khẩn cấp nếu thân chủ không thể tự nhận
+          Mã Kích Hoạt. Hành động này sẽ được thâu lại.
+        message_received: Đã nhận tin nhắn
+        notification: Đã chấp thuận hồ sơ đăng ký cho <CLIENT NAME>
+        question: Đương đơn có Mã Kích Hoạt không?
+        title: Mã Kích Hoạt
+    disbursements:
+      edit:
+        activation_trouble: Nếu quý vị gặp vấn đề khi kích hoạt thẻ trợ cấp này, vui
+          lòng xem lại hướng dẫn và liên hệ với công ty phát hành thẻ bằng số điện
+          thoại hoặc thông tin trang web có in trên thẻ.
+        disburse_card: Giải ngân thẻ
+        inform_application: 'Thông báo cho đương đơn:'
+        lost_card: Nếu quý vị mất thẻ hoặc thẻ bị đánh cắp, nó sẽ không được thay
+          thế.
+        method: Thẻ được giải ngân bằng phương thức nào?
+        sequence_number: Số Thứ Tự của Thẻ
+        title: Hoàn thành việc giải ngân
+        when: Thẻ được giải ngân khi nào?
+    duplicates:
+      show:
+        body: Một người có tên, ngày sinh và địa chỉ trùng với người này đã đăng ký
+          xin trợ cấp DRAI.
+        title: Đương đơn này đã được xác định là một trường hợp trùng lập.
+    edits:
+      edit:
+        about_program:
+          about_accordian:
+            body: Đây là chương trình dành cho những người nhập cư không có giấy tờ
+              để xin trợ cấp trong giại đoạn đại dịch. Trợ cấp này là một thẻ chi
+              tiêu trị giá $500 cho mỗi người trưởng thành. Những ai đăng ký sẽ cần
+              trả lời một số câu hỏi về việc họ bị ảnh hưởng bởi COVID-19 như thế
+              nào và cung cấp một số thông tin cá nhân. Họ sẽ cần nộp tài liệu để
+              xác minh thông tin đó.
+            title: Giới thiệu về chương trình DRAI
+        additional_information:
+          receives_calfresh_help_text: Hộ gia đình được định nghĩa là những người
+            đang sinh sống, mua đồ ăn và nấu ăn cùng nhau.
+          receives_calfresh_label: Có ai trong gia đình quý vị hiện đang nhận trợ
+            cấp CalFresh hoặc CalWORKs không?
+          title: Thông tin bổ sung
+          unmet_needs_childcare: Chăm sóc con cái
+          unmet_needs_food: Thực phẩm
+          unmet_needs_housing: 'Nhà ở (ví dụ: đang gặp khó khăn trả tiền nhà hoặc
+            thế chấp)'
+          unmet_needs_legend: Quý vị có nhu cầu gì chưa được đáp ứng?
+          unmet_needs_none_of_the_above: Không có trong danh sách trên
+          unmet_needs_other: Các nhu cầu chưa được đáp ứng khác
+          unmet_needs_transportation: Vận chuyển
+          unmet_needs_utilities: Tiện ích
+        applicant_information:
+          country_of_origin: Nguồn gốc quốc gia
+          dob: Ngày sinh
+          gender: Giới tính
+          gender_options:
+            female: Nữ
+            male: Nam
+            non_binary: Không phân biệt (không phải nam cũng không phải nữ)
+            other: Giới tính khác
+            transgender_female: 'Chuyển giới: Name thành nữ'
+            transgender_male: 'Chuyển giới: Nữ thành nam'
+          help: Thông tin sau đây là cho mục đích nhân khẩu học. Đương đơn có thể
+            từ chối trả lời.
+          name: Họ tên đầy đủ
+          racial_ethnic_identity: Chủng tộc/dân tộc
+          sexual_orientation: Khuynh hướng tình dục
+          title: Thông tin về đương đơn
+        attestation:
+          statement: Quý vị có xác nhận rằng thông tin quý vị vừa cung cấp là đúng
+            và chính xác không, và quý vị có hiểu rằng nếu thông tin quý vị cung cấp
+            là thông tin sai lệch hoặc không đầy đủ, sẽ có thể là căn cứ để từ chối
+            hồ sơ xin trợ cấp của quý vị không?
+          subtitle: 'Đọc cho đương đơn:'
+          title: Đương đơn xác nhận
+        california_address:
+          address_required: Phải có một địa chỉ. Các thân chủ vô gia cư có thể dùng
+            địa chỉ của nhà tạm trú hoặc một địa chỉ khác.
+          title: Địa chỉ cư trú
+        contact_information:
+          email_address: Địa chỉ email (nếu có)
+          help_text: Chọn một hoặc cả hai phương thức thông báo. Đương đơn sẽ nhận
+            Số Hồ Sơ và Mã Kích Hoạt theo phương thức này.
+          landline: Đây là điện thoại bàn
+          message_rates_apply: Phí tin nhắn hoặc dữ liệu có thể áp dụng. Quý vị sẽ
+            có thể ngưng nhận tin nhắn bằng cách gửi một tin nhắn với từ khóa "STOP"
+            bất cứ lúc nào, hoặc gửi một tin nhắn với từ khóa "HELP" để có thêm thông
+            tin. Quý vị sẽ nhận 2 tin nhắn cho mỗi hồ sơ.
+          phone_number_required: Bất kỳ ai cũng phải cung cấp một số điện thoại, bất
+            kể phương thức thông báo.
+          preferred_contact_email: Email
+          preferred_contact_label: Quý vị muốn nhận các thông điệp về Số Hồ Sơ và
+            Mã Kích Hoạt bằng phương thức nào?
+          preferred_contact_text: Tin nhắn
+          read_to_client: 'Đọc cho đương đơn:'
+          title: Thông tin liên lạc
+        eligibility:
+          care_facility_closed: Có phải cơ sở chăm sóc mà quý vị thường gửi con cái
+            hoặc một ai khác để chăm sóc, chẳng hạn như trường học, nhà trẻ hoặc một
+            cơ sở chăm sóc người lớn nào đó, đã đóng cửa vì dịch COVID-19?
+          caregiver: Quý vị có đang chăm sóc cho một người phụ thuộc, chẳng hạn như
+            con nhỏ, cha mẹ già, hay người phối ngẫu mà đang có các triệu chứng của
+            COVID-19, khiến quý vị không thể đi làm không?
+          experiencing_symptoms: Quý vị có đang hoặc có bao giờ bị các triệu chứng
+            trùng với COVID-19 không?
+          help_text: Giấy tờ hợp lệ có thể là thẻ An sinh Xã hội và giấy phép làm
+            việc hoặc Giấy Phép Làm Việc do Cơ Quan Di Trú Và Nhập Tịch Hoa Kỳ cấp.
+          label_text: Quý vị hiện có giấy tờ hợp lệ nào mà cho phép quý vị làm việc
+            tại Hoa Kỳ không?
+          read_to_client: Đọc nội dung sau đây cho đương đơn. Họ phải đáp ứng ít nhất
+            một tiêu chí. Vui lòng đánh dấu tất cả các ô thích hợp.
+          reduced_work_hours: Có ai trong số những người mang về thu nhập trong gia
+            đình quý vị, kể cả chính quý vị, đã bị mất việc hoặc giảm giờ làm việc
+            đáng kể vì đại dịch COVID-19 không?
+          title: Tính đủ điều kiện
+          underlying_health_condition: Tình trạng sức khỏe hoặc tuổi tác của qúy vị
+            có gây nguy cơ khi bi nhiễm COVID-19, và do đó quý vị không thể làm việc
+            để tuân theo quy tắc cách ly xã hội không?
+        language:
+          languages:
+            arabic: Tiếng Ả-rập
+            chinese: Tiếng Trung Quốc (giản thể)
+            english: Tiếng Anh
+            koren: Tiếng Hàn Quốc
+            spanish: Tiếng Tây Ban Nha
+            tagalog: Tiếng Tagalog
+            vietnamese: Tiếng Việt
+          title: Ngôn Ngữ Hồ Sơ Đăng Ký
+        mailing_address:
+          add_mailing_address: Thêm một địa chỉ gửi thư riêng
+          remove_mailing_address: Xóa địa chỉ gửi thư
+          title: Địa chỉ gửi thư
+        organization_relationship:
+          title: Xác nhận rằng đương đơn không phải là nhân viên, nhà thầu hoặc tình
+            nguyện viên của tổ chức này.
+        privacy:
+          help_text: Đọc nội dung này cho đương đơn.
+          text: "Tôi sẽ hỏi quý vị một số câu hỏi để xác minh quý vị có đủ điều kiện
+            nhận trợ cấp này hay không. Chúng tôi cũng sẽ thu thập tài liệu từ quý
+            vị để xác minh ai đang nộp đơn xin trợ cấp này. Thông tin cá nhân của
+            quý vị sẽ được bảo vệ. Tin cá nhân sẽ được nhập vào một cổng thông tin
+            trực tuyến được quản lý bởi một tổ chức phi lợi nhuận. Tổ chức của chúng
+            tôi cũng sẽ lưu giữ thông tin này. Chúng tôi sẽ chia sẻ một số thông tin
+            chung với chính phủ tiểu bang, nhưng không một thông tin nào chúng tôi
+            chia sẻ có thể xác định được danh tính của quý vị. Chúng tôi sẽ không
+            chia sẻ thông tin của quý vị với bất kỳ ai khác và sau này sẽ xóa bỏ nó
+            một cách an toàn. \n Dựa trên những gì tôi vừa nói, quý vị có muốn nộp
+            đơn xin trợ cấp không?"
+          title: Kịch bản quyền riêng tư
+        service_criteria:
+          title: Tiêu chí dịch vụ
+          zip_code:
+            button: Tra cứu
+            error: 'Quận <COUNTY> nằm ngoài khu vực dịch vụ của quý vị, giới thiệu
+              đương đơn tới:'
+            notification: Quận <COUNTY> nằm trong khu vực dịch vụ của quý vị.
+            title: Số bưu chính
+        shared_address:
+          apartment_number: Số căn hộ, tòa nhà, đơn vị, vv (tùy chọn)
+          city: Thành phố
+          state: Tiểu bang
+          street_address: Địa chỉ
+          zip: Mã bưu chính
+    verifications:
+      edit:
+        app_not_submitted: Chưa nộp hồ sơ.
+        app_submitted: Đã nộp hồ sơ thành công
+        app_verified: Đã xác minh hồ sơ thành công.
+        application_number:
+          confirm: Xác nhận đương đơn đã nhận được email hoặc tin nhắn với Số Hồ Sơ
+            của họ. Nếu không, xem lại thông tin liên lạc và chỉnh sửa nếu cần.
+          message: Thân chủ nên viết số này xuống. Họ sẽ cần nó để nhận trợ cấp trực
+            tiếp.
+          title: Số Hồ Sơ
+        next_steps:
+          step1: Quý vị cần gửi các tài liệu xác minh mà chúng ta đã đề cập đến trong
+            vòng năm ngày làm việc kể từ ngày hôm nay.
+          step2: Nếu chúng tôi không nhận được các tài liệu này, chúng tôi sẽ đóng
+            hồ sơ của quý vị và quý vị sẽ phải đăng ký lại.
+          step3: Chúng tôi không thể đảm bảo rằng trợ cấp này sẽ tồn tại trong tương
+            lai.
+          step4: Chúng tôi sẽ thông báo cho quý vị biết một khi chúng tôi chấp thuận
+            hồ sơ của quý vị và cách chúng tôi sẽ gửi thông báo đó.
+          step5: Xác nhận phương thức gửi thông báo với đương đơn.
+          title: Các Bước Tiếp Theo
+        receive_card:
+          options:
+            deliver: Giao tận nơi
+            mail: Gửi qua bưu điện
+            pick_up: Đến lấy
+          subtitle: Có thể chỉnh sửa nội dung này sau.
+          title: Đương đơn sẽ nhận thẻ của họ bằng phương thức nào?
+        title: Đã nộp hồ sơ đăng ký
+        verifications:
+          covid19_impact_accordion:
+            body: "- Một lá thư hoặc thông báo nói rằng đương đơn phải chăm sóc một
+              đứa trẻ hoặc một cá nhân nào đó vì trường học, nhà trẻ hoặc cơ sở chăm
+              sóc của họ đã đóng cửa do COVID-19\n - Một lá thư hoặc thông báo từ
+              hãng cho thấy đương đơn đã bị mất việc hoặc bị giảm số giờ làm việc
+              đáng kể do COVID-19\n - Một lá thư hoặc thông báo từ một chuyên gia
+              y tế hay tài liệu khác mà có thể cho thấy đương đơn đang gặp khó khăn
+              do bất cứ lý do nào sau đây:\n a. Có triệu chứng trùng với COVID-19\n
+              b. Có nguy cơ mắc bệnh nghiêm trọng cao hơn từ COVID-19 do tình trạng
+              sức khỏe hoặc tuổi tác và do đó không thể làm việc tuân theo hướng dẫn
+              về cách ly xã hội để bảo vệ sức khỏe cộng đồng \n c. Đang chăm sóc cho
+              một người phụ thuộc hoặc người phối ngẫu có triệu chứng trùng với COVID-19"
+            title: Tác động của COVID-19
+          message: 'Để có thể xử lý đơn của quý vị, chúng tôi cần xác minh thông tin
+            quý vị cung cấp là chính xác. Quý vị sẽ cần gửi các tài liệu sau đây qua
+            tin nhắn, email, các hệ thống khác do CBO triển khai, hoặc trực tiếp:'
+          photo_id_accordion:
+            body: |-
+              - Thẻ căn cước do tiểu bang cấp
+               - Bằng lái xe do tiểu bang cấp
+               - Hộ chiếu từ bất kỳ nước nào
+               - Giấy tờ tùy thân quốc tế
+               - Thẻ căn cước sinh viên/học sinh
+               - Thẻ căn cước việc làm
+            title: Giấy chứng minh có ảnh
+          proof_of_address_accordion:
+            body: |-
+              - Giấy chứng minh có in địa chỉ, chẳng hạn như bằng lái xe hoặc thẻ căn cước do tiểu bang cấp
+               - Thư báo cấp trợ cấp từ một cơ quan chính phủ gửi cho đương đơn hoặc cho thấy đương đơn đang cư trú trong hộ gia đình này
+               - Hợp đồng thuê có tên của đương đơn
+               - Hóa đơn tiện ích gửi đến đương đơn
+               - Thẻ bảo hiểm có tên đương đơn
+               - Giấy đăng ký học có địa chỉ của đương đơn, được gửi đến đương đơn hoặc có tên của đương đơn
+            title: Giấy tờ chứng minh địa chỉ
+          title: Tài liệu xác minh
+  email_message:
+    activation:
+      body_html: |-
+        <p>Đơn xin Trợ Cấp Thảm Họa của quý vị đã được chấp thuận. Mã Kích Hoạt cho thẻ trợ cấp của quý vị là ******.</p>
+         <p>Gọi số <card phone number> để kích hoạt thẻ của quý vị.</p>
+      subject: Mã kích hoạt cho thẻ Trợ Cấp Thảm Họa
+    app_id:
+      body_html: |-
+        <p>Xin chào!</p>
+         <p>Hồ sơ xin trợ cấp của quý vị đã được nộp. Số hồ sơ của quý vị là %{app_id}.</p>
+         <p>Quý vị sẽ cần số này và các tài liệu xác minh để nhận thẻ trợ cấp.</p>
+         <p>- Đội Ngũ DRAI</p>
+      subject: Đã nộp hồ sơ xin trợ cấp %{app_id}
+    auto_response:
+      body_html: |-
+        <p>Đây là trả lời tự động từ chương trình Trợ Cấp Thảm Họa Code for America.</p>
+         <p>Nếu quý vị cần trợ giúp với hồ sơ của mình, hãy gọi cho tổ chức mà đã giúp quý vị đăng ký.</p>
+         <p>Nếu quý vị cần trợ giúp với thẻ trợ cấp của mình, hãy gọi số <card phone number>.</p>
+  general:
+    activate: Kích hoạt
+    affirmative: Có
+    approve: chấp thuận
+    cancel: Hủy
+    cancel_application: Hủy hồ sơ đăng ký
+    confirm: Xác nhận
+    continue: Tiếp
+    delete: Xóa
+    delete_application: Xóa hồ sơ đăng ký này
+    disabled: Đã vô hiệu hóa
+    drai_application: 
+    email_address: Email
+    go_back: Quay lại
+    negative: Không
+    optional: không bắt buộc
+    phone_number: Điện thoại
+    proceed: Đi tiếp
+    sign_out: Đăng xuất
+    submit: Nộp
+    update: Cập nhật
+  privacies:
+    show:
+      body_html: |-
+        <ol>
+         <li>Khi quý vị chọn tham gia dịch vụ, chúng tôi sẽ gửi cho quý vị một tin nhắn SMS để xác nhận việc đăng ký của quý vị.</li>
+         <li>Code for America sẽ gửi cho quý vị thông báo về tình trạng hồ sơ của quý vị.</li>
+         <li>Quý vị có thể hủy dịch vụ SMS bất cứ lúc nào. Chỉ cần gửi tin nhắn với từ khóa "STOP" đến mã ngắn. Sau khi quý vị gửi tin nhắn SMS "STOP" cho chúng tôi, chúng tôi sẽ gửi cho quý vị một tin nhắn SMS để xác nhận rằng quý vị đã hủy đăng ký. Sau đó quý vị sẽ không còn nhận tin nhắn SMS từ chúng tôi nữa.</li>
+         <li>Nếu bất cứ lúc nào quý vị quên các từ khóa được hỗ trợ, quý vị chỉ cần nhắn chữ "STOP" đến mã ngắn. Sau khi quý vị gửi tin nhắn SMS "HELP" cho chúng tôi, chúng tôi sẽ trả lời với hướng dẫn về cách sử dụng dịch vụ của chúng tôi cũng như cách hủy đăng ký.</li>
+         <li>Các công ty mạng không chịu trách nhiệm đối với các tin nhắn bị trì hoãn hoặc không gửi được</li>
+         <li>Như mọi khi, phí tin nhắn và dữ liệu có thể áp dụng cho bất kỳ tin nhắn nào gửi từ chúng tôi đến quý vị và từ quý vị đến chúng tôi. Quý vị sẽ nhận 3 tin nhắn theo dự kiến. Nếu quý vị có thắc mắc về gói tin nhắn hoặc gói dữ liệu của mình, tốt nhất là quý vị nên liên hệ với công ty mạng wifi của mình. Đối với mọi thắc mắc về các dịch vụ được cung cấp bởi mã ngắn này, quý vị có thể gửi email đến help@ca-drai.org</li>
+         <li>Nếu quý vị có thắc mắc về quyền riêng tư, vui lòng đọc chính sách quyền riêng tư của chúng tôi: ca-drai.org/privacy</li>
+         <li>Nếu quý vị có thắc mắc, vui lòng gửi email đến ca-drai@website.com</li>
+         </ol>
+      title: Chính Sách Thông Báo Trợ Cấp Thảm Họa của Code for America
+  shared:
+    date_select:
+      day: Ngày
+      month: Tháng
+      year: Năm
+  text_message:
+    activation: Hồ sơ xin Trợ Cấp Thảm Họa của quý vị đã được phê duyệt. Mã Kích Hoạt
+      cho thẻ trợ cấp của quý vị là ******. Gọi <card phone number> để kích hoạt thẻ
+      của quý vị.
+    app_id: Đơn xin trợ cấp của quý vị đã được nộp. Số hồ sơ đăng ký của quý vị là
+      %{app_id}. Quý vị sẽ cần số này và tài liệu xác minh để nhận thẻ trợ cấp.
+    auto_response: Đây là trả lời tự động từ chương trình Trợ Cấp Thảm Họa Code for
+      America. Nếu quý vị cần trợ giúp với hồ sơ của mình, vui lòng liên hệ tổ chức
+      mà đã giúp quý vị đăng ký. Tìm hiểu thêm chi tiết tại https://ca-drai.org/privacy.
+    help: Đây là trả lời tự động từ chương trình Trợ Cấp Thảm Họa Code for America.
+      Nếu quý vị cần trợ giúp với hồ sơ của mình, vui lòng liên hệ tổ chức mà đã giúp
+      quý vị đăng ký. Tìm hiểu thêm chi tiết tại https://ca-drai.org/privacy. Trả
+      lời với từ khóa "STOP" để hủy đăng ký.
+    subscribed: Quý vị đã đồng ý nhận tin nhắn về Trợ Cấp Thảm Họa. Quý vị sẽ nhận
+      thông tin quan trọng về hồ sơ đăng ký của mình và trợ cấp từ số này. Trả lời
+      với từ khóa "HELP" để được giúp đỡ. Trả lời với từ khóa "STOP" để hủy đăng ký.
+      Phí tin nhắn và dữ liệu có thể áp dụng.
+    unsubscribed: Quý vị đã hủy đăng ký nhận tin nhắn về Trợ Cấp Thảm Họa. Quý vị
+      sẽ không còn nhận bất kỳ tin nhắn nào từ số này. Trả lời với từ khóa "START"
+      để đăng ký lại.
+  voice_message:
+    auto_response: Đây là tin nhắn tự động từ chương trình Trợ Cấp Thảm Họa Code for
+      America. Để được trợ giúp với hồ sơ của quý vị, hãy gọi cho tổ chức mà đã giúp
+      quý vị đăng ký. Để được trợ giúp với thẻ trợ cấp của quý vị, hãy gọi số <card
+      phone number>.
