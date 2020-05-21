@@ -1,6 +1,7 @@
 module AidApplications
   class ApprovalsController < BaseController
     before_action :authenticate_supervisor!
+    before_action :ensure_submitted
 
     def edit
       @aid_application = current_aid_application

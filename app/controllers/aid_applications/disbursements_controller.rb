@@ -1,6 +1,8 @@
 module AidApplications
   class DisbursementsController < BaseController
     before_action :authenticate_supervisor!
+    before_action :ensure_approved
+
     before_action do
       if current_aid_application.disbursed_at.present?
         redirect_to edit_organization_aid_application_finished_path(current_organization, current_aid_application)
