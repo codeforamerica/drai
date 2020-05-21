@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
 
     resource :privacy, only: [:show]
+    resource :referral_information, only: [:show]
 
     namespace :admin do
       resources :organizations, only: :index

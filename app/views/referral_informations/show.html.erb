@@ -1,0 +1,23 @@
+<div class="grid">
+  <h2 class="spacing-above-25">Referral Information</h2>
+  <div class="data-table-container">
+    <table class="data-table js-sticky-header">
+      <thead>
+      <tr>
+        <th>Organization</th>
+        <th>Phone number</th>
+        <th>Counties served</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% Organization.all.each do |organization| %>
+          <tr id="<%= dom_id(organization) %>">
+            <td><%= organization.name %></td>
+            <td><%= organization.display_phone_number %></td>
+            <td><%= organization.county_names.to_a.join(', ') %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
