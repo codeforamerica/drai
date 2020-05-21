@@ -10,4 +10,11 @@ scheduler.every ENV.fetch('SEARCH_REFRESH_INTERVAL', '1m'), overlap: false do
   AidApplicationSearch.refresh
 end
 
+# every day at 2am
+scheduler.every '0 2 * * *' do
+  puts '=== deleting unsubmitted aid applications that are at least 24 hours old ==='
+  cleaner = AidApplicationCleaner.new
+  cleaner.delete_stale_and_unsubmitted
+end
+
 scheduler.join
