@@ -306,6 +306,7 @@ class AidApplication < ApplicationRecord
 
   before_validation :strip_phone_number
   before_validation :sms_consent_only_if_not_landline
+  before_validation :ensure_county_matches_zip_code
 
   validates :application_number, uniqueness: true, allow_nil: true
 
@@ -324,6 +325,7 @@ class AidApplication < ApplicationRecord
     validates :street_address, presence: true
     validates :city, presence: true
     validates :zip_code, presence: true, zip_code: true
+    validate :zip_code_must_be_in_organization_service_area
 
     with_options if: :allow_mailing_address? do
       validates :mailing_street_address, presence: true
@@ -426,6 +428,14 @@ class AidApplication < ApplicationRecord
                          unmet_other, unmet_transportation, unmet_utilities].any?
     if !checked_an_option
       errors.add(:unmet_other, I18n.t('activerecord.errors.messages.check_one_box_eligible'))
+    end
+  end
+
+  def zip_code_must_be_in_organization_service_area
+    zip_code_counties = ZipCode.new(zip_code).counties
+    if (organization.county_names & zip_code_counties).empty?
+      zip_code_county_text = zip_code_counties.any? ? "#{zip_code_counties.first} County" : "another state"
+      errors.add(:zip_code, :zip_code_outside_organization_service_area, zip_code: zip_code, zip_code_county: zip_code_county_text)
     end
   end
 
@@ -568,6 +578,13 @@ class AidApplication < ApplicationRecord
   def sms_consent_only_if_not_landline
     if sms_consent? && landline?
       self.sms_consent = false
+    end
+  end
+
+  def ensure_county_matches_zip_code
+    zip_code_counties = ZipCode.new(zip_code).counties
+    if !zip_code_counties.include?(county_name) && (organization.county_names & zip_code_counties).any?
+      self.county_name = zip_code_counties.first
     end
   end
 

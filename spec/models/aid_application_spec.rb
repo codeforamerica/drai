@@ -83,13 +83,38 @@ RSpec.describe AidApplication, type: :model do
       aid_application = build :aid_application, zip_code: ''
       expect(aid_application).not_to be_valid(:submit)
     end
+
     it 'must be valid' do
       aid_application = build :aid_application, zip_code: 'none'
       expect(aid_application).not_to be_valid(:submit)
     end
+
     it 'cannot be outside of california' do
       aid_application = build :aid_application, zip_code: '89101'
       expect(aid_application).not_to be_valid(:submit)
+    end
+
+    it 'cannot be in a county not supported by the organization' do
+      organization = create :organization, county_names: ["San Francisco", "Alameda"]
+      aid_application = build :aid_application, organization: organization, zip_code: '94303' # San Mateo and Santa Clara
+      expect(aid_application).not_to be_valid(:submit)
+      expect(aid_application.errors[:zip_code]).to include "94303 is in San Mateo County, which is outside of your organization's service area. Please update the ZIP code or refer the applicant to the organization that can serve them."
+    end
+
+    it 'uses a different error message when the zip code is out of state' do
+      organization = create :organization, county_names: ["San Francisco", "Alameda"]
+      aid_application = build :aid_application, organization: organization, zip_code: '89101'
+      expect(aid_application).not_to be_valid(:submit)
+      expect(aid_application.errors[:zip_code]).to include "89101 is in another state, which is outside of your organization's service area. Please update the ZIP code or refer the applicant to the organization that can serve them."
+    end
+
+    it 'updates the county to match the zip code if they do not match but the new county is supported by the organization' do
+      organization = create :organization, county_names: ["San Francisco", "San Mateo"]
+      aid_application = create :aid_application, organization: organization, county_name: 'San Francisco'
+      aid_application.update(zip_code: '94303') # San Mateo and Santa Clara
+
+      expect(aid_application).to be_valid(:submit)
+      expect(aid_application.reload.county_name).to eq 'San Mateo'
     end
   end
 
