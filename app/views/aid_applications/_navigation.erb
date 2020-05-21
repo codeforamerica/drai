@@ -13,6 +13,8 @@
             [t('aid_applications.applicants.edit.language.languages.spanish'), :es],
             [t('aid_applications.applicants.edit.language.languages.koren'), :ko],
             [t('aid_applications.applicants.edit.language.languages.tagalog'), :tl],
+            [t('aid_applications.applicants.edit.language.languages.vietnamese'), :vi],
+            [t('aid_applications.applicants.edit.language.languages.arabic'), :ar]
         ] %>
         <%= f.select :new_locale, locales, { selected: I18n.locale }, { onchange: 'this.form.submit();' } %>
     <% end %>

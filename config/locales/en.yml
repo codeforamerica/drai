@@ -178,10 +178,10 @@ en:
           title: 'Application Number:'
         next_steps:
           message_html: |
-            <ol>
+            <ol class="list--numbered">
               <li>You need to submit the verification documents we discussed in the next five business days.</li>
               <li>If we do not receive these documents, your application file will be closed and you will have to reapply.</li>
-              <li> We cannot guarantee that assistance will be available at a later date.</li>
+              <li>We cannot guarantee that assistance will be available at a later date.</li>
               <li>We will notify you once we approve your application and how it will be delivered to you.</li>
               <li>Confirm delivery method with applicant.</li>
             </ol>
@@ -600,14 +600,15 @@ en:
   privacies:
     show:
       body_html: |
-        <ol>
+        <ol class="list--numbered">
           <li>When you opt-in to the service, we will send you an SMS message to confirm your signup.</li>
           <li>Code for America will send you notifications about the status of your application.</li>
-          <li>You can cancel the SMS service at any time. Just text "STOP" to the short code. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us.</li>
+          <li>You can cancel the SMS service at any time. <strong>Just text "STOP" to the short code.</strong> After you send the SMS message <strong>"STOP"</strong> to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us.</li>
           <li>If at any time you forget what keywords are supported, just text "HELP" to the short code. After you send the SMS message "HELP" to us, we will respond with instructions on how to use our service as well as how to unsubscribe.</li>
           <li>Carriers are not liable for delayed or undelivered messages</li>
-          <li>As always, message and data rates may apply for any messages sent to you from us and to us from you. You will receive 3 expected messages. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
-          <li>For questions about privacy, email privacy@ca-drai.org</li>
+          <li>As always, message and data rates may apply for any messages sent to you from us and to us from you. You will receive 3 expected messages. If you have any questions about your text plan or data plan, it is best to contact your wireless provider. For all questions about the services provided by this short code, you can send an email to <a href="mailto:help@ca-drai.org">help@ca-drai.org</a></li>
+          <li>If you have any questions regarding privacy, please read our privacy policy: <a href='https://ca-drai.org/en/privacy' target='_blank'>ca-drai.org/en/privacy</a></li>
+          <li>For questions, email <a href="mailto:privacy@ca-drai.org">privacy@ca-drai.org</a></li>
         </ol>
       title: Code for America Disaster Relief Aid Notifications Policy
   shared:
@@ -625,10 +626,10 @@ en:
       to receive the payment card.
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
-      More information at https://ca-drai.org/privacy.
+      More information at https://ca-drai.org/en/privacy.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
-      More information at https://ca-drai.org/privacy. Reply STOP to unsubscribe.
+      More information at https://ca-drai.org/en/privacy. Reply STOP to unsubscribe.
     subscribed: You have agreed to receive Disaster Assistance messages. You will
       receive important information about your application and payment from this number.
       Reply HELP for help. Reply STOP to unsubscribe. Msg&data rates may apply.
