@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Company.name }
     total_payment_cards_count { 10 }
     county_names { ["San Francisco", "Marin"] }
-    phone_number { '1234567890' }
+    contact_information { '(123) 456-7890' }
   end
 end

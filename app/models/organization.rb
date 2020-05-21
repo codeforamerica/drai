@@ -69,12 +69,4 @@ class Organization < ApplicationRecord
   def disbursed_aid_applications_count
     @disbursed_aid_applications_count ||= attributes["disbursed_aid_applications_count"] || aid_applications.only_disbursed.count
   end
-
-  def display_phone_number
-    if phone_number && phone_number.length == 10
-      "(#{phone_number[0..2]}) #{phone_number[3..5]}-#{phone_number[6..9]}"
-    else
-      phone_number
-    end
-  end
 end

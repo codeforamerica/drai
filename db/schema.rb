@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_190912) do
     t.integer "aid_applications_count", default: 0, null: false
     t.integer "total_payment_cards_count", default: 0, null: false
     t.string "county_names", default: [], array: true
-    t.string "phone_number"
+    t.string "contact_information"
   end
 
   create_table "payment_cards", force: :cascade do |t|
