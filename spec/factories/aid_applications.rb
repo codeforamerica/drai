@@ -55,6 +55,9 @@ FactoryBot.define do
     trait :disbursed do
       approved
 
+      disburser { create :supervisor, organization: organization }
+      disbursed_at { Time.current }
+
       after(:create) do |aid_application, evaluator|
         payment_card = create(:payment_card)
         aid_application.disburse(payment_card, disburser: aid_application.approver)
