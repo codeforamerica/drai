@@ -44,6 +44,7 @@ en:
         sequence_number_already_assigned: This sequence number has already been used.
         sequence_number_invalid: Make sure the sequence number is correct.
         zip_code: Must be a 5-digit ZIP Code in California.
+        zip_code_outside_organization_service_area: "%{zip_code} is in %{zip_code_county}, which is outside of your organization's service area. Please update the ZIP code or refer the applicant to the organization that can serve them."
         zip_five_digits: Must be a 5-digit ZIP Code.
   aid_applications:
     applicants:
