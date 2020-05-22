@@ -14,38 +14,8 @@ vi:
         zip_code: "Phải là mã bưu chính gồm 5 chữ số ở California"
         zip_five_digits: "Phải là mã bưu chính gồm 5 chữ số"
   aid_applications:
-    confirm_messages:
+    applicants:
       edit:
-        activation_code_required: "Thân chủ *phải* có Mã Kích Hoạt thì mới sử dụng được thẻ của họ."
-        button: "Gửi Mã Kích Hoạt"
-        contact_info: "Thao tác này sẽ gửi mã kích hoạt cho đương đơn theo phương thức mà họ đã chọn trong lần đăng ký ban đầu."
-        edit: "Chỉnh sửa thông tin liên lạc"
-        emergency_confirm: "Quý vị chắc chắn muốn truy cập nội dung này?"
-        emergency_info: "Chỉ sử dụng truy cập khẩn cấp nếu thân chủ không thể tự nhận Mã Kích Hoạt. Hành động này sẽ được thâu lại."
-        message_received: "Đã nhận tin nhắn"
-        notification: "Đã chấp thuận hồ sơ đăng ký cho <CLIENT NAME>"
-        question: "Đương đơn có Mã Kích Hoạt không?"
-        title: "Mã Kích Hoạt"
-    disbursements:
-      edit:
-        activation_trouble: "Nếu quý vị gặp vấn đề khi kích hoạt thẻ trợ cấp này, vui lòng xem lại hướng dẫn và liên hệ với công ty phát hành thẻ bằng số điện thoại hoặc thông tin trang web có in trên thẻ."
-        disburse_card: "Giải ngân thẻ"
-        inform_application: "Thông báo cho đương đơn:"
-        lost_card: "Nếu quý vị mất thẻ hoặc thẻ bị đánh cắp, nó sẽ không được thay thế."
-        method: "Thẻ được giải ngân bằng phương thức nào?"
-        sequence_number: "Số Thứ Tự của Thẻ"
-        title: "Hoàn thành việc giải ngân"
-        when: "Thẻ được giải ngân khi nào?"
-    duplicates:
-      show:
-        body: "Một người có tên, ngày sinh và địa chỉ trùng với người này đã đăng ký xin trợ cấp DRAI."
-        title: "Đương đơn này đã được xác định là một trường hợp trùng lập."
-    edits:
-      edit:
-        about_program:
-          about_accordian:
-            body: "Đây là chương trình dành cho những người nhập cư không có giấy tờ để xin trợ cấp trong giại đoạn đại dịch. Trợ cấp này là một thẻ chi tiêu trị giá $500 cho mỗi người trưởng thành. Những ai đăng ký sẽ cần trả lời một số câu hỏi về việc họ bị ảnh hưởng bởi COVID-19 như thế nào và cung cấp một số thông tin cá nhân. Họ sẽ cần nộp tài liệu để xác minh thông tin đó."
-            title: "Giới thiệu về chương trình DRAI"
         additional_information:
           receives_calfresh_help_text: "Hộ gia đình được định nghĩa là những người đang sinh sống, mua đồ ăn và nấu ăn cùng nhau."
           receives_calfresh_label: "Có ai trong gia đình quý vị hiện đang nhận trợ cấp CalFresh hoặc CalWORKs không?"
@@ -92,16 +62,6 @@ vi:
           preferred_contact_text: "Tin nhắn"
           read_to_client: "Đọc cho đương đơn:"
           title: "Thông tin liên lạc"
-        eligibility:
-          care_facility_closed: "Có phải cơ sở chăm sóc mà quý vị thường gửi con cái hoặc một ai khác để chăm sóc, chẳng hạn như trường học, nhà trẻ hoặc một cơ sở chăm sóc người lớn nào đó, đã đóng cửa vì dịch COVID-19?"
-          caregiver: "Quý vị có đang chăm sóc cho một người phụ thuộc, chẳng hạn như con nhỏ, cha mẹ già, hay người phối ngẫu mà đang có các triệu chứng của COVID-19, khiến quý vị không thể đi làm không?"
-          experiencing_symptoms: "Quý vị có đang hoặc có bao giờ bị các triệu chứng trùng với COVID-19 không?"
-          help_text: "Giấy tờ hợp lệ có thể là thẻ An sinh Xã hội và giấy phép làm việc hoặc Giấy Phép Làm Việc do Cơ Quan Di Trú Và Nhập Tịch Hoa Kỳ cấp."
-          label_text: "Quý vị hiện có giấy tờ hợp lệ nào mà cho phép quý vị làm việc tại Hoa Kỳ không?"
-          read_to_client: "Đọc nội dung sau đây cho đương đơn. Họ phải đáp ứng ít nhất một tiêu chí. Vui lòng đánh dấu tất cả các ô thích hợp."
-          reduced_work_hours: "Có ai trong số những người mang về thu nhập trong gia đình quý vị, kể cả chính quý vị, đã bị mất việc hoặc giảm giờ làm việc đáng kể vì đại dịch COVID-19 không?"
-          title: "Tính đủ điều kiện"
-          underlying_health_condition: "Tình trạng sức khỏe hoặc tuổi tác của qúy vị có gây nguy cơ khi bi nhiễm COVID-19, và do đó quý vị không thể làm việc để tuân theo quy tắc cách ly xã hội không?"
         language:
           languages:
             arabic: "Tiếng Ả-rập"
@@ -118,23 +78,24 @@ vi:
           title: "Địa chỉ gửi thư"
         organization_relationship:
           title: "Xác nhận rằng đương đơn không phải là nhân viên, nhà thầu hoặc tình nguyện viên của tổ chức này."
-        privacy:
-          help_text: "Đọc nội dung này cho đương đơn."
-          text: "Tôi sẽ hỏi quý vị một số câu hỏi để xác minh quý vị có đủ điều kiện nhận trợ cấp này hay không. Chúng tôi cũng sẽ thu thập tài liệu từ quý vị để xác minh ai đang nộp đơn xin trợ cấp này. Thông tin cá nhân của quý vị sẽ được bảo vệ. Tin cá nhân sẽ được nhập vào một cổng thông tin trực tuyến được quản lý bởi một tổ chức phi lợi nhuận. Tổ chức của chúng tôi cũng sẽ lưu giữ thông tin này. Chúng tôi sẽ chia sẻ một số thông tin chung với chính phủ tiểu bang, nhưng không một thông tin nào chúng tôi chia sẻ có thể xác định được danh tính của quý vị. Chúng tôi sẽ không chia sẻ thông tin của quý vị với bất kỳ ai khác và sau này sẽ xóa bỏ nó một cách an toàn. \n Dựa trên những gì tôi vừa nói, quý vị có muốn nộp đơn xin trợ cấp không?"
-          title: "Kịch bản quyền riêng tư"
-        service_criteria:
-          title: "Tiêu chí dịch vụ"
-          zip_code:
-            button: "Tra cứu"
-            error: "Quận <COUNTY> nằm ngoài khu vực dịch vụ của quý vị, giới thiệu đương đơn tới:"
-            notification: "Quận <COUNTY> nằm trong khu vực dịch vụ của quý vị."
-            title: "Số bưu chính"
         shared_address:
           apartment_number: "Số căn hộ, tòa nhà, đơn vị, vv (tùy chọn)"
           city: "Thành phố"
           state: "Tiểu bang"
           street_address: "Địa chỉ"
           zip: "Mã bưu chính"
+    confirm_messages:
+      edit:
+        activation_code_required: "Thân chủ *phải* có Mã Kích Hoạt thì mới sử dụng được thẻ của họ."
+        button: "Gửi Mã Kích Hoạt"
+        contact_info: "Thao tác này sẽ gửi mã kích hoạt cho đương đơn theo phương thức mà họ đã chọn trong lần đăng ký ban đầu."
+        edit: "Chỉnh sửa thông tin liên lạc"
+        emergency_confirm: "Quý vị chắc chắn muốn truy cập nội dung này?"
+        emergency_info: "Chỉ sử dụng truy cập khẩn cấp nếu thân chủ không thể tự nhận Mã Kích Hoạt. Hành động này sẽ được thâu lại."
+        message_received: "Đã nhận tin nhắn"
+        notification: "Đã chấp thuận hồ sơ đăng ký cho <CLIENT NAME>"
+        question: "Đương đơn có Mã Kích Hoạt không?"
+        title: "Mã Kích Hoạt"
     confirmations:
       edit:
         app_not_submitted: "Chưa nộp hồ sơ."
@@ -197,6 +158,48 @@ vi:
               </ul>
             title: "Giấy tờ chứng minh địa chỉ"
           title: "Tài liệu xác minh"
+    disbursements:
+      edit:
+        activation_trouble: "Nếu quý vị gặp vấn đề khi kích hoạt thẻ trợ cấp này, vui lòng xem lại hướng dẫn và liên hệ với công ty phát hành thẻ bằng số điện thoại hoặc thông tin trang web có in trên thẻ."
+        disburse_card: "Giải ngân thẻ"
+        inform_application: "Thông báo cho đương đơn:"
+        lost_card: "Nếu quý vị mất thẻ hoặc thẻ bị đánh cắp, nó sẽ không được thay thế."
+        method: "Thẻ được giải ngân bằng phương thức nào?"
+        sequence_number: "Số Thứ Tự của Thẻ"
+        title: "Hoàn thành việc giải ngân"
+        when: "Thẻ được giải ngân khi nào?"
+    duplicates:
+      show:
+        body: "Một người có tên, ngày sinh và địa chỉ trùng với người này đã đăng ký xin trợ cấp DRAI."
+        title: "Đương đơn này đã được xác định là một trường hợp trùng lập."
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: "Đây là chương trình dành cho những người nhập cư không có giấy tờ để xin trợ cấp trong giại đoạn đại dịch. Trợ cấp này là một thẻ chi tiêu trị giá $500 cho mỗi người trưởng thành. Những ai đăng ký sẽ cần trả lời một số câu hỏi về việc họ bị ảnh hưởng bởi COVID-19 như thế nào và cung cấp một số thông tin cá nhân. Họ sẽ cần nộp tài liệu để xác minh thông tin đó."
+            title: "Giới thiệu về chương trình DRAI"
+        eligibility:
+          care_facility_closed: "Có phải cơ sở chăm sóc mà quý vị thường gửi con cái hoặc một ai khác để chăm sóc, chẳng hạn như trường học, nhà trẻ hoặc một cơ sở chăm sóc người lớn nào đó, đã đóng cửa vì dịch COVID-19?"
+          caregiver: "Quý vị có đang chăm sóc cho một người phụ thuộc, chẳng hạn như con nhỏ, cha mẹ già, hay người phối ngẫu mà đang có các triệu chứng của COVID-19, khiến quý vị không thể đi làm không?"
+          experiencing_symptoms: "Quý vị có đang hoặc có bao giờ bị các triệu chứng trùng với COVID-19 không?"
+          help_text: "Giấy tờ hợp lệ có thể là thẻ An sinh Xã hội và giấy phép làm việc hoặc Giấy Phép Làm Việc do Cơ Quan Di Trú Và Nhập Tịch Hoa Kỳ cấp."
+          label_text: "Quý vị hiện có giấy tờ hợp lệ nào mà cho phép quý vị làm việc tại Hoa Kỳ không?"
+          read_to_client: "Đọc nội dung sau đây cho đương đơn. Họ phải đáp ứng ít nhất một tiêu chí. Vui lòng đánh dấu tất cả các ô thích hợp."
+          reduced_work_hours: "Có ai trong số những người mang về thu nhập trong gia đình quý vị, kể cả chính quý vị, đã bị mất việc hoặc giảm giờ làm việc đáng kể vì đại dịch COVID-19 không?"
+          title: "Tính đủ điều kiện"
+          underlying_health_condition: "Tình trạng sức khỏe hoặc tuổi tác của qúy vị có gây nguy cơ khi bi nhiễm COVID-19, và do đó quý vị không thể làm việc để tuân theo quy tắc cách ly xã hội không?"
+        privacy:
+          help_text: "Đọc nội dung này cho đương đơn."
+          text_part1: "Tôi sẽ hỏi quý vị một số câu hỏi để xác minh quý vị có đủ điều kiện nhận trợ cấp này hay không. Chúng tôi cũng sẽ thu thập tài liệu từ quý vị để xác minh ai đang nộp đơn xin trợ cấp này. Thông tin cá nhân của quý vị sẽ được bảo vệ. Tin cá nhân sẽ được nhập vào một cổng thông tin trực tuyến được quản lý bởi một tổ chức phi lợi nhuận. Tổ chức của chúng tôi cũng sẽ lưu giữ thông tin này. Chúng tôi sẽ chia sẻ một số thông tin chung với chính phủ tiểu bang, nhưng không một thông tin nào chúng tôi chia sẻ có thể xác định được danh tính của quý vị. Chúng tôi sẽ không chia sẻ thông tin của quý vị với bất kỳ ai khác và sau này sẽ xóa bỏ nó một cách an toàn."
+          text_part2: "Dựa trên những gì tôi vừa nói, quý vị có muốn nộp đơn xin trợ cấp không?"
+          title: "Kịch bản quyền riêng tư"
+        service_criteria:
+          title: "Tiêu chí dịch vụ"
+          zip_code:
+            button: "Tra cứu"
+            error: "Quận <COUNTY> nằm ngoài khu vực dịch vụ của quý vị, giới thiệu đương đơn tới:"
+            notification: "Quận <COUNTY> nằm trong khu vực dịch vụ của quý vị."
+            title: "Số bưu chính"
   email_message:
     activation:
       body_html: |
