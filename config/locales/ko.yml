@@ -61,9 +61,8 @@ ko:
           address_required: 주소가 있어야 합니다. 노숙인 의뢰인은 쉼터 주소나 다른 주소를 사용할 수 있습니다.
           title: 거주지 주소
         contact_information:
+          body: 통지수령 방법 중 하나 또는 둘 모두를 선택하십시오. 신청인은 선택한 방법으로 신청 번호와 활성화 코드를 수령하게 됩니다.
           email_address: 이메일 주소(사용하고 있는 경우)
-          body: 통지수령 방법 중 하나 또는 둘 모두를 선택하십시오. 신청인은 선택한 방법으로 신청 번호와 활성화 코드를 수령하게
-            됩니다.
           landline: 유선전화 번호입니다.
           message_rates_apply: 문자 및 데이터 요금이 적용될 수 있습니다. 귀하는 언제든지 “STOP”(중지)이라고 문자를
             보내 수신 동의 선택을 해지하거나 “HELP”(도움)라고 문자를 보내 보다 자세한 안내 메시지를 수신할 수 있습니다.  신청서
@@ -265,9 +264,9 @@ ko:
         %{activation_code}입니다.</p><p>%{ivr_phone_number} 로 전화하여 카드를 활성화하십시오.</p>"
       subject: '재난 지원(Disaster Assistance) 지급 카드 활성화 코드 '
     app_id:
-      body_html: "<p>안녕하세요!</p><p>귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수(ID) 번호는 %{app_id} 입니다.</
-        p><p>귀하의 지급 카드를 수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.</p><p>-DRAI (이민자 대상 재난구호지원)
-        팀</p>"
+      body_html: "<p>안녕하세요!</p><p>귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수(ID) 번호는 %{app_id}
+        입니다.</ p><p>귀하의 지급 카드를 수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.</p><p>-DRAI (이민자
+        대상 재난구호지원) 팀</p>"
       subject: 지원 신청서가 접수되었습니다 %{app_id}
     auto_response:
       body_html: "<p>본 문자는 Code for America(미국을 위한 코드) 재난 지원(Disaster Assistance)에서
@@ -316,22 +315,23 @@ ko:
       month: 월
       year: 년
   text_message:
-    activation: 귀하의 재난 지원 (Disaster Assistance) 신청서가 승인되었습니다. 지급 카드의 활성화 코드는 %{activation_code} 입니다.
-      %{ivr_phone_number} 로 전화하여 카드를 활성화하십시오.
-    app_id: 귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수 (ID) 번호는 %{app_id} 입니다. 귀하의 지급 카드를 수령하려면,
-      이 접수 번호와 귀하의 증빙 서류가 필요합니다.
-    auto_response: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance) 에서
-      발송하는 자동 응답 서비스입니다. 귀하의 신청서문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 보다
-      자세한 내용은 https://ca-drai.org/privacy 를 참조하십시오.
-    help: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance) 에서 발송하는 자동 응답
-      서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 보다 자세한 내용은 https://ca-drai.org/privacy 를
-      참조하십시오. 문자 수신 서비스를 해지하려면 “STOP” (중지) 라는 회신 문자를 보내십시오
+    activation: 귀하의 재난 지원 (Disaster Assistance) 신청서가 승인되었습니다. 지급 카드의 활성화 코드는 %{activation_code}
+      입니다. %{ivr_phone_number} 로 전화하여 카드를 활성화하십시오.
+    app_id: 귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수 (ID) 번호는 %{app_id} 입니다. 귀하의 지급 카드를
+      수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.
+    auto_response: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance)
+      에서 발송하는 자동 응답 서비스입니다. 귀하의 신청서문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오.
+      보다 자세한 내용은 https://ca-drai.org/privacy 를 참조하십시오.
+    help: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance) 에서 발송하는 자동
+      응답 서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 보다 자세한 내용은
+      https://ca-drai.org/privacy 를 참조하십시오. 문자 수신 서비스를 해지하려면 “STOP” (중지) 라는 회신 문자를
+      보내십시오
     subscribed: 귀하는 재난 지원 (Disaster Assistance) 문자 서비스 이용 수신에 동의하였습니다. 이 번호로 귀하의 신청서
-      및 지급 관련 정보가 전송됩니다. 도움이 필요하면 “HELP” (도움) 이라고 회신 문자를 보내십시오. 문자 수신 서비스를 해지하려면 “STOP” (중지) 라는
-      회신 문자를 보내십시오. 문자 데이터 요금이 적용될 수 있습니다.
+      및 지급 관련 정보가 전송됩니다. 도움이 필요하면 “HELP” (도움) 이라고 회신 문자를 보내십시오. 문자 수신 서비스를 해지하려면 “STOP”
+      (중지) 라는 회신 문자를 보내십시오. 문자 데이터 요금이 적용될 수 있습니다.
     unsubscribed: 귀하는 재난 지원(Disaster Assistance) 문자 서비스를 해지하였습니다. 이 번호로 더 이상 문자를 수신되지
       않게 됩니다. 서비스를 다시 이용하려면 “START” (시작) 이라는 회신문자를 전송하십시오.
   voice_message:
-    auto_response: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance) 에서
-      발송하는 자동 응답 서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오. 지급
-      카드 관련 도움이 필요하면 1-877-610-1075로 문의하십시오.
+    auto_response: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance)
+      에서 발송하는 자동 응답 서비스입니다. 귀하의 신청서 문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오.
+      지급 카드 관련 도움이 필요하면 1-877-610-1075로 문의하십시오.

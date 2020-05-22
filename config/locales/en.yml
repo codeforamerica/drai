@@ -44,7 +44,9 @@ en:
         sequence_number_already_assigned: This sequence number has already been used.
         sequence_number_invalid: Make sure the sequence number is correct.
         zip_code: Must be a 5-digit ZIP Code in California.
-        zip_code_outside_organization_service_area: "%{zip_code} is in %{zip_code_county}, which is outside of your organization's service area. Please update the ZIP code or refer the applicant to the organization that can serve them."
+        zip_code_outside_organization_service_area: "%{zip_code} is in %{zip_code_county},
+          which is outside of your organization's service area. Please update the
+          ZIP code or refer the applicant to the organization that can serve them."
         zip_five_digits: Must be a 5-digit ZIP Code.
   aid_applications:
     applicants:
@@ -100,12 +102,12 @@ en:
             or other address.
           title: Residential address
         contact_information:
+          body: Select one or both notice methods. The applicant will be sent their
+            Application Number and Activation Code by this method.
           confirmed_invalid_email: I have confirmed with the client that their email
             is recorded correctly. Misspellings and typos will prevent them from receiving
             benefits.
           email_address: Email address (if available)
-          body: Select one or both notice methods. The applicant will be sent
-            their Application Number and Activation Code by this method.
           landline: This is a landline
           message_rates_apply: Message and data rates may apply. You will be able
             to opt out by texting STOP at any time or texting HELP for more information.
@@ -146,6 +148,24 @@ en:
           state: State
           street_address: Street Address
           zip: ZIP Code
+    confirm_messages:
+      edit:
+        activation_code_required: The client *must* have their Activation Code to
+          use their card.
+        button: Send Activation Code
+        contact_info: This will send the applicant their code by the method they selected
+          during their initial application.
+        edit: Edit contact information
+        emergency_confirm: Are you sure you want to access a client's activation code?
+        emergency_info: Emergency access should only be used if the client cannot
+          receive the code themselves. This access will be recorded.
+        help: Approving the application should trigger sending the Activation Number.
+          The applicant must have their Activation Number to use their card.
+        message_received: Message received
+        notification: Application approved for <CLIENT NAME>
+        question: Does the applicant have their Activation Code?
+        review: Review contact information
+        title: Activation Code
     confirmations:
       edit:
         app_not_submitted: Application not yet submitted.
@@ -206,9 +226,9 @@ en:
               </ul>
             title: COVID-19 impact
           message: 'In order to process your application, we will need to verify the
-                information you provided is accurate. You will need to submit the following
-                documents through text, email, other systems implemented by the CBO, or
-                in-person:'
+            information you provided is accurate. You will need to submit the following
+            documents through text, email, other systems implemented by the CBO, or
+            in-person:'
           photo_id_accordion:
             body_html: |
               <ul class="list--bulleted">
@@ -232,24 +252,6 @@ en:
               </ul>
             title: Proof of address
           title: Verification documents
-    confirm_messages:
-      edit:
-        activation_code_required: The client *must* have their Activation Code to
-          use their card.
-        button: Send Activation Code
-        contact_info: This will send the applicant their code by the method they selected
-          during their initial application.
-        edit: Edit contact information
-        emergency_confirm: Are you sure you want to access a client's activation code?
-        emergency_info: Emergency access should only be used if the client cannot
-          receive the code themselves. This access will be recorded.
-        help: Approving the application should trigger sending the Activation Number.
-          The applicant must have their Activation Number to use their card.
-        message_received: Message received
-        notification: Application approved for <CLIENT NAME>
-        question: Does the applicant have their Activation Code?
-        review: Review contact information
-        title: Activation Code
     disbursements:
       edit:
         activation_trouble: If you have problems with activating the payment card,
@@ -371,14 +373,14 @@ en:
   flash:
     actions:
       create:
-        alert:
-        notice:
+        alert: 
+        notice: 
       destroy:
-        alert:
-        notice:
+        alert: 
+        notice: 
       update:
-        alert:
-        notice:
+        alert: 
+        notice: 
   general:
     activate: Activate
     affirmative: 'Yes'

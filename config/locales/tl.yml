@@ -73,10 +73,10 @@ tl:
             na mga kliyente ay maaring gumamit ng tuluyan o ibang address.
           title: Address sa Residente
         contact_information:
-          email_address: Address sa email (kung meron)
           body: Pumili ng isa o pareho na paraan ng abiso. Papadalhan ang aplikante
             ng kanilang Numero ng Aplikastyon at Code ng Kodigo ng Pagiging-aktibo
             sa pamamagitan nitong paraan.
+          email_address: Address sa email (kung meron)
           landline: Ito ay isang landline
           message_rates_apply: Ang rata sa mensahe at data ay maaaring nalalapat.
             Ikaw ay maaaring umalis sa pamamagitan ng pagteks ng HUMINTO sa anumang
@@ -387,8 +387,8 @@ tl:
         sa iyong plano sa teks o data plan, pinakamabuti na makipag-ugnay sa iyong
         wireless na tagapagkaloob. Sa lahat ng mga katanungan tungkol sa mga serbisyo
         sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring magpadala ng email
-        sa privacy@ca-drai.org </li><li>Kung ikaw ay may mga katanungan tungkol sa pagiging
-        pribado, pakibasa ang aming alituntunin sa pagiging pribado: ca-drai.org/privacy</li><li>
+        sa privacy@ca-drai.org </li><li>Kung ikaw ay may mga katanungan tungkol sa
+        pagiging pribado, pakibasa ang aming alituntunin sa pagiging pribado: ca-drai.org/privacy</li><li>
         para sa mga katanungan, email privacy@ca-drai.org</li></ol>"
       title: Kodigo ng alituntunin ng mga Notipikasyon ng Relebong Tulong sa Sakuna
         ng Amerika

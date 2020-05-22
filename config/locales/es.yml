@@ -62,10 +62,10 @@ es:
             usar la dirección de un albergue u otro lugar.
           title: Dirección de domicilio
         contact_information:
+          body: Seleccione uno o ambos métodos de notificación. Se le enviarán su
+            número de solicitud y código de activación al solicitante a través de
+            este método.
           email_address: Dirección de correo electrónico (si hay alguna)
-          body: Seleccione uno o ambos métodos de notificación. Se le enviarán
-            su número de solicitud y código de activación al solicitante a través
-            de este método.
           landline: Esta es una línea fija.
           message_rates_apply: Tarifas de mensajes y datos pueden ser aplicadas. Podrá
             optar por no recibir mensajes de texto enviando ALTO en cualquier momento
