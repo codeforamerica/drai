@@ -63,7 +63,7 @@ es:
           title: Dirección de domicilio
         contact_information:
           email_address: Dirección de correo electrónico (si hay alguna)
-          help_text: Seleccione uno o ambos métodos de notificación. Se le enviarán
+          body: Seleccione uno o ambos métodos de notificación. Se le enviarán
             su número de solicitud y código de activación al solicitante a través
             de este método.
           landline: Esta es una línea fija.

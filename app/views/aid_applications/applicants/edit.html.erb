@@ -3,7 +3,7 @@
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
     <% if params[:verify] %>
-      <header class="form-card__header text--error">
+      <header class="form-card__header">
         <h1>Verify</h1>
       </header>
     <% else %>
@@ -79,7 +79,7 @@
             <%= t('.contact_information.preferred_contact_label') %>
           </legend>
 
-          <p class="text--help"><%= t('.contact_information.help_text') %></p>
+          <p class="text--body"><%= t('.contact_information.body') %></p>
 
           <div class="question-with-follow-up">
             <div class="question-with-follow-up__question associated-field-to-disable">
@@ -94,14 +94,12 @@
           </div>
         </fieldset>
 
-        <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }, classes: ['spacing-below-0']) %>
-        <label class="checkbox checkbox-with-associated-field-to-disable">
-          <%= f.check_box(:landline) %>
-          <%= t('.contact_information.landline') %>
-        </label>
-
-        <br>
-        <br>
+        <fieldset>
+          <div class="form-group group-of-mixed-fields">
+            <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }, classes: ['spacing-below-0']) %>
+            <%= f.cfa_checkbox(:landline, t('.contact_information.landline')) %>
+          </div>
+        </fieldset>
 
         <%= f.cfa_input_field(:email, t('.contact_information.email_address'), type: 'email') %>
 
@@ -128,7 +126,7 @@
               )
           %>
 
-          <fieldset class="input-group form-group group-of-individual-checkboxes">
+          <fieldset class="input-group form-group group-of-individual-fields">
             <legend class="spacing-below-15"><strong><%= t('.additional_information.unmet_needs_legend') %></strong></legend>
             <% [
                    {method: :unmet_food, label: t('.additional_information.unmet_needs_food')},
@@ -146,7 +144,7 @@
           <fieldset class="input-group form-group">
             <legend class="form-question spacing-below-15"><%= t('.attestation.title') %></legend>
             <p class="text--help"><em><%= t('.attestation.read_to_client') %></em></p>
-            <p class="text--help"><%= t('.attestation.statement') %></p>
+            <p class="text--body"><%= t('.attestation.statement') %></p>
             <%= f.cfa_checkbox :attestation, t('general.affirmative') %>
           </fieldset>
 

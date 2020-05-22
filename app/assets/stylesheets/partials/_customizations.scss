@@ -61,14 +61,21 @@
   font-variant: normal;
 }
 
+.checkbox-subtle-text .checkbox {
+  font-weight: normal;
+}
 .disabled {
   opacity: .5;
   pointer-events: none;
   cursor: default;
 }
 
-.group-of-individual-checkboxes .form-group, .group-of-input-fields .form-group {
+.group-of-individual-fields .form-group {
   margin-bottom: 0;
+}
+
+.group-of-mixed-fields .form-group {
+  margin-bottom: 1em;
 }
 
 .list--numbered {
