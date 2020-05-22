@@ -1,15 +1,18 @@
 FactoryBot.define do
-  factory :aid_application do
+  factory :new_aid_application, class: AidApplication do
     creator { build :assister }
     organization { creator.organization }
+  end
 
-    # Eligibility
+  factory :eligible_aid_application, parent: :new_aid_application do
     county_name { organization&.county_names&.first }
     no_cbo_association { true }
     covid19_reduced_work_hours { true }
     valid_work_authorization { false }
     attestation { true }
+  end
 
+  factory :aid_application, parent: :eligible_aid_application do
     # Application
     name { Faker::Name.name }
     birthday { 'January 1, 1980' }

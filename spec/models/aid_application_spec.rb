@@ -3,10 +3,28 @@ require 'rails_helper'
 RSpec.describe AidApplication, type: :model do
   let(:aid_application) { create :aid_application }
 
-  it 'has a valid factory' do
-    aid_application = build :aid_application
-    expect(aid_application).to be_valid(:eligibility)
-    expect(aid_application).to be_valid(:submit)
+  describe 'factories' do
+    specify 'aid_application is submittable but not submitted' do
+      aid_application = build :aid_application
+      expect(aid_application).to be_valid
+      expect(aid_application.eligible?).to eq true
+      expect(aid_application).to be_valid(:submit)
+      expect(aid_application.submitted?).to eq false
+    end
+
+    specify 'new_aid_application is ineligible' do
+      aid_application = build :new_aid_application
+      expect(aid_application).to be_valid
+      expect(aid_application.eligible?).to eq false
+      expect(aid_application).not_to be_valid(:eligibility)
+    end
+
+    specify 'eligible_aid_application is eligible but not submittable' do
+      aid_application = build :eligible_aid_application
+      expect(aid_application).to be_valid
+      expect(aid_application.eligible?).to eq true
+      expect(aid_application).not_to be_valid(:submit)
+    end
   end
 
   describe '#organization' do
