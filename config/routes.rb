@@ -36,6 +36,7 @@ Rails.application.routes.draw do
           end
         end
         resource :export, only: [:show, :create]
+        resource :messages, only: [:edit, :update], path_names: { edit: '' }
         resources :aid_applications, only: [:show, :create, :destroy]
       end
 

@@ -219,7 +219,7 @@ class AidApplication < ApplicationRecord
       "ko" => 'Korean',
       "tl" => 'Tagalog',
       "es" => 'Spanish'
-  }.freeze
+  }.freeze.with_indifferent_access
 
   has_paper_trail
 

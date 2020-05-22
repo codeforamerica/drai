@@ -1,0 +1,25 @@
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2>Custom Submission Message</h2>
+
+      <p class="text--help">
+        Use these custom messages to include instructions for submitting documents or checking status. The text will be appended to the Submission message sent to clients. Less than 200 characters.
+      </p>
+    </header>
+
+    <%= form_for(@organization, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_textarea attribute_from_locale('en'), "English Submission Message (default)" %>
+
+        <% (message_locales - [:en]).each do |message_locale| %>
+          <%= f.cfa_textarea attribute_from_locale(message_locale), "#{AidApplication::LOCALE_LANGUAGE_MAPPING[message_locale.to_s]} Submission Message" %>
+        <% end %>
+      </div>
+
+      <div class="form-card__footer">
+        <%= f.button "Update messages", type: 'submit', class: 'toolbar__item button button--primary' %>
+      </div>
+  <% end %>
+  </div>
+</div>

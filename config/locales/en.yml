@@ -428,9 +428,7 @@ en:
     activation: Your application for Disaster Assistance has been approved. The activation
       code for your payment card is %{activation_code}. Call %{ivr_phone_number} to
       activate your card.
-    app_id: Your application for Disaster Assistance has been submitted. Your application
-      ID number is %{app_id}. You will need this number and your verification documents
-      to receive the payment card.
+    app_id: Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}. If you have questions about submitting documents, contact the organization that assisted you at %{organization_contact}.
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.
