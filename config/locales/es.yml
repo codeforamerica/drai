@@ -269,9 +269,9 @@ es:
           title: Documentos de verificación
   email_message:
     activation:
-      body_html: "<p>Su solicitud para asistencia por desastre ha sido aprobada. El
-        código de activación para su tarjeta de pago es %{activation_code}.</p><p>Llame
-        al %{ivr_phone_number} para activar su tarjeta.</p>"
+      body_html: |
+        <p>El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.</p>
+        <p>Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.</p>
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     app_id:
       body_html: |
@@ -327,9 +327,8 @@ es:
       month: Mes
       year: Año
   text_message:
-    activation: Su solicitud para asistencia por desastre ha sido aprobada. El código
-      de activación para su tarjeta de pago es %{activation_code}. Llame al %{ivr_phone_number}
-      para activar su tarjeta.
+    activation: El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.
+      Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.
     app_id: Su solicitud para asistencia económica ha sido entregada. El número de
       identificación de su solicitud es %{app_id}. Necesitará este número y sus documentos
       de verificación para recibir la tarjeta de pago.
