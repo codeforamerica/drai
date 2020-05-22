@@ -38,7 +38,10 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     # Chrome's no-sandbox option is required for running in Docker
-    driven_by :selenium, using: (ENV['SHOW_BROWSER'] ? :chrome : :headless_chrome), screen_size: [1024, 800], options: { args: ["no-sandbox", "disable-dev-shm-usage"] }
+    driven_by :selenium, using: (ENV['SHOW_BROWSER'] ? :chrome : :headless_chrome), screen_size: [1024, 800] do |driver_options|
+      driver_options.add_argument("--disable-dev-shm-usage")
+      driver_options.add_argument("--no-sandbox")
+    end
   end
 
   # When running in a browser, ensure capybara-email links have correct host
