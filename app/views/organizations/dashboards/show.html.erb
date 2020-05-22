@@ -90,7 +90,7 @@
         <tbody>
         <% @aid_applications.each do |aid_application| %>
           <tr id="<%= dom_id(aid_application) %>">
-            <td><%= link_to aid_application.application_number, edit_organization_aid_application_eligibility_path(aid_application.organization, aid_application) %></td>
+            <td><%= link_to aid_application.application_number, organization_aid_application_path(aid_application.organization, aid_application) %></td>
             <td><%= aid_application.submitted_at.to_s(:month_day_year) %></td>
             <td><%= aid_application.name %></td>
             <td><%= (aid_application.submitter || aid_application.creator).name %></td>

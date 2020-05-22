@@ -1,5 +1,21 @@
 module Organizations
   class AidApplicationsController < BaseController
+    def show
+      aid_application = current_organization.aid_applications.find(params[:id])
+
+      if current_user.supervisor?
+        if aid_application.disbursed?
+          redirect_to edit_organization_aid_application_finished_path(current_organization, aid_application)
+        elsif aid_application.approved?
+          redirect_to edit_organization_aid_application_disbursement_path(current_organization, aid_application)
+        else
+          redirect_to edit_organization_aid_application_verification_path(current_organization, aid_application)
+        end
+      else
+        redirect_to edit_organization_aid_application_confirmation_path(current_organization, aid_application)
+      end
+    end
+
     def create
       @aid_application = AidApplication.create!(
           creator: current_user,

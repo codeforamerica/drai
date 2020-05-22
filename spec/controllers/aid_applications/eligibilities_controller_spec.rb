@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe AidApplications::EligibilitiesController do
   let(:assister) { create :assister }
-  let(:aid_application) { AidApplication.create!(creator: assister, organization: assister.organization) }
+  let(:aid_application) { create :new_aid_application, creator: assister }
 
   describe '#edit' do
     context 'when not authenticated' do

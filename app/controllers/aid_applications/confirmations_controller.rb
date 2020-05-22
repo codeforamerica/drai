@@ -1,5 +1,7 @@
 module AidApplications
   class ConfirmationsController < BaseController
+    before_action :ensure_submitted
+
     def edit
       @aid_application = current_aid_application
     end

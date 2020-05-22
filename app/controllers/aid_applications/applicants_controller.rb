@@ -1,5 +1,8 @@
 module AidApplications
   class ApplicantsController < BaseController
+    before_action :ensure_eligible
+    before_action :ensure_submitted, if: -> { params[:verify] }
+
     def edit
       @aid_application = current_aid_application
 

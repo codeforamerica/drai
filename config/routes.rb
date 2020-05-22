@@ -24,7 +24,6 @@ Rails.application.routes.draw do
       resources :aid_applications, only: :index
     end
 
-
     resources :organizations, only: [] do
       scope module: :organizations do
         resource :dashboard, only: [:show]
@@ -37,7 +36,7 @@ Rails.application.routes.draw do
           end
         end
         resource :export, only: [:show, :create]
-        resources :aid_applications, only: [:create, :destroy]
+        resources :aid_applications, only: [:show, :create, :destroy]
       end
 
       resources :aid_applications, only: [] do
