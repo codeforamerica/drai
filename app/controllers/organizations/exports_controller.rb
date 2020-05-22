@@ -8,35 +8,44 @@ class Organizations::ExportsController < ApplicationController
   def create
     ExportLog.create! organization: current_organization, exporter: current_user
 
-    query = current_organization.aid_applications.submitted.left_joins(:payment_card).select(
-      :application_number,
-      <<~SQL,
-        (
-          CASE
-          WHEN disbursed_at IS NOT NULL THEN 'disbursed'
-          WHEN approved_at IS NOT NULL THEN 'approved'
-          ELSE 'submitted'
-          END
-        ) AS status
-      SQL
-      :name,
-      :county_name,
-      :phone_number,
-      :email,
-      :street_address,
-      :apartment_number,
-      :city,
-      :zip_code,
-      :mailing_street_address,
-      :mailing_apartment_number,
-      :mailing_city,
-      :mailing_state,
-      :mailing_zip_code,
-      "payment_cards.sequence_number AS payment_card_sequence_number",
-      "date_trunc('second', submitted_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS submitted_at",
-      "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
-      "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
-    )
+    query = current_organization.aid_applications.submitted
+              .joins("left join users submitters ON submitters.id = submitter_id")
+              .joins("left join users approvers ON approvers.id = approver_id")
+              .joins("left join users disbursers ON disbursers.id = disburser_id")
+              .left_joins(:payment_card)
+              .select(
+                  :application_number,
+                  <<~SQL,
+                    (
+                      CASE
+                      WHEN disbursed_at IS NOT NULL THEN 'disbursed'
+                      WHEN approved_at IS NOT NULL THEN 'approved'
+                      ELSE 'submitted'
+                      END
+                    ) AS status
+                  SQL
+                  :name,
+                  :county_name,
+                  :phone_number,
+                  :email,
+                  :street_address,
+                  :apartment_number,
+                  :city,
+                  :zip_code,
+                  :mailing_street_address,
+                  :mailing_apartment_number,
+                  :mailing_city,
+                  :mailing_state,
+                  :mailing_zip_code,
+                  "payment_cards.sequence_number AS payment_card_sequence_number",
+                  "card_receipt_method AS preferred_card_receipt_method",
+                  "submitters.name AS submitter",
+                  "approvers.name AS approver",
+                  "disbursers.name AS disburser",
+                  "date_trunc('second', submitted_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS submitted_at",
+                  "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
+                  "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
+              )
     stream_csv_report(query)
   end
 
