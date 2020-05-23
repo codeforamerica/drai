@@ -355,8 +355,8 @@ en:
   email_message:
     activation:
       body_html: |
-        <p>Your application for Disaster Assistance has been approved. The activation code for your payment card is %{activation_code}.</p>
-        <p>Call %{ivr_phone_number} to activate your card.</p>
+        <p>The activation code for your Disaster Assistance payment card is %{activation_code}.</p>
+        <p>When you receive your card, call the number on the back of the card to activate it.</p>
       subject: Disaster Assistance payment card activation code
     app_id:
       body_html: |
@@ -427,9 +427,9 @@ en:
     password_help: Should be 8-70 characters long and include 1 uppercase, 1 lowercase,
       1 digit, and 1 special character (#?!@$%^&*-).
   text_message:
-    activation: Your application for Disaster Assistance has been approved. The activation
-      code for your payment card is %{activation_code}. Call %{ivr_phone_number} to
-      activate your card.
+    activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
+      When you receive your card, call the number on the back of the card to activate
+      it.
     app_id: Your application for Disaster Assistance has been submitted. Your application
       ID number is %{app_id}. You will need this number and your verification documents
       to receive the payment card.
