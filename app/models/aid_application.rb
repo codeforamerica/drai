@@ -456,21 +456,31 @@ class AidApplication < ApplicationRecord
   def send_submission_notification
     if sms_consent?
       ApplicationTexter.basic_message(
-          to: phone_number,
-          body: I18n.t('text_message.subscribed', locale: locale)
+        to: phone_number,
+        body: I18n.t('text_message.subscribed', locale: locale),
       ).deliver_later
 
       ApplicationTexter.basic_message(
-          to: phone_number,
-          body: I18n.t('text_message.app_id', app_id: application_number, locale: locale)
+        to: phone_number,
+        body: I18n.t(
+          'text_message.app_id',
+          app_id: application_number,
+          contact_information: organization.contact_information,
+          locale: locale
+        )
       ).deliver_later
     end
 
     if email_consent?
       ApplicationEmailer.basic_message(
-          to: email,
-          subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
-          body: I18n.t('email_message.app_id.body_html', app_id: application_number, locale: locale)
+        to: email,
+        subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
+        body: I18n.t(
+          'email_message.app_id.body_html',
+          app_id: application_number,
+          contact_information: organization.contact_information,
+          locale: locale
+        )
       ).deliver_later
     end
   end
