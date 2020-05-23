@@ -31,13 +31,28 @@ module ApplicationHelper
 
   def activation_code_notification_description(aid_application)
     if aid_application.sms_consent? && aid_application.email_consent?
-      "text message at #{aid_application.phone_number} and email at #{aid_application.email}"
+      html_output = <<~HTML
+        <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}</strong> and email at <strong>#{aid_application.email}.</strong></span>
+      HTML
     elsif aid_application.sms_consent?
-      "text message at #{aid_application.phone_number}"
+      html_output = <<~HTML
+        <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}.</strong></span>
+      HTML
     elsif aid_application.email_consent?
-      "email at #{aid_application.email}"
+      html_output = <<~HTML
+        <span>email at <strong>#{aid_application.email}.</strong></span>
+      HTML
     else
-      "no contact info"
+      html_output = <<~HTML
+        <span><strong>No contact info.</strong></span>
+      HTML
     end
+
+    html_output.html_safe
+  end
+
+  def add_dashes_to_phone_number(phone_number)
+    phone_number.match(/(\d{3})(\d{3})(\d{4})/)
+      [$1, $2, $3].join("-")
   end
 end

@@ -18,12 +18,16 @@
       <h2>Activation code</h2>
 
       <div class="form-card__content notice--success">
-        <p>The applicant has been sent their Activation Code via <strong><%= activation_code_notification_description(@aid_application) %></strong>.</p>
+        <p>The applicant has been sent their Activation Code via <%= activation_code_notification_description(@aid_application) %></p>
       </div>
 
       <p>The client <strong>must</strong> have their Activation Code to use their card.</p>
 
-      <%= f.button "Re-send Activation Code", type: 'submit', name: 'form_action', value: 'resend_code', class: 'button button--primary' %>
+      <%= f.button "Re-send Activation Code",
+                   type: 'submit',
+                   name: 'form_action',
+                   value: 'resend_code',
+                   class: 'button button--secondary' %>
     </div>
   <% end %>
 </div>
