@@ -28,4 +28,31 @@ module ApplicationHelper
   def supervisor?
     current_user.try(:supervisor?) || current_user.try(:admin?)
   end
+
+  def activation_code_notification_description(aid_application)
+    if aid_application.sms_consent? && aid_application.email_consent?
+      html_output = <<~HTML
+        <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}</strong> and email at <strong>#{aid_application.email}.</strong></span>
+      HTML
+    elsif aid_application.sms_consent?
+      html_output = <<~HTML
+        <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}.</strong></span>
+      HTML
+    elsif aid_application.email_consent?
+      html_output = <<~HTML
+        <span>email at <strong>#{aid_application.email}.</strong></span>
+      HTML
+    else
+      html_output = <<~HTML
+        <span><strong>No contact info.</strong></span>
+      HTML
+    end
+
+    html_output.html_safe
+  end
+
+  def add_dashes_to_phone_number(phone_number)
+    phone_number.match(/(\d{3})(\d{3})(\d{4})/)
+      [$1, $2, $3].join("-")
+  end
 end

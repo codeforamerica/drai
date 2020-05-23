@@ -338,10 +338,6 @@ en:
               to:"
             notification: "<COUNTY> County is within your service area."
             title: ZIP code
-    finisheds:
-      edit:
-        homepage_link: Return to home page
-        title: Card successfully disbursed
     index:
       action: Action
       add_app: Start a new application

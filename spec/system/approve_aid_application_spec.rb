@@ -43,7 +43,7 @@ describe 'Approve aid application', type: :system do
     fill_in I18n.t('aid_applications.disbursements.edit.sequence_number'), with: payment_card.sequence_number
     click_on I18n.t('aid_applications.disbursements.edit.disburse_card')
 
-    expect(page).to have_content I18n.t('aid_applications.finisheds.edit.title')
+    expect(page).to have_content "Card successfully disbursed"
 
     payment_card.reload
 
