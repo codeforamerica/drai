@@ -358,7 +358,7 @@ en:
       body_html: |
         <p>Hello!</p>
         <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}.</p>
-        <p>You will need this number and your verification documents to receive the payment card.</p>
+        <p>If you have questions about submitting documents, contact the organization that assisted you at: %{contact_information}</p>
         <p>- The DRAI Team</p>
       subject: Assistance application submitted %{app_id}
     auto_response:
@@ -369,14 +369,14 @@ en:
   flash:
     actions:
       create:
-        alert: 
-        notice: 
+        alert:
+        notice:
       destroy:
-        alert: 
-        notice: 
+        alert:
+        notice:
       update:
-        alert: 
-        notice: 
+        alert:
+        notice:
   general:
     activate: Activate
     affirmative: 'Yes'
@@ -426,9 +426,9 @@ en:
     activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
       When you receive your card, call the number on the back of the card to activate
       it.
-    app_id: Your application for Disaster Assistance has been submitted. Your application
-      ID number is %{app_id}. You will need this number and your verification documents
-      to receive the payment card.
+    app_id: 'Your application for Disaster Assistance has been submitted. Your application
+      ID number is %{app_id}. If you have questions about submitting documents, contact
+      the organization that assisted you at: %{contact_information}'
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.

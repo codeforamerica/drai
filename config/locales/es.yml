@@ -277,7 +277,7 @@ es:
       body_html: |
         <p>¡Hola!</p>
         <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}.</p>
-        <p>Necesitará este número y sus documentos de verificación para recibir la tarjeta de pago.</p>
+        <p>Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al %{contact_information}</p>
         <p>- El equipo de DRAI</p>
       subject: Solicitud de asistencia entregada %{app_id}
     auto_response:
@@ -329,9 +329,9 @@ es:
   text_message:
     activation: El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.
       Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.
-    app_id: Su solicitud para asistencia económica ha sido entregada. El número de
-      identificación de su solicitud es %{app_id}. Necesitará este número y sus documentos
-      de verificación para recibir la tarjeta de pago.
+    app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de
+      identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar
+      documentos, comuníquese con la organización que le asistió al: %{contact_information}'
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud. Puede obtener más información

@@ -509,7 +509,7 @@ RSpec.describe AidApplication, type: :model do
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
                                                                      args: [{
                                                                               to: aid_application.phone_number,
-                                                                              body: I18n.t('text_message.subscribed', locale: 'en')
+                                                                              body: I18n.t('text_message.subscribed', contact_information: aid_application.organization.contact_information, locale: 'en')
                                                                             }]
         )
         expect do
@@ -517,7 +517,7 @@ RSpec.describe AidApplication, type: :model do
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
                                                                      args: [{
                                                                               to: aid_application.phone_number,
-                                                                              body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'en')
+                                                                              body: I18n.t('text_message.app_id', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
                                                                             }]
         )
       end
@@ -532,7 +532,7 @@ RSpec.describe AidApplication, type: :model do
                      .with("ApplicationTexter", "basic_message", "deliver_now",
                            args: [{
                                     to: aid_application.phone_number,
-                                    body: I18n.t('text_message.subscribed', locale: 'es')
+                                    body: a_string_including("solicitud para asistencia")
                                   }]
           )
 
@@ -543,120 +543,8 @@ RSpec.describe AidApplication, type: :model do
                      .with("ApplicationTexter", "basic_message", "deliver_now",
                            args: [{
                                     to: aid_application.phone_number,
-                                    body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'es')
+                                    body: a_string_including("solicitud para asistencia")
                                   }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Cantonese' do
-        let(:preferred_language) { 'Cantonese' }
-
-        it 'sends an SMS in Chinese' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'zh')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Mandarin' do
-        let(:preferred_language) { 'Mandarin' }
-
-        it 'sends an SMS in Chinese' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'zh')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Arabic' do
-        let(:preferred_language) { 'Arabic' }
-
-        it 'sends an SMS in Arabic' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'ar')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Vietnamese' do
-        let(:preferred_language) { 'Vietnamese' }
-
-        it 'sends an SMS in Vietnamese' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'vi')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Korean' do
-        let(:preferred_language) { 'Korean' }
-
-        it 'sends an SMS in Korean' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'ko')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language of Tagalog' do
-        let(:preferred_language) { 'Tagalog' }
-
-        it 'sends an SMS in Tagalog' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'tl')
-                                }]
-                     )
-        end
-      end
-
-      context 'when the application has another preferred_language (ie: Japanese)' do
-        let(:preferred_language) { 'Japanese' }
-
-        it 'sends an SMS in English' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                         args: [{
-                                  to: aid_application.phone_number,
-                                  body: I18n.t('text_message.app_id', app_id: aid_application.application_number, locale: 'en')
-                                }]
                      )
         end
       end
@@ -673,26 +561,9 @@ RSpec.describe AidApplication, type: :model do
                                                                      args: [{
                                                                                 to: aid_application.email,
                                                                                 subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                                                                body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'en')
+                                                                                body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
                                                                             }]
         )
-      end
-
-      context 'when the application has a preferred_language of Cantonese' do
-        let(:preferred_language) { 'Cantonese' }
-
-        it 'sends the email messages in Cantonese' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationEmailer", "basic_message", "deliver_now",
-                           args: [{
-                                      to: aid_application.email,
-                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'zh'),
-                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'zh')
-                                  }]
-                     )
-        end
       end
 
       context 'when the application has a preferred_language of Spanish' do
@@ -706,24 +577,7 @@ RSpec.describe AidApplication, type: :model do
                            args: [{
                                       to: aid_application.email,
                                       subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'es'),
-                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'es')
-                                  }]
-                     )
-        end
-      end
-
-      context 'when the application has a preferred_language with no translations (ie: Japanese)' do
-        let(:preferred_language) { 'Japanese' }
-
-        it 'sends the email messages in English' do
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationEmailer", "basic_message", "deliver_now",
-                           args: [{
-                                      to: aid_application.email,
-                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                      body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, locale: 'en')
+                                      body: a_string_including("solicitud para asistencia")
                                   }]
                      )
         end
