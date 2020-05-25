@@ -2,7 +2,7 @@
 
 <div class="grid__item width-two-thirds shift-one-sixth">
   <div class="form-card">
-    <% if params[:verify] %>
+    <% if verify_page? %>
       <header class="form-card__header">
         <h1>Verify</h1>
       </header>
@@ -47,7 +47,7 @@
           <%= f.cfa_input_field :city, t('.shared_address.city') %>
           <%= f.cfa_input_field :zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
 
-          <% unless @aid_application.allow_mailing_address %>
+          <% unless @aid_application.allow_mailing_address? %>
             <%= f.button type: 'submit', name: 'form_action', value: 'allow_mailing_address', class: 'button button--secondary' do %>
               <span class="icon icon-add" aria-hidden="true"></span> <%= t('.mailing_address.add_mailing_address') %>
             <% end %>
@@ -55,9 +55,11 @@
         </div>
         <hr>
 
-        <% if @aid_application.allow_mailing_address %>
+        <% if @aid_application.allow_mailing_address? %>
           <div class="mailing-address" id="mailing-address">
             <h2><%= t('.mailing_address.title') %></h2>
+            <%= f.hidden_field :allow_mailing_address %>
+
             <%= f.cfa_input_field :mailing_street_address, t('.shared_address.street_address') %>
             <%= f.cfa_input_field :mailing_apartment_number, t('.shared_address.apartment_number') %>
             <%= f.cfa_input_field :mailing_city, t('.shared_address.city') %>
@@ -152,7 +154,7 @@
       </div>
 
       <div class="form-card__footer">
-        <% if params[:verify] %>
+        <% if verify_page? %>
           <div class="toolbar">
             <div class="toolbar__left">
               <%= f.button t('general.save_and_exit'), type: 'submit', name: 'form_action', value: 'verify_and_exit', class: 'toolbar__item button' %>

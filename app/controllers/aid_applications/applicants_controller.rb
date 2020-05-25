@@ -1,7 +1,7 @@
 module AidApplications
   class ApplicantsController < BaseController
     before_action :ensure_eligible
-    before_action :ensure_submitted, if: -> { params[:verify] }
+    before_action :ensure_submitted, if: -> { verify_page? }
 
     def edit
       @aid_application = current_aid_application
@@ -33,7 +33,13 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: -> {edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "mailing-address")}
+        return respond_with @aid_application, location: (lambda do
+          if verify_page?
+            edit_organization_aid_application_verification_path(current_organization, @aid_application, anchor: "mailing-address")
+          else
+            edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "mailing-address")
+          end
+        end)
       elsif params[:form_action] == 'remove_mailing_address'
         @aid_application.assign_attributes(
             allow_mailing_address: false,
@@ -50,7 +56,13 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: -> {edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address")}
+        return respond_with @aid_application, location: (lambda do
+          if verify_page?
+            edit_organization_aid_application_verification_path(current_organization, @aid_application, anchor: "address")
+          else
+            edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address")
+          end
+        end)
       elsif params[:form_action] == 'verify' || params[:form_action] == 'verify_and_exit'
         @aid_application.save(context: :submit)
 
@@ -121,5 +133,10 @@ module AidApplications
         AidApplication::DEMOGRAPHIC_OPTIONS_DEFAULT
       end
     end
+
+    def verify_page?
+      params[:verify]
+    end
+    helper_method :verify_page?
   end
 end

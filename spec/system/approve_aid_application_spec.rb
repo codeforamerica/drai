@@ -24,6 +24,29 @@ describe 'Approve aid application', type: :system do
 
     click_on aid_application.application_number
 
+    expect(page).to have_content "Verify"
+
+    ## Ensure that mailing address is still validated after submission
+    accept_alert do
+      click_on "Remove mailing address"
+    end
+    click_on "Add a separate mailing address"
+
+    within '.mailing-address' do
+      fill_in "ZIP Code", with: "02130"
+    end
+
+    click_on 'Continue'
+
+    # Expect validation errors
+    within '.mailing-address' do
+      fill_in "Street Address", with: "123 Rural Street"
+      fill_in "Apartment, building, unit, etc. (optional)", with: "Unit A"
+      fill_in "City", with: "Other Town"
+      fill_in "State", with: "Massachusetts"
+    end
+    ## /Ensure that mailing address is still validated after submission
+
     within '#application-navigation' do
       click_on 'Determination'
     end
