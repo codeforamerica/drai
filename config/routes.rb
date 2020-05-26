@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
   # All routes in this scope will be prefixed with /locale if an available locale is set. See default_url_options in
   # application_controller.rb and http://guides.rubyonrails.org/i18n.html for more info on this approach.
+
+  namespace :webhooks do
+    resources :twilio, only: [] do
+      collection do
+        post 'status'
+      end
+    end
+    resources :mailgun, only: [] do
+      collection do
+        post 'status'
+      end
+    end
+  end
+
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     root 'hello_worlds#show'
 

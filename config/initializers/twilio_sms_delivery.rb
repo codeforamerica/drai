@@ -17,6 +17,7 @@ module Mail
           body: mail.body.raw_source
         )
       )
+      mail.message_id = @response.sid
     end
   end
 end

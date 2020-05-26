@@ -29,8 +29,14 @@ test:
   <<: *default
   database: dafi_test
 
+staging: &production
+  <<: *default
+  database: dafi_staging
+  url: <%= ENV['DATABASE_URL'] %>
+
 production: &production
   <<: *default
+  database: dafi_production
   url: <%= ENV['DATABASE_URL'] %>
 
 demo:

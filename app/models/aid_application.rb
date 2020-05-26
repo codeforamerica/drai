@@ -290,6 +290,7 @@ class AidApplication < ApplicationRecord
   belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
   has_one :payment_card
   has_one :aid_application_search
+  has_many :message_logs, as: :messageable
 
   enum preferred_contact_channel: {text: "text", voice: "voice", email: "email"}, _prefix: "preferred_contact_channel"
 
@@ -455,12 +456,12 @@ class AidApplication < ApplicationRecord
 
   def send_submission_notification
     if sms_consent?
-      ApplicationTexter.basic_message(
+      ApplicationTexter.with(messageable: self).basic_message(
         to: phone_number,
         body: I18n.t('text_message.subscribed', locale: locale),
       ).deliver_later
 
-      ApplicationTexter.basic_message(
+      ApplicationTexter.with(messageable: self).basic_message(
         to: phone_number,
         body: I18n.t(
           'text_message.app_id',
@@ -472,7 +473,7 @@ class AidApplication < ApplicationRecord
     end
 
     if email_consent?
-      ApplicationEmailer.basic_message(
+      ApplicationEmailer.with(messageable: self).basic_message(
         to: email,
         subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
         body: I18n.t(
@@ -488,7 +489,7 @@ class AidApplication < ApplicationRecord
 
   def send_disbursement_notification
     if sms_consent?
-      ApplicationTexter.basic_message(
+      ApplicationTexter.with(messageable: self).basic_message(
           to: phone_number,
           body: I18n.t(
               'text_message.activation',
@@ -500,7 +501,7 @@ class AidApplication < ApplicationRecord
     end
 
     if email_consent?
-      ApplicationEmailer.basic_message(
+      ApplicationEmailer.with(messageable: self).basic_message(
           to: email,
           subject: I18n.t('email_message.activation.subject', locale: locale),
           body: I18n.t(
