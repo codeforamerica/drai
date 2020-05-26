@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_190912) do
+ActiveRecord::Schema.define(version: 2020_05_26_013602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,24 @@ ActiveRecord::Schema.define(version: 2020_05_21_190912) do
     t.bigint "exporter_id"
     t.index ["exporter_id"], name: "index_export_logs_on_exporter_id"
     t.index ["organization_id"], name: "index_export_logs_on_organization_id"
+  end
+
+  create_table "message_logs", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "message_id"
+    t.text "channel"
+    t.text "from"
+    t.text "to"
+    t.text "subject"
+    t.text "body"
+    t.text "status"
+    t.text "status_code"
+    t.text "status_message"
+    t.text "messageable_type"
+    t.bigint "messageable_id"
+    t.index ["message_id"], name: "index_message_logs_on_message_id", unique: true
+    t.index ["messageable_type", "messageable_id"], name: "index_message_logs_on_messageable_type_and_messageable_id"
   end
 
   create_table "organizations", force: :cascade do |t|

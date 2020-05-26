@@ -19,6 +19,7 @@ describe AidApplications::FinishedsController do
             form_action: "resend_code"
         }
       end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
+                                                                   params: { messageable: aid_application },
                                                                    args: [{
                                                                               to: aid_application.phone_number,
                                                                               body: I18n.t(

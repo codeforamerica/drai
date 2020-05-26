@@ -50,27 +50,27 @@ RSpec.describe AidApplication, type: :model do
     end
 
     it ' filters by status' do
-      expect(described_class.filter_by_params({status: 'approved'})).to eq([approved_app])
+      expect(described_class.filter_by_params({ status: 'approved' })).to eq([approved_app])
     end
 
     it 'filters by status garbage' do
-      expect(described_class.filter_by_params({status: 'garbage'})).to eq([submitted_app, approved_app, disbursed_app])
+      expect(described_class.filter_by_params({ status: 'garbage' })).to eq([submitted_app, approved_app, disbursed_app])
     end
 
     it 'orders by status value' do
-      expect(described_class.filter_by_params({order: 'asc'})).to eq([disbursed_app, approved_app, submitted_app])
+      expect(described_class.filter_by_params({ order: 'asc' })).to eq([disbursed_app, approved_app, submitted_app])
     end
 
     it 'searches' do
-      expect(described_class.filter_by_params({q: approved_app.application_number})).to eq([approved_app])
+      expect(described_class.filter_by_params({ q: approved_app.application_number })).to eq([approved_app])
     end
 
     it 'filters by search and status' do
-      expect(described_class.filter_by_params({q: approved_app.application_number, status: 'disbursed'})).to eq([])
+      expect(described_class.filter_by_params({ q: approved_app.application_number, status: 'disbursed' })).to eq([])
     end
 
     it 'does it all' do
-      expect(described_class.filter_by_params({q: 'APP', status: 'disbursed', order: 'desc'})).to eq([disbursed_app])
+      expect(described_class.filter_by_params({ q: 'APP', status: 'disbursed', order: 'desc' })).to eq([disbursed_app])
     end
   end
 
@@ -258,7 +258,7 @@ RSpec.describe AidApplication, type: :model do
         aid_application.valid?(:submit)
         expect(aid_application.errors[:email]).to be_present
 
-        expect(aid_application.error_message?(:email,:mailgun_email_invalid)).to be true
+        expect(aid_application.error_message?(:email, :mailgun_email_invalid)).to be true
       end
     end
   end
@@ -332,11 +332,11 @@ RSpec.describe AidApplication, type: :model do
   describe '#eligibility_required' do
     it 'must have at least one covid19 criteria checked' do
       aid_application = build :aid_application,
-                                covid19_care_facility_closed: nil,
-                                covid19_caregiver: nil,
-                                covid19_experiencing_symptoms: nil,
-                                covid19_reduced_work_hours: nil,
-                                covid19_underlying_health_condition: nil
+                              covid19_care_facility_closed: nil,
+                              covid19_caregiver: nil,
+                              covid19_experiencing_symptoms: nil,
+                              covid19_reduced_work_hours: nil,
+                              covid19_underlying_health_condition: nil
       expect(aid_application).not_to be_valid(:eligibility)
     end
   end
@@ -352,7 +352,7 @@ RSpec.describe AidApplication, type: :model do
     it 'must be true' do
       aid_application = build :aid_application, contact_method_confirmed: nil
       expect(aid_application).not_to be_valid(:confirmation)
-	end
+    end
   end
 
   describe '#card_receipt_method' do
@@ -365,7 +365,7 @@ RSpec.describe AidApplication, type: :model do
   describe '.search' do
     it 'performs a scoped query against associated AidApplicationSearch' do
       aid_application = create :aid_application, :submitted, city: 'Riverside'
-      _other_aid_application = create :aid_application, :submitted, city:   'San Diego'
+      _other_aid_application = create :aid_application, :submitted, city: 'San Diego'
 
       AidApplicationSearch.refresh
       expect(described_class.search('Riverside')).to eq [aid_application]
@@ -507,6 +507,7 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_submission_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
+                                                                     params: { messageable: aid_application },
                                                                      args: [{
                                                                               to: aid_application.phone_number,
                                                                               body: I18n.t('text_message.subscribed', contact_information: aid_application.organization.contact_information, locale: 'en')
@@ -515,11 +516,20 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_submission_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
+                                                                     params: { messageable: aid_application },
                                                                      args: [{
                                                                               to: aid_application.phone_number,
                                                                               body: I18n.t('text_message.app_id', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
                                                                             }]
         )
+      end
+
+      it 'records a Message object' do
+        perform_enqueued_jobs do
+          aid_application.send_submission_notification
+        end
+
+        expect(aid_application.message_logs.size).to eq 2
       end
 
       context 'when the application has a preferred_language of Spanish' do
@@ -529,23 +539,25 @@ RSpec.describe AidApplication, type: :model do
           expect do
             aid_application.send_submission_notification
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           args: [{
-                                    to: aid_application.phone_number,
-                                    body: a_string_including("solicitud para asistencia")
-                                  }]
-          )
+                   .with("ApplicationTexter", "basic_message", "deliver_now",
+                         params: { messageable: aid_application },
+                         args: [{
+                                  to: aid_application.phone_number,
+                                  body: a_string_including("solicitud para asistencia")
+                                }]
+                   )
 
 
           expect do
             aid_application.send_submission_notification
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           args: [{
-                                    to: aid_application.phone_number,
-                                    body: a_string_including("solicitud para asistencia")
-                                  }]
-                     )
+                   .with("ApplicationTexter", "basic_message", "deliver_now",
+                         params: { messageable: aid_application },
+                         args: [{
+                                  to: aid_application.phone_number,
+                                  body: a_string_including("solicitud para asistencia")
+                                }]
+                   )
         end
       end
     end
@@ -558,12 +570,21 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_submission_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", "basic_message", "deliver_now",
+                                                                     params: { messageable: aid_application },
                                                                      args: [{
-                                                                                to: aid_application.email,
-                                                                                subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                                                                body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
+                                                                              to: aid_application.email,
+                                                                              subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
+                                                                              body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
                                                                             }]
         )
+      end
+
+      it 'records a Message object' do
+        perform_enqueued_jobs do
+          aid_application.send_submission_notification
+        end
+
+        expect(aid_application.message_logs.size).to eq 1
       end
 
       context 'when the application has a preferred_language of Spanish' do
@@ -573,13 +594,14 @@ RSpec.describe AidApplication, type: :model do
           expect do
             aid_application.send_submission_notification
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationEmailer", "basic_message", "deliver_now",
-                           args: [{
-                                      to: aid_application.email,
-                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'es'),
-                                      body: a_string_including("solicitud para asistencia")
-                                  }]
-                     )
+                   .with("ApplicationEmailer", "basic_message", "deliver_now",
+                         params: { messageable: aid_application },
+                         args: [{
+                                  to: aid_application.email,
+                                  subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'es'),
+                                  body: a_string_including("solicitud para asistencia")
+                                }]
+                   )
         end
       end
     end
@@ -594,17 +616,26 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_disbursement_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                           .with("ApplicationTexter", "basic_message", "deliver_now",
-                                 args: [{
-                                          to: aid_application.phone_number,
-                                          body: I18n.t(
-                                            'text_message.activation',
-                                            activation_code: aid_application.payment_card.activation_code,
-                                            ivr_phone_number: BlackhawkApi.ivr_phone_number,
-                                            locale: 'en'
-                                          )
-                                        }]
-                           )
+                 .with("ApplicationTexter", "basic_message", "deliver_now",
+                       params: { messageable: aid_application },
+                       args: [{
+                                to: aid_application.phone_number,
+                                body: I18n.t(
+                                  'text_message.activation',
+                                  activation_code: aid_application.payment_card.activation_code,
+                                  ivr_phone_number: BlackhawkApi.ivr_phone_number,
+                                  locale: 'en'
+                                )
+                              }]
+                 )
+      end
+
+      it 'records a Messages objects' do
+        perform_enqueued_jobs do
+          aid_application.send_disbursement_notification
+        end
+
+        expect(aid_application.message_logs.size).to eq 1
       end
 
       context 'with preferred language set to Spanish' do
@@ -614,17 +645,18 @@ RSpec.describe AidApplication, type: :model do
           expect do
             aid_application.send_disbursement_notification
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t(
-                                          'text_message.activation',
-                                          activation_code: aid_application.payment_card.activation_code,
-                                          ivr_phone_number: BlackhawkApi.ivr_phone_number,
-                                          locale: 'es'
-                                      )
-                                  }]
-                     )
+                   .with("ApplicationTexter", "basic_message", "deliver_now",
+                         params: { messageable: aid_application },
+                         args: [{
+                                  to: aid_application.phone_number,
+                                  body: I18n.t(
+                                    'text_message.activation',
+                                    activation_code: aid_application.payment_card.activation_code,
+                                    ivr_phone_number: BlackhawkApi.ivr_phone_number,
+                                    locale: 'es'
+                                  )
+                                }]
+                   )
         end
       end
     end
@@ -636,6 +668,14 @@ RSpec.describe AidApplication, type: :model do
         expect do
           aid_application.send_disbursement_notification
         end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+      end
+
+      it 'records a Message object' do
+        perform_enqueued_jobs do
+          aid_application.send_disbursement_notification
+        end
+
+        expect(aid_application.message_logs.size).to eq 1
       end
     end
 
