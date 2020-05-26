@@ -32,6 +32,10 @@ module Dafi
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # Skylight.io Configuration
+    config.skylight.environments += %w[staging demo]
+    config.skylight.probes << 'active_job'
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Pacific Time (US & Canada)'

@@ -324,6 +324,10 @@ GEM
       rubyzip (>= 1.2.2)
     sentry-raven (3.0.0)
       faraday (>= 1.0)
+    skylight (4.3.0)
+      skylight-core (= 4.3.0)
+    skylight-core (4.3.0)
+      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -415,6 +419,7 @@ DEPENDENCIES
   scenic
   selenium-webdriver
   sentry-raven
+  skylight
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
