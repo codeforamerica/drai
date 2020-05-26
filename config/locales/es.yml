@@ -8,7 +8,7 @@ es:
           sea elegible.
         confirmation_required: Se requiere una confirmación.
         eligibility_criteria: Los clientes solamente son elegibles para DRAI si responden
-          “No”.
+          "No".
         email: Asegúrese de ingresar un correo electrónico válido.
         landline_sms: Las líneas telefónicas fijas no pueden recibir mensajes de texto.
           Ingrese un número de teléfono celular o cambie el método de la notificación.
@@ -117,6 +117,82 @@ es:
         notification: Solicitud aprobada para <CLIENT NAME>
         question: "¿El solicitante tiene su código de activación?"
         title: Código de activación
+    confirmations:
+      edit:
+        app_not_submitted: Solicitud aún no entregada.
+        app_submitted: Solicitud entregada correctamente.
+        app_verified: Solicitud verificada.
+        application_number:
+          confirm: Verifique que el solicitante recibió el correo electrónico o mensaje
+            de texto con el número de solicitud. Si no, revise la información de contacto
+            y realice las modificaciones necesarias.
+          edit_contact: Modificar información de contacto
+          message: El cliente deberá anotar este número. Lo necesitará para recoger
+            la asistencia en persona.
+          title: Número de solicitud
+        next_steps:
+          step1: Dentro de los próximos cinco días hábiles, necesita entregar los
+            documentos de verificación de los que hablamos anteriormente.
+          step2: Si no recibimos estos documentos, se cerrará su expediente de solicitud
+            y tendrá que volver a presentar la solicitud.
+          step3: No podemos garantizar que la asistencia estará disponible en una
+            fecha más tarde.
+          step4: Una vez que aprobemos su solicitud, le avisaremos y le explicaremos
+            cómo se le entregará la tarjeta de pago.
+          step5: Confirme el método de entrega con el solicitante.
+          title: Los próximos pasos
+        receive_card:
+          options:
+            deliver: Alguien se la entregará al solicitante.
+            mail: Por correo postal
+            pick_up: El solicitante la recogerá en persona.
+          subtitle: Esto se puede modificar más tarde.
+          title: "¿Cómo obtendrá su tarjeta el solicitante?"
+        title: Solicitud entregada
+        verifications:
+          covid19_impact_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Carta o aviso de que el solicitante debe cuidar a un niño u otra persona cuya escuela, centro de cuidado infantil u otro centro de cuidado está cerrado debido a la COVID-19</li>
+                <li>Carta o aviso del empleador que indica la pérdida del empleo o la reducción de las horas de trabajo debido a la COVID-19</li>
+                <li>
+                  <p>Carta o aviso de un profesional médico u otra documentación que pueda mostrar dificultades basadas en cualquiera de los siguientes:</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>Tiene síntomas consistentes con la COVID-19</li>
+                    <li>Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir con las pautas de la salud pública de distanciamiento social no puede trabajar</li>
+                    <li>Es un cuidador de un dependiente o cónyuge que tiene síntomas consistentes con la COVID-19</li>
+                  </ul>
+                </li>
+              </ul>
+            title: Impacto de la COVID-19
+          message: Para poder procesar su solicitud, necesitaremos verificar que la
+            información que usted proporcionó sea verdadera. Necesitará entregar los
+            siguientes documentos a través de un mensaje de texto, correo electrónico,
+            otros sistemas implementados por la organización sin ánimo de lucro o
+            en persona.
+          photo_id_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Cualquier tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Cualquier licencia de conducir emitida por una agencia estatal</li>
+                <li>Pasaporte de cualquier país</li>
+                <li>Documento de identificación internacional</li>
+                <li>Tarjeta de identificación de la escuela</li>
+                <li>Tarjeta de identificación del trabajo</li>
+              </ul>
+            title: Identificación con fotografía
+          proof_of_address_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>Documento de identificación con la dirección indicada, como una licencia de conducir o tarjeta de identificación emitida por una agencia estatal</li>
+                <li>Carta de beneficios de una agencia gubernamental dirigida al solicitante o que muestre que el solicitante vive en el hogar</li>
+                <li>Contrato de arrendamiento que muestre el nombre del solicitante</li>
+                <li>Factura de servicios públicos dirigida al solicitante</li>
+                <li>Tarjetas de seguro con el nombre del solicitante</li>
+                <li>Papeles de inscripción de la escuela con la dirección, dirigidos al solicitante o que tengan el nombre del solicitante</li>
+              </ul>
+            title: Comprobante de domicilio
+          title: Documentos de verificación
     disbursements:
       edit:
         activation_trouble: Si tiene problemas para activar la tarjeta de pago, por
@@ -194,79 +270,6 @@ es:
               al solicitante a:"
             notification: "<COUNTY> El condado está dentro de su área de servicio."
             title: Código postal
-    verifications:
-      edit:
-        app_not_submitted: Solicitud aún no entregada.
-        app_submitted: Solicitud entregada correctamente.
-        app_verified: Solicitud verificada.
-        application_number:
-          edit_contact: Modificar información de contacto
-          message: El cliente deberá anotar este número. Lo necesitará para recoger
-            la asistencia en persona.
-          title: Número de solicitud
-        next_steps:
-          step1: Dentro de los próximos cinco días hábiles, necesita entregar los
-            documentos de verificación de los que hablamos anteriormente.
-          step2: Si no recibimos estos documentos, se cerrará su expediente de solicitud
-            y tendrá que volver a presentar la solicitud.
-          step3: No podemos garantizar que la asistencia estará disponible en una
-            fecha más tarde.
-          step4: Una vez que aprobemos su solicitud, le avisaremos y le explicaremos
-            cómo se le entregará la tarjeta de pago.
-          step5: Confirme el método de entrega con el solicitante.
-          title: Los próximos pasos
-        receive_card:
-          options:
-            deliver: Alguien se la entregará al solicitante.
-            mail: Por correo postal
-            pick_up: El solicitante la recogerá en persona.
-          subtitle: Esto se puede modificar más tarde.
-          title: "¿Cómo obtendrá su tarjeta el solicitante?"
-        title: Solicitud entregada
-        verifications:
-          covid19_impact_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Carta o aviso de que el solicitante debe cuidar a un niño u otra persona cuya escuela, centro de cuidado infantil u otro centro de cuidado está cerrado debido a la COVID-19</li>
-                <li>Carta o aviso del empleador que indica la pérdida del empleo o la reducción de las horas de trabajo debido a la COVID-19</li>
-                <li>
-                  <p>Carta o aviso de un profesional médico u otra documentación que pueda mostrar dificultades basadas en cualquiera de los siguientes:</p>
-                  <ul class="list--numbered" style="padding-bottom: 0">
-                    <li>Tiene síntomas consistentes con la COVID-19</li>
-                    <li>Tiene un mayor riesgo de enfermarse gravemente de la COVID-19 debido a su edad o una enfermedad subyacente y, por lo tanto, para poder cumplir con las pautas de la salud pública de distanciamiento social no puede trabajar</li>
-                    <li>Es un cuidador de un dependiente o cónyuge que tiene síntomas consistentes con la COVID-19</li>
-                  </ul>
-                </li>
-              </ul>
-            title: Impacto de la COVID-19
-          message: Para poder procesar su solicitud, necesitaremos verificar que la
-            información que usted proporcionó sea verdadera. Necesitará entregar los
-            siguientes documentos a través de un mensaje de texto, correo electrónico,
-            otros sistemas implementados por la organización sin ánimo de lucro o
-            en persona.
-          photo_id_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Cualquier tarjeta de identificación emitida por una agencia estatal</li>
-                <li>Cualquier licencia de conducir emitida por una agencia estatal</li>
-                <li>Pasaporte de cualquier país</li>
-                <li>Documento de identificación internacional</li>
-                <li>Tarjeta de identificación de la escuela</li>
-                <li>Tarjeta de identificación del trabajo</li>
-              </ul>
-            title: Identificación con fotografía
-          proof_of_address_accordion:
-            body_html: |
-              <ul class="list--bulleted">
-                <li>Documento de identificación con la dirección indicada, como una licencia de conducir o tarjeta de identificación emitida por una agencia estatal</li>
-                <li>Carta de beneficios de una agencia gubernamental dirigida al solicitante o que muestre que el solicitante vive en el hogar</li>
-                <li>Contrato de arrendamiento que muestre el nombre del solicitante</li>
-                <li>Factura de servicios públicos dirigida al solicitante</li>
-                <li>Tarjetas de seguro con el nombre del solicitante</li>
-                <li>Papeles de inscripción de la escuela con la dirección, dirigidos al solicitante o que tengan el nombre del solicitante</li>
-              </ul>
-            title: Comprobante de domicilio
-          title: Documentos de verificación
   email_message:
     activation:
       body_html: |
@@ -280,11 +283,10 @@ es:
         <p>Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al %{contact_information}</p>
         <p>- El equipo de DRAI</p>
       subject: Solicitud de asistencia entregada %{app_id}
-    auto_response:
-      body_html: "<p>Esta es una respuesta automatizada de la asistencia por desastre
-        de la organización Code for America.</p><p>Para obtener ayuda con su caso,
-        comuníquese con la organización que le ayudó con su solicitud.</p><p>Para
-        obtener ayuda con su tarjeta de pago, llame al 1-877-610-1075.</p>"
+    auto_response: body_html:| <p>Esta es una respuesta automatizada de la asistencia
+      por desastre de la organización Code for America.</p> <p>Para obtener ayuda
+      con su caso, comuníquese con la organización que le ayudó con su solicitud.</p>
+      <p>Para obtener ayuda con su tarjeta de pago, llame al %{ivr_phone_number}.</p>
   general:
     activate: Activar
     affirmative: Sí
@@ -294,6 +296,7 @@ es:
     confirm: Confirmar
     continue: Continuar
     delete: Eliminar
+    delete_application: Eliminar esta solicitud
     delete_this_application: Eliminar esta solicitud
     disabled: Desactivada
     email_address: Dirección de correo electrónico
@@ -308,16 +311,16 @@ es:
     update: Actualizar
   privacies:
     show:
-      body_html: |-
-        <ol>
-         <li>Cuando opte por el servicio, le enviaremos un mensaje de texto para confirmar su suscripción.</li>
-         <li>Code for America le enviará notificaciones sobre el estado de su solicitud.</li>
-         <li>Puede cancelar el servicio de mensajes de texto en cualquier momento. Solo envíe “ALTO” al código corto. Después de enviarnos el mensaje de texto “ALTO”, le enviaremos un mensaje de texto para confirmar que se ha cancelado su suscripción. Después de esto, ya no recibirá nuestros mensajes de texto.</li>
-         <li>Si en algún momento se le olvida qué palabras clave son compatibles, solo envíe “AYUDA” al código corto. Después de enviarnos el mensaje de texto “AYUDA”, le responderemos con instrucciones sobre cómo usar nuestros servicios y cómo cancelar su suscripción.</li>
-         <li>Las compañías telefónicas no son responsables de los mensajes retrasados o no entregados</li>
-         <li>Como siempre, se pueden aplicar las tarifas de mensajes y datos para cualquier mensaje que le enviemos y que usted nos envíe. Recibirá 3 mensajes esperados. Si tiene alguna pregunta sobre su plan de datos y mensajes de texto, será mejor comunicarse con su proveedor de servicios móvil. Para todas las preguntas sobre los servicios proporcionados por este código corto, puede enviar un correo electrónico a privacy@ca-drai.org</li>
-         <li>Si tiene alguna pregunta sobre la privacidad, por favor, lea nuestra política de privacidad: ca-drai.org/privacy</li>
-         <li>Si tiene preguntas, envíe un correo electrónico a privacy@ca-drai.org</li>
+      body_html: |
+        <ol class="list--numbered">
+           <li>Cuando opte por el servicio, le enviaremos un mensaje de texto para confirmar su suscripción.</li>
+           <li>Code for America le enviará notificaciones sobre el estado de su solicitud.</li>
+           <li>Puede cancelar el servicio de mensajes de texto en cualquier momento. <strong>Solo envíe “ALTO” al código corto.</strong> Después de enviarnos el mensaje de texto <strong>“ALTO”</strong>, le enviaremos un mensaje de texto para confirmar que se ha cancelado su suscripción. Después de esto, ya no recibirá nuestros mensajes de texto.</li>
+           <li>Si en algún momento se le olvida qué palabras clave son compatibles, solo envíe “AYUDA” al código corto. Después de enviarnos el mensaje de texto “AYUDA”, le responderemos con instrucciones sobre cómo usar nuestros servicios y cómo cancelar su suscripción.</li>
+           <li>Las compañías telefónicas no son responsables de los mensajes retrasados o no entregados</li>
+           <li>Como siempre, se pueden aplicar las tarifas de mensajes y datos para cualquier mensaje que le enviemos y que usted nos envíe. Recibirá 3 mensajes esperados. Si tiene alguna pregunta sobre su plan de datos y mensajes de texto, será mejor comunicarse con su proveedor de servicios móvil. Para todas las preguntas sobre los servicios proporcionados por este código corto, puede enviar un correo electrónico a <a href="mailto:help@ca-drai.org">help@ca-drai.org</a></li>
+           <li>Si tiene alguna pregunta sobre la privacidad, por favor, lea nuestra política de privacidad: <a href="https://ca-drai.org/es/privacy">ca-drai.org/es/privacy</a></li>
+           <li>Si tiene preguntas, envíe un correo electrónico a <a href="mailto:privacy@ca-drai.org">privacy@ca-drai.org</a></li>
          </ol>
       title: Política de notificaciones para la asistencia por desastre de la organización
         Code for America

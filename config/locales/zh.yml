@@ -1,2 +1,272 @@
 ---
 zh:
+  activerecord:
+    errors:
+      messages:
+        attestation_required: 需要证明
+        check_one_box_eligible: 必须至少勾选一个方框的客户才有资格。
+        confirmation_required: 需要确认。
+        eligibility_criteria: 只有回答“否”的客户才有资格获得移民灾难救济援助
+        email: 确保输入有效的电子邮件
+        landline_sms: 固定电话无法接收短信。输入手机号码或更改接收通知的方法。
+        phone_number: 确保使用 10 位数字的电话号码为
+        required_question: 这个问题必答。
+        zip_code: 必须是加州的 5 位数邮政编码
+        zip_five_digits: 必须是 5 位数邮政编码
+  aid_applications:
+    applicants:
+      edit:
+        additional_information:
+          receives_calfresh_help_text: 家庭是指一起生活、购物和准备饭菜的人
+          receives_calfresh_label: 您家中是否有人目前正在领取粮食券 (CalFresh) 或加州工作机会并对儿童负责任计划 (CALWORKs)
+            的福利？
+          title: 其他信息
+          unmet_needs_childcare: 儿童保育
+          unmet_needs_food: 食物
+          unmet_needs_housing: 住房（即难以支付房租或房贷）
+          unmet_needs_legend: 您有哪些未满足的需求？
+          unmet_needs_none_of_the_above: 以上皆非
+          unmet_needs_other: 其他未满足的需求
+          unmet_needs_transportation: 交通
+          unmet_needs_utilities: 水电费
+        applicant_information:
+          country_of_origin: 出生国家
+          dob: 出生日期
+          gender: 性别
+          gender_options:
+            female: 女
+            male: 男
+            non_binary: 非二元（既非男性也非女性）
+            other: 其他性别认同
+            transgender_female: 变性者： 男性变女性
+            transgender_male: 变性者：女性变男性
+          help: 以下信息仅供人口统计使用，申请人可以拒绝回答。
+          name: 全名
+          racial_ethnic_identity: 种族/族裔
+          sexual_orientation: 性倾向
+          title: 申请人信息
+        attestation:
+          statement: 您是否音译证明所提供的信息都真实准确？您是否知道，如果所提供的信息陈述不实或不完整，即可能是拒绝您的申请的依据？
+          subtitle: 向申请人宣读：
+          title: 申请人证明
+        california_address:
+          address_required: 地址为必填项。无家可归的客户可以使用庇护所或其他地址。
+          title: 居住地址
+        contact_information:
+          email_address: 电子邮件地址（如有）
+          help_text: 选择一种或两种通知方法。将使用这种方法向申请人发送其申请编号和激活码。
+          landline: 这是固定电话
+          message_rates_apply: 消息和数据费率可能适用。随时都可发送“STOP”（停止）短信选择退出，或发送“HELP”（帮助）短信获取更多信息。您每份申请都将收到
+            2 条消息。
+          phone_number_required: 无论通知方式如何，每个人都必须提供一个电话号码。
+          preferred_contact_email: 电子邮件
+          preferred_contact_label: 您希望如何接收包含您的申请编号和激活码的消息？
+          preferred_contact_text: 文字讯息
+          read_to_client: 向申请人宣读：
+          title: 联系信息
+        language:
+          languages:
+            arabic: 阿拉伯文
+            chinese: 简体中文
+            english: 英文
+            koren: 韩文
+            spanish: 西班牙文
+            tagalog: 他加禄文
+            vietnamese: 越南文
+          title: 申请语言
+        mailing_address:
+          add_mailing_address: 添加一个单独的邮寄地址
+          remove_mailing_address: 删除邮寄地址
+          title: 邮寄地址
+        organization_relationship:
+          title: 确认申请人不是本组织的员工、承包商或志愿者。
+        shared_address:
+          apartment_number: 公寓、建筑物、单元等（可选）
+          city: 城市
+          state: 州
+          street_address: 街道地址
+          zip: 邮政编码
+    confirm_messages:
+      edit:
+        activation_code_required: 客户*必须*有其激活码才能使用付款卡。
+        button: 发送激活码
+        contact_info: 这将通过初次申请时选择的方法将其激活码发送给申请人。
+        edit: 编辑联系信息
+        emergency_confirm: 您确定要使用这个信息吗？
+        emergency_info: 仅当客户自己无法收到激活码时才使用紧急联系信息。该行动的记录将被记录。
+        message_received: 收到消息
+        notification: 的申请已批<CLIENT NAME>
+        question: 申请人是否有激活码？
+        title: 激活码
+    confirmations:
+      edit:
+        app_not_submitted: 申请尚未递交。
+        app_submitted: 申请已成功递交
+        app_verified: 申请已成功验证。
+        application_number:
+          message: 客户应将此号码写下来，需要用来亲自领取福利。
+          title: 申请编号
+        next_steps:
+          step1: 您需要在接下来的五个工作日中交上讨论的验证文件。
+          step2: 如果没有收到这些文件，您的申请将被关闭，而您将不得不重新申请。
+          step3: 不能保证以后会提供援助。
+          step4: 申请批准后会通知您，同时告知付款卡交付方式。
+          step5: 与申请人确认交付方式。
+          title: 下一步
+        receive_card:
+          options:
+            deliver: 寄到家中
+            mail: 信函
+            pick_up: 亲自领取
+          subtitle: 以后可以编辑。
+          title: 申请人将如何收到付款卡？
+        title: 申请已提交
+        verifications:
+          covid19_impact_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>申请人必须照顾因 COVID-19 而关闭学校、托儿所或其他保育设施的儿童或其他人的信件或通知</li>
+                <li>雇主的​​来信或通知，表明因 COVID-19 而失业或工作时间大大减少</li>
+                <li>
+                  <p>医护人员的信件或通知或其他文件，可能基于以下任何一种情况而显示有困难：</p>
+                  <ul class="list--numbered" style="padding-bottom: 0">
+                    <li>症状与 COVID-19 一样</li>
+                    <li>由于潜在的健康状况或年龄，更可能因 COVID-19 患重病，因此为了遵守社交疏离而无法工作 </li>
+                    <li>是症状与 COVID-19
+                        一样的受抚养人或配偶的照顾者</li>
+                  </ul>
+                </li>
+              </ul>
+            title: COVID-19 的影响
+          message: 处理申请需要验证您提供的信息是否正确。您将需要通过短信、电子邮件、CBO 实施的其他系统或亲自递交以下文件
+          photo_id_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>任何国家签发的身份证</li>
+                <li>任何国家签发的驾驶执照</li>
+                <li>任何国家的护照</li>
+                <li>国际身份证件</li>
+                <li>学校身份证</li>
+                <li>工作证</li>
+              </ul>
+            title: 带照片的身份证
+          proof_of_address_accordion:
+            body_html: |
+              <ul class="list--bulleted">
+                <li>列出地址的身份证明文件，如州签发的驾驶执照或州签发的身份证</li>
+                <li>政府机构发给申请人的福利信，或表明申请人在家中居住</li>
+                <li>显示申请人姓名的租赁协议</li>
+                <li>发给申请人的水电费账单</li>
+                <li>显示申请人姓名的保险卡</li>
+                <li>寄给申请人或显示申请人姓名的附有地址的学校招生文件</li>
+              </ul>
+            title: 地址证明
+          title: 验证文件
+    disbursements:
+      edit:
+        activation_trouble: 如果在激活付款卡时遇到问题，请仔细阅读说明，并通过付款卡上列出的电话号码或网站信息与发卡行联系。
+        disburse_card: 付款卡
+        inform_application: '告诉申请人:'
+        lost_card: 丢失或被盗的付款卡无法更换。
+        method: 付款卡用什么方法支付？
+        sequence_number: 付款卡序列号
+        title: 全部支付
+        when: 付款卡什么时候支付的？
+    duplicates:
+      show:
+        body: 已有姓名、出生日期和地址相同的人递交了移民灾难救济援助申请。
+        title: 该申请人已被确认为重复。
+    eligibilities:
+      edit:
+        about_program:
+          about_accordian:
+            body: 这个计划旨在让无证移民在大流行病爆发期间获得经济援助。每个成人都可获得一张 500 美元的借记卡。申请人需要回答有关如何受到 COVID-19
+              影响的问题，提供一些个人信息， 并交上证明这些信息的文件。
+            title: 关于移民灾难救济援助 (DRAI) 计划
+        eligibility:
+          care_facility_closed: 由于 COVID-19 爆发，通常为您照看孩子或其他需要照顾之人的设施（如学校、托儿所或其他成人生活设施）是否关闭了？
+          caregiver: 您是否因需要照顾受抚养人（如儿童或年迈的父母，或患有或患有症状与 COVID-19 一样的配偶）而无法工作？
+          experiencing_symptoms: 您是否有过与 COVID-19 一样的症状？
+          help_text: 有效文件包括社会安全号卡和美国公民及移民服务局 (USCIS) 签发的工作授权书或就业授权书。
+          label_text: 您目前是否有授权您在美国工作的有效文件？
+          read_to_client: 向申请人宣读以下内容。他们必须至少满足一个条件。勾选所有适用方框。
+          reduced_work_hours: 您或家中其他为家庭提供收入的成人是否已因 COVID-19 爆发而失业或工作时间大大减少？
+          title: 资格
+          underlying_health_condition: 由于潜在的健康状况或年龄，您是否更可能因 COVID-19 患重病，因此为了遵守社交疏离而无法工作？
+        privacy:
+          help_text: 向申请人宣读。
+          text_part1: 会问几个问题，用来验证您是否有资格获得此援助， 还会向您收集文件，以确认援助申请人。您的个人信息会受到保护，将输入一个由非营利组织管理的在线门户，
+            并由本组织保留。一般性汇总信息将与州政府分享，但没有任何信息会识别您的身份。您的信息不会与其他任何人分享，而且最终将安全地销毁。
+          text_part2: 知道这些信息后，您是否还要申请？
+          title: 隐私脚本
+        service_criteria:
+          title: 服务标准
+          zip_code:
+            button: 查找
+            error: "<COUNTY> 该不在您的服务范围内，请转介申请人到："
+            notification: "<COUNTY> 该在您的服务范围内。"
+            title: 邮政编码
+  email_message:
+    activation:
+      body_html: |
+        <p>您的灾难援助申请已批。付款卡的激活码是 %{activation_code}。</p>
+        <p>致电 %{ivr_phone_number} 激活付款卡。</p>
+      subject: 灾难援助付款卡激活码
+    app_id:
+      body_html: |
+        <p>您好！</p>
+        <p>您的经济援助申请已递交。您的申请 ID 号是 %{app_id}。</p>
+        <p>需要此号码和验证文件才能领取付款卡。</p>
+        <p>- 移民灾难救济援助团队</p>
+      subject: 援助申请已递交 %{app_id}
+    auto_response:
+      body_html: |
+        <p>这是美国代码组织灾害援助的自动回复。</p>
+        <p>如需申请方面的帮助，请联系协助您申请的组织。</p>
+        <p>如需付款卡方面的帮助，请致电1-877-610-1075.</p>
+  general:
+    activate: 激活
+    affirmative: 是
+    approve: 批准
+    cancel: 取消
+    cancel_application: 取消申请
+    confirm: 确认
+    continue: 继续
+    delete: 删除
+    delete_application: 删除这份申请
+    disabled: 有残疾
+    email_address: 电子邮件地址
+    go_back: 返回
+    negative: 否
+    optional: 可选
+    phone_number: 电话号码
+    proceed: 继续
+    sign_out: 登出
+    submit: 递交
+    update: 更新
+  privacies:
+    show:
+      body_html: |-
+        <ol class="list--numbered">
+          <li>选择使用该服务时，会向您发送一条短信确认您的注册。</li>
+          <li>美国代码组织会向您发送有关您申请状态的通知。</li>
+          <li>可以随时取消短信服务。<strong>只需向短代码发送“STOP”（停止）短信即可。</strong>收到您发来的“<strong>STOP</strong>”（停止）短信后，会向您发送一条短信，以确认您已退订。您以后不再会收到我们发来的短信。</li>
+          <li>如果忘了可以使用哪些关键字，只需向短代码发送“HELP”（帮助）短信即可。收到您发来的“HELP”（帮助）短信后，会回复有关如何使用本组织服务以及如何退订的说明。</li>
+          <li>运营商不对延迟或未送达的消息负责。</li>
+          <li>与往常一样，消息和数据费率可能适用于我们发送给您以及您发送给我们的任何消息。您预计会收到 3 条消息。如果对您的短信计划或数据计划有任何疑问，最好与您的手机服务提供商联系。有关此短代码所提供服务的所有问题，您可以发送电子邮件至<a href="mailto:help@ca-drai.org">help@ca-drai.org</a></li>
+          <li>如对隐私有任何疑问，请阅读我们的隐私政策：<a href='https://ca-drai.org/zh/privacy' target='_blank'>ca-drai.org/zh/privacy</a>。</li>
+          <li>如有疑问，请发送电子邮件至 <a href="mailto:privacy@ca-drai.org">privacy@ca-drai.org</a>。</li>
+        </ol>
+      title: 美国代码组织灾难救济援助通知政策
+  shared:
+    date_select:
+      day: 日
+      month: 月
+      year: 年
+  text_message:
+    activation: |-
+      您的灾难援助申请已批。付款卡的激活码是
+      %{activation_code}。致电%{ivr_phone_number} 激活付款卡。
+    app_id: 您的经济援助申请已递交。您的申请 ID 号是 %{app_id}。需要此号码和验证文件才能领取付款卡。
+  voice_message:
+    auto_response: 这是美国代码组织灾害援助的自动消息。如需申请方面的帮助，请联系协助您申请的组织。如需付款卡方面的帮助，请致电 1-877-610-1075.

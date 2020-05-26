@@ -37,8 +37,7 @@ tl:
           title: Karagdagang impormasyon
           unmet_needs_childcare: Pangangalaga sa Pabahay
           unmet_needs_food: Pagkain
-          unmet_needs_housing: Pabahay ( i.e. kahirapan sa pagbayad ng paupahan o
-            mortgage)
+          unmet_needs_housing: Pabahay (i.e. kahirapan sa pagbayad ng paupahan o mortgage)
           unmet_needs_legend: Anong mga pangangailangan ang iyong hindi nakamit?
           unmet_needs_none_of_the_above: Wala sa alinman sa itaas
           unmet_needs_other: Ibang pangangailangn na hindi nakamit
@@ -151,9 +150,9 @@ tl:
           title: Pamantayan ng serbisyo
           zip_code:
             button: Tignan
-            error: "<COUNTY> Ang county ay nasa labas ng iyong lugar ng serbisyo,
+            error: "%{county} Ang county ay nasa labas ng iyong lugar ng serbisyo,
               isangguni ang aplikante sa:"
-            notification: "<COUNTY> Ang county ay nasa loob ng iyong lugar ng serbisyo."
+            notification: "%{county} Ang county ay nasa loob ng iyong lugar ng serbisyo."
             title: ZIP code
         shared_address:
           apartment_number: Apartment, gusali, yunit, atbp (opsyonal)
@@ -162,6 +161,24 @@ tl:
           street_address: Direksyon ng Kalye
           zip: Zip Code
     confirm_messages:
+      disbursements:
+        edit:
+          activation_trouble: Kung ikaw ay may mga problema sa pag-activate ng iyong
+            kard ng kabayaran, pag-aralan ang alituntunin at makipag-ugnay sa taga-isyu
+            ng kard sa pamamagitan ng numero ng telepono o impormasyon ng website
+            na nakalista sa kard ng kabayaran.
+          disburse_card: Naipamahaging kard
+          inform_application: 'Ipaalam sa aplikante:'
+          lost_card: Kung nawala mo ang iyong kard o nanakaw ang kard, hindi ito mapapalitan.
+          method: Sa anong paraan naipamahagi ang kard?
+          sequence_number: Numero ng Pagkakasunod ng Kard
+          title: Kumpletuhin ang pakikibahagi
+          when: Kailan naipamahagi ang kard?
+      duplicates:
+        show:
+          body: May isang tao na may magkasing pangalan, petsa ng kapanganakan at
+            address ang nag-aplay na para sa DRAI.
+          title: Ang aplikante na ito ay natukoy na isang doble.
       edit:
         activation_code_required: Ang kliyente ay *dapat* magkaroon ng Kodigo ng Pagiging-aktibo
           sa paggamit ng kanilang kard.
@@ -174,27 +191,9 @@ tl:
           ay hindi nakatanggap mismo ng kanilang Kodigo ng Pagiging-aktibo. Ang isang
           rekord nitong aksyon ay maitatala.
         message_received: Natanggap ang Mensahe
-        notification: Ang aplikasyon ay naaprubahan para kay  <PANGALAN NG KLIYENTE>
+        notification: Ang aplikasyon ay naaprubahan pa %{client_name}
         question: Meron bang Kodigo ng Pagiging aktibo ang aplikante?
         title: Kodigo ng Pagiging -aktibo
-    disbursements:
-      edit:
-        activation_trouble: Kung ikaw ay may mga problema sa pag-activate ng iyong
-          kard ng kabayaran, pag-aralan ang alituntunin at makipag-ugnay sa taga-isyu
-          ng kard sa pamamagitan ng numero ng telepono o impormasyon ng website na
-          nakalista sa kard ng kabayaran.
-        disburse_card: Naipamahaging kard
-        inform_application: 'Ipaalam sa aplikante:'
-        lost_card: Kung nawala mo ang iyong kard o nanakaw ang kard, hindi ito mapapalitan.
-        method: Sa anong paraan naipamahagi ang kard?
-        sequence_number: Numero ng Pagkakasunod ng Kard
-        title: Kumpletuhin ang pakikibahagi
-        when: Kailan naipamahagi ang kard?
-    duplicates:
-      show:
-        body: May isang tao na may magkasing pangalan, petsa ng kapanganakan at address
-          ang nag-aplay na para sa DRAI.
-        title: Ang aplikante na ito ay natukoy na isang doble.
     eligibilities:
       edit:
         about_program:
@@ -250,9 +249,9 @@ tl:
           title: Pamantayan ng serbisyo
           zip_code:
             button: Tignan
-            error: "<COUNTY> Ang county ay nasa labas ng iyong lugar ng serbisyo,
+            error: "%{county} Ang county ay nasa labas ng iyong lugar ng serbisyo,
               isangguni ang aplikante sa:"
-            notification: "<COUNTY> Ang county ay nasa loob ng iyong lugar ng serbisyo."
+            notification: "%{county} Ang county ay nasa loob ng iyong lugar ng serbisyo."
             title: ZIP code
     verifications:
       edit:
@@ -301,7 +300,7 @@ tl:
                   </ul>
                 </li>
               </ul>
-            title: Dulot ng COVID-9
+            title: Dulot ng COVID-19
           message: 'Upang maiproseso ang iyong aplikasyon, kinakailangan naming na
             beripikahin na tama ang impormasyon na ibinigay. Kinakailangan mong isumite
             ang sumusunnod na dokumento sa pamamagitan ng teks, mail, o ibang sistema
@@ -355,6 +354,7 @@ tl:
     confirm: Kumpirmahin
     continue: Ipagpatuloy
     delete: Tanggalin
+    delete_application: Tanggalin ang aplikasyon na ito
     delete_this_application: Tanggalin ang aplikasyon na ito
     disabled: Kapansanan
     email_address: Address ng email
@@ -369,27 +369,17 @@ tl:
     update: I-update
   privacies:
     show:
-      body_html: "<ol><li> Kapag ikaw ay umalis sa serbisyo, kami ay magpapadala ng
-        isang mensahe sa SMS upang kumpirmahin ang iyong pagsign-up. </li><li>Ang
-        Kodigo ng Amerika ay magpapadala sa iyo ng notipikasyon tungkol sa iyong katayuan
-        sa iyong aplikasyon. </li><li> Maaari mong kanselahin ang serbisyo ng SMS
-        sa anumang oras. Iteks lamang ang “STOP” sa maiksing kodigo. Pagkatapos mo
-        maipadala ang mensahe sa SMS na “STOP” sa amin, kami ay magpapadala ng mensahe
-        sa SMS na kumukumpirma na ikaw ay hindi na naka-subscribe. Pagkatapos nito,
-        hindi ka na makakatangap ng mensahe na SMS mula sa amin. </li><li>Kung sa
-        anumang oras nakalimutan mo kung ano ang mga keyword na sinusuportahan, iteks
-        lang ang “HELP” para sa maiksing kodigo. Pagkatapos mo naipadala ang mensahe
-        sa SMS na “HELP” sa amin, kami ay tutugon sa mga alituntunin kung paano gamitin
-        ang serbisyo at kung paano mag-unsubscribe. </li><li>Ang mga carriers ay hindi
-        responsable para sa naatala at hindi naipadalang mga mensahe </li><li> Lagi,
-        ang rata sa mensahe at data ay nalalapat para sa anumang mensahe na naipadala
-        sa iyo mula sa amin at sa amin sa iyo. Kung ikaw ay may mga katanungan tungkol
-        sa iyong plano sa teks o data plan, pinakamabuti na makipag-ugnay sa iyong
-        wireless na tagapagkaloob. Sa lahat ng mga katanungan tungkol sa mga serbisyo
-        sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring magpadala ng email
-        sa privacy@ca-drai.org </li><li>Kung ikaw ay may mga katanungan tungkol sa
-        pagiging pribado, pakibasa ang aming alituntunin sa pagiging pribado: ca-drai.org/privacy</li><li>
-        para sa mga katanungan, email privacy@ca-drai.org</li></ol>"
+      body_html: |
+        <ol class="list--numbered">
+          <li> Kapag ikaw ay umalis sa serbisyo, kami ay magpapadala ng isang mensahe sa SMS upang kumpirmahin ang iyong pagsign-up.</li>
+          <li>Ang Kodigo ng Amerika ay magpapadala sa iyo ng notipikasyon tungkol sa iyong katayuan sa iyong aplikasyon.</li>
+          <li> Maaari mong kanselahin ang serbisyo ng SMS sa anumang oras. <strong>Iteks lamang ang “STOP” sa maiksing kodigo.</strong> Pagkatapos mo maipadala ang mensahe sa SMS na <strong>“STOP”</strong> sa amin, kami ay magpapadala ng mensahe sa SMS na kumukumpirma na ikaw ay hindi na naka-subscribe. Pagkatapos nito, hindi ka na makakatangap ng mensahe na SMS mula sa amin. </li>
+          <li>Kung sa anumang oras nakalimutan mo kung ano ang mga keyword na sinusuportahan, iteks lang ang “HELP” para sa maiksing kodigo. Pagkatapos mo naipadala ang mensahe sa SMS na “HELP” sa amin, kami ay tutugon sa mga alituntunin kung paano gamitin ang serbisyo at kung paano mag-unsubscribe. </li>
+          <li>Ang mga carriers ay hindi responsable para sa naatala at hindi naipadalang mga mensahe </li>
+          <li> Lagi, ang rata sa mensahe at data ay nalalapat para sa anumang mensahe na naipadala sa iyo mula sa amin at sa amin sa iyo. Kung ikaw ay may mga katanungan tungkol sa iyong plano sa teks o data plan, pinakamabuti na makipag-ugnay sa iyong wireless na tagapagkaloob. Sa lahat ng mga katanungan tungkol sa mga serbisyo sa pamamagitan nitong maiksing kodigo, ikaw ay maaaring magpadala ng email sa <a href="mailto:help@ca-drai.org">help@ca-drai.org</a> </li>
+          <li>Kung ikaw ay may mga katanungan tungkol sa pagiging pribado, pakibasa ang aming alituntunin sa pagiging pribado: <a href="https://ca-drai.org/tl/privacy">ca-drai.org/tl/privacy</a></li>
+          <li> para sa mga katanungan, email <a href="mailto:privacy@ca-drai.org">privacy@ca-drai.org</a></li>
+        </ol>
       title: Kodigo ng alituntunin ng mga Notipikasyon ng Relebong Tulong sa Sakuna
         ng Amerika
   shared:
