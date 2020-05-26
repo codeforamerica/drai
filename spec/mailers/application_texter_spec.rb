@@ -24,7 +24,8 @@ describe ApplicationTexter do
       expect(twilio_messages).to have_received(:create).with(
         messaging_service_sid: Rails.application.secrets.twilio_messaging_service_sid,
         to: '+11234567890',
-        body: 'hello'
+        body: 'hello',
+        status_callback: UrlHelpers.status_webhooks_twilio_url
       )
     end
   end

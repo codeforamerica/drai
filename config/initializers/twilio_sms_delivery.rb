@@ -14,7 +14,8 @@ module Mail
       @response = twilio_client.messages.create(
         @options.merge(
           to: PhoneNumberFormatter.format(Array(mail.to).first),
-          body: mail.body.raw_source
+          body: mail.body.raw_source,
+          status_callback: UrlHelpers.status_webhooks_twilio_url
         )
       )
       mail.message_id = @response.sid
