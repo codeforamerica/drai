@@ -7,7 +7,7 @@ module Webhooks
       status = params.dig('event-data', 'event')
       status_message = params.dig('event-data', 'severity')
 
-      message_log = MessageLog.find_or_create_by message_id: message_id
+      message_log = MessageLog.find_or_create_by_message_id message_id
       message_log.assign_status(
         status: status,
         status_code: status_message
