@@ -3,15 +3,11 @@ Rails.application.routes.draw do
   # application_controller.rb and http://guides.rubyonrails.org/i18n.html for more info on this approach.
 
   namespace :webhooks do
-    resources :twilio, only: [] do
-      collection do
-        post 'status'
-      end
+    resource :twilio, controller: :twilio, only: [] do
+      post 'status'
     end
-    resources :mailgun, only: [] do
-      collection do
-        post 'status'
-      end
+    resource :mailgun, controller: :mailgun, only: [] do
+      post 'status'
     end
   end
 
