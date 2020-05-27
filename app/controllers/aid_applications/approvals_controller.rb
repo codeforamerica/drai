@@ -15,6 +15,7 @@ module AidApplications
         respond_with @aid_application, location: organization_aid_application_duplicate_path(current_organization, @aid_application)
       else
         @aid_application.save_and_approve(approver: current_user)
+        @aid_application.send_approval_notification
 
         if params['form_action'] == 'approve_and_exit'
           respond_with @aid_application, location: organization_dashboard_path(current_organization), notice: "#{@aid_application.application_number} has been approved."

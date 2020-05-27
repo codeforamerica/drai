@@ -284,6 +284,12 @@ ar:
 
         <p> - فريق DRAI </p>
       subject: تم إرسال طلب المعونة %{app_id}
+    approved:
+      body_html: |
+        <p>Hello!</p>
+        <p>Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.</p>
+        <p>- The DRAI Team</p>
+      subject: Disaster Assistance application approved!
     auto_response:
       body_html: |
         <p>
@@ -348,6 +354,7 @@ ar:
       لتفعيل بطاقتك.
     app_id: تم تقديم طلبك للحصول على معونة مالية. رقم معرّف طلبك هو %{app_id}. ستحتاج
       إلى هذا الرقم ووثائق التحقق الخاصة بك لاستلام بطاقة الدفع.
+    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
     auto_response: هذا رد تلقائي من برنامج المعونة في حالات الكوارث التابع لمنظمة
       Code for America. للمساعدة في ملفك، اتصل بالمنظمة التي ساعدت في تقديم طلبك.
       تتوفر المزيد من المعلومات على https://ca-drai.org/ar/privacy.
