@@ -1,0 +1,71 @@
+// All form inputs expect Latin/LTR text
+*[dir="rtl"] {
+  input,
+  .text--error {
+    direction: ltr;
+  }
+
+  // Necessary for datepicker to be in correct order (MM/DD/YYYY) regardless of direction
+  .input-group--inline {
+    direction: ltr;
+    text-align: right;
+  }
+
+  .checkbox,
+  .radio-button {
+    padding-left: 2.5rem;
+    padding-right: 6rem;
+
+    input[type='checkbox'],
+    input[type='radio'] {
+      left: inherit;
+      right: 2.5rem;
+      margin-right: inherit;
+    }
+  }
+
+  .select {
+    select {
+      padding: 0 2.5rem 0 6rem;
+    }
+
+    &:after {
+      left: 0;
+      right: inherit;
+    }
+  }
+
+  .button {
+    margin-left: inherit;
+    margin-right: inherit;
+  }
+
+  .accordion__button {
+    text-align: inherit;
+
+    padding-left: 3.5rem;
+    padding-right: inherit;
+
+    &:after {
+      right: inherit;
+      left: 0;
+    }
+  }
+
+  .toolbar {
+    .toolbar__right {
+
+    }
+    .toolbar__left {
+      margin-right: 0;
+    }
+  }
+}
+
+// Don't italicize non-Latin characters.
+*[lang="zh"],
+*[lang="ar"] {
+  * {
+    font-style: normal !important;
+  }
+}
