@@ -176,7 +176,7 @@
               <% if @aid_application.submitted? %>
                 <%= f.button t('general.update'), type: 'submit', class: 'toolbar__item button button--primary' %>
               <% else %>
-                <%= f.button t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', class: 'toolbar__item button button--primary' %>
+                <%= f.button t('general.submit'), type: 'submit', name: 'form_action', value: 'submit', data: { disable_with: "Please wait..." }, class: 'toolbar__item button button--primary' %>
               <% end %>
             </div>
           </div>
