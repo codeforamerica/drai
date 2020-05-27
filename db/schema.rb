@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_013602) do
+ActiveRecord::Schema.define(version: 2020_05_27_175130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,13 @@ ActiveRecord::Schema.define(version: 2020_05_26_013602) do
     t.index ["sequence_number"], name: "index_payment_cards_on_sequence_number", unique: true
   end
 
+  create_table "reveal_activation_code_logs", force: :cascade do |t|
+    t.bigint "aid_application_id"
+    t.bigint "user_id"
+    t.index ["aid_application_id"], name: "index_reveal_activation_code_logs_on_aid_application_id"
+    t.index ["user_id"], name: "index_reveal_activation_code_logs_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password"
@@ -204,6 +211,8 @@ ActiveRecord::Schema.define(version: 2020_05_26_013602) do
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"
   add_foreign_key "payment_cards", "aid_applications"
+  add_foreign_key "reveal_activation_code_logs", "aid_applications"
+  add_foreign_key "reveal_activation_code_logs", "users"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "users", column: "inviter_id"
 
