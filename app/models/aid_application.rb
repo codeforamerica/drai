@@ -235,7 +235,9 @@ class AidApplication < ApplicationRecord
     filter_query = self
 
     if params[:q].present?
-      filter_query = filter_query.query(params[:q])
+      phone_number = params[:q].gsub(/\D/, '')
+      search_term = phone_number.length == 10 ? phone_number : params[:q]
+      filter_query = filter_query.query(search_term)
     end
 
     if params[:status].in? ['submitted', 'approved', 'disbursed']

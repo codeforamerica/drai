@@ -39,7 +39,7 @@ RSpec.describe AidApplication, type: :model do
     let(:assister) { create :assister }
     let!(:disbursed_app) { create :aid_application, :disbursed, creator: assister }
     let!(:approved_app) { create :aid_application, :approved, creator: assister }
-    let!(:submitted_app) { create :aid_application, :submitted, creator: assister }
+    let!(:submitted_app) { create :aid_application, :submitted, creator: assister, phone_number: "1112223333" }
 
     before do
       AidApplicationSearch.refresh
@@ -63,6 +63,10 @@ RSpec.describe AidApplication, type: :model do
 
     it 'searches' do
       expect(described_class.filter_by_params({ q: approved_app.application_number })).to eq([approved_app])
+    end
+
+    it 'searches by phone number' do
+      expect(described_class.filter_by_params({ q: "(111) 222-3333" })).to eq([submitted_app])
     end
 
     it 'filters by search and status' do
