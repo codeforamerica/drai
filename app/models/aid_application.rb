@@ -223,12 +223,12 @@ class AidApplication < ApplicationRecord
 
   has_paper_trail
 
-  scope :submitted, -> { where.not(submitted_at: nil) }
-  scope :approved, -> { where.not(approved_at: nil) }
-  scope :disbursed, -> { where.not(disbursed_at: nil) }
-  scope :only_submitted, -> { submitted.where(approved_at: nil) }
-  scope :only_approved, -> { approved.where(disbursed_at: nil) }
-  scope :only_disbursed, -> { disbursed }
+  scope :submitted, -> {where.not(submitted_at: nil)}
+  scope :approved, -> {where.not(approved_at: nil)}
+  scope :disbursed, -> {where.not(disbursed_at: nil)}
+  scope :only_submitted, -> {submitted.where(approved_at: nil)}
+  scope :only_approved, -> {approved.where(disbursed_at: nil)}
+  scope :only_disbursed, -> {disbursed}
 
   scope :query, ->(term) {select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term))}
   scope :filter_by_params, (lambda do |params|
@@ -259,13 +259,13 @@ class AidApplication < ApplicationRecord
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
-      .where.not(id: aid_application.id)
-      .where('lower(name) = ?', aid_application.name.strip.downcase)
-      .where(
-        birthday: aid_application.birthday,
-        zip_code: aid_application.zip_code.strip
-      )
-      .match_by_address(aid_application)
+        .where.not(id: aid_application.id)
+        .where('lower(name) = ?', aid_application.name.strip.downcase)
+        .where(
+            birthday: aid_application.birthday,
+            zip_code: aid_application.zip_code.strip
+        )
+        .match_by_address(aid_application)
   end
 
   scope :match_by_address, ->(aid_application) do
@@ -458,32 +458,37 @@ class AidApplication < ApplicationRecord
 
   def send_submission_notification
     if sms_consent?
+      text_msg_body = if chir_app?
+                        I18n.t('text_message.chir_app_id', app_id: application_number, locale: locale)
+                      else
+                        I18n.t('text_message.app_id',
+                               app_id: application_number,
+                               contact_information: organization.contact_information,
+                               locale: locale
+                        )
+                      end
+
       ApplicationTexter.with(messageable: self).basic_message(
-        to: phone_number,
-        body: I18n.t('text_message.subscribed', locale: locale),
+          to: phone_number,
+          body: I18n.t('text_message.subscribed', locale: locale),
       ).deliver_later
 
       ApplicationTexter.with(messageable: self).basic_message(
-        to: phone_number,
-        body: I18n.t(
-          'text_message.app_id',
-          app_id: application_number,
-          contact_information: organization.contact_information,
-          locale: locale
-        )
+          to: phone_number,
+          body: text_msg_body
       ).deliver_later
     end
 
     if email_consent?
+      email_body = if chir_app?
+                     I18n.t('email_message.chir_app_id.body_html', app_id: application_number, locale: locale)
+                   else
+                     I18n.t('email_message.app_id.body_html', app_id: application_number, contact_information: organization.contact_information, locale: locale)
+                   end
       ApplicationEmailer.with(messageable: self).basic_message(
-        to: email,
-        subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
-        body: I18n.t(
-          'email_message.app_id.body_html',
-          app_id: application_number,
-          contact_information: organization.contact_information,
-          locale: locale
-        )
+          to: email,
+          subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
+          body: email_body
       ).deliver_later
     end
   end
@@ -601,6 +606,10 @@ class AidApplication < ApplicationRecord
     end
   end
 
+  def chir_app?
+    organization.name == 'Coalition for Humane Immigrant Rights'
+  end
+
   def locale
     case preferred_language
     when "Spanish"
@@ -621,4 +630,5 @@ class AidApplication < ApplicationRecord
       "en"
     end
   end
+
 end

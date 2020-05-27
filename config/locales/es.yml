@@ -276,6 +276,12 @@ es:
         <p>El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.</p>
         <p>Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.</p>
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
+    chir_app_id:
+      body_html: |
+        <p>¡Hola!</p>
+        <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}.</p>
+        <p>Favor de mandar comprobante de identidad, dirección, y como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al docs@chirla.org.</p>
+        <p>- El equipo de DRAI</p>
     app_id:
       body_html: |
         <p>¡Hola!</p>
@@ -332,9 +338,8 @@ es:
   text_message:
     activation: El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.
       Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.
-    app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de
-      identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar
-      documentos, comuníquese con la organización que le asistió al: %{contact_information}'
+    chir_app_id: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}. Favor de mandar comprobante de identidad, dirección, y como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al docs@chirla.org."
+    app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al: %{contact_information}'
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud. Puede obtener más información
