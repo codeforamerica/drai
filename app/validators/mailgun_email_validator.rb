@@ -24,7 +24,7 @@ class MailgunEmailValidator < ActiveModel::EachValidator
 
       response_data = response.parse
       response_data["result"] == 'deliverable'
-    rescue Net::ReadTimeout, Net::OpenTimeout
+    rescue HTTP::TimeoutError, Net::ReadTimeout, Net::OpenTimeout
       Rails.logger.info('Mailgun timed out on this request')
       true
     rescue StandardError => e
