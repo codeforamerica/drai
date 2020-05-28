@@ -367,6 +367,12 @@ en:
         <p>If you have questions about submitting documents, contact the organization that assisted you at: %{contact_information}</p>
         <p>- The DRAI Team</p>
       subject: Assistance application submitted %{app_id}
+    approved:
+      body_html: |
+        <p>Hello!</p>
+        <p>Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.</p>
+        <p>- The DRAI Team</p>
+      subject: Disaster Assistance application approved!
     auto_response:
       body_html: |
         <p>This is an automated response from Code for America Disaster Assistance.</p>
@@ -437,6 +443,7 @@ en:
     app_id: 'Your application for Disaster Assistance has been submitted. Your application
       ID number is %{app_id}. If you have questions about submitting documents, contact
       the organization that assisted you at: %{contact_information}'
+    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.

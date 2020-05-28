@@ -289,6 +289,12 @@ es:
         <p>Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al %{contact_information}</p>
         <p>- El equipo de DRAI</p>
       subject: Solicitud de asistencia entregada %{app_id}
+    approved:
+      body_html: |
+        <p>¡Hola!</p>
+        <p>¡Su solicitud de Asistencia de Desastre fue aprobada! Le avisaremos cuando se le haya asignado su tarjeta.</p>
+        <p>- El equipo de DRAI</p>
+      subject: ¡Su solicitud de Asistencia de Desastre fue aprobada!
     auto_response: body_html:| <p>Esta es una respuesta automatizada de la asistencia
       por desastre de la organización Code for America.</p> <p>Para obtener ayuda
       con su caso, comuníquese con la organización que le ayudó con su solicitud.</p>
@@ -340,6 +346,7 @@ es:
       Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.
     chir_app_id: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}. Favor de mandar comprobante de identidad, dirección, y como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al docs@chirla.org."
     app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al: %{contact_information}'
+    approved: ¡Su solicitud de Asistencia de Desastre fue aprobada! Le avisaremos cuando se le haya asignado su tarjeta.
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud. Puede obtener más información

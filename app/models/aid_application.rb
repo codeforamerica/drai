@@ -485,6 +485,7 @@ class AidApplication < ApplicationRecord
                    else
                      I18n.t('email_message.app_id.body_html', app_id: application_number, contact_information: organization.contact_information, locale: locale)
                    end
+
       ApplicationEmailer.with(messageable: self).basic_message(
           to: email,
           subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
@@ -493,6 +494,25 @@ class AidApplication < ApplicationRecord
     end
   end
 
+  def send_approval_notification
+    if sms_consent?
+      ApplicationTexter.with(messageable: self).basic_message(
+          to: phone_number,
+          body: I18n.t(
+              'text_message.approved',
+              locale: locale
+          )
+      ).deliver_later
+    end
+
+    if email_consent?
+      ApplicationEmailer.with(messageable: self).basic_message(
+          to: email,
+          subject: I18n.t('email_message.approved.subject', locale: locale),
+          body: I18n.t('email_message.approved.body_html', locale: locale)
+      ).deliver_later
+    end
+  end
 
   def send_disbursement_notification
     if sms_consent?

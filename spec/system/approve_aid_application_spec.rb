@@ -52,10 +52,18 @@ describe 'Approve aid application', type: :system do
     end
 
     expect(page).to have_content 'Approve and exit'
-    click_on 'Approve and continue to disbursement'
+    perform_enqueued_jobs do
+      click_on 'Approve and continue to disbursement'
+    end
+
+    open_sms aid_application.phone_number
+    expect(current_sms).to have_content "Your application for Disaster Assistance has been approved"
+
+    open_email aid_application.email
+    expect(current_email).to have_content "Your application for Disaster Assistance has been approved"
 
     aid_application.reload
-    expect(aid_application.approved_at).to be_within(1.second).of(Time.current)
+    expect(aid_application.approved_at).to be_within(2.seconds).of(Time.current)
     expect(aid_application.approver).to eq supervisor
 
     fill_in I18n.t('aid_applications.disbursements.edit.sequence_number'), with: "garbage"
