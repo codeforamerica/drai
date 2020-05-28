@@ -354,6 +354,12 @@ en:
         <p>The activation code for your Disaster Assistance payment card is %{activation_code}.</p>
         <p>When you receive your card, call the number on the back of the card to activate it.</p>
       subject: Disaster Assistance payment card activation code
+    chir_app_id:
+      body_html: |
+        <p>Hello!</p>
+        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}</p>
+        <p>Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org.</p>
+        <p>- The DRAI Team</p>
     app_id:
       body_html: |
         <p>Hello!</p>
@@ -427,6 +433,7 @@ en:
     activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
       When you receive your card, call the number on the back of the card to activate
       it.
+    chir_app_id: "Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}. Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org."
     app_id: 'Your application for Disaster Assistance has been submitted. Your application
       ID number is %{app_id}. If you have questions about submitting documents, contact
       the organization that assisted you at: %{contact_information}'
