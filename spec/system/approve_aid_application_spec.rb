@@ -80,12 +80,11 @@ describe 'Approve aid application', type: :system do
       click_on "Emergency access"
     end
 
+    payment_card.reload
     expect(page).to have_content payment_card.activation_code
 
-    payment_card.reload
-
-    expect(payment_card.aid_application_id).to eq aid_application.id
     expect(payment_card.activation_code).to be_present
+    expect(payment_card.aid_application_id).to eq aid_application.id
 
     aid_application.reload
     expect(aid_application.disbursed_at).to be_within(1.second).of Time.current
