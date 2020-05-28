@@ -76,6 +76,12 @@ describe 'Approve aid application', type: :system do
 
     expect(page).to have_content "Card successfully disbursed"
 
+    accept_alert do
+      click_on "Emergency access"
+    end
+
+    expect(page).to have_content payment_card.activation_code
+
     payment_card.reload
 
     expect(payment_card.aid_application_id).to eq aid_application.id
@@ -97,5 +103,12 @@ describe 'Approve aid application', type: :system do
 
     open_email aid_application.email
     expect(current_email).to have_content payment_card.activation_code
+
+    reveal_activation_code_log = RevealActivationCodeLog.last
+    expect(reveal_activation_code_log).to be_present
+    expect(reveal_activation_code_log).to have_attributes(
+                                            aid_application: aid_application,
+                                            user: supervisor
+                                          )
   end
 end

@@ -58,7 +58,9 @@ Rails.application.routes.draw do
           resource :approval, only: [:edit, :update], path_names: { edit: '' }
           resource :duplicate, only: [:show]
           resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
-          resource :finished, only: [:edit, :update], path_names: { edit: '' }
+          resource :finished, only: [:edit, :update], path_names: { edit: '' } do
+            post 'reveal_activation_code'
+          end
         end
       end
     end
