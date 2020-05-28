@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe Webhooks::TwilioController do
+  let(:twilio_validator) { instance_double(Twilio::Security::RequestValidator, validate: true) }
+
+  before do
+    allow(Twilio::Security::RequestValidator).to receive(:new).and_return(twilio_validator)
+  end
+
   describe '#status' do
     let(:message_id) { 'ABC263609d13d809a13de985cc8fd44fb7' }
     let(:params) do

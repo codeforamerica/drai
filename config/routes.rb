@@ -4,10 +4,11 @@ Rails.application.routes.draw do
 
   namespace :webhooks do
     resource :twilio, controller: :twilio, only: [] do
-      post 'status'
+      post :status
     end
     resource :mailgun, controller: :mailgun, only: [] do
-      post 'status'
+      post :status
+      post :inbound
     end
   end
 
