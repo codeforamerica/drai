@@ -394,7 +394,7 @@ RSpec.describe AidApplication, type: :model do
         extra_white_space_in_fields_aid_application = create :aid_application, :submitted, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}", apartment_number: apartment_number
         different_cases_aid_application = create :aid_application, :submitted, name: name.upcase, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
 
-        expect(AidApplication.matching_submitted_apps(aid_application)).to eq [duplicate_aid_application, extra_white_space_in_fields_aid_application, different_cases_aid_application]
+        expect(AidApplication.matching_submitted_apps(aid_application)).to contain_exactly(duplicate_aid_application, extra_white_space_in_fields_aid_application, different_cases_aid_application)
       end
     end
 
