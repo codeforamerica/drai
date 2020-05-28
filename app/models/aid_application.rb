@@ -457,13 +457,28 @@ class AidApplication < ApplicationRecord
   end
 
   def send_submission_notification
+    contact_information = if organization.contact_information.include?('/')
+                            contacts_by_county = organization.contact_information
+                                                     .split('/')
+                                                     .each_with_object({}) do |county_info, obj|
+                              matches = county_info.match(/(.*) County\: (.*)/)
+                              county_name = matches[1].strip
+                              phone_number = matches[2].strip
+
+                              obj[county_name] = phone_number
+                            end
+
+                            contacts_by_county[county_name]
+                          else
+                            organization.contact_information
+                          end
     if sms_consent?
       text_msg_body = if chir_app?
                         I18n.t('text_message.chir_app_id', app_id: application_number, locale: locale)
                       else
                         I18n.t('text_message.app_id',
                                app_id: application_number,
-                               contact_information: organization.contact_information,
+                               contact_information: contact_information,
                                locale: locale
                         )
                       end
@@ -483,7 +498,7 @@ class AidApplication < ApplicationRecord
       email_body = if chir_app?
                      I18n.t('email_message.chir_app_id.body_html', app_id: application_number, locale: locale)
                    else
-                     I18n.t('email_message.app_id.body_html', app_id: application_number, contact_information: organization.contact_information, locale: locale)
+                     I18n.t('email_message.app_id.body_html', app_id: application_number, contact_information: contact_information, locale: locale)
                    end
 
       ApplicationEmailer.with(messageable: self).basic_message(
