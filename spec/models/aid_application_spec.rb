@@ -36,10 +36,10 @@ RSpec.describe AidApplication, type: :model do
   end
 
   describe '.filter_by_params' do
-    let(:assister) { create :assister }
-    let!(:disbursed_app) { create :aid_application, :disbursed, creator: assister }
-    let!(:approved_app) { create :aid_application, :approved, creator: assister }
-    let!(:submitted_app) { create :aid_application, :submitted, creator: assister, phone_number: "1112223333" }
+    let(:assister) {create :assister}
+    let!(:disbursed_app) {create :aid_application, :disbursed, creator: assister}
+    let!(:approved_app) {create :aid_application, :approved, creator: assister}
+    let!(:submitted_app) {create :aid_application, :submitted, creator: assister, phone_number: "1112223333"}
 
     before do
       AidApplicationSearch.refresh
@@ -66,7 +66,7 @@ RSpec.describe AidApplication, type: :model do
     end
 
     it 'searches by phone number' do
-      expect(described_class.filter_by_params({ q: "(111) 222-3333" })).to eq([submitted_app])
+      expect(described_class.filter_by_params({q: "(111) 222-3333"})).to eq([submitted_app])
     end
 
     it 'filters by search and status' do
@@ -594,6 +594,36 @@ RSpec.describe AidApplication, type: :model do
                      )
         end
       end
+
+      context 'when app is submitted by a multi-county organization' do
+        let!(:organization) {create :organization, county_names: ['San Francisco', 'Alameda'], contact_information: "San Francisco County: 555-555-5555 / Alameda County: 444-444-4444" }
+        let!(:assister) {create :assister, organization: organization}
+        let(:aid_application) {create :aid_application, :submitted, email_consent: false, creator: assister}
+
+        it 'sends submission message with county-specific phone number' do
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationTexter", "basic_message", "deliver_now",
+                           params: {messageable: aid_application},
+                           args: [{
+                                      to: aid_application.phone_number,
+                                      body: I18n.t('text_message.subscribed', locale: 'en')
+                                  }]
+                     )
+
+          expect do
+            aid_application.send_submission_notification
+          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                     .with("ApplicationTexter", "basic_message", "deliver_now",
+                           params: {messageable: aid_application},
+                           args: [{
+                                      to: aid_application.phone_number,
+                                      body: I18n.t('text_message.app_id', app_id: aid_application.application_number, contact_information: '555-555-5555', locale: 'en')
+                                  }]
+                     )
+        end
+      end
     end
 
     context 'when email consent' do
@@ -650,9 +680,9 @@ RSpec.describe AidApplication, type: :model do
           end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", "basic_message", "deliver_now",
                                                                        params: {messageable: aid_application},
                                                                        args: [{
-                                                                                to: aid_application.email,
-                                                                                subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                                                                body: I18n.t('email_message.chir_app_id.body_html', app_id: aid_application.application_number, locale: 'en')
+                                                                                  to: aid_application.email,
+                                                                                  subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
+                                                                                  body: I18n.t('email_message.chir_app_id.body_html', app_id: aid_application.application_number, locale: 'en')
                                                                               }]
           )
         end
