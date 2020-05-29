@@ -83,4 +83,32 @@ class Organization < ApplicationRecord
   def rejected_aid_applications_count
     @rejected_aid_applications_count ||= attributes["rejected_aid_applications_count"] || aid_applications.only_rejected.count
   end
+  
+  def counts_by_county
+    return @_counts_by_county if @_counts_by_county
+
+    raw_counts = {
+      total: aid_applications.submitted.group(:county_name).count,
+      submitted: aid_applications.only_submitted.group(:county_name).count,
+      approved: aid_applications.only_approved.group(:county_name).count,
+      disbursed: aid_applications.only_disbursed.group(:county_name).count,
+    }
+
+    by_counties = {}
+    raw_counts.each do |type, counties|
+      counties.each do |county, count|
+        by_counties[county] ||= {}
+        by_counties[county][type] = count
+      end
+    end
+
+    # Zero out any missing types
+    by_counties.each do |_county, counts|
+      raw_counts.each do |type, _|
+        counts[type] ||= 0
+      end
+    end
+
+    @_counts_by_county = by_counties.sort.to_h
+  end
 end

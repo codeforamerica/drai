@@ -103,7 +103,7 @@ describe AidApplications::ApplicantsController do
     end
 
     context 'when submit form action' do
-      let!(:aid_application_attributes) {attributes_for(:aid_application, organization: nil, creator: nil)}
+      let!(:aid_application_attributes) { attributes_for(:aid_application, creator: assister) }
       it 'submits the application' do
 
         expect do

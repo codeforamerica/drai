@@ -70,6 +70,37 @@
       </div>
     </div>
 
+    <% if current_organization.counts_by_county.size > 1 %>
+      <div class="grid__item width-one-whole">
+        <div class="statistic-card">
+          <div>
+            <table class="data-table">
+              <thead>
+              <tr>
+                <th>County</th>
+                <th>Submitted</th>
+                <th>Approved</th>
+                <th>Disbursed</th>
+                <th>Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% current_organization.counts_by_county.each do |county, counts| %>
+                <tr id="<%="#{county}-#{county.length}"%>">
+                  <td><%= county %></td>
+                  <td><%= counts[:submitted] %></td>
+                  <td><%= counts[:approved] %></td>
+                  <td><%= counts[:disbursed] %></td>
+                  <td><%= counts[:total] %></td>
+                </tr>
+              <% end %>
+              </tbody>
+              <tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

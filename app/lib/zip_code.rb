@@ -7,6 +7,12 @@ class ZipCode
     @csv_data ||= CSV.read(DATA_CSV_PATH, headers: true)
   end
 
+  def self.from_county(county_name)
+    fips_code = FIPS_CODE_TO_COUNTY.find { |_fips_code, fips_county| fips_county == county_name }&.first
+    return unless fips_code
+    csv_data.select { |row| row["county_fips_code"] == fips_code }.map { |row| row["zip_code"] }
+  end
+
   def initialize(code)
     @code = code.to_s
   end
