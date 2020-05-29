@@ -1,10 +1,10 @@
 <% content = capture_form do |f| %>
-  <%= f.cfa_input_field(:name, t('.name'), classes: ["form-width--med"]) %>
-  <%= f.cfa_input_field(:password, I18n.t('account.setups.edit.password'), type: "password", classes: ["form-width--med"], help_text: I18n.t('shared.password_help')) %>
+  <%= f.cfa_input_field(:name, t('account.setups.edit.name'), classes: ["form-width--med"]) %>
+  <%= f.cfa_input_field(:password, t('account.setups.edit.password'), type: "password", classes: ["form-width--med"], help_text: t('shared.password_help')) %>
 <% end %>
 
 <% footer = capture_form do |f| %>
-  <%= f.cfa_button I18n.t('account.setups.edit.set_up_account') %>
+  <%= f.cfa_button t('account.setups.edit.set_up_account') %>
 <% end %>
 
 <%= render 'shared/form_card',

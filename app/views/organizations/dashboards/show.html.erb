@@ -17,8 +17,8 @@
       <div class="statistic-card">
         <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter current_organization.total_payment_cards_count - current_organization.total_aid_applications_count %>
-          <small style="font-size: 14px;"> / <%= number_with_delimiter current_organization.total_payment_cards_count %></small>
+          <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.total_aid_applications_count, locale: :en) %>
+          <small style="font-size: 14px;"> / <%= number_with_delimiter(current_organization.total_payment_cards_count, locale: :en) %></small>
         </p>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="statistic-card">
         <p class="statistic-card__label">Committed Cards <br>(Submitted + Approved)</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count %>
+          <%= number_with_delimiter(current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count, locale: :en) %>
           <small style="font-size: 14px">&nbsp;</small>
         </p>
       </div>
@@ -49,7 +49,7 @@
       <div class="statistic-card">
         <p class="statistic-card__label">Submitted pending Approval</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter current_organization.submitted_aid_applications_count %>
+          <%= number_with_delimiter(current_organization.submitted_aid_applications_count, locale: :en) %>
         </p>
       </div>
     </div>
@@ -57,7 +57,7 @@
       <div class="statistic-card">
         <p class="statistic-card__label">Approved pending Disbursement</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter current_organization.approved_aid_applications_count %>
+          <%= number_with_delimiter(current_organization.approved_aid_applications_count, locale: :en) %>
         </p>
       </div>
     </div>

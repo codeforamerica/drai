@@ -1,12 +1,12 @@
 <% content = capture_form do |f| %>
-  <%= f.cfa_input_field(:current_password, I18n.t('account.accounts.edit.current_password'), type: "password", classes: ["form-width--med"]) %>
+  <%= f.cfa_input_field(:current_password, t('account.accounts.edit.current_password'), type: "password", classes: ["form-width--med"]) %>
 
-  <%= f.cfa_input_field(:password, I18n.t('account.accounts.edit.new_password'), type: "password", classes: ["form-width--med"], help_text: I18n.t('shared.password_help')) %>
-  <%= f.cfa_input_field(:password_confirmation, I18n.t('account.accounts.edit.password_confirmation'), type: "password", classes: ["form-width--med"]) %>
+  <%= f.cfa_input_field(:password, t('account.accounts.edit.new_password'), type: "password", classes: ["form-width--med"], help_text: t('shared.password_help')) %>
+  <%= f.cfa_input_field(:password_confirmation, t('account.accounts.edit.password_confirmation'), type: "password", classes: ["form-width--med"]) %>
 <% end %>
 
 <% footer = capture_form do |f| %>
-  <%= f.cfa_button I18n.t('general.update') %>
+  <%= f.cfa_button t('general.update') %>
 <% end %>
 
 <%= render 'shared/form_card',

@@ -1,6 +1,6 @@
 <%= render 'aid_applications/navigation' %>
 
-<div class="grid__item width-two-thirds shift-one-sixth">
+<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
   <div class="form-card">
     <% if verify_page? %>
       <header class="form-card__header">
@@ -26,8 +26,8 @@
 
         <h2><%= t('.applicant_information.title') %></h2>
         <%= f.cfa_input_field :name, t('.applicant_information.name') %>
-        <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
 
+        <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
         <fieldset>
           <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
           <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>

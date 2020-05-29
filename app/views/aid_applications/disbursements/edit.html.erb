@@ -1,6 +1,6 @@
 <%= render 'aid_applications/navigation' %>
 
-<div class="grid__item width-two-thirds shift-one-sixth">
+<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
   <div class="form-card">
     <header class="form-card__header">
       <h1><%= t('.title') %></h1>

@@ -55,4 +55,14 @@ module ApplicationHelper
     phone_number.match(/(\d{3})(\d{3})(\d{4})/)
       [$1, $2, $3].join("-")
   end
+
+  def translate(key, **options)
+    translation = super(key, **options)
+    if translation.present? && I18n.locale != :en && translation == super(key, **options.merge(locale: :en))
+      "<bdo dir=\"ltr\" class=\"translation-fallback\">#{translation}</bdo>".html_safe
+    else
+      translation
+    end
+  end
+  alias t translate
 end
