@@ -75,5 +75,14 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :homepage_path
+
+  def append_info_to_payload(payload)
+    super
+    payload[:environment] = Rails.env
+    payload[:remote_ip] = request.remote_ip
+    payload[:user_id] = current_user.try(:id) if defined? current_user
+    payload[:organization_id] = current_organization.try(:id) if defined? current_organization
+    payload[:aid_application_id] = current_aid_application.try(:id) if defined? current_aid_application
+  end
 end
 
