@@ -1,26 +1,32 @@
 <%= render 'aid_applications/navigation' %>
 
-<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
+<div class="grid__item width-two-thirds shift-one-sixth" <%= raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
   <div class="form-card">
     <header class="form-card__header">
       <h1><%= t('.title') %></h1>
     </header>
 
-    <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
-      <div class="form-card__content">
+    <div class="form-card__content">
+      <%= form_for(@aid_application, url: { action: :update_contact_information }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
         <fieldset class="form-group group-of-input-fields">
           <legend><h2><%= t('.application_number.message_received') %></h2></legend>
           <p class="text--help"><%= t('.application_number.sent_to', application_number: @aid_application.application_number) %></p>
           <% if @aid_application.sms_consent? %>
-            <%= f.cfa_input_field :phone_number,  t('general.phone_number'), options: { data: { enable_on_change: '#contact-info-button' } } %>
+            <%= f.cfa_input_field :phone_number, t('general.phone_number'), options: { data: { enable_on_change: '#contact-info-button' } } %>
           <% end %>
           <% if @aid_application.email_consent? %>
-            <%= f.cfa_input_field :email,  t('general.email_address'), options: { data: { enable_on_change: '#contact-info-button' } } %>
+            <%= f.cfa_input_field :email, t('general.email_address'), options: { data: { enable_on_change: '#contact-info-button' } } %>
           <% end %>
           <br>
-          <%= f.button t('.application_number.edit_contact'), id: 'contact-info-button', type: 'submit', name: 'form_action', value: 'update_and_resend', class: 'button button--small' %>
+          <%= f.button t('.application_number.edit_contact'), type: 'submit', class: 'button button--small' %>
         </fieldset>
+      <% end %>
+    </div>
 
+    <hr>
+
+    <%= form_for(@aid_application, url: { action: :update }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
         <p class="with-padding-med"><em><%= t('.application_number.confirm') %></em></p>
         <%= f.cfa_checkbox :contact_method_confirmed, t('.application_number.contact_method') %>
 
@@ -37,7 +43,7 @@
           </div>
         </div>
         <div class="accordion">
-          <button href="#" class="accordion__button" aria-expanded="true" aria-controls="document_proof_of_address"><%= t('.verifications.proof_of_address_accordion.title') %></button>
+          <button class="accordion__button" aria-expanded="true" aria-controls="document_proof_of_address"><%= t('.verifications.proof_of_address_accordion.title') %></button>
           <div class="accordion__content" id="document_proof_of_address">
             <p><%= t('.verifications.proof_of_address_accordion.body_html') %></p>
           </div>
@@ -60,17 +66,17 @@
           <li><em><%= t('.next_steps.step5') %></em></li>
         </ol>
 
-          <%= f.cfa_radio_set(
-                  :card_receipt_method,
-                  label_text: t('.receive_card.title'),
-                  help_text: t('.receive_card.subtitle'),
-                  collection: [
-                      {value: AidApplication::CARD_RECEIPT_PICK_UP, label: t('.receive_card.options.pick_up')},
-                      {value: AidApplication::CARD_RECEIPT_DELIVER, label: t('.receive_card.options.deliver')},
-                      {value: AidApplication::CARD_RECEIPT_MAIL, label: t('.receive_card.options.mail')},
-                      {value: AidApplication::CARD_RECEIPT_DECIDE_LATER, label: t('.receive_card.options.decide_later')}
-                  ])
-          %>
+        <%= f.cfa_radio_set(
+              :card_receipt_method,
+              label_text: t('.receive_card.title'),
+              help_text: t('.receive_card.subtitle'),
+              collection: [
+                { value: AidApplication::CARD_RECEIPT_PICK_UP, label: t('.receive_card.options.pick_up') },
+                { value: AidApplication::CARD_RECEIPT_DELIVER, label: t('.receive_card.options.deliver') },
+                { value: AidApplication::CARD_RECEIPT_MAIL, label: t('.receive_card.options.mail') },
+                { value: AidApplication::CARD_RECEIPT_DECIDE_LATER, label: t('.receive_card.options.decide_later') }
+              ])
+        %>
       </div>
 
       <div class="form-card__footer">
