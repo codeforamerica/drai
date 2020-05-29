@@ -79,6 +79,9 @@ describe 'Start aid application', type: :system do
     within_fieldset "How would you like to receive the messages with your Application Number and Activation Code?" do
       check "Text message"
       expect(find_field("Text message", checked: true)).to be_present
+
+      check "Email"
+      expect(find_field("Email", checked: true)).to be_present
     end
 
     within '#preferred-contact-channel__text' do
@@ -110,10 +113,36 @@ describe 'Start aid application', type: :system do
     expect(page).to have_content I18n.t('aid_applications.confirmations.edit.title')
     expect(page).to have_content /APP-/
 
-    check "Contact method confirmed"
+    aid_application = AidApplication.last
 
+    # Expect to receive SMS
+    open_sms aid_application.phone_number
+    expect(current_sms).to have_content aid_application.application_number
+
+    # Expect to receive Email
+    open_email aid_application.email
+    expect(current_email).to have_content aid_application.application_number
+
+    # Update Contact Information as if they did not receive the messages
+    fill_in 'Email', with: ''
+    click_on 'Update and re-send'
+
+    expect(page).to have_content "can't be blank"
+
+    fill_in 'Email', with: "test@example.com"
+    perform_enqueued_jobs do
+      click_on 'Update and re-send'
+    end
+
+    open_email "test@example.com"
+    expect(current_email).to have_content aid_application.application_number
+
+    # Read Verification Documents Section and Confirm Contact Information
     expect(page).to have_content 'Verification documents'
     expect(page).to have_content 'Next Steps'
+
+    check "Contact method confirmed"
+    expect(find_field("Contact method confirmed", checked: true)).to be_present
 
     within_fieldset "How will the applicant get their card?" do
       choose "Mail"
@@ -124,7 +153,7 @@ describe 'Start aid application', type: :system do
 
     expect(page).to have_content 'Start a new application'
 
-    aid_application = AidApplication.last
+    aid_application.reload
     expect(aid_application).to have_attributes(
                                  creator: assister,
                                  organization: assister.organization,
@@ -139,9 +168,9 @@ describe 'Start aid application', type: :system do
                                  mailing_zip_code: "02130",
                                  mailing_state: "Massachusetts",
                                  phone_number: "5555555555",
-                                 email: "example@example.com",
+                                 email: "test@example.com",
                                  sms_consent: true,
-                                 email_consent: false,
+                                 email_consent: true,
                                  receives_calfresh_or_calworks: true,
                                  unmet_childcare: true,
                                  unmet_utilities: true,
@@ -157,11 +186,5 @@ describe 'Start aid application', type: :system do
                                  attestation: true,
                                  contact_method_confirmed: true,
                                )
-
-    open_sms aid_application.phone_number
-    expect(current_sms).to have_content aid_application.application_number
-
-    open_email aid_application.email
-    expect(current_email).to be_nil
   end
 end
