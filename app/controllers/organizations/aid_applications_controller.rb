@@ -6,7 +6,7 @@ module Organizations
       if current_user.supervisor?
         if aid_application.disbursed?
           redirect_to edit_organization_aid_application_finished_path(current_organization, aid_application)
-        elsif aid_application.approved?
+        elsif aid_application.approved? || aid_application.rejected?
           redirect_to edit_organization_aid_application_disbursement_path(current_organization, aid_application)
         else
           redirect_to edit_organization_aid_application_verification_path(current_organization, aid_application)

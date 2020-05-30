@@ -8,10 +8,11 @@ class Organizations::ExportsController < ApplicationController
   def create
     ExportLog.create! organization: current_organization, exporter: current_user
 
-    query = current_organization.aid_applications.submitted
+    query = current_organization.aid_applications.visible
               .joins("left join users submitters ON submitters.id = submitter_id")
               .joins("left join users approvers ON approvers.id = approver_id")
               .joins("left join users disbursers ON disbursers.id = disburser_id")
+              .joins("left join users rejecters ON rejecters.id = rejecter_id")
               .left_joins(:payment_card)
               .select(
                   :application_number,
@@ -19,6 +20,7 @@ class Organizations::ExportsController < ApplicationController
                     (
                       CASE
                       WHEN disbursed_at IS NOT NULL THEN 'disbursed'
+                      WHEN rejected_at IS NOT NULL THEN 'rejected'
                       WHEN approved_at IS NOT NULL THEN 'approved'
                       ELSE 'submitted'
                       END
@@ -42,10 +44,12 @@ class Organizations::ExportsController < ApplicationController
                   "submitters.name AS submitter",
                   "approvers.name AS approver",
                   "disbursers.name AS disburser",
+                  "rejecters.name AS rejecter",
                   "date_trunc('second', submitted_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS submitted_at",
                   "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
                   "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
-              )
+                  "date_trunc('second', rejected_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS rejected_at",
+                  )
     stream_csv_report(query)
   end
 

@@ -6,7 +6,7 @@ module Admin
 
     def index
       @aid_applications = AidApplication.includes(:organization, :creator, :submitter, :approver, :disburser)
-                            .submitted
+                            .visible
                             .filter_by_params(params)
                             .limit(LIMIT)
     end

@@ -55,6 +55,13 @@ FactoryBot.define do
       approved_at { Time.current }
     end
 
+    trait :rejected do
+      submitted
+
+      rejecter { create :supervisor, organization: organization }
+      rejected_at { Time.current }
+    end
+
     trait :disbursed do
       approved
 

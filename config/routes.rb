@@ -58,7 +58,10 @@ Rails.application.routes.draw do
             put 'update_contact_information'
           end
           resource :verification, controller: :applicants, only: [:edit, :update], path_names: { edit: '' }, defaults: { verify: true }
-          resource :approval, only: [:edit, :update], path_names: { edit: '' }
+          resource :approval, only: [:edit], path_names: { edit: '' } do
+            put :approve
+            put :reject
+          end
           resource :duplicate, only: [:show]
           resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
           resource :finished, only: [:edit, :update], path_names: { edit: '' } do

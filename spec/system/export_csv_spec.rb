@@ -7,6 +7,7 @@ describe 'Export CSV', type: :system do
   let!(:submitted_aid_applications) { create_list :aid_application, 2, :submitted, organization: supervisor.organization }
   let!(:approved_aid_applications) { create_list :aid_application, 2, :approved, organization: supervisor.organization }
   let!(:disbursed_aid_applications) { create_list :aid_application, 2, :disbursed, organization: supervisor.organization }
+  let!(:rejected_aid_applications) { create_list :aid_application, 2, :rejected, organization: supervisor.organization }
   let!(:other_aid_applications) { create_list :aid_application, 2, :submitted }
 
   specify do
@@ -21,7 +22,7 @@ describe 'Export CSV', type: :system do
     raw_csv = page.body
     csv = CSV.parse(raw_csv, headers: true)
 
-    expect(csv.size).to eq(6)
+    expect(csv.size).to eq(8)
     expect(csv.map { |r| r['application_number'] }).not_to include(*other_aid_applications.map(&:application_number))
 
     disbursed_app = disbursed_aid_applications.first
@@ -48,9 +49,11 @@ describe 'Export CSV', type: :system do
                                        'submitter' => disbursed_app.submitter.name,
                                        'approver' => disbursed_app.approver.name,
                                        'disburser' => disbursed_app.disburser.name,
+                                       'rejecter' => disbursed_app.rejecter.try(:name),
                                        'submitted_at' => disbursed_app.submitted_at.strftime('%Y-%m-%d %H:%M:%S'),
                                        'approved_at' => disbursed_app.approved_at.strftime('%Y-%m-%d %H:%M:%S'),
                                        'disbursed_at' => disbursed_app.disbursed_at.strftime('%Y-%m-%d %H:%M:%S'),
+                                       'rejected_at' => disbursed_app.rejected_at.try(:strftime, '%Y-%m-%d %H:%M:%S'),
                                      })
 
     export_log = ExportLog.last

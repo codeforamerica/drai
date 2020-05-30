@@ -43,7 +43,7 @@
   <% end %>
 
   <% enable_determination_tab = current_aid_application.submitted? && supervisor_visible? %>
-  <%= link_to organization_aid_application_approval_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_approval_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_determination_tab ? '' : 'disabled'}" do %>
+  <%= link_to edit_organization_aid_application_approval_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(edit_organization_aid_application_approval_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_determination_tab ? '' : 'disabled'}" do %>
     4. Determination
   <% end %>
 

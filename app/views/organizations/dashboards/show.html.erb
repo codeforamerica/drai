@@ -14,7 +14,7 @@
 
   <div class="grid">
     <div class="grid__item width-one-third">
-      <div class="statistic-card">
+      <div class="statistic-card statistics-remaining">
         <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.total_aid_applications_count, locale: :en) %>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="grid__item width-one-third">
-      <div class="statistic-card">
+      <div class="statistic-card statistics-committed">
         <p class="statistic-card__label">Committed Cards <br>(Submitted + Approved)</p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count, locale: :en) %>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="grid__item width-one-third">
-      <div class="statistic-card">
+      <div class="statistic-card statistics-disbursed">
         <p class="statistic-card__label">Disbursed Cards<br>&nbsp;</p>
         <p class="statistic-card__number">
           <%= current_organization.disbursed_aid_applications_count %>
@@ -46,7 +46,7 @@
 
   <div class="grid">
     <div class="grid__item width-one-third">
-      <div class="statistic-card">
+      <div class="statistic-card statistics-submitted">
         <p class="statistic-card__label">Submitted pending Approval</p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.submitted_aid_applications_count, locale: :en) %>
@@ -54,13 +54,22 @@
       </div>
     </div>
     <div class="grid__item width-one-third">
-      <div class="statistic-card">
+      <div class="statistic-card statistics-approved">
         <p class="statistic-card__label">Approved pending Disbursement</p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.approved_aid_applications_count, locale: :en) %>
         </p>
       </div>
     </div>
+    <div class="grid__item width-one-third">
+      <div class="statistic-card statistics-rejected">
+        <p class="statistic-card__label">Rejected</p>
+        <p class="statistic-card__number">
+          <%= number_with_delimiter(current_organization.rejected_aid_applications_count, locale: :en) %>
+        </p>
+      </div>
+    </div>
+
   </div>
 <% end %>
 

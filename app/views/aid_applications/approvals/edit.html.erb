@@ -7,28 +7,40 @@
     </header>
 
     <% if @aid_application.approved? %>
-      <p>Application was approved on <strong><%= @aid_application.approved_at.to_s(:month_day_year) %></strong> by
-        <strong><%= @aid_application.approver.name %></strong>.</p>
+      <p>
+        Application was approved on <strong><%= @aid_application.approved_at.to_s(:month_day_year) %></strong>
+        by <strong><%= @aid_application.approver.name %></strong>.
+      </p>
 
       <% unless @aid_application.disbursed? %>
         <p><%= link_to "Disburse Payment Card", edit_organization_aid_application_disbursement_path(current_organization, @aid_application) %></p>
       <% end %>
+    <% elsif @aid_application.rejected? %>
+      <p>
+        Application was rejected on <strong><%= @aid_application.rejected_at.to_s(:month_day_year) %></strong>
+        by <strong><%= @aid_application.rejecter.name %></strong>.
+      </p>
     <% else %>
-      <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
         <div class="form-card__footer">
-          <p><%= f.button "Approve and exit", type: "submit", name: 'form_action', value: 'approve_and_exit',  class: 'button button--primary' %></p>
-          <p><%= f.button "Approve and continue to disbursement", type: 'submit', name: 'form_action', value: 'submit', class: 'button button--primary' %></p>
+          <%= button_to({ action: :approve },
+                        method: :put,
+                        name: 'form_action',
+                        value: 'approve_and_exit',
+                        class: "button button--primary") { "Approve and exit" } %>
 
+          <%= button_to({ action: :approve },
+                        method: :put,
+                        name: 'form_action',
+                        value: 'submit',
+                        class: "button button--primary") { "Approve and continue to disbursement" } %>
           <br>
           <br>
-          <%= link_to t('general.delete_this_application'),
-                      organization_aid_application_path(current_organization, current_aid_application),
-                      method: :delete,
-                      class: "button button--danger",
-                      data: { confirm: "Are you sure you want to delete this application?" } %>
+
+          <%= button_to({ action: :reject },
+                        method: :put,
+                        class: "button button--danger",
+                        data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
+          <% end %>
         </div>
-        </div>
-      <% end %>
-    <% end %>
     </div>
 </div>
