@@ -3,7 +3,7 @@ module Organizations
     def show
       @aid_applications = current_organization.aid_applications
                             .includes(:organization, :creator, :submitter, :approver, :disburser)
-                            .submitted
+                            .visible
                             .filter_by_params(params)
                             .page(params[:page])
     end

@@ -8,9 +8,9 @@ describe AidApplications::ApprovalsController do
     sign_in supervisor
   end
 
-  describe '#update' do
+  describe '#approve' do
     it 'marks application as approved' do
-      put :update, params: {
+      put :approve, params: {
         aid_application_id: aid_application.id,
         organization_id: supervisor.organization.id
       }
@@ -21,12 +21,34 @@ describe AidApplications::ApprovalsController do
     end
 
     it 'redirects to the disbursements' do
-      put :update, params: {
+      put :approve, params: {
         aid_application_id: aid_application.id,
         organization_id: supervisor.organization.id
       }
 
       expect(response).to redirect_to edit_organization_aid_application_disbursement_path(supervisor.organization, aid_application)
+    end
+  end
+
+  describe '#reject' do
+    it 'marks application as rejected' do
+      put :reject, params: {
+        aid_application_id: aid_application.id,
+        organization_id: supervisor.organization.id
+      }
+
+      aid_application.reload
+      expect(aid_application.rejected_at).to be_within(1.second).of(Time.current)
+      expect(aid_application.rejecter).to eq supervisor
+    end
+
+    it 'redirects to the disbursements' do
+      put :reject, params: {
+        aid_application_id: aid_application.id,
+        organization_id: supervisor.organization.id
+      }
+
+      expect(response).to redirect_to organization_dashboard_path(supervisor.organization)
     end
   end
 end

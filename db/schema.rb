@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_175130) do
+ActiveRecord::Schema.define(version: 2020_05_29_225141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 2020_05_27_175130) do
     t.datetime "disbursed_at"
     t.bigint "disburser_id"
     t.boolean "confirmed_invalid_email"
+    t.datetime "rejected_at"
+    t.bigint "rejecter_id"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_175130) do
     t.index ["organization_id", "disbursed_at"], name: "index_aid_applications_org_id_disbursed_at"
     t.index ["organization_id", "submitted_at", "approved_at"], name: "index_aid_applications_org_id_submitted_at_approved_at"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
+    t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
   end
 
@@ -183,6 +186,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_175130) do
     t.bigint "aid_applications_submitted_count", default: 0, null: false
     t.bigint "aid_applications_approved_count", default: 0, null: false
     t.bigint "aid_applications_disbursed_count", default: 0, null: false
+    t.bigint "aid_applications_rejected_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -207,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_175130) do
   add_foreign_key "aid_applications", "users", column: "approver_id"
   add_foreign_key "aid_applications", "users", column: "creator_id"
   add_foreign_key "aid_applications", "users", column: "disburser_id"
+  add_foreign_key "aid_applications", "users", column: "rejecter_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"

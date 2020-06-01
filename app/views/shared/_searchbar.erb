@@ -28,6 +28,7 @@
               ['Submitted', :submitted],
               ['Approved', :approved],
               ['Disbursed', :disbursed],
+              ['Rejected', :rejected],
           ] %>
           <%= f.select :status, statuses, { selected: params[:status] }, { onchange: 'this.form.submit();', class: ['select__element'] } %>
         </div>

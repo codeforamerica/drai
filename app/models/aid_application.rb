@@ -223,12 +223,17 @@ class AidApplication < ApplicationRecord
 
   has_paper_trail
 
-  scope :submitted, -> {where.not(submitted_at: nil)}
-  scope :approved, -> {where.not(approved_at: nil)}
+  scope :visible, -> {where.not(submitted_at: nil)}
+  scope :submitted, -> {unrejected.where.not(submitted_at: nil)}
+  scope :approved, -> {unrejected.where.not(approved_at: nil)}
   scope :disbursed, -> {where.not(disbursed_at: nil)}
+  scope :rejected, -> {where.not(rejected_at: nil)}
+  scope :unrejected, -> {where(rejected_at: nil)}
+
   scope :only_submitted, -> {submitted.where(approved_at: nil)}
   scope :only_approved, -> {approved.where(disbursed_at: nil)}
   scope :only_disbursed, -> {disbursed}
+  scope :only_rejected, -> {rejected}
 
   scope :query, (lambda do |input|
     potential_phone_number = input.gsub(/\D/, '')
@@ -246,7 +251,7 @@ class AidApplication < ApplicationRecord
       filter_query = filter_query.query(params[:q])
     end
 
-    if params[:status].in? ['submitted', 'approved', 'disbursed']
+    if params[:status].in? ['submitted', 'approved', 'disbursed', 'rejected']
       status = params[:status]
       filter_query = filter_query.send("only_#{status}")
     else
@@ -296,6 +301,8 @@ class AidApplication < ApplicationRecord
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
   belongs_to :approver, class_name: 'User', inverse_of: :aid_applications_approved, counter_cache: :aid_applications_approved_count, optional: :true
   belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
+  belongs_to :rejecter, class_name: 'User', inverse_of: :aid_applications_rejected, counter_cache: :aid_applications_rejected_count, optional: :true
+
   has_one :payment_card
   has_one :aid_application_search
   has_many :message_logs, as: :messageable
@@ -455,6 +462,13 @@ class AidApplication < ApplicationRecord
     save!
   end
 
+  def save_and_reject(rejecter:)
+    self.rejecter = rejecter
+    self.rejected_at = Time.current
+
+    save!
+  end
+
   def generate_application_number
     loop do
       value = "APP-#{organization.id}-#{rand(100..999)}-#{rand(100..999)}"
@@ -573,6 +587,8 @@ class AidApplication < ApplicationRecord
   def status
     if disbursed?
       :disbursed
+    elsif rejected?
+      :rejected
     elsif approved?
       :approved
     elsif submitted?
@@ -587,7 +603,8 @@ class AidApplication < ApplicationRecord
         started: 'Unsubmitted',
         submitted: 'Submitted',
         approved: 'Approved',
-        disbursed: 'Disbursed'
+        disbursed: 'Disbursed',
+        rejected: 'Rejected',
     }.fetch(status)
   end
 
@@ -605,6 +622,10 @@ class AidApplication < ApplicationRecord
 
   def approved?
     approved_at.present?
+  end
+
+  def rejected?
+    rejected_at.present?
   end
 
   def disbursed?

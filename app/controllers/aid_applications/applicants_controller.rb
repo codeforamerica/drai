@@ -70,7 +70,7 @@ module AidApplications
           if params[:form_action] == 'verify_and_exit'
             organization_dashboard_path(current_organization)
           else
-            organization_aid_application_approval_path(current_organization, @aid_application)
+            edit_organization_aid_application_approval_path(current_organization, @aid_application)
           end
         end)
       else
