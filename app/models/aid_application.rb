@@ -230,14 +230,20 @@ class AidApplication < ApplicationRecord
   scope :only_approved, -> {approved.where(disbursed_at: nil)}
   scope :only_disbursed, -> {disbursed}
 
-  scope :query, ->(term) {select('"aid_applications".*').joins(:aid_application_search).merge(AidApplicationSearch.search(term))}
+  scope :query, (lambda do |input|
+    potential_phone_number = input.gsub(/\D/, '')
+    phone_number_search = potential_phone_number.size == 10 && !input.include?('APP-')
+    search_term = phone_number_search ? potential_phone_number : input
+
+    select('"aid_applications".*').joins(:aid_application_search)
+      .merge(AidApplicationSearch.search(search_term, true, 'search_rank'))
+  end)
+
   scope :filter_by_params, (lambda do |params|
     filter_query = self
 
     if params[:q].present?
-      phone_number = params[:q].gsub(/\D/, '')
-      search_term = phone_number.length == 10 ? phone_number : params[:q]
-      filter_query = filter_query.query(search_term)
+      filter_query = filter_query.query(params[:q])
     end
 
     if params[:status].in? ['submitted', 'approved', 'disbursed']
