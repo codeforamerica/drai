@@ -11,7 +11,14 @@
     <div class="form-card__footer">
       <div class="toolbar">
         <div class="toolbar__left">
-          <%= link_to edit_organization_aid_application_applicant_path(current_organization, current_aid_application), class: 'button button--primary' do %>
+          <%
+            go_back_path = if verify_step?
+                             edit_organization_aid_application_verification_path(current_organization, current_aid_application)
+                           else
+                             edit_organization_aid_application_applicant_path(current_organization, current_aid_application)
+                           end
+          %>
+          <%= link_to go_back_path, class: 'button button--primary' do %>
             <span class="icon icon-arrow_back" aria-hidden="true"></span> <%= t('general.go_back') %>
           <% end %>
         </div>

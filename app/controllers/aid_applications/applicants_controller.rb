@@ -16,15 +16,8 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.assign_attributes(aid_application_params)
 
-      app_is_duplicate = AidApplication.matching_submitted_apps(@aid_application).any?
-
-      if params[:form_action] == 'submit' && !app_is_duplicate && !@aid_application.submitted?
-        @aid_application.save_and_submit(submitter: current_user)
-
-        if @aid_application.errors.empty?
-          @aid_application.send_submission_notification
-        end
-      elsif params[:form_action] == 'allow_mailing_address'
+      case params[:form_action]
+      when 'allow_mailing_address'
         @aid_application.allow_mailing_address = true
 
         if @aid_application.submitted?
@@ -33,14 +26,14 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: (lambda do
+        respond_with @aid_application, location: (lambda do
           if verify_page?
             edit_organization_aid_application_verification_path(current_organization, @aid_application, anchor: "mailing-address")
           else
             edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "mailing-address")
           end
         end)
-      elsif params[:form_action] == 'remove_mailing_address'
+      when 'remove_mailing_address'
         @aid_application.assign_attributes(
             allow_mailing_address: false,
             mailing_street_address: nil,
@@ -56,36 +49,59 @@ module AidApplications
           @aid_application.save
         end
 
-        return respond_with @aid_application, location: (lambda do
+        respond_with @aid_application, location: (lambda do
           if verify_page?
             edit_organization_aid_application_verification_path(current_organization, @aid_application, anchor: "address")
           else
             edit_organization_aid_application_applicant_path(current_organization, @aid_application, anchor: "address")
           end
         end)
-      elsif params[:form_action] == 'verify' || params[:form_action] == 'verify_and_exit'
+      when 'submit'
+        if @aid_application.submitted?
+          redirect_to edit_organization_aid_application_confirmation_path(current_organization, @aid_application)
+          return
+        end
+
+        app_is_duplicate_submitted = AidApplication.matching_submitted_apps(@aid_application).any?
+
+        if app_is_duplicate_submitted
+          @aid_application.save
+          respond_with @aid_application, location: -> { organization_aid_application_duplicate_path(current_organization, @aid_application) }
+        else
+          @aid_application.save_and_submit(submitter: current_user)
+          if @aid_application.errors.empty?
+            @aid_application.send_submission_notification
+          end
+
+          respond_with @aid_application, location: -> { edit_organization_aid_application_confirmation_path(current_organization, @aid_application) }
+        end
+      when 'verify', 'verify_and_exit'
         @aid_application.save(context: :submit)
 
-        return respond_with @aid_application, location: (lambda do
+        app_is_duplicate_approved = AidApplication.matching_approved_apps(@aid_application).any?
+        if app_is_duplicate_approved
+          respond_with @aid_application, location: -> { organization_aid_application_duplicate_path(current_organization, @aid_application, verify: true) }
+          return
+        end
+
+        respond_with @aid_application, location: (lambda do
           if params[:form_action] == 'verify_and_exit'
             organization_dashboard_path(current_organization)
           else
             edit_organization_aid_application_approval_path(current_organization, @aid_application)
           end
         end)
-      else
+      else # update
         @aid_application.save(context: :submit)
-      end
 
-      respond_with @aid_application, location: (lambda do
-        if app_is_duplicate
-          organization_aid_application_duplicate_path(current_organization, @aid_application)
-        elsif @aid_application.submitted?
-          edit_organization_aid_application_confirmation_path(current_organization, @aid_application)
-        else
-          edit_organization_aid_application_applicant_path(current_organization, @aid_application)
-        end
-      end)
+        respond_with @aid_application, location: (lambda do
+          if @aid_application.submitted?
+            edit_organization_aid_application_confirmation_path(current_organization, @aid_application)
+          else
+            edit_organization_aid_application_applicant_path(current_organization, @aid_application)
+          end
+        end)
+      end
     end
 
     def aid_application_params
