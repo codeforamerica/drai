@@ -31,4 +31,37 @@ RSpec.describe Organization, type: :model do
       end.to change { organization.reload.versions.count }.by(1)
     end
   end
+
+  describe '#counts_by_county' do
+    let(:organization) { create :organization, county_names: ['San Francisco', 'Marin'] }
+
+    let!(:sf_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:sf_approved) { create_list :aid_application, 3, :approved, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:sf_rejected) { create_list :aid_application, 2, :rejected, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:marin_disbursed) { create_list :aid_application, 3, :disbursed, organization: organization, county_name: 'Marin', zip_code: '94903' }
+    let!(:sm_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Mateo', zip_code: '94401' }
+
+    it 'returns each county with individual counts' do
+      expect(organization.counts_by_county).to eq({
+                                                    "Marin" => {
+                                                      submitted: 0,
+                                                      approved: 0,
+                                                      disbursed: 3,
+                                                      total: 3
+                                                    },
+                                                    "San Francisco" => {
+                                                      submitted: 3,
+                                                      approved: 3,
+                                                      disbursed: 0,
+                                                      total: 6,
+                                                    },
+                                                    "San Mateo" => {
+                                                      submitted: 3,
+                                                      approved: 0,
+                                                      disbursed: 0,
+                                                      total: 3
+                                                    },
+                                                  })
+    end
+  end
 end

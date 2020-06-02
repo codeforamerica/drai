@@ -5,7 +5,7 @@ FactoryBot.define do
   end
 
   factory :eligible_aid_application, parent: :new_aid_application do
-    county_name { organization&.county_names&.first }
+    county_name { organization&.county_names&.sample }
     no_cbo_association { true }
     covid19_reduced_work_hours { true }
     valid_work_authorization { false }
@@ -19,7 +19,7 @@ FactoryBot.define do
 
     street_address { Faker::Address.street_address }
     city { Faker::Address.city }
-    zip_code { '94103' }
+    zip_code { ZipCode.from_county(county_name)&.sample }
 
     allow_mailing_address { true }
     mailing_street_address { Faker::Address.street_address }

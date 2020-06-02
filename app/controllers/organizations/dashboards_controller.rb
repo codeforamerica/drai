@@ -1,7 +1,8 @@
 module Organizations
   class DashboardsController < BaseController
     def show
-      @aid_applications = current_organization.aid_applications
+      @organization = current_organization
+      @aid_applications = @organization.aid_applications
                             .includes(:organization, :creator, :submitter, :approver, :disburser)
                             .visible
                             .filter_by_params(params)

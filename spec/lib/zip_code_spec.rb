@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe ZipCode do
+  describe '.from_county' do
+    it 'returns all zip codes in a county' do
+      zips = ZipCode.from_county('San Francisco')
+      expect(zips).to include '94108'
+      expect(zips.size).to be > 20
+    end
+  end
+
   describe '#counties' do
     let(:result) { described_class.new(input).counties }
 
