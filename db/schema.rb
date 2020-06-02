@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_225141) do
+ActiveRecord::Schema.define(version: 2020_06_01_221428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,8 +223,17 @@ ActiveRecord::Schema.define(version: 2020_05_29_225141) do
 
   create_view "aid_application_searches", materialized: true, sql_definition: <<-SQL
       SELECT aid_applications.id AS aid_application_id,
-      ((((((((((((((aid_applications.id || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) || ' '::text) || (COALESCE(aid_applications.application_number, ''::character varying))::text) AS searchable_data
-     FROM aid_applications
+      ((((((((((((((((((((((((aid_applications.id || ' '::text) || (aid_applications.application_number)::text) || ' '::text) || replace((aid_applications.application_number)::text, 'APP-'::text, ''::text)) || ' '::text) || regexp_replace((aid_applications.application_number)::text, '[^0-9]'::text, ''::text, 'g'::text)) || ' '::text) || COALESCE(aid_applications.name, ''::text)) || ' '::text) ||
+          CASE
+              WHEN (aid_applications.birthday IS NOT NULL) THEN to_char((aid_applications.birthday)::timestamp with time zone, 'MM/DD/YYYY'::text)
+              ELSE ''::text
+          END) || ' '::text) ||
+          CASE
+              WHEN (aid_applications.birthday IS NOT NULL) THEN to_char((aid_applications.birthday)::timestamp with time zone, 'FMMM/FMDD/YYYY'::text)
+              ELSE ''::text
+          END) || ' '::text) || COALESCE(aid_applications.street_address, ''::text)) || ' '::text) || COALESCE(aid_applications.city, ''::text)) || ' '::text) || COALESCE(aid_applications.zip_code, ''::text)) || ' '::text) || COALESCE(aid_applications.email, ''::text)) || ' '::text) || COALESCE(aid_applications.phone_number, ''::text)) || ' '::text) || (COALESCE(payment_cards.sequence_number, ''::character varying))::text) AS searchable_data
+     FROM (aid_applications
+       LEFT JOIN payment_cards ON ((payment_cards.aid_application_id = aid_applications.id)))
     WHERE (aid_applications.application_number IS NOT NULL);
   SQL
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin

@@ -366,13 +366,41 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
-  describe '.search' do
-    it 'performs a scoped query against associated AidApplicationSearch' do
-      aid_application = create :aid_application, :submitted, city: 'Riverside'
-      _other_aid_application = create :aid_application, :submitted, city: 'San Diego'
+  describe '.query' do
+    let!(:aid_application) { create :aid_application, :submitted, city: 'Riverside' }
+    let!(:other_aid_application) { create :aid_application, :submitted, city: 'San Diego' }
 
+    before do
       AidApplicationSearch.refresh
-      expect(described_class.search('Riverside')).to eq [aid_application]
+    end
+
+    it 'performs a scoped query against associated AidApplicationSearch' do
+      expect(described_class.query('Riverside')).to eq [aid_application]
+    end
+
+    it 'can search Aid Applications even if the Index is not refreshed' do
+      another_aid_application = create :aid_application, :submitted, city: 'Riverside'
+      expect(described_class.query(another_aid_application.application_number)).to eq [another_aid_application]
+    end
+
+    it 'allows searching by various formats of Application Number' do
+      another_aid_application = create :aid_application, :submitted, application_number: "APP-1-234-567"
+      AidApplicationSearch.refresh
+      expect(described_class.query("APP 1-234-567")).to eq [another_aid_application]
+      expect(described_class.query("1-234-567")).to eq [another_aid_application]
+      expect(described_class.query("1234567")).to eq [another_aid_application]
+    end
+
+    it 'allow searching by sequence_number' do
+      disbursed_aid_application = create :aid_application, :disbursed
+      AidApplicationSearch.refresh
+      expect(described_class.query(disbursed_aid_application.payment_card.sequence_number)).to eq [disbursed_aid_application]
+    end
+
+    it 'allows searching by birthday' do
+      birthday_aid_application = create :aid_application, :disbursed, birthday: 'February 14, 1980'
+      AidApplicationSearch.refresh
+      expect(described_class.query('2/14/1980')).to eq [birthday_aid_application]
     end
   end
 

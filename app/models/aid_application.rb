@@ -236,12 +236,16 @@ class AidApplication < ApplicationRecord
   scope :only_rejected, -> {rejected}
 
   scope :query, (lambda do |input|
-    potential_phone_number = input.gsub(/\D/, '')
-    phone_number_search = potential_phone_number.size == 10 && !input.include?('APP-')
-    search_term = phone_number_search ? potential_phone_number : input
+    if input.strip.starts_with?('APP-')
+      where(application_number: input)
+    else
+      potential_phone_number = input.gsub(/\D/, '')
+      phone_number_search = potential_phone_number.size == 10
+      search_term = phone_number_search ? potential_phone_number : input
 
-    select('"aid_applications".*').joins(:aid_application_search)
-      .merge(AidApplicationSearch.search(search_term, true, 'search_rank'))
+      select('"aid_applications".*').joins(:aid_application_search)
+        .merge(AidApplicationSearch.search(search_term, true, 'search_rank'))
+    end
   end)
 
   scope :filter_by_params, (lambda do |params|
