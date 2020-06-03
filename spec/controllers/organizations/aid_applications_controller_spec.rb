@@ -54,10 +54,42 @@ describe Organizations::AidApplicationsController, type: :controller do
 
       aid_application = AidApplication.last
       expect(aid_application).to have_attributes(
-                                       creator: assister,
-                                       organization: assister.organization
-                                     )
+                                   creator: assister,
+                                   organization: assister.organization
+                                 )
       expect(response).to redirect_to edit_organization_aid_application_eligibility_path(assister.organization, aid_application)
+    end
+  end
+
+  describe '#destroy' do
+    let(:assister) { create :assister }
+    let!(:aid_application) { create :aid_application, creator: assister }
+
+    before { sign_in assister }
+
+    it 'deletes the aid application' do
+      expect do
+        delete :destroy, params: {
+          organization_id: aid_application.organization.id,
+          id: aid_application.id
+        }
+      end.to change(AidApplication, :count).by(-1)
+
+      expect { aid_application.reload }.to raise_error ActiveRecord::RecordNotFound
+      expect(response).to redirect_to organization_dashboard_path(aid_application.organization)
+    end
+
+    context 'when aid application is disbursed' do
+      let!(:aid_application) { create :aid_application, :disbursed, creator: assister }
+
+      it 'does not allow deletion' do
+        expect do
+          delete :destroy, params: {
+            organization_id: aid_application.organization.id,
+            id: aid_application.id
+          }
+        end.not_to change(AidApplication, :count)
+      end
     end
   end
 end

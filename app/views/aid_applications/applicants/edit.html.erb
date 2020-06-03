@@ -1,6 +1,6 @@
 <%= render 'aid_applications/navigation' %>
 
-<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
+<div class="grid__item width-two-thirds shift-one-sixth" <%= raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
   <div class="form-card">
     <% if verify_page? %>
       <header class="form-card__header">
@@ -16,7 +16,8 @@
       <div class="notice notice--error">
         This site is for demonstration purposes only.
         Do not enter any personal information!
-        If you need to submit an application go to <strong><%= link_to 'ca-drai.org', 'https://www.ca-drai.org' %></strong>.
+        If you need to submit an application go to
+        <strong><%= link_to 'ca-drai.org', 'https://www.ca-drai.org' %></strong>.
       </div>
     <% end %>
 
@@ -27,7 +28,7 @@
         <h2><%= t('.applicant_information.title') %></h2>
         <%= f.cfa_input_field :name, t('.applicant_information.name') %>
 
-        <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY'%>
+        <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY' %>
         <fieldset>
           <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
           <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>
@@ -85,7 +86,7 @@
 
           <div class="question-with-follow-up">
             <div class="question-with-follow-up__question associated-field-to-disable">
-              <%= f.cfa_checkbox(:sms_consent, t('.contact_information.preferred_contact_text'), options: {'data-follow-up' => '#preferred-contact-channel__text'}) %>
+              <%= f.cfa_checkbox(:sms_consent, t('.contact_information.preferred_contact_text'), options: { 'data-follow-up' => '#preferred-contact-channel__text' }) %>
             </div>
             <%= f.cfa_checkbox(:email_consent, t('.contact_information.preferred_contact_email')) %>
 
@@ -117,29 +118,29 @@
         <div class="additional-information-section">
           <h2><%= t('.additional_information.title') %></h2>
           <%= f.cfa_radio_set(
-                  :receives_calfresh_or_calworks,
-                  label_text: t('.additional_information.receives_calfresh_label'),
-                  help_text: t('.additional_information.receives_calfresh_help_text'),
-                  collection: [
-                      {value: true, label: t('general.affirmative')},
-                      {value: false, label: t('general.negative')}
-                  ],
-                  layouts: [:inline]
+                :receives_calfresh_or_calworks,
+                label_text: t('.additional_information.receives_calfresh_label'),
+                help_text: t('.additional_information.receives_calfresh_help_text'),
+                collection: [
+                  { value: true, label: t('general.affirmative') },
+                  { value: false, label: t('general.negative') }
+                ],
+                layouts: [:inline]
               )
           %>
 
           <fieldset class="input-group form-group group-of-individual-fields">
-            <legend class="spacing-below-15"><strong><%= t('.additional_information.unmet_needs_legend') %></strong></legend>
+            <legend class="spacing-below-15"><strong><%= t('.additional_information.unmet_needs_legend') %></strong>
+            </legend>
             <% [
-                   {method: :unmet_food, label: t('.additional_information.unmet_needs_food')},
-                   {method: :unmet_housing, label: t('.additional_information.unmet_needs_housing')},
-                   {method: :unmet_childcare, label: t('.additional_information.unmet_needs_childcare')},
-                   {method: :unmet_utilities, label: t('.additional_information.unmet_needs_utilities')},
-                   {method: :unmet_transportation, label: t('.additional_information.unmet_needs_transportation')},
-                   {method: :unmet_other, label: t('.additional_information.unmet_needs_other')},
-
+                 { method: :unmet_food, label: t('.additional_information.unmet_needs_food') },
+                 { method: :unmet_housing, label: t('.additional_information.unmet_needs_housing') },
+                 { method: :unmet_childcare, label: t('.additional_information.unmet_needs_childcare') },
+                 { method: :unmet_utilities, label: t('.additional_information.unmet_needs_utilities') },
+                 { method: :unmet_transportation, label: t('.additional_information.unmet_needs_transportation') },
+                 { method: :unmet_other, label: t('.additional_information.unmet_needs_other') },
                ].each do |item| %>
-                <%= f.cfa_checkbox(item[:method], item[:label]) %>
+              <%= f.cfa_checkbox(item[:method], item[:label]) %>
             <% end %>
           </fieldset>
 
@@ -154,7 +155,9 @@
       </div>
 
       <div class="form-card__footer">
-        <% if verify_page? %>
+        <% if @aid_application.disbursed? %>
+          <p><em>Aid Applications cannot be modified once they have been disbursed.</em></p>
+        <% elsif verify_page? %>
           <div class="toolbar">
             <div class="toolbar__left">
               <%= f.button t('general.save_and_exit'), type: 'submit', name: 'form_action', value: 'verify_and_exit', class: 'toolbar__item button' %>
@@ -166,11 +169,13 @@
         <% else %>
           <div class="toolbar">
             <div class="toolbar__left">
-              <%= link_to t('general.delete_this_application'),
-                          organization_aid_application_path(current_organization, current_aid_application),
-                          method: :delete,
-                          class: "button button--danger",
-                          data: { confirm: "Are you sure you want to delete this application?" } %>
+              <% unless @aid_application.submitted? %>
+                <%= link_to t('general.delete_this_application'),
+                            organization_aid_application_path(current_organization, current_aid_application),
+                            method: :delete,
+                            class: "button button--danger",
+                            data: { confirm: "Are you sure you want to delete this application?" } %>
+              <% end %>
             </div>
             <div class="toolbar__right">
               <% if @aid_application.submitted? %>
