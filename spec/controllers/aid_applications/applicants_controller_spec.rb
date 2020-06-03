@@ -105,7 +105,6 @@ describe AidApplications::ApplicantsController do
     context 'when submit form action' do
       let!(:aid_application_attributes) { attributes_for(:aid_application, creator: assister) }
       it 'submits the application' do
-
         expect do
           put :update, params: {
             aid_application_id: aid_application.id,
