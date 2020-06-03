@@ -1,78 +1,85 @@
 <%= render 'aid_applications/navigation' %>
 
-<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
+<div class="grid__item width-two-thirds shift-one-sixth" <%= raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
   <div class="form-card">
     <header class="form-card__header">
       <h1><%= t('general.drai_application') %></h1>
     </header>
 
-    <%= form_for(@aid_application, url: {action: :update}, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
-        <div class="form-card__content">
-          <div class="accordion">
-            <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.about_program.about_accordian.title') %></button>
-            <div class="accordion__content" id="about_program">
-              <p><%= t('.about_program.about_accordian.body') %></p>
-            </div>
+    <%= form_for(@aid_application, url: { action: :update }, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <div class="accordion">
+          <button class="accordion__button" aria-expanded="true" aria-controls="about_program"><%= t('.about_program.about_accordian.title') %></button>
+          <div class="accordion__content" id="about_program">
+            <p><%= t('.about_program.about_accordian.body') %></p>
           </div>
-          <hr>
-
-          <h2><%= t('.privacy.title') %></h2>
-          <p class="text--help"><em><%= t('.privacy.help_text') %></em></p>
-          <p><%= t('.privacy.text_part1') %></p>
-          <p><%= t('.privacy.text_part2') %></p>
-          <hr>
-
-          <h2><%= t('.service_criteria.title') %></h2>
-
-          <div class="form-group-with-following-item">
-            <%= f.cfa_select :county_name, t('.service_criteria.county'), @aid_application.organization.county_names + [t('general.none_of_the_above')] %>
-            <div class="form-group-following-item"><%= link_to t('.service_criteria.see_referral_information'), referral_information_path, target: "_blank" %></div>
-          </div>
-
-          <p><%= t('.confirmation.label_text') %></p>
-          <%= f.cfa_checkbox :no_cbo_association, t('general.confirm') %>
-          <hr>
-
-          <h2><%= t('.eligibility.title') %></h2>
-          <%= f.cfa_radio_set(
-                  :valid_work_authorization,
-                  label_text: t('.eligibility.label_text'),
-                  help_text: t('.eligibility.help_text'),
-                  collection: [
-                      {value: true, label: t('general.affirmative')},
-                      {value: false, label: t('general.negative')}
-                  ],
-                  layouts: [:inline]
-              )
-          %>
         </div>
-        <fieldset class="input-group form-group group-of-individual-fields checkbox-subtle-text">
-          <legend class="spacing-below-15"><em><%= t('.eligibility.read_to_client') %></em></legend>
-          <% [
-                 {method: :covid19_reduced_work_hours, label: t('.eligibility.reduced_work_hours') },
-                 {method: :covid19_care_facility_closed, label: t('.eligibility.care_facility_closed')},
-                 {method: :covid19_experiencing_symptoms, label: t('.eligibility.experiencing_symptoms')},
-                 {method: :covid19_underlying_health_condition, label: t('.eligibility.underlying_health_condition')},
-                 {method: :covid19_caregiver, label: t('.eligibility.caregiver')}
-             ].each do |item| %>
-            <%= f.cfa_checkbox(item[:method], item[:label]) %>
-          <% end %>
-        </fieldset>
+        <hr>
 
-        <div class="form-card__footer">
+        <h2><%= t('.privacy.title') %></h2>
+        <p class="text--help"><em><%= t('.privacy.help_text') %></em></p>
+        <p><%= t('.privacy.text_part1') %></p>
+        <p><%= t('.privacy.text_part2') %></p>
+        <hr>
+
+        <h2><%= t('.service_criteria.title') %></h2>
+
+        <div class="form-group-with-following-item">
+          <%= f.cfa_select :county_name, t('.service_criteria.county'), @aid_application.organization.county_names + [t('general.none_of_the_above')] %>
+          <div class="form-group-following-item"><%= link_to t('.service_criteria.see_referral_information'), referral_information_path, target: "_blank" %></div>
+        </div>
+
+        <p><%= t('.confirmation.label_text') %></p>
+        <%= f.cfa_checkbox :no_cbo_association, t('general.confirm') %>
+        <hr>
+
+        <h2><%= t('.eligibility.title') %></h2>
+        <%= f.cfa_radio_set(
+              :valid_work_authorization,
+              label_text: t('.eligibility.label_text'),
+              help_text: t('.eligibility.help_text'),
+              collection: [
+                { value: true, label: t('general.affirmative') },
+                { value: false, label: t('general.negative') }
+              ],
+              layouts: [:inline]
+            )
+        %>
+      </div>
+      <fieldset class="input-group form-group group-of-individual-fields checkbox-subtle-text">
+        <legend class="spacing-below-15"><em><%= t('.eligibility.read_to_client') %></em></legend>
+        <% [
+             { method: :covid19_reduced_work_hours, label: t('.eligibility.reduced_work_hours') },
+             { method: :covid19_care_facility_closed, label: t('.eligibility.care_facility_closed') },
+             { method: :covid19_experiencing_symptoms, label: t('.eligibility.experiencing_symptoms') },
+             { method: :covid19_underlying_health_condition, label: t('.eligibility.underlying_health_condition') },
+             { method: :covid19_caregiver, label: t('.eligibility.caregiver') }
+           ].each do |item| %>
+          <%= f.cfa_checkbox(item[:method], item[:label]) %>
+        <% end %>
+      </fieldset>
+
+      <div class="form-card__footer">
+        <% if @aid_application.disbursed? %>
+          <p><em>Aid Applications cannot be modified once they have been disbursed.</em></p>
+        <% else %>
           <div class="toolbar">
+
             <div class="toolbar__left">
-              <%= link_to t('general.delete_application'),
-                          organization_aid_application_path(current_organization, current_aid_application),
-                          method: :delete,
-                          class: "button button--danger",
-                          data: { confirm: "Are you sure you want to delete this application?" } %>
+              <% unless @aid_application.submitted? %>
+                <%= link_to t('general.delete_application'),
+                            organization_aid_application_path(current_organization, current_aid_application),
+                            method: :delete,
+                            class: "button button--danger",
+                            data: { confirm: "Are you sure you want to delete this application?" } %>
+              <% end %>
             </div>
             <div class="toolbar__right">
               <%= f.button t('general.continue'), type: 'submit', class: 'toolbar__item button button--primary' %>
             </div>
           </div>
-        </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -1,7 +1,9 @@
 module Organizations
   class AidApplicationsController < BaseController
+    before_action :prevent_disbursed_destruction, only: [:destroy]
+
     def show
-      aid_application = current_organization.aid_applications.find(params[:id])
+      aid_application = current_aid_application
 
       if current_user.supervisor?
         if aid_application.disbursed?
@@ -26,15 +28,22 @@ module Organizations
     end
 
     def destroy
-      @aid_application = current_organization.aid_applications.find(params[:id]) if params[:id]
+      @aid_application = current_aid_application
       @aid_application.destroy!
+
       redirect_to organization_dashboard_path(current_organization)
     end
 
     private
 
-    def aid_application_params
-      params.require(:aid_application).permit(:street_address, :city, :zip_code, :phone_number, :email, :name, :birthday)
+    def current_aid_application
+      @_current_aid_application ||= current_organization.aid_applications.find(params[:id]) if params[:id]
+    end
+
+    def prevent_disbursed_destruction
+      return unless current_aid_application.disbursed?
+
+      redirect_to organization_aid_application_path(current_organization, current_aid_application)
     end
   end
 end

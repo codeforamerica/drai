@@ -2,6 +2,7 @@ module AidApplications
   class ApplicantsController < BaseController
     before_action :ensure_eligible
     before_action :ensure_submitted, if: -> { verify_page? }
+    before_action :prevent_disbursed_modification, only: [:update]
 
     def edit
       @aid_application = current_aid_application
@@ -154,5 +155,11 @@ module AidApplications
       params[:verify]
     end
     helper_method :verify_page?
+
+    def prevent_disbursed_modification
+      return unless current_aid_application.disbursed?
+
+      redirect_to organization_aid_application_path(current_organization, current_aid_application)
+    end
   end
 end
