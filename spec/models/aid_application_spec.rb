@@ -626,7 +626,7 @@ RSpec.describe AidApplication, type: :model do
       context 'when app is submitted by a multi-county organization' do
         let!(:organization) {create :organization, county_names: ['San Francisco', 'Alameda'], contact_information: "San Francisco County: 555-555-5555 / Alameda County: 444-444-4444" }
         let!(:assister) {create :assister, organization: organization}
-        let(:aid_application) {create :aid_application, :submitted, email_consent: false, creator: assister}
+        let(:aid_application) {create :aid_application, :submitted, email_consent: false, creator: assister, county_name: 'San Francisco' }
 
         it 'sends submission message with county-specific phone number' do
           expect do
