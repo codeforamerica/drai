@@ -224,15 +224,18 @@ class AidApplication < ApplicationRecord
   has_paper_trail
 
   scope :visible, -> {where.not(submitted_at: nil)}
-  scope :submitted, -> {unrejected.where.not(submitted_at: nil)}
+  scope :submitted, -> {unrejected.unpaused.where.not(submitted_at: nil)}
   scope :approved, -> {unrejected.where.not(approved_at: nil)}
   scope :disbursed, -> {where.not(disbursed_at: nil)}
+  scope :paused, -> {where.not(paused_at: nil)}
+  scope :unpaused, -> {where(paused_at: nil)}
   scope :rejected, -> {where.not(rejected_at: nil)}
   scope :unrejected, -> {where(rejected_at: nil)}
 
   scope :only_submitted, -> {submitted.where(approved_at: nil)}
   scope :only_approved, -> {approved.where(disbursed_at: nil)}
   scope :only_disbursed, -> {disbursed}
+  scope :only_paused, -> {paused}
   scope :only_rejected, -> {rejected}
 
   scope :query, (lambda do |input|
@@ -255,7 +258,7 @@ class AidApplication < ApplicationRecord
       filter_query = filter_query.query(params[:q])
     end
 
-    if params[:status].in? ['submitted', 'approved', 'disbursed', 'rejected']
+    if params[:status].in? ['submitted', 'approved', 'disbursed', 'paused', 'rejected']
       status = params[:status]
       filter_query = filter_query.send("only_#{status}")
     else
@@ -396,6 +399,19 @@ class AidApplication < ApplicationRecord
       while row = conn.get_copy_data
         yield row
       end
+    end
+  end
+
+  def self.delete_stale_and_unsubmitted
+    apps_to_delete = AidApplication.where(submitted_at: nil).where('created_at < ?', 1.day.ago)
+    apps_to_delete.destroy_all
+  end
+
+  def self.pause_stale_and_unapproved
+    AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('submitted_at < ?', 7.days.ago).find_each do |aid_application|
+      aid_application.update!(paused_at: Time.current)
+    rescue => e
+      Raven.capture_exception(e)
     end
   end
 
@@ -593,6 +609,8 @@ class AidApplication < ApplicationRecord
       :disbursed
     elsif rejected?
       :rejected
+    elsif paused?
+      :paused
     elsif approved?
       :approved
     elsif submitted?
@@ -608,6 +626,7 @@ class AidApplication < ApplicationRecord
         submitted: 'Submitted',
         approved: 'Approved',
         disbursed: 'Disbursed',
+        paused: 'Paused',
         rejected: 'Rejected',
     }.fetch(status)
   end
@@ -626,6 +645,10 @@ class AidApplication < ApplicationRecord
 
   def approved?
     approved_at.present?
+  end
+
+  def paused?
+    paused_at.present?
   end
 
   def rejected?

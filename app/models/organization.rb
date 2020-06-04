@@ -26,15 +26,16 @@ class Organization < ApplicationRecord
         WHERE
           organization_id = organizations.id
           AND submitted_at IS NOT NULL
+          AND paused_at IS NULL
           AND rejected_at IS NULL
       ) AS total_aid_applications_count,
-      organizations.*,
       (
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
         WHERE
           organization_id = organizations.id 
           AND submitted_at IS NOT NULL
+          AND paused_at IS NULL
           AND approved_at IS NULL
           AND rejected_at IS NULL
       ) AS submitted_aid_applications_count,
@@ -42,7 +43,15 @@ class Organization < ApplicationRecord
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
         WHERE
-          organization_id = organizations.id 
+          organization_id = organizations.id
+          AND paused_at IS NOT NULL
+          AND rejected_at IS NULL
+      ) AS paused_aid_applications_count,
+      (
+        SELECT COUNT(aid_applications.id)
+        FROM aid_applications
+        WHERE
+          organization_id = organizations.id
           AND approved_at IS NOT NULL
           AND disbursed_at IS NULL
           AND rejected_at IS NULL
@@ -51,7 +60,7 @@ class Organization < ApplicationRecord
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
         WHERE
-          organization_id = organizations.id 
+          organization_id = organizations.id
           AND disbursed_at IS NOT NULL
       ) AS disbursed_aid_applications_count,
       (
@@ -68,22 +77,14 @@ class Organization < ApplicationRecord
     @total_aid_applications_count ||= attributes["total_aid_applications_count"] || aid_applications.submitted.count
   end
 
-  def submitted_aid_applications_count
-    @submitted_aid_applications_count ||= attributes["submitted_aid_applications_count"] || aid_applications.only_submitted.count
+  [:submitted, :approved, :disbursed, :paused, :rejected].each do |status|
+    class_eval <<~RUBY
+      def #{status}_aid_applications_count
+        @#{status}_aid_applications_count ||= attributes["#{status}_aid_applications_count"] || aid_applications.only_#{status}.count
+      end
+    RUBY
   end
 
-  def approved_aid_applications_count
-    @approved_aid_applications_count ||= attributes["approved_aid_applications_count"] || aid_applications.only_approved.count
-  end
-
-  def disbursed_aid_applications_count
-    @disbursed_aid_applications_count ||= attributes["disbursed_aid_applications_count"] || aid_applications.only_disbursed.count
-  end
-
-  def rejected_aid_applications_count
-    @rejected_aid_applications_count ||= attributes["rejected_aid_applications_count"] || aid_applications.only_rejected.count
-  end
-  
   def counts_by_county
     return @_counts_by_county if @_counts_by_county
 
@@ -92,6 +93,8 @@ class Organization < ApplicationRecord
       submitted: aid_applications.only_submitted.group(:county_name).count,
       approved: aid_applications.only_approved.group(:county_name).count,
       disbursed: aid_applications.only_disbursed.group(:county_name).count,
+      paused: aid_applications.only_paused.group(:county_name).count,
+      rejected: aid_applications.only_rejected.group(:county_name).count,
     }
 
     by_counties = {}

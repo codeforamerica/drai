@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_221428) do
+ActiveRecord::Schema.define(version: 2020_06_04_211219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_221428) do
     t.boolean "confirmed_invalid_email"
     t.datetime "rejected_at"
     t.bigint "rejecter_id"
+    t.datetime "paused_at"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"

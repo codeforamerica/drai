@@ -62,6 +62,12 @@ FactoryBot.define do
       rejected_at { Time.current }
     end
 
+    trait :paused do
+      submitted
+
+      paused_at { Time.current }
+    end
+
     trait :disbursed do
       approved
 
