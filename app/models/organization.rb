@@ -15,6 +15,7 @@ class Organization < ApplicationRecord
   has_paper_trail
 
   has_many :users
+  has_many :supervisors, -> { supervisor }, class_name: 'User'
   has_many :aid_applications
 
   scope :with_counts, lambda {

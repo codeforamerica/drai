@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_211219) do
+ActiveRecord::Schema.define(version: 2020_06_05_000158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2020_06_04_211219) do
     t.datetime "rejected_at"
     t.bigint "rejecter_id"
     t.datetime "paused_at"
+    t.datetime "unpaused_at"
+    t.bigint "unpauser_id"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
@@ -78,9 +80,11 @@ ActiveRecord::Schema.define(version: 2020_06_04_211219) do
     t.index ["organization_id", "approved_at", "disbursed_at"], name: "index_aid_applications_org_id_approved_at_disbursed_at"
     t.index ["organization_id", "disbursed_at"], name: "index_aid_applications_org_id_disbursed_at"
     t.index ["organization_id", "submitted_at", "approved_at"], name: "index_aid_applications_org_id_submitted_at_approved_at"
+    t.index ["organization_id", "submitted_at", "paused_at"], name: "index_aid_applications_org_id_submitted_at_paused_at"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
+    t.index ["unpauser_id"], name: "index_aid_applications_on_unpauser_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -188,6 +192,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_211219) do
     t.bigint "aid_applications_approved_count", default: 0, null: false
     t.bigint "aid_applications_disbursed_count", default: 0, null: false
     t.bigint "aid_applications_rejected_count", default: 0, null: false
+    t.bigint "aid_applications_unpaused_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -214,6 +219,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_211219) do
   add_foreign_key "aid_applications", "users", column: "disburser_id"
   add_foreign_key "aid_applications", "users", column: "rejecter_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
+  add_foreign_key "aid_applications", "users", column: "unpauser_id"
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"
   add_foreign_key "payment_cards", "aid_applications"

@@ -64,10 +64,12 @@ class User < ApplicationRecord
   has_many :aid_applications_submitted, class_name: 'AidApplication', inverse_of: :submitter, foreign_key: :submitted_id
   has_many :aid_applications_approved, class_name: 'AidApplication', inverse_of: :approver, foreign_key: :approver_id
   has_many :aid_applications_disbursed, class_name: 'AidApplication', inverse_of: :disburser, foreign_key: :disburser_id
-  has_many :aid_applications_rejected, class_name: 'AidApplication', inverse_of: :rejecter, foreign_key: :disburser_id
+  has_many :aid_applications_unpaused, class_name: 'AidApplication', inverse_of: :unpauser, foreign_key: :unpauser_id
+  has_many :aid_applications_rejected, class_name: 'AidApplication', inverse_of: :rejecter, foreign_key: :rejecter_id
 
   scope :activated, -> { where(deactivated_at: nil) }
   scope :deactivated, -> { where.not(deactivated_at: nil) }
+  scope :supervisor, -> { where(supervisor: true) }
 
   validates :email, presence: true, email: true, uniqueness: { case_sensitive: true }
   validates :password, confirmation: true, format: { with: PASSWORD_REGEX, message: :password_complexity }, if: :password_required?

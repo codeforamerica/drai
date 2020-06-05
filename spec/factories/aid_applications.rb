@@ -13,6 +13,10 @@ FactoryBot.define do
   end
 
   factory :aid_application, parent: :eligible_aid_application do
+    transient do
+      supervisor { organization.supervisors.sample || create(:supervisor, organization: organization) }
+    end
+
     # Application
     name { Faker::Name.name }
     birthday { 'January 1, 1980' }
@@ -51,27 +55,36 @@ FactoryBot.define do
     trait :approved do
       submitted
 
-      approver { create :supervisor, organization: organization }
+      approver { supervisor }
       approved_at { Time.current }
     end
 
     trait :rejected do
       submitted
 
-      rejecter { create :supervisor, organization: organization }
+      rejecter { supervisor }
       rejected_at { Time.current }
     end
 
     trait :paused do
       submitted
 
-      paused_at { Time.current }
+      submitted_at { 10.days.ago }
+      paused_at { submitted_at + 7.days }
+    end
+
+    trait :unpaused do
+      paused
+
+      paused_at { nil }
+      unpaused_at { submitted_at + 8.days }
+      unpauser { supervisor }
     end
 
     trait :disbursed do
       approved
 
-      disburser { create :supervisor, organization: organization }
+      disburser { supervisor }
       disbursed_at { Time.current }
 
       after(:create) do |aid_application, evaluator|

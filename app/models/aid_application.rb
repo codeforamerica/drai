@@ -308,6 +308,7 @@ class AidApplication < ApplicationRecord
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
   belongs_to :approver, class_name: 'User', inverse_of: :aid_applications_approved, counter_cache: :aid_applications_approved_count, optional: :true
   belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
+  belongs_to :unpauser, class_name: 'User', inverse_of: :aid_applications_unpaused, counter_cache: :aid_applications_unpaused_count, optional: :true
   belongs_to :rejecter, class_name: 'User', inverse_of: :aid_applications_rejected, counter_cache: :aid_applications_rejected_count, optional: :true
 
   has_one :payment_card
@@ -408,7 +409,9 @@ class AidApplication < ApplicationRecord
   end
 
   def self.pause_stale_and_unapproved
-    AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('submitted_at < ?', 7.days.ago).find_each do |aid_application|
+    pausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil, unpaused_at: nil).where('submitted_at < ?', 7.days.ago)
+    repausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('unpaused_at < ?', 7.days.ago)
+    pausable.or(repausable).find_each do |aid_application|
       aid_application.update!(paused_at: Time.current)
     rescue => e
       Raven.capture_exception(e)
@@ -476,15 +479,31 @@ class AidApplication < ApplicationRecord
   end
 
   def save_and_approve(approver:)
-    self.approver = approver
-    self.approved_at = Time.current
+    assign_attributes(
+      approved_at: Time.current,
+      approver: approver,
+      paused_at: nil
+    )
 
     save!
   end
 
   def save_and_reject(rejecter:)
-    self.rejecter = rejecter
-    self.rejected_at = Time.current
+    assign_attributes(
+      rejected_at: Time.current,
+      rejecter: rejecter,
+      paused_at: nil
+    )
+
+    save!
+  end
+
+  def save_and_unpause(unpauser:)
+    assign_attributes(
+      paused_at: nil,
+      unpaused_at: Time.current,
+      unpauser: unpauser
+    )
 
     save!
   end
