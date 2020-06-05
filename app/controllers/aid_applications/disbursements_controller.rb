@@ -16,6 +16,8 @@ module AidApplications
     end
 
     def update
+      current_aid_application.update(aid_application_params)
+
       @search_card = SearchCard.new(search_card_params)
 
       payment_card = PaymentCard.find_by(sequence_number: @search_card.sequence_number.strip)
@@ -49,7 +51,11 @@ module AidApplications
     private
 
     def search_card_params
-      params.require(:search_card).permit(:sequence_number)
+      params.require(:search_card).permit(:sequence_number).except(:aid_application)
+    end
+
+    def aid_application_params
+      params.require(:search_card).fetch(:aid_application, {}).permit(:card_receipt_method)
     end
 
     class SearchCard

@@ -66,17 +66,7 @@
           <li><em><%= t('.next_steps.step5') %></em></li>
         </ol>
 
-        <%= f.cfa_radio_set(
-              :card_receipt_method,
-              label_text: t('.receive_card.title'),
-              help_text: t('.receive_card.subtitle'),
-              collection: [
-                { value: AidApplication::CARD_RECEIPT_PICK_UP, label: t('.receive_card.options.pick_up') },
-                { value: AidApplication::CARD_RECEIPT_DELIVER, label: t('.receive_card.options.deliver') },
-                { value: AidApplication::CARD_RECEIPT_MAIL, label: t('.receive_card.options.mail') },
-                { value: AidApplication::CARD_RECEIPT_DECIDE_LATER, label: t('.receive_card.options.decide_later') }
-              ])
-        %>
+        <%= render 'aid_applications/card_receipt_method', f: f, help_text: t('aid_applications.confirmations.edit.receive_card.subtitle') %>
       </div>
 
       <div class="form-card__footer">

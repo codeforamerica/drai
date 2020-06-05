@@ -1,0 +1,18 @@
+<%
+  collection = [
+    { value: AidApplication::CARD_RECEIPT_PICK_UP, label: human_card_receipt_method(AidApplication::CARD_RECEIPT_PICK_UP) },
+    { value: AidApplication::CARD_RECEIPT_DELIVER, label: human_card_receipt_method(AidApplication::CARD_RECEIPT_DELIVER) },
+    { value: AidApplication::CARD_RECEIPT_MAIL, label: human_card_receipt_method(AidApplication::CARD_RECEIPT_MAIL) },
+  ]
+
+  if local_assigns.fetch(:decide_later, true)
+    collection << { value: AidApplication::CARD_RECEIPT_DECIDE_LATER, label: human_card_receipt_method(AidApplication::CARD_RECEIPT_DECIDE_LATER) }
+  end
+%>
+
+<%= f.cfa_radio_set(
+      :card_receipt_method,
+      label_text: t('aid_applications.confirmations.edit.receive_card.title'),
+      help_text: local_assigns[:help_text],
+      collection: collection)
+%>
