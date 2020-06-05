@@ -22,6 +22,7 @@ class Organizations::ExportsController < ApplicationController
                       WHEN disbursed_at IS NOT NULL THEN 'disbursed'
                       WHEN rejected_at IS NOT NULL THEN 'rejected'
                       WHEN approved_at IS NOT NULL THEN 'approved'
+                      WHEN paused_at IS NOT NULL THEN 'paused'
                       ELSE 'submitted'
                       END
                     ) AS status

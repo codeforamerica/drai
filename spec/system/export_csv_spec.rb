@@ -8,6 +8,8 @@ describe 'Export CSV', type: :system do
   let!(:approved_aid_applications) { create_list :aid_application, 2, :approved, organization: supervisor.organization }
   let!(:disbursed_aid_applications) { create_list :aid_application, 2, :disbursed, organization: supervisor.organization }
   let!(:rejected_aid_applications) { create_list :aid_application, 2, :rejected, organization: supervisor.organization }
+  let!(:paused_aid_applications) { create_list :aid_application, 2, :paused, organization: supervisor.organization }
+  let!(:unpaused_aid_applications) { create_list :aid_application, 2, :unpaused, organization: supervisor.organization }
   let!(:other_aid_applications) { create_list :aid_application, 2, :submitted }
 
   specify do
@@ -22,8 +24,17 @@ describe 'Export CSV', type: :system do
     raw_csv = page.body
     csv = CSV.parse(raw_csv, headers: true)
 
-    expect(csv.size).to eq(8)
+    expect(csv.size).to eq(12)
     expect(csv.map { |r| r['application_number'] }).not_to include(*other_aid_applications.map(&:application_number))
+
+    counts_by_status = csv.group_by { |r| r['status'] }.map { |status, rows| [status, rows.size] }.to_h
+    expect(counts_by_status).to eq({
+                              'submitted' => 4,
+                              'approved' => 2,
+                              'disbursed' => 2,
+                              'paused' => 2,
+                              'rejected' => 2,
+                            })
 
     disbursed_app = disbursed_aid_applications.first
     disbursed_row = csv.find { |r| r['application_number'] == disbursed_app.application_number }
