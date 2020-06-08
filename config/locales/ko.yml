@@ -265,8 +265,8 @@ ko:
       subject: '재난 지원(Disaster Assistance) 지급 카드 활성화 코드 '
     app_id:
       body_html: "<p>안녕하세요!</p><p>귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수(ID) 번호는 %{app_id}
-        입니다.</p><p>귀하의 지급 카드를 수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.</p><p>-DRAI (이민자
-        대상 재난구호지원) 팀</p>"
+        입니다.</p><p>귀하의 지급 카드를 수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.</p><p>-DRAI (이민자 대상
+        재난구호지원) 팀</p>"
       subject: 지원 신청서가 접수되었습니다 %{app_id}
     approved:
       body_html: |
@@ -324,7 +324,8 @@ ko:
       입니다. %{ivr_phone_number} 로 전화하여 카드를 활성화하십시오.
     app_id: 귀하의 재정 지원 신청서가 접수되었습니다. 귀하의 신청서 접수 (ID) 번호는 %{app_id} 입니다. 귀하의 지급 카드를
       수령하려면, 이 접수 번호와 귀하의 증빙 서류가 필요합니다.
-    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
+    approved: Your application for Disaster Assistance has been approved! We’ll let
+      you know when your payment card has been assigned to you.
     auto_response: 본 문자는 Code for America (미국을 위한 코드) 재난 지원 (Disaster Assistance)
       에서 발송하는 자동 응답 서비스입니다. 귀하의 신청서문의에 대한 도움이 필요하면 귀하의 신청서 작성에 도움을 주었던 단체에 문의하십시오.
       보다 자세한 내용은 https://ca-drai.org/privacy 를 참조하십시오.

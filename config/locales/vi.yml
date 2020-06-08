@@ -330,7 +330,8 @@ vi:
       kích hoạt thẻ của quý vị.
     app_id: Đơn xin trợ cấp của quý vị đã được nộp. Số hồ sơ đăng ký của quý vị là
       %{app_id}. Quý vị sẽ cần số này và tài liệu xác minh để nhận thẻ trợ cấp.
-    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
+    approved: Your application for Disaster Assistance has been approved! We’ll let
+      you know when your payment card has been assigned to you.
     auto_response: Đây là trả lời tự động từ chương trình Trợ Cấp Thảm Họa Code for
       America. Nếu quý vị cần trợ giúp với hồ sơ của mình, vui lòng liên hệ tổ chức
       mà đã giúp quý vị đăng ký. Tìm hiểu thêm chi tiết tại https://ca-drai.org/vi/privacy.

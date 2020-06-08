@@ -302,6 +302,10 @@ en:
           help_text: A valid document includes a Social Security Number card and a
             work authorization or Employment Authorization Document issued by U.S.
             Citizenship and Immigration Services.
+          immigrant_notice_html: If you have work authorization through a valid DACA
+            or TPS benefit, a visa that gives you permission to work, legal permanent
+            residency (e.g. a green card), or U.S. citizenship, you are <strong>ineligible</strong>
+            for DRAI.
           label_text: Do you currently have a valid document that authorizes you to
             work in the United States?
           read_to_client: Read the following to the applicant. They must meet at least
@@ -354,12 +358,6 @@ en:
         <p>The activation code for your Disaster Assistance payment card is %{activation_code}.</p>
         <p>When you receive your card, call the number on the back of the card to activate it.</p>
       subject: Disaster Assistance payment card activation code
-    chir_app_id:
-      body_html: |
-        <p>Hello!</p>
-        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}</p>
-        <p>Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org.</p>
-        <p>- The DRAI Team</p>
     app_id:
       body_html: |
         <p>Hello!</p>
@@ -378,6 +376,12 @@ en:
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
         <p>For help with your payment card, call 1-877-610-1075.</p>
+    chir_app_id:
+      body_html: |
+        <p>Hello!</p>
+        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}</p>
+        <p>Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org.</p>
+        <p>- The DRAI Team</p>
   flash:
     actions:
       create:
@@ -439,14 +443,17 @@ en:
     activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
       When you receive your card, call the number on the back of the card to activate
       it.
-    chir_app_id: "Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}. Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org."
     app_id: 'Your application for Disaster Assistance has been submitted. Your application
       ID number is %{app_id}. If you have questions about submitting documents, contact
       the organization that assisted you at: %{contact_information}'
-    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
+    approved: Your application for Disaster Assistance has been approved! We’ll let
+      you know when your payment card has been assigned to you.
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.
+    chir_app_id: Your application for Disaster Assistance has been submitted. Your
+      application ID number is %{app_id}. Please email or text proof of Identity,
+      Address, and Hardship documents to docs@chirla.org.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
       More information at https://ca-drai.org/en/privacy. Reply STOP to unsubscribe.
