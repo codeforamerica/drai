@@ -1,2 +1,0 @@
-# Run every minute
-*/1 * * * * bundle exec rake search:refresh

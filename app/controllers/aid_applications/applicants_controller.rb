@@ -105,6 +105,13 @@ module AidApplications
       end
     end
 
+    def unpause
+      @aid_application = current_aid_application
+      @aid_application.save_and_unpause(unpauser: current_user)
+
+      respond_with @aid_application, location: -> { edit_organization_aid_application_verification_path(current_organization, @aid_application) }, notice: "The application has been restarted."
+    end
+
     def aid_application_params
       params.require(:aid_application).permit(
           :street_address,

@@ -1,6 +1,18 @@
 <%= render 'aid_applications/navigation' %>
 
 <div class="grid__item width-two-thirds shift-one-sixth" <%= raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
+  <% if @aid_application.paused? %>
+    <div class="form-card">
+      <div class="notice notice--warning spacing-below-60">
+        This application is paused. The client did not submit their verification documents within the 7 business day window.
+        Restarting the application will reset the 7 day clock.
+      </div>
+      <div class="form-card__footer">
+        <%= button_to({ action: 'unpause' }, method: :put, class: 'button button--primary') { "Restart application" } %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-card">
     <% if verify_page? %>
       <header class="form-card__header">

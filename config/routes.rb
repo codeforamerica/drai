@@ -53,7 +53,9 @@ Rails.application.routes.draw do
       resources :aid_applications, only: [] do
         scope module: :aid_applications do
           resource :eligibility, only: [:edit, :update], path_names: { edit: '' }
-          resource :applicant, only: [:edit, :update], path_names: { edit: '' }, defaults: { verify: false }
+          resource :applicant, only: [:edit, :update], path_names: { edit: '' }, defaults: { verify: false } do
+            put :unpause
+          end
           resource :confirmation, only: [:edit, :update], path_names: { edit: '' } do
             put 'update_contact_information'
           end

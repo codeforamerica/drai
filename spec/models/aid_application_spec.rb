@@ -455,6 +455,35 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '.delete_stale_and_unsubmitted' do
+    it 'deletes unsubmitted aid applications that are more than 24 hours old' do
+      submitted_application = create :aid_application, :submitted
+      approved_application = create :aid_application, :approved
+      disbursed_application = create :aid_application, :disbursed
+      recent_application = create :aid_application, created_at: 1.hour.ago
+      _old_unsubmitted_application = create :aid_application, created_at: 25.hour.ago
+      described_class.delete_stale_and_unsubmitted
+
+      expect(AidApplication.all).to eq [submitted_application, approved_application, disbursed_application, recent_application]
+    end
+  end
+
+  describe '.pause_stale_and_unapproved' do
+    it 'pauses unapproved aid applications that are more than 7 days old' do
+      submitted_application = create :aid_application, :submitted, submitted_at: 6.days.ago
+      approved_application = create :aid_application, :approved
+      disbursed_application = create :aid_application, :disbursed
+      old_unapproved_application = create :aid_application, :submitted, submitted_at: 8.days.ago
+      unpaused_application = create :aid_application, :unpaused, submitted_at: 8.days.ago, unpaused_at: 6.days.ago
+      repaused_application = create :aid_application, :submitted, submitted_at: 8.days.ago, unpaused_at: 8.days.ago
+
+      described_class.pause_stale_and_unapproved
+
+      expect(AidApplication.paused).to contain_exactly(old_unapproved_application, repaused_application)
+      expect(AidApplication.submitted).to contain_exactly(submitted_application, approved_application, disbursed_application, unpaused_application)
+    end
+  end
+
   describe '#disburse' do
     let(:supervisor) {create :supervisor}
     let(:payment_card) {create :payment_card}
