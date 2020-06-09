@@ -44,7 +44,7 @@ FactoryBot.define do
 
     racial_ethnic_identity { [AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS.first] }
 
-    card_receipt_method { 'Mail' }
+    card_receipt_method { AidApplication::CARD_RECEIPT_MAIL }
 
     trait :submitted do
       submitter { creator }

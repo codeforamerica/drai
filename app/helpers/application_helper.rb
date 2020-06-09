@@ -65,4 +65,13 @@ module ApplicationHelper
     end
   end
   alias t translate
+
+  def human_card_receipt_method(key)
+    {
+      AidApplication::CARD_RECEIPT_PICK_UP => t('aid_applications.confirmations.edit.receive_card.options.pick_up'),
+      AidApplication::CARD_RECEIPT_DELIVER => t('aid_applications.confirmations.edit.receive_card.options.deliver'),
+      AidApplication::CARD_RECEIPT_MAIL => t('aid_applications.confirmations.edit.receive_card.options.mail'),
+      AidApplication::CARD_RECEIPT_DECIDE_LATER => t('aid_applications.confirmations.edit.receive_card.options.decide_later')
+    }.fetch(key, key)
+  end
 end

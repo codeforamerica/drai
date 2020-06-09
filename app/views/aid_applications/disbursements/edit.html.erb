@@ -6,6 +6,12 @@
       <h1><%= t('.title') %></h1>
     </header>
 
+    <p><em><%= t('.inform_application') %></em></p>
+    <p><%= t('.activation_trouble') %></p>
+    <p><%= t('.lost_card') %></p>
+
+    <hr>
+
     <%= form_for(@search_card, url: { action: :update }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
         <%= f.cfa_input_field :sequence_number, t('.sequence_number') %>
@@ -18,11 +24,15 @@
             </p>
           </div>
         </div>
-        <hr>
 
-        <p><em><%= t('.inform_application') %></em></p>
-        <p><%= t('.activation_trouble') %></p>
-        <p><%= t('.lost_card') %></p>
+        <br>
+        <br>
+        <% if current_aid_application.card_receipt_method.present? %>
+          <p>The distribution method selected during the initial application was <strong><%= human_card_receipt_method(current_aid_application.card_receipt_method) %></strong>.</p>
+        <% end %>
+        <%= f.fields_for :aid_application, current_aid_application do |ff| %>
+          <%= render 'aid_applications/card_receipt_method', f: ff, decide_later: false %>
+        <% end %>
       </div>
 
       <div class="form-card__footer">
