@@ -19,7 +19,7 @@
 
   <div class="grid">
     <div class="grid__item width-one-third">
-      <div class="statistic-card statistics-remaining">
+      <div class="statistic-card statistics-remaining <% if low_on_cards? %>statistics-card__warning<% end %>">
         <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.total_aid_applications_count, locale: :en) %>
