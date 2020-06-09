@@ -348,6 +348,7 @@ en:
       org: Org
       search_apps: Search applications
       status: Status
+      low_card_warning: You are running low on remaining cards. Once all of the cards are committed, you won’t be able to start new applications.
   email_message:
     activation:
       body_html: |

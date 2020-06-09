@@ -8,6 +8,11 @@
         <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
       <% end %>
     </div>
+    <% if low_on_cards? %>
+      <div class="notice--warning grid__item width-one-half">
+        <p><%=t('aid_applications.index.low_card_warning') %></p>
+      </div>
+    <% end %>
   </div>
 
   <h2 class="spacing-above-25">Dashboard</h2>
