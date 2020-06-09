@@ -400,7 +400,8 @@ tl:
     app_id: Ang iyong aplikasyon para sa tulong pinansiyal ay naisumite. Ang iyong
       numero ng ID sa aplikasyon ay %{app_id}. Kailangan mo ang numero na ito at ang
       iyong beripikasyon na mga dokumentong upang makatanggap ng kabayaran sa kard.
-    approved: Your application for Disaster Assistance has been approved! We’ll let you know when your payment card has been assigned to you.
+    approved: Your application for Disaster Assistance has been approved! We’ll let
+      you know when your payment card has been assigned to you.
     auto_response: Ito ay isang automatikong tugon mula sa Kodigo ng Tulong sa Sakuna
       ng Amerika. Para sa tulong sa iyong kaso, makipag-ugnay sa organisasyon na tumutulong
       sa iyong aplikasyon. Dagdag na impormasyon sa https://ca-drai.org/privacy
