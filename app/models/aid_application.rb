@@ -278,7 +278,7 @@ class AidApplication < ApplicationRecord
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
         .where.not(id: aid_application.id)
-        .where('lower(name) = ?', aid_application.name.strip.downcase)
+        .where("#{normalize_sql('name')} = #{normalize_sql('?')}", aid_application.name)
         .where(
             birthday: aid_application.birthday,
             zip_code: aid_application.zip_code.strip
@@ -293,7 +293,7 @@ class AidApplication < ApplicationRecord
       result = result.where("street_address like ?", "#{street_address_starts_with_number[1]}%")
 
       if aid_application.apartment_number.present?
-        result = result.where('lower(apartment_number) = ?', aid_application.apartment_number.strip.downcase)
+        result = result.where("#{normalize_sql('apartment_number')} = #{normalize_sql('?')}", aid_application.apartment_number)
       end
     end
     result
@@ -401,6 +401,10 @@ class AidApplication < ApplicationRecord
         yield row
       end
     end
+  end
+
+  def self.normalize_sql(value)
+    "regexp_replace(lower(unaccent(trim(regexp_replace(#{value}, '\s+', ' ', 'g')))), '[^A-z0-9 ]', '')"
   end
 
   def self.delete_stale_and_unsubmitted

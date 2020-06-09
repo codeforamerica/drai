@@ -406,6 +406,7 @@ RSpec.describe AidApplication, type: :model do
 
   describe '.matching_submitted_apps' do
     let(:name) {"Fake Name"}
+    let(:same_name) { " Faké,   Name "}
     let(:birthday) {'January 1, 1980'}
     let(:zip_code) {'12345'}
 
@@ -414,7 +415,7 @@ RSpec.describe AidApplication, type: :model do
         street_address = '123 Main St'
         apartment_number = '6'
         aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
-        duplicate_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '123 N Main St', apartment_number: apartment_number
+        duplicate_aid_application = create :aid_application, :submitted, name: same_name, birthday: birthday, zip_code: zip_code, street_address: '123 N Main St', apartment_number: apartment_number
         _unsubmitted_matching_aid_application = create :aid_application, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
         _submitted_street_address_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: '456 Pine 123 St', apartment_number: apartment_number
         _submitted_apartment_does_not_match_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: '14'
@@ -443,14 +444,15 @@ RSpec.describe AidApplication, type: :model do
         birthday = 'January 1, 1980'
         zip_code = '12345'
         street_address = '123 Main St'
-        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
-        duplicate_aid_application = create :aid_application, :approved, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
+        apartment_number = '#1'
+        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        duplicate_aid_application = create :aid_application, :approved, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
         _unapproved_matching_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
         _approved_street_address_does_not_match_aid_application = create :aid_application, :approved, name: name, birthday: birthday, zip_code: zip_code, street_address: 'other street address'
         _approved_name_does_not_match_aid_application = create :aid_application, :approved, name: 'different name', birthday: birthday, zip_code: zip_code, street_address: street_address
-        extra_white_space_in_fields_aid_application = create :aid_application, :approved, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}"
+        extra_white_space_in_fields_aid_application = create :aid_application, :approved, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}", apartment_number: apartment_number
 
-        expect(AidApplication.matching_approved_apps(aid_application)).to eq [duplicate_aid_application, extra_white_space_in_fields_aid_application]
+        expect(AidApplication.matching_approved_apps(aid_application)).to contain_exactly(duplicate_aid_application, extra_white_space_in_fields_aid_application)
       end
     end
   end
