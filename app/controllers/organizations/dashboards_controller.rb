@@ -21,10 +21,8 @@ module Organizations
                      2000
                    when total_cards > 6000
                      1000
-                   when total_cards > 0
-                     500
                    else
-                     0 # TODO: what should happen when total cards are 0?
+                     500
                    end
 
       (total_cards - @organization.total_aid_applications_count) < card_limit
