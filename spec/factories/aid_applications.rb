@@ -69,8 +69,8 @@ FactoryBot.define do
     trait :paused do
       submitted
 
-      submitted_at { 10.days.ago }
-      paused_at { submitted_at + 7.days }
+      submitted_at { 14.days.ago }
+      paused_at { submitted_at + AidApplication::PAUSE_INTERVAL }
     end
 
     trait :unpaused do
