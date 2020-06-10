@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_000158) do
+ActiveRecord::Schema.define(version: 2020_06_09_195004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "aid_applications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_000158) do
     t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
     t.index ["unpauser_id"], name: "index_aid_applications_on_unpauser_id"
+    t.index ["zip_code", "birthday"], name: "index_aid_applications_on_zip_code_and_birthday"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
