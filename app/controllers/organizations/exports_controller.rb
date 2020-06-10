@@ -28,6 +28,7 @@ class Organizations::ExportsController < ApplicationController
                     ) AS status
                   SQL
                   :name,
+                  "to_char(birthday, 'YYYY-MM-DD') AS birthday",
                   :county_name,
                   :phone_number,
                   :email,

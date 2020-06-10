@@ -43,6 +43,7 @@ describe 'Export CSV', type: :system do
                                        'application_number' => disbursed_app.application_number,
                                        'status' => 'disbursed',
                                        'name' => disbursed_app.name,
+                                       'birthday' => disbursed_app.birthday.strftime('%Y-%m-%d'),
                                        'county_name' => disbursed_app.county_name,
                                        "phone_number" => disbursed_app.phone_number,
                                        "email" => disbursed_app.email,
