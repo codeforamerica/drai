@@ -15,6 +15,9 @@ class Seeder
     FactoryBot.create_list :aid_application, 100, :submitted, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 5, creator: assister, organization: organization
 
+    low_card_organization
+    no_card_organization
+
     %w[
       123456
       223456
@@ -100,5 +103,15 @@ class Seeder
 
   def refresh_search_views
     AidApplicationSearch.refresh
+  end
+
+  def low_card_organization
+    org = FactoryBot.create :organization, name: 'Low Card Org', total_payment_cards_count: 10
+    FactoryBot.create_list :aid_application, 9, :submitted, creator: FactoryBot.create(:assister, organization: org)
+  end
+
+  def no_card_organization
+    org = FactoryBot.create :organization, name: 'No Card Org', total_payment_cards_count: 10
+    FactoryBot.create_list :aid_application, 10, :submitted, creator: FactoryBot.create(:assister, organization: org)
   end
 end
