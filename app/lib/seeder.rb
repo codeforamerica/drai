@@ -106,12 +106,12 @@ class Seeder
   end
 
   def low_card_organization
-    org = FactoryBot.create :organization, name: 'Low Card Org', total_payment_cards_count: 10
+    org = FactoryBot.create :organization, name: 'Low-Card Org', total_payment_cards_count: 10
     FactoryBot.create_list :aid_application, 9, :submitted, creator: FactoryBot.create(:assister, organization: org)
   end
 
   def no_card_organization
-    org = FactoryBot.create :organization, name: 'No Card Org', total_payment_cards_count: 10
+    org = FactoryBot.create :organization, name: 'No-Card Org', total_payment_cards_count: 10
     FactoryBot.create_list :aid_application, 10, :submitted, creator: FactoryBot.create(:assister, organization: org)
   end
 end
