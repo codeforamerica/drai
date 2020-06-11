@@ -85,4 +85,20 @@ RSpec.describe 'CBO dashboard', type: :system do
       expect(page).to have_content I18n.t('.aid_applications.index.low_card_warning')
     end
   end
+
+  context 'when there are 0 remaining available cards' do
+    it 'shows a notice' do
+      assister.organization.update(total_payment_cards_count: 2)
+
+      sign_in assister
+      visit root_path
+
+      within '.statistics-remaining' do
+        expect(page).to have_content '0' # remaining
+        expect(page).to have_content '2' # total
+      end
+
+      expect(page).to have_content I18n.t('.aid_applications.index.no_card_warning')
+    end
+  end
 end
