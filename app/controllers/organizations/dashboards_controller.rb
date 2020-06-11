@@ -15,6 +15,7 @@ module Organizations
 
     def low_on_cards?
       total_cards = @organization.total_payment_cards_count
+      remaining_cards = total_cards - @organization.total_aid_applications_count
 
       card_limit = case
                    when total_cards > 11_000
@@ -25,9 +26,14 @@ module Organizations
                      500
                    end
 
-      (total_cards - @organization.total_aid_applications_count) < card_limit
+      (remaining_cards < card_limit) && remaining_cards.positive?
     end
     helper_method :low_on_cards?
+
+    def no_cards?
+      (@organization.total_payment_cards_count - @organization.total_aid_applications_count) <= 0
+    end
+    helper_method :no_cards?
 
   end
 end

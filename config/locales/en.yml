@@ -349,6 +349,7 @@ en:
       search_apps: Search applications
       status: Status
       low_card_warning: You are running low on remaining cards. Once all of the cards are committed, you won’t be able to start new applications.
+      no_card_warning: You have zero remaining cards. You can’t start any new applications unless one of the committed cards is released.
   email_message:
     activation:
       body_html: |
