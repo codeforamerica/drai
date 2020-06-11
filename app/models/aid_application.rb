@@ -69,7 +69,7 @@
 #  fk_rails_...  (submitter_id => users.id)
 #
 class AidApplication < ApplicationRecord
-  READONLY_ONCE_SET = ['application_number', 'submitted_at', 'submitter_id', 'approved_at', 'approver_id']
+  READONLY_ONCE_SET = ['application_number']
   DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
   PREFERRED_LANGUAGE_OPTIONS = [
       'American Sign Language',
