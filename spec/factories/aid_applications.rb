@@ -87,10 +87,7 @@ FactoryBot.define do
       disburser { supervisor }
       disbursed_at { Time.current }
 
-      after(:create) do |aid_application, evaluator|
-        payment_card = create(:payment_card)
-        aid_application.disburse(payment_card, disburser: aid_application.approver)
-      end
+      payment_card { create(:payment_card, :disbursed, aid_application: nil) }
     end
   end
 end
