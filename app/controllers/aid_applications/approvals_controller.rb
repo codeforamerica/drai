@@ -3,6 +3,7 @@ module AidApplications
     before_action :authenticate_supervisor!
     before_action :authenticate_admin!, only: [:unapprove, :unreject]
     before_action :ensure_submitted
+    before_action :prevent_waitlist_approval, only: [:approve]
     before_action :prevent_double_approval, only: [:approve, :reject]
     before_action :prevent_double_rejection, only: [:approve, :reject]
 
@@ -60,6 +61,11 @@ module AidApplications
     end
 
     private
+
+    def prevent_waitlist_approval
+      return unless current_aid_application.waitlisted?
+      redirect_to(action: :edit)
+    end
 
     def prevent_double_approval
       return if current_aid_application.approved_at.blank?

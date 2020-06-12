@@ -232,12 +232,14 @@ class AidApplication < ApplicationRecord
   scope :unpaused, -> {where(paused_at: nil)}
   scope :rejected, -> {where.not(rejected_at: nil)}
   scope :unrejected, -> {where(rejected_at: nil)}
+  scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
 
   scope :only_submitted, -> {submitted.where(approved_at: nil)}
   scope :only_approved, -> {approved.where(disbursed_at: nil)}
   scope :only_disbursed, -> {disbursed}
   scope :only_paused, -> {paused}
   scope :only_rejected, -> {rejected}
+  scope :only_waitlisted, -> {waitlisted}
 
   scope :query, (lambda do |input|
     if input.strip.starts_with?('APP-')
@@ -259,7 +261,7 @@ class AidApplication < ApplicationRecord
       filter_query = filter_query.query(params[:q])
     end
 
-    if params[:status].in? ['submitted', 'approved', 'disbursed', 'paused', 'rejected']
+    if params[:status].in? ['submitted', 'approved', 'disbursed', 'paused', 'rejected', 'waitlisted']
       status = params[:status]
       filter_query = filter_query.send("only_#{status}")
     else
@@ -271,7 +273,12 @@ class AidApplication < ApplicationRecord
     else
       order = 'desc'
     end
-    filter_query = filter_query.order("#{status}_at" => order)
+
+    if status == 'waitlisted'
+      filter_query = filter_query.order("aid_application_waitlists.waitlist_position" => order)
+    else
+      filter_query = filter_query.order("#{status}_at" => order)
+    end
 
     filter_query
   end)
@@ -314,7 +321,10 @@ class AidApplication < ApplicationRecord
 
   has_one :payment_card
   has_one :aid_application_search
+  has_one :aid_application_waitlist
   has_many :message_logs, as: :messageable
+
+  delegate :waitlist_position, to: :aid_application_waitlist, allow_nil: true
 
   enum preferred_contact_channel: {text: "text", voice: "voice", email: "email"}, _prefix: "preferred_contact_channel"
 
@@ -638,6 +648,8 @@ class AidApplication < ApplicationRecord
       :paused
     elsif approved?
       :approved
+    elsif waitlisted?
+      :waitlisted
     elsif submitted?
       :submitted
     else
@@ -653,6 +665,7 @@ class AidApplication < ApplicationRecord
         disbursed: 'Disbursed',
         paused: 'Paused',
         rejected: 'Rejected',
+        waitlisted: "Waitlist ##{waitlist_position}"
     }.fetch(status)
   end
 
@@ -666,6 +679,11 @@ class AidApplication < ApplicationRecord
 
   def submitted?
     submitted_at.present?
+  end
+
+  def waitlisted?
+    return false unless waitlist_position.present?
+    waitlist_position > 0
   end
 
   def approved?

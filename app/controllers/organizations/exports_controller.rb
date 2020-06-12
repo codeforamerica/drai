@@ -13,6 +13,7 @@ class Organizations::ExportsController < ApplicationController
               .joins("left join users approvers ON approvers.id = approver_id")
               .joins("left join users disbursers ON disbursers.id = disburser_id")
               .joins("left join users rejecters ON rejecters.id = rejecter_id")
+              .joins("left join aid_application_waitlists ON aid_application_waitlists.aid_application_id = aid_applications.id")
               .left_joins(:payment_card)
               .select(
                   :application_number,
@@ -23,6 +24,7 @@ class Organizations::ExportsController < ApplicationController
                       WHEN rejected_at IS NOT NULL THEN 'rejected'
                       WHEN approved_at IS NOT NULL THEN 'approved'
                       WHEN paused_at IS NOT NULL THEN 'paused'
+                      WHEN waitlist_position IS NOT NULL then 'waitlisted'
                       ELSE 'submitted'
                       END
                     ) AS status
@@ -43,6 +45,7 @@ class Organizations::ExportsController < ApplicationController
                   :mailing_zip_code,
                   "payment_cards.sequence_number AS payment_card_sequence_number",
                   "card_receipt_method AS preferred_card_receipt_method",
+                  :waitlist_position,
                   "submitters.name AS submitter",
                   "approvers.name AS approver",
                   "disbursers.name AS disburser",

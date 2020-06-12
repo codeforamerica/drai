@@ -23,7 +23,7 @@
           <td><%= organization.submitted_aid_applications_count %></td>
           <td><%= organization.approved_aid_applications_count %></td>
           <td><%= organization.disbursed_aid_applications_count %></td>
-          <td><%= organization.total_payment_cards_count - organization.total_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
+          <td><%= organization.total_payment_cards_count - organization.committed_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
         </tr>
       <% end %>
       </tbody>

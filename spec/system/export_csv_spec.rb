@@ -2,7 +2,8 @@ require 'rails_helper'
 require 'csv'
 
 describe 'Export CSV', type: :system do
-  let(:supervisor) { create :supervisor }
+  let(:organization) { create :organization, total_payment_cards_count: 4 }
+  let(:supervisor) { create :supervisor, organization: organization }
   let!(:unsubmitted_aid_applications) { create_list :aid_application, 2, organization: supervisor.organization }
   let!(:submitted_aid_applications) { create_list :aid_application, 2, :submitted, organization: supervisor.organization }
   let!(:approved_aid_applications) { create_list :aid_application, 2, :approved, organization: supervisor.organization }
@@ -29,12 +30,13 @@ describe 'Export CSV', type: :system do
 
     counts_by_status = csv.group_by { |r| r['status'] }.map { |status, rows| [status, rows.size] }.to_h
     expect(counts_by_status).to eq({
-                              'submitted' => 4,
-                              'approved' => 2,
-                              'disbursed' => 2,
-                              'paused' => 2,
-                              'rejected' => 2,
-                            })
+                                    'waitlisted' => 2,
+                                    'submitted' => 2,
+                                    'approved' => 2,
+                                    'disbursed' => 2,
+                                    'paused' => 2,
+                                    'rejected' => 2,
+                                  })
 
     disbursed_app = disbursed_aid_applications.first
     disbursed_row = csv.find { |r| r['application_number'] == disbursed_app.application_number }
@@ -58,6 +60,7 @@ describe 'Export CSV', type: :system do
                                        "mailing_zip_code" => disbursed_app.mailing_zip_code,
                                        'payment_card_sequence_number' => disbursed_app.payment_card.sequence_number,
                                        'preferred_card_receipt_method' => disbursed_app.card_receipt_method,
+                                       'waitlist_position' => nil,
                                        'submitter' => disbursed_app.submitter.name,
                                        'approver' => disbursed_app.approver.name,
                                        'disburser' => disbursed_app.disburser.name,

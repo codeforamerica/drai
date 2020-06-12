@@ -71,7 +71,7 @@ RSpec.describe 'CBO dashboard', type: :system do
       sign_in assister
       visit root_path
 
-      expect(page).not_to have_content I18n.t('.aid_applications.index.low_card_warning')
+      expect(page).not_to have_content "You are running low on remaining cards"
     end
   end
 
@@ -82,12 +82,15 @@ RSpec.describe 'CBO dashboard', type: :system do
       sign_in assister
       visit root_path
 
-      expect(page).to have_content I18n.t('.aid_applications.index.low_card_warning')
+      expect(page).to have_content "You are running low on remaining cards"
     end
   end
 
   context 'when there are 0 remaining available cards' do
     it 'shows a notice' do
+      assister.organization.aid_applications.destroy_all
+
+      create_list :aid_application, 2, :disbursed, organization: assister.organization
       assister.organization.update(total_payment_cards_count: 2)
 
       sign_in assister
@@ -98,7 +101,7 @@ RSpec.describe 'CBO dashboard', type: :system do
         expect(page).to have_content '2' # total
       end
 
-      expect(page).to have_content I18n.t('.aid_applications.index.no_card_warning')
+      expect(page).to have_content "You have zero remaining cards."
     end
   end
 end
