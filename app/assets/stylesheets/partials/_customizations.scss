@@ -91,3 +91,12 @@
     margin-bottom: $s60;
   }
 }
+
+.statistics-card__warning {
+  border: 1px solid #D13F00;
+  color: #D13F00;
+}
+
+.statistics-card__warning .statistic-card__label{
+  color: #D13F00;
+}
