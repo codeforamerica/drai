@@ -13,4 +13,5 @@ Rails.application.config.filter_parameters += [
   /\Acard_number\z/,
   :password,
   :password_confirmation,
+  :csv_text,
 ]
