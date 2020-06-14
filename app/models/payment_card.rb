@@ -1,7 +1,31 @@
+require 'csv'
+
 class PaymentCard < ApplicationRecord
   has_paper_trail
 
   belongs_to :aid_application, optional: true
+
+  def self.import(csv_text:, quote_number:)
+    if quote_number.blank?
+      raise "Missing Quote Number"
+    end
+
+    csv = CSV.parse(csv_text, headers: true)
+
+    data = csv.map do |row|
+      {
+        quote_number: quote_number,
+        sequence_number: row.fetch("SEQUENCE #"),
+        proxy_number: row["PROXY"] || row["Proxy"] || (raise "missing 'PROXY'"),
+        card_number: row.fetch("CLEANSED PAN"),
+        client_order_number: row["CLIENT ORDER NUMBER"] || row["HAWK MARKETPLACE ORDER NUMBER"] || (raise "missing 'CLIENT ORDER NUMBER'"),
+        created_at: Time.current,
+        updated_at: Time.current,
+      }
+    end
+
+    insert_all(data)
+  end
 
   def generate_activation_code
     rand(100000..999999)

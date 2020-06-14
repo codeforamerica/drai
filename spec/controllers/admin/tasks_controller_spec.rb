@@ -27,4 +27,26 @@ describe Admin::TasksController, type: :controller do
       expect(BlackhawkApi).to have_received(:activate)
     end
   end
+
+  describe '#import_payment_cards' do
+    it 'imports cards' do
+      post :import_payment_cards, params: {
+        import_payment_cards: {
+          quote_number: '555555',
+          csv_text: <<~CSV
+            SEQUENCE #,Proxy,CLEANSED PAN,CLIENT ORDER NUMBER
+            123456,111122223333,9999-XXXX-XXXX-1111,123123
+          CSV
+        }
+      }
+
+      expect(PaymentCard.last).to have_attributes(
+                                    quote_number: '555555',
+                                    sequence_number: '123456',
+                                    proxy_number: '111122223333',
+                                    card_number: '9999-XXXX-XXXX-1111',
+                                    client_order_number: '123123',
+                                  )
+    end
+  end
 end

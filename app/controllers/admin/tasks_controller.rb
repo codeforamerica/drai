@@ -3,6 +3,7 @@ class Admin::TasksController < ApplicationController
 
   before_action do
     @replace_payment_card = ReplacePaymentCard.new
+    @import_payment_cards = ImportPaymentCards.new
   end
 
   def show
@@ -39,6 +40,29 @@ class Admin::TasksController < ApplicationController
     end
   end
 
+  def import_payment_cards
+    import_payment_cards_params = params.require(:import_payment_cards)
+                                    .permit(
+                                      :quote_number,
+                                      :csv_text
+                                    )
+
+    @import_payment_cards.assign_attributes(import_payment_cards_params)
+
+    begin
+      result = PaymentCard.import(quote_number: @import_payment_cards.quote_number, csv_text: @import_payment_cards.csv_text)
+    rescue => error
+      @import_payment_cards.errors.add(:csv_text, error.message)
+    end
+
+    if @import_payment_cards.errors.empty?
+      redirect_to({ action: :show }, notice: "Imported #{result&.rows.size} Payment Cards")
+    else
+      render :show
+    end
+  end
+
+
   class ReplacePaymentCard
     include ActiveModel::Model
     attr_accessor :wrong_sequence_number
@@ -46,6 +70,16 @@ class Admin::TasksController < ApplicationController
 
     def self.model_name
       ActiveModel::Name.new(self, nil, "ReplacePaymentCard")
+    end
+  end
+
+  class ImportPaymentCards
+    include ActiveModel::Model
+    attr_accessor :quote_number
+    attr_accessor :csv_text
+
+    def self.model_name
+      ActiveModel::Name.new(self, nil, "ImportPaymentCards")
     end
   end
 end

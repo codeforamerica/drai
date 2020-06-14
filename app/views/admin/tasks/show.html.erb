@@ -17,4 +17,24 @@
       </div>
     <% end %>
   </div>
+
+  <br>
+  <br>
+
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2>Import Payment Cards</h2>
+    </header>
+
+    <%= form_for(@import_payment_cards, url: { action: :import_payment_cards }, method: :post, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_input_field :quote_number, "Quote Number" %>
+        <%= f.cfa_textarea :csv_text, "CSV Text" %>
+      </div>
+
+      <div class="form-card__footer">
+        <%= f.button 'Import Payment Cards', data: { disable_with: "Please wait..." }, class: 'toolbar__item button button--primary' %>
+      </div>
+    <% end %>
+  </div>
 </div>
