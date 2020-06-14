@@ -11,8 +11,8 @@ module AidApplications
     end
     helper_method :current_aid_application
 
-    def ensure_eligible
-      return if current_aid_application.eligible?
+    def ensure_eligible_or_submitted
+      return if current_aid_application.eligible? || current_aid_application.submitted?
 
       redirect_to edit_organization_aid_application_eligibility_path(current_organization, current_aid_application)
     end

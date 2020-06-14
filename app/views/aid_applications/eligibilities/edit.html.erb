@@ -25,7 +25,7 @@
         <h2><%= t('.service_criteria.title') %></h2>
 
         <div class="form-group-with-following-item">
-          <%= f.cfa_select :county_name, t('.service_criteria.county'), @aid_application.organization.county_names + [t('general.none_of_the_above')] %>
+          <%= render 'aid_applications/county_name', f: f, aid_application: @aid_application %>
           <div class="form-group-following-item"><%= link_to t('.service_criteria.see_referral_information'), referral_information_path, target: "_blank" %></div>
         </div>
 

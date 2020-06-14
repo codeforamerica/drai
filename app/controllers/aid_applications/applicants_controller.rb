@@ -1,6 +1,6 @@
 module AidApplications
   class ApplicantsController < BaseController
-    before_action :ensure_eligible
+    before_action :ensure_eligible_or_submitted
     before_action :ensure_submitted, if: -> { verify_page? }
     before_action :prevent_disbursed_modification, only: [:update]
 
@@ -118,6 +118,7 @@ module AidApplications
           :apartment_number,
           :city,
           :zip_code,
+          :county_name,
           :allow_mailing_address,
           :mailing_street_address,
           :mailing_apartment_number,
