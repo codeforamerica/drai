@@ -1,0 +1,20 @@
+<%= render 'admin/tab_navigation' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth">
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2>Replace Payment Card</h2>
+    </header>
+
+    <%= form_for(@replace_payment_card, url: { action: :replace_payment_card }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_input_field :wrong_sequence_number, "Wrong sequence number" %>
+        <%= f.cfa_input_field :correct_sequence_number, "Correct sequence number" %>
+      </div>
+
+      <div class="form-card__footer">
+        <%= f.button 'Replace Payment Card', data: { disable_with: "Please wait..." }, class: 'toolbar__item button button--primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

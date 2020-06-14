@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       resources :organizations, only: :index
       resources :users, only: :index
       resources :aid_applications, only: :index
+      resource :tasks do
+        put :replace_payment_card
+      end
     end
 
     resources :organizations, only: [] do
