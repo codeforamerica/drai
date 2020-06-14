@@ -21,26 +21,46 @@
         by <strong><%= @aid_application.rejecter.name %></strong>.
       </p>
     <% else %>
-        <div class="form-card__footer">
-          <%= button_to({ action: :approve },
-                        method: :put,
-                        name: 'form_action',
-                        value: 'approve_and_exit',
-                        class: "button button--primary") { "Approve and exit" } %>
+      <div class="form-card__footer">
+        <%= button_to({ action: :approve },
+                      method: :put,
+                      name: 'form_action',
+                      value: 'approve_and_exit',
+                      class: "button button--primary") { "Approve and exit" } %>
 
-          <%= button_to({ action: :approve },
-                        method: :put,
-                        name: 'form_action',
-                        value: 'submit',
-                        class: "button button--primary") { "Approve and continue to disbursement" } %>
-          <br>
-          <br>
+        <%= button_to({ action: :approve },
+                      method: :put,
+                      name: 'form_action',
+                      value: 'submit',
+                      class: "button button--primary") { "Approve and continue to disbursement" } %>
+        <br>
+        <br>
 
-          <%= button_to({ action: :reject },
-                        method: :put,
-                        class: "button button--danger",
-                        data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
-          <% end %>
-        </div>
+        <%= button_to({ action: :reject },
+                      method: :put,
+                      class: "button button--danger",
+                      data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if current_user.admin? && !@aid_application.disbursed? && (@aid_application.approved? || @aid_application.rejected? )  %>
+    <div class="form-card">
+      <p><em>This is only visible to Admins.</em></p>
+
+      <% if @aid_application.approved? %>
+        <%= button_to({ action: :unapprove },
+                      method: :put,
+                      data: { confirm: "Are you sure you want to un-approve this application?" },
+                      class: "button button--danger") { "Un-Approve" } %>
+      <% end %>
+
+      <% if @aid_application.rejected? %>
+        <%= button_to({ action: :unreject },
+                      method: :put,
+                      data: { confirm: "Are you sure you want to un-reject this application?" },
+            class: "button button--danger") { "Un-Reject" } %>
+      <% end %>
     </div>
+  <% end %>
 </div>

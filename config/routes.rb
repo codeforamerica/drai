@@ -63,6 +63,8 @@ Rails.application.routes.draw do
           resource :approval, only: [:edit], path_names: { edit: '' } do
             put :approve
             put :reject
+            put :unapprove
+            put :unreject
           end
           resource :duplicate, only: [:show]
           resource :disbursement, only: [:edit, :update], path_names: { edit: '' }

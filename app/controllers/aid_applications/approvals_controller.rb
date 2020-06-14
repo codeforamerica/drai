@@ -1,6 +1,7 @@
 module AidApplications
   class ApprovalsController < BaseController
     before_action :authenticate_supervisor!
+    before_action :authenticate_admin!, only: [:unapprove, :unreject]
     before_action :ensure_submitted
     before_action :prevent_double_approval, only: [:approve, :reject]
     before_action :prevent_double_rejection, only: [:approve, :reject]
@@ -32,6 +33,30 @@ module AidApplications
       @aid_application.save_and_reject(rejecter: current_user)
 
       respond_with @aid_application, location: organization_dashboard_path(current_organization), notice: "#{@aid_application.application_number} has been approved."
+    end
+
+    def unapprove
+      if current_aid_application.disbursed?
+        return redirect_to(action: :edit)
+      end
+
+      @aid_application = current_aid_application
+      @aid_application.update!(
+        approved_at: nil,
+        approver: nil
+      )
+
+      redirect_to({ action: :edit }, notice: "#{@aid_application.application_number} has been un-approved.")
+    end
+
+    def unreject
+      @aid_application = current_aid_application
+      @aid_application.update!(
+        rejected_at: nil,
+        rejecter: nil
+      )
+
+      redirect_to({ action: :edit }, notice: "#{@aid_application.application_number} has been un-rejected.")
     end
 
     private
