@@ -69,6 +69,7 @@
 #  fk_rails_...  (submitter_id => users.id)
 #
 class AidApplication < ApplicationRecord
+  PAUSE_INTERVAL = 12.days
   READONLY_ONCE_SET = ['application_number']
   DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
   PREFERRED_LANGUAGE_OPTIONS = [
@@ -412,9 +413,10 @@ class AidApplication < ApplicationRecord
     apps_to_delete.destroy_all
   end
 
+
   def self.pause_stale_and_unapproved
-    pausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil, unpaused_at: nil).where('submitted_at < ?', 7.days.ago)
-    repausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('unpaused_at < ?', 7.days.ago)
+    pausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil, unpaused_at: nil).where('submitted_at < ?', PAUSE_INTERVAL.ago)
+    repausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('unpaused_at < ?', PAUSE_INTERVAL.ago)
     pausable.or(repausable).find_each do |aid_application|
       aid_application.update!(paused_at: Time.current)
     rescue => e
