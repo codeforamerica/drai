@@ -59,6 +59,7 @@
           <%= f.cfa_input_field :apartment_number, t('.shared_address.apartment_number') %>
           <%= f.cfa_input_field :city, t('.shared_address.city') %>
           <%= f.cfa_input_field :zip_code, t('.shared_address.zip'), classes: ["form-width--zip"] %>
+          <%= render 'aid_applications/county_name', f: f, aid_application: @aid_application %>
 
           <% unless @aid_application.allow_mailing_address? %>
             <%= f.button type: 'submit', name: 'form_action', value: 'allow_mailing_address', class: 'button button--secondary' do %>

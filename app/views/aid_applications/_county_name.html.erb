@@ -1,0 +1,5 @@
+<%
+  county_names = (aid_application.organization.county_names + [aid_application.county_name, t('general.none_of_the_above')]).compact.uniq
+%>
+
+<%= f.cfa_select :county_name, t('.service_criteria.county'), county_names %>
