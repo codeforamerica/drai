@@ -29,7 +29,7 @@ class Admin::TasksController < ApplicationController
     if correct_payment_card.blank?
       @replace_payment_card.errors.add(:correct_sequence_number, "Payment Card does not exist")
     elsif correct_payment_card.aid_application.present?
-      @replace_payment_card.errors.add(:wrong_sequence_number, "Payment Card has already been disbursed")
+      @replace_payment_card.errors.add(:correct_sequence_number, "Payment Card has already been disbursed")
     end
 
     if @replace_payment_card.errors.empty?
