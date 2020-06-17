@@ -466,7 +466,7 @@ RSpec.describe AidApplication, type: :model do
       _old_unsubmitted_application = create :aid_application, created_at: 25.hour.ago
       described_class.delete_stale_and_unsubmitted
 
-      expect(AidApplication.all).to eq [submitted_application, approved_application, disbursed_application, recent_application]
+      expect(AidApplication.all).to contain_exactly(submitted_application, approved_application, disbursed_application, recent_application)
     end
   end
 

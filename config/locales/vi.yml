@@ -227,6 +227,10 @@ vi:
             trùng với COVID-19 không?
           help_text: Giấy tờ hợp lệ có thể là thẻ An sinh Xã hội và giấy phép làm
             việc hoặc Giấy Phép Làm Việc do Cơ Quan Di Trú Và Nhập Tịch Hoa Kỳ cấp.
+          immigrant_notice_html: 'Nếu quý vị có giấy phép làm việc thông qua phúc
+            lợi DACA hoặc TPS hợp lệ, visa thị thực cho phép quý vị làm việc, thẻ
+            thường trú nhân hợp pháp (ví dụ: thẻ xanh) hoặc quốc tịch Hoa Kỳ, quý
+            vị không đủ điều kiện cho DRAI.'
           label_text: Quý vị hiện có giấy tờ hợp lệ nào mà cho phép quý vị làm việc
             tại Hoa Kỳ không?
           read_to_client: Đọc nội dung sau đây cho đương đơn. Họ phải đáp ứng ít nhất
