@@ -80,6 +80,8 @@ class Organization < ApplicationRecord
     SQL
   }
 
+  validates :slug, uniqueness: true, allow_nil: true
+
   def committed_aid_applications_count
     @total_aid_applications_count ||= attributes["committed_aid_applications_count"] || aid_applications.submitted.count
   end
