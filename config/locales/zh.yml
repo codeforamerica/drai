@@ -212,13 +212,13 @@ zh:
         <p>您的灾难援助申请已批。付款卡的激活码是 %{activation_code}。</p>
         <p>致电 %{ivr_phone_number} 激活付款卡。</p>
       subject: 灾难援助付款卡激活码
-    app_id:
+    application_number:
       body_html: |
         <p>您好！</p>
-        <p>您的经济援助申请已递交。您的申请 ID 号是 %{app_id}。</p>
+        <p>您的经济援助申请已递交。您的申请 ID 号是 %{application_number}。</p>
         <p>需要此号码和验证文件才能领取付款卡。</p>
         <p>- 移民灾难救济援助团队</p>
-      subject: 援助申请已递交 %{app_id}
+      subject: 援助申请已递交 %{application_number}
     auto_response:
       body_html: |
         <p>这是美国代码组织灾害援助的自动回复。</p>
@@ -267,6 +267,8 @@ zh:
     activation: |-
       您的灾难援助申请已批。付款卡的激活码是
       %{activation_code}。致电%{ivr_phone_number} 激活付款卡。
-    app_id: 您的经济援助申请已递交。您的申请 ID 号是 %{app_id}。需要此号码和验证文件才能领取付款卡。
+    application_number: 您的经济援助申请已递交。您的申请 ID 号是 %{application_number}。需要此号码和验证文件才能领取付款卡。
   voice_message:
     auto_response: 这是美国代码组织灾害援助的自动消息。如需申请方面的帮助，请联系协助您申请的组织。如需付款卡方面的帮助，请致电 1-877-610-1075.
+  submission_instructions:
+    default: 您的经济援助申请已递交。您的申请 ID 号是 %{application_number}。需要此号码和验证文件才能领取付款卡。

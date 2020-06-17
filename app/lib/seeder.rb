@@ -19,6 +19,9 @@ class Seeder
     no_card_organization
     waitlisted_organization
 
+    fake_catholic_charities
+    fake_chirla
+
     %w[
       123456
       223456
@@ -120,5 +123,13 @@ class Seeder
   def waitlisted_organization
     org = Organization.find_by(name: 'Waitlisted') || FactoryBot.create(:organization, name: 'Waitlisted', total_payment_cards_count: 10)
     FactoryBot.create_list :aid_application, 13, :submitted, organization: org
+  end
+
+  def fake_catholic_charities
+    Organization.find_by(name: 'Fake Catholic Charities') || FactoryBot.create(:organization, name: 'Fake Catholic Charities', slug: 'catholic', county_names: ['Santa Clara', 'Alameda', 'Contra Costa', 'Marin', 'San Francisco', 'San Mateo'], total_payment_cards_count: 10)
+  end
+
+  def fake_chirla
+    Organization.find_by(name: 'Fake CHIRLA') || FactoryBot.create(:organization, name: 'Fake CHIRLA', slug: 'chirla', county_names: ['Los Angeles'], total_payment_cards_count: 10)
   end
 end

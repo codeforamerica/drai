@@ -149,4 +149,39 @@ class Organization < ApplicationRecord
   def no_cards?
     (total_payment_cards_count - disbursed_aid_applications_count) <= 0
   end
+
+  def contact_information_for_county(county)
+    if contact_information.include?('/')
+      contacts_by_county = contact_information.split('/').each_with_object({}) do |county_info, obj|
+        matches = county_info.match(/(.*) County\: (.*)/)
+        county_name = matches[1].strip
+        phone_number = matches[2].strip
+
+        obj[county_name] = phone_number
+      end
+
+      contacts_by_county[county]
+    else
+      contact_information
+    end
+  end
+
+  def submission_instructions(application_number:, county:, locale: 'en')
+    result = I18n.t("submission_instructions.#{slug}",
+                    application_number: application_number,
+                    deep_interpolation: true,
+                    contact_information: contact_information_for_county(county),
+                    locale: locale,
+                    default: '')
+
+    if result.is_a?(Hash)
+      county_key = county.parameterize(separator: '_').to_sym
+      result = result[county_key].presence || result[:default]
+    end
+
+    result.presence || I18n.t("submission_instructions.default",
+                              application_number: application_number,
+                              contact_information: contact_information_for_county(county),
+                              locale: locale)
+  end
 end

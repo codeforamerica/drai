@@ -358,13 +358,8 @@ en:
         <p>The activation code for your Disaster Assistance payment card is %{activation_code}.</p>
         <p>When you receive your card, call the number on the back of the card to activate it.</p>
       subject: Disaster Assistance payment card activation code
-    app_id:
-      body_html: |
-        <p>Hello!</p>
-        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}.</p>
-        <p>If you have questions about submitting documents, contact the organization that assisted you at: %{contact_information}</p>
-        <p>- The DRAI Team</p>
-      subject: Assistance application submitted %{app_id}
+    application_number:
+      subject: Assistance application submitted %{application_number}
     approved:
       body_html: |
         <p>Hello!</p>
@@ -376,12 +371,6 @@ en:
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
         <p>For help with your payment card, call 1-877-610-1075.</p>
-    chir_app_id:
-      body_html: |
-        <p>Hello!</p>
-        <p>Your application for Disaster Assistance has been submitted. Your application ID number is %{app_id}</p>
-        <p>Please email or text proof of Identity, Address, and Hardship documents to docs@chirla.org.</p>
-        <p>- The DRAI Team</p>
   flash:
     actions:
       create:
@@ -443,17 +432,11 @@ en:
     activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
       When you receive your card, call the number on the back of the card to activate
       it.
-    app_id: 'Your application for Disaster Assistance has been submitted. Your application
-      ID number is %{app_id}. If you have questions about submitting documents, contact
-      the organization that assisted you at: %{contact_information}'
     approved: Your application for Disaster Assistance has been approved! We’ll let
       you know when your payment card has been assigned to you.
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.
-    chir_app_id: Your application for Disaster Assistance has been submitted. Your
-      application ID number is %{app_id}. Please email or text proof of Identity,
-      Address, and Hardship documents to docs@chirla.org.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
       More information at https://ca-drai.org/en/privacy. Reply STOP to unsubscribe.
@@ -462,6 +445,27 @@ en:
       Reply HELP for help. Reply STOP to unsubscribe. Msg&data rates may apply.
     unsubscribed: You have unsubscribed from Disaster Assistance messages. You will
       not receive any more messages from this number. Reply START to resubscribe.
+  submission_instructions:
+    default: 'Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. If you have questions about submitting documents, contact the organization that assisted you at: %{contact_information}'
+    catholic:
+      santa_clara: "Your application for Disaster Assistance has been submitted to Catholic Charities. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to drai@ccsj.org"
+      alameda: "Your application for Disaster Assistance has been submitted to Catholic Charities. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to drai@cceb.org"
+      contra_costa: "Your application for Disaster Assistance has been submitted to Catholic Charities. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to drai@cceb.org"
+      default: "Your application for Disaster Assistance has been submitted to Catholic Charities. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to hope@catholiccharitiessf.org"
+    chirla: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to docs@chirla.org."
+    caracen: "Thank you for applying to the Disaster Relief Assistance DRAI through CARECEN. Your application has been successfully submitted. Your application ID number is %{application_number}. Please note, a Caseworker from CARECEN will be contacting you this upcoming week so we ask for your patience. As you wait, you can begin to collect documentation verifying your eligibility. No further action is necessary."
+    aaaj: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents at https://bit.ly/AJLA-DRAI . When asked for your APP-ID number, enter only the numbers. For example, APP-1-123-123 would be 1123123."
+    micop:
+      ventura: "Your application for Disaster Assistance has been submitted. Your application ID number is <number>. Please email or text proof of identity, address, and hardship documents to: drai.sb@mixteco.org or 805-791-2003 or 805-519-7776"
+      santa_barbara: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to: drai.vc@mixteco.org or 805-256-1001 or 805-519-7774"
+    crlaf: "Your application for a Disaster Relief payment has been submitted. Your application ID number is %{application_number}. If you have not done so already, please email or text proof of identity, address, and hardship documents directly to your caseworker."
+    todec: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to perris@todec.org"
+    jfssd:
+    cabsc:
+    ufw:
+    chd:
+    sbcsc:
+
   voice_message:
     auto_response: This is an automated message from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.

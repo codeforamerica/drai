@@ -567,24 +567,19 @@ RSpec.describe AidApplication, type: :model do
       let(:aid_application) {create :aid_application, :submitted, email_consent: false, preferred_language: preferred_language}
 
       it 'sends an SMS welcome message and then SMS application number message' do
-        expect do
+        perform_enqueued_jobs do
           aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
-                                                                     params: {messageable: aid_application},
-                                                                     args: [{
-                                                                                to: aid_application.phone_number,
-                                                                                body: I18n.t('text_message.subscribed', contact_information: aid_application.organization.contact_information, locale: 'en')
-                                                                            }]
-        )
-        expect do
-          aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", "basic_message", "deliver_now",
-                                                                     params: {messageable: aid_application},
-                                                                     args: [{
-                                                                                to: aid_application.phone_number,
-                                                                                body: I18n.t('text_message.app_id', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
-                                                                            }]
-        )
+        end
+
+        sms_messages = ActionMailer::Base.deliveries.select { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+        first_message = sms_messages.first
+        second_message = sms_messages.second
+
+        expect(first_message).to be_present
+        expect(first_message.body).to eq I18n.t('text_message.subscribed', contact_information: aid_application.organization.contact_information, locale: 'en')
+
+        expect(second_message).to be_present
+        expect(second_message.body).to eq I18n.t('submission_instructions.default', application_number: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
       end
 
       it 'records a Message object' do
@@ -596,61 +591,32 @@ RSpec.describe AidApplication, type: :model do
       end
 
       context 'when the application has a preferred_language of Spanish' do
-        let(:preferred_language) {'Spanish'}
+        let(:preferred_language) { 'Spanish' }
 
         it 'sends the SMS messages in Spanish' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: a_string_including("solicitud para asistencia")
-                                  }]
-                     )
+          end
 
-
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: a_string_including("solicitud para asistencia")
-                                  }]
-                     )
+          sms_messages = ActionMailer::Base.deliveries.select { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+          expect(sms_messages.second.body.to_s).to include("solicitud para asistencia")
         end
       end
 
-      context 'when app is submitted by CHIR' do
-        let!(:organization) {create :organization, name: "Coalition for Humane Immigrant Rights"}
+      context 'when app is submitted by CHIRLA' do
+        let!(:organization) {create :organization, name: "Coalition for Humane Immigrant Rights", slug: 'chirla' }
         let!(:assister) {create :assister, organization: organization}
         let(:aid_application) {create :aid_application, :submitted, email_consent: false, creator: assister}
 
         it 'sends the CHIR-specific SMS message' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t('text_message.subscribed', locale: 'en')
-                                  }]
-                     )
+          end
 
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t('text_message.chir_app_id', app_id: aid_application.application_number, locale: 'en')
-                                  }]
-                     )
+          sms_messages = ActionMailer::Base.deliveries.select { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+          second_message = sms_messages.second
+
+          expect(second_message.body).to eq I18n.t('submission_instructions.chirla', application_number: aid_application.application_number, locale: 'en')
         end
       end
 
@@ -660,27 +626,14 @@ RSpec.describe AidApplication, type: :model do
         let(:aid_application) {create :aid_application, :submitted, email_consent: false, creator: assister, county_name: 'San Francisco' }
 
         it 'sends submission message with county-specific phone number' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t('text_message.subscribed', locale: 'en')
-                                  }]
-                     )
+          end
 
-          expect do
-            aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t('text_message.app_id', app_id: aid_application.application_number, contact_information: '555-555-5555', locale: 'en')
-                                  }]
-                     )
+          sms_messages = ActionMailer::Base.deliveries.select { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+          second_message = sms_messages.second
+
+          expect(second_message.body).to eq I18n.t('submission_instructions.default', application_number: aid_application.application_number, contact_information: '555-555-5555', locale: 'en')
         end
       end
     end
@@ -690,16 +643,15 @@ RSpec.describe AidApplication, type: :model do
       let(:aid_application) {create :aid_application, :submitted, sms_consent: false, preferred_language: preferred_language}
 
       it 'sends an email with the application number message' do
-        expect do
+        perform_enqueued_jobs do
           aid_application.send_submission_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", "basic_message", "deliver_now",
-                                                                     params: {messageable: aid_application},
-                                                                     args: [{
-                                                                                to: aid_application.email,
-                                                                                subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                                                                body: I18n.t('email_message.app_id.body_html', app_id: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
-                                                                            }]
-        )
+        end
+
+        email_message = ActionMailer::Base.deliveries.find { |m| m.to.include? aid_application.email }
+        expect(email_message).to be_present
+
+        expect(email_message.subject).to eq I18n.t('email_message.application_number.subject', application_number: aid_application.application_number, locale: 'en')
+        expect(email_message.html_part.body.to_s).to eq I18n.t('submission_instructions.default', application_number: aid_application.application_number, contact_information: aid_application.organization.contact_information, locale: 'en')
       end
 
       it 'records a Message object' do
@@ -714,41 +666,34 @@ RSpec.describe AidApplication, type: :model do
         let(:preferred_language) {'Spanish'}
 
         it 'sends the email messages in Spanish' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationEmailer", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.email,
-                                      subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'es'),
-                                      body: a_string_including("solicitud para asistencia")
-                                  }]
-                     )
+          end
+
+          email_message = ActionMailer::Base.deliveries.find { |m| m.to.include? aid_application.email }
+          expect(email_message).to be_present
+
+          expect(email_message.subject).to eq I18n.t('email_message.application_number.subject', application_number: aid_application.application_number, locale: 'es')
+          expect(email_message.html_part.body.to_s).to include "solicitud para asistencia"
         end
       end
 
       context 'when an app is submitted by CHIR' do
-        let!(:organization) {create :organization, name: "Coalition for Humane Immigrant Rights"}
+        let!(:organization) {create :organization, name: "Coalition for Humane Immigrant Rights", slug: 'chirla'}
         let!(:assister) {create :assister, organization: organization}
         let(:aid_application) {create :aid_application, :submitted, email_consent: true, sms_consent: false, creator: assister}
 
         it 'send CHIR-specific email message' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_submission_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", "basic_message", "deliver_now",
-                                                                       params: {messageable: aid_application},
-                                                                       args: [{
-                                                                                  to: aid_application.email,
-                                                                                  subject: I18n.t('email_message.app_id.subject', app_id: aid_application.application_number, locale: 'en'),
-                                                                                  body: I18n.t('email_message.chir_app_id.body_html', app_id: aid_application.application_number, locale: 'en')
-                                                                              }]
-          )
+          end
+
+          email_message = ActionMailer::Base.deliveries.find { |m| m.to.include? aid_application.email }
+          expect(email_message.html_part.body.to_s).to eq I18n.t('submission_instructions.chirla', application_number: aid_application.application_number, locale: 'en')
         end
       end
     end
   end
-
 
   describe '#send_disbursement_notification' do
     context 'when SMS consent' do

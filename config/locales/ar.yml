@@ -292,16 +292,16 @@ ar:
         </p>
         <p> اتصل بالرقم %{ivr_phone_number} لتفعيل بطاقتك </p>
       subject: رمز تفعيل بطاقة دفع المعونة في حالات الكوارث
-    app_id:
+    application_number:
       body_html: |
         <p> مرحبا </p>
 
-        <p> .%{app_id} لقد تم تقديم طلبك للحصول على معونة مالية. رقم الطلب الخاص بك هو</p>
+        <p> .%{application_number} لقد تم تقديم طلبك للحصول على معونة مالية. رقم الطلب الخاص بك هو</p>
 
         <p> .ستحتاج إلى هذا الرقم ووثائق التحقق لاستلام بطاقة الدفع </p>
 
         <p> - فريق DRAI </p>
-      subject: تم إرسال طلب المعونة %{app_id}
+      subject: تم إرسال طلب المعونة %{application_number}
     approved:
       body_html: |
         </p>مرحبا<p>
@@ -370,7 +370,7 @@ ar:
     activation: تمت الموافقة على طلبك للحصول على المعونة في حالات الكوارث. رمز تفعيل
       بطاقة الدفع الخاصة بك هو %{activation_code}. اتصل بالرقم %{ivr_phone_number}
       لتفعيل بطاقتك.
-    app_id: تم تقديم طلبك للحصول على معونة مالية. رقم معرّف طلبك هو %{app_id}. ستحتاج
+    application_number: تم تقديم طلبك للحصول على معونة مالية. رقم معرّف طلبك هو %{application_number}. ستحتاج
       إلى هذا الرقم ووثائق التحقق الخاصة بك لاستلام بطاقة الدفع.
     approved: Your application for Disaster Assistance has been approved! We’ll let
       you know when your payment card has been assigned to you.
@@ -390,3 +390,6 @@ ar:
     auto_response: هذه رسالة تلقائية من برنامج المعونة في حالات الكوارث التابع لمنظمة
       Code for America. للمساعدة في طلبك، اتصل بالمنظمة التي ساعدت في تقديم طلبك.
       للحصول على مساعدة بشأن بطاقة الدفع الخاصة بك، اتصل بالرقم %{ivr_phone_number}.
+  submission_instructions:
+    default: تم تقديم طلبك للحصول على معونة مالية. رقم معرّف طلبك هو %{application_number}. ستحتاج
+               إلى هذا الرقم ووثائق التحقق الخاصة بك لاستلام بطاقة الدفع.
