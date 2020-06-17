@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_003121) do
+ActiveRecord::Schema.define(version: 2020_06_17_162551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_003121) do
     t.integer "total_payment_cards_count", default: 0, null: false
     t.string "county_names", default: [], array: true
     t.string "contact_information"
+    t.string "slug"
   end
 
   create_table "payment_cards", force: :cascade do |t|

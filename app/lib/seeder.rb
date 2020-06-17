@@ -17,9 +17,7 @@ class Seeder
 
     low_card_organization
     no_card_organization
-
-    waitlist_org = FactoryBot.create :organization, name: 'Waitlisted', total_payment_cards_count: 10
-    FactoryBot.create_list :aid_application, 13, :submitted, organization: waitlist_org
+    waitlisted_organization
 
     %w[
       123456
@@ -74,6 +72,7 @@ class Seeder
   def organization
     @organization ||= Organization.find_or_create_by!(name: 'Legal Aid') do |organization|
       organization.assign_attributes(
+        slug: 'legal_test',
         total_payment_cards_count: 10000,
         county_names: ["San Francisco", "San Mateo"],
         contact_information: 'San Francisco County: (555) 111-2222 / San Mateo County: (555) 444-5555'
@@ -109,12 +108,17 @@ class Seeder
   end
 
   def low_card_organization
-    org = FactoryBot.create :organization, name: 'Low-Card Org', total_payment_cards_count: 10
+    org = Organization.find_by(name: 'Low-Card Org') || FactoryBot.create(:organization, name: 'Low-Card Org', total_payment_cards_count: 10)
     FactoryBot.create_list :aid_application, 9, :submitted, creator: FactoryBot.create(:assister, organization: org)
   end
 
   def no_card_organization
-    org = FactoryBot.create :organization, name: 'No-Card Org', total_payment_cards_count: 10
+    org = Organization.find_by(name: 'No-Card Org') || FactoryBot.create(:organization, name: 'No-Card Org', total_payment_cards_count: 10)
     FactoryBot.create_list :aid_application, 10, :disbursed, creator: FactoryBot.create(:assister, organization: org)
+  end
+
+  def waitlisted_organization
+    org = Organization.find_by(name: 'Waitlisted') || FactoryBot.create(:organization, name: 'Waitlisted', total_payment_cards_count: 10)
+    FactoryBot.create_list :aid_application, 13, :submitted, organization: org
   end
 end

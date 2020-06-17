@@ -6,6 +6,7 @@
       <thead>
       <tr>
         <th>ID</th>
+        <th>Slug</th>
         <th>Name</th>
         <th>Users</th>
         <th>Submitted</th>
@@ -18,6 +19,7 @@
       <% @organizations.each do |organization| %>
         <tr id="<%= dom_id(organization) %>">
           <td><%= organization.id %></td>
+          <td><%= organization.slug %></td>
           <td><%= link_to organization.name, organization_dashboard_path(organization) %></td>
           <td><%= organization.users_count %></td>
           <td><%= organization.submitted_aid_applications_count %></td>
