@@ -236,6 +236,10 @@ es:
             Social y una autorización de trabajo o un documento de autorización de
             empleo emitida por la Oficina de Servicios de Ciudadanía e Inmigración
             de los EE. UU. (USCIS).
+          immigrant_notice_html: Si tiene autorización de trabajo a través de un beneficio
+            válido de DACA o TPS, una visa que le da permiso para trabajar, residencia
+            legal permanente (por ejemplo, una tarjeta verde) o ciudadanía estadounidense,
+            <strong>no es elegible</strong> para DRAI.
           label_text: "¿Tiene usted actualmente un documento válido que lo autorice
             para trabajar en los Estado Unidos?"
           read_to_client: Lea lo siguiente al solicitante, que debe cumplir al menos

@@ -89,32 +89,6 @@ tl:
           preferred_contact_text: Mensahe sa teksto
           read_to_client: 'Basahin sa aplikante:'
           title: Kontak na Impormasyon
-        eligibility:
-          care_facility_closed: Ang pasilidad ba ng pangangalaga, tulad ng paaralan,
-            pasilidad sa pangangalaga sa bata o ibang pasilidad na pinaninirahan ng
-            adulto, kung saan mo madalas pinapadala ang iyong anak o ibang tao para
-            sa pangangalaga, ay sarado dahil sa pagsiklab ng COVID-19?
-          caregiver: Ikaw ba ay isang tagapangalaga ng isang dependente, tulad ng
-            isang bata o nakatatandang magulang, o isang asawa na may o nagkaroon
-            ng patuloy na sintomas ng COVID-19, na nagdulot saiyo ng hindi pagtratrabaho?
-          experiencing_symptoms: Ikaw ba nakararanas o nakaranas ng patuloy na sintomas
-            ng COVID-19?
-          help_text: Kasama ng isang balidong dokumento ang Social Security Number
-            kard at ang awtorisasyon sa pagtrabaho o Dokumento ng Awtorisasyon sa
-            Pagtratrabaho o Employment Authorization Document na inisyu ng U.S. Citizenship
-            and Immigration Services
-          label_text: Ikaw ba ay may kasalukuyang balidong dokumento na pinapayagan
-            ka na magtrabaho sa Estados Unidos?
-          read_to_client: Basahin ang sumusunod sa aplikante. Kailangan nilang tugunan
-            ang isa sa pamantayan. I-tsek lahat ng mga kahon na nalalapat.
-          reduced_work_hours: Ikaw ba, o ibang mga adulto sa iyong sambahayan na nagbibigay
-            ng kita sa iyong sambahayan, ang nawalan ng trabaho o nabawasanan ang
-            oras ng pagtratrabaho dahil sa pagsiklab ng COVID-19?
-          title: Pagiging karapat-dapat
-          underlying_health_condition: Ikaw ba ay nasa mataas na panganib ng malubhang
-            sakit ng COVID-19 dahil sa kasalukuyang kondisyon sa kalusugan o edad,
-            at samakatuwid hindi makatrabaho upang sumunod sa kuitusan ng pagdistansiya
-            sa lipunan?
         language:
           languages:
             arabic: Arabiko
@@ -219,6 +193,11 @@ tl:
             kard at ang awtorisasyon sa pagtrabaho o Dokumento ng Awtorisasyon sa
             Pagtratrabaho o Employment Authorization Document na inisyu ng U.S. Citizenship
             and Immigration Services
+          immigrant_notice_html: "Kung ikaw ay may awtorisasyon na magtrabaho sa pamamagitan
+             ng  balidong DACA o benepisyo ng TPS, ang isang visa na nagbibigay sa
+             iyo ng  pahintulot na magtrabaho, legal na permanenteng paninirahan (hal.
+             green card), o pagkamamamayan ng U.S. citizenship, ikaw ay hindi karapat-dapat
+             para sa DRAI."
           label_text: Ikaw ba ay may kasalukuyang balidong dokumento na pinapayagan
             ka na magtrabaho sa Estados Unidos?
           read_to_client: Basahin ang sumusunod sa aplikante. Kailangan nilang tugunan
