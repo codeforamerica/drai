@@ -18,14 +18,21 @@ namespace :heroku do
   task db_reset: :environment do
     raise "Cannot run this task in production" if Rails.env.production?
 
-    ActiveRecord::Base.connection.tables.each do |table|
-      next if table.in? ['schema_migrations', 'ar_internal_metadata']
-
-      query = "DROP TABLE IF EXISTS #{table} CASCADE;"
-      ActiveRecord::Base.connection.execute(query)
+    puts "== Dropping Database Tables =="
+    queries = ActiveRecord::Base.connection.tables
+                .reject { |table| table.in? ['schema_migrations', 'ar_internal_metadata'] }
+                .map do |table|
+      "DROP TABLE IF EXISTS #{table} CASCADE"
     end
 
+    ActiveRecord::Base.transaction do
+      ActiveRecord::Base.connection.execute queries.join('; ')
+    end
+
+    puts "== Loading Schema =="
     Rake::Task['db:schema:load'].invoke
+
+    puts "== Seeding Records =="
     Rake::Task['db:seed'].invoke
   end
 end
