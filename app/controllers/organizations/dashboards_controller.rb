@@ -3,7 +3,14 @@ module Organizations
     def show
       @organization = current_organization
       @aid_applications = @organization.aid_applications
-                            .includes(:organization, :creator, :submitter, :approver, :disburser)
+                            .includes(
+                              :organization,
+                              :creator,
+                              :submitter,
+                              :approver,
+                              :disburser,
+                              :aid_application_waitlist
+                            )
                             .visible
                             .filter_by_params(params)
                             .page(params[:page])
@@ -15,7 +22,7 @@ module Organizations
 
     def low_on_cards?
       total_cards = @organization.total_payment_cards_count
-      remaining_cards = total_cards - @organization.total_aid_applications_count
+      remaining_cards = total_cards - @organization.committed_aid_applications_count
 
       card_limit = case
                    when total_cards > 11_000
@@ -31,7 +38,7 @@ module Organizations
     helper_method :low_on_cards?
 
     def no_cards?
-      (@organization.total_payment_cards_count - @organization.total_aid_applications_count) <= 0
+      (@organization.total_payment_cards_count - @organization.disbursed_aid_applications_count) <= 0
     end
     helper_method :no_cards?
 

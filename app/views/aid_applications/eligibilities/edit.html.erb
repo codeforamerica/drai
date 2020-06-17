@@ -16,6 +16,13 @@
         </div>
         <hr>
 
+        <% if @aid_application.waitlist_position.present? %>
+          <p class="notice notice--error">
+            Explain to the client that they are on a waitlist and may not get a card.
+            This application is <strong>Number <%= @aid_application.waitlist_position %></strong> on the waitlist.
+          </p>
+        <% end %>
+
         <h2><%= t('.privacy.title') %></h2>
         <p class="text--help"><em><%= t('.privacy.help_text') %></em></p>
         <p><%= t('.privacy.text_part1') %></p>

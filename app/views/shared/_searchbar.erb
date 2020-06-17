@@ -5,8 +5,7 @@
         <%= text_field_tag "q",
                            params[:q],
                            placeholder: placeholder,
-                           class: "searchbar__input",
-                           autofocus: true %>
+                           class: "searchbar__input" %>
 
         <label class="searchbar__button">
           <span class="icon icon-arrow_forward"></span>
@@ -29,6 +28,7 @@
               ['Approved', :approved],
               ['Disbursed', :disbursed],
               ['Paused', :paused],
+              ['Waitlisted', :waitlisted],
               ['Rejected', :rejected],
           ] %>
           <%= f.select :status, statuses, { selected: params[:status] }, { onchange: 'this.form.submit();', class: ['select__element'] } %>

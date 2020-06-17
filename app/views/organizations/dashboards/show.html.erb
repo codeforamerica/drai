@@ -3,32 +3,36 @@
 <% if params[:page].blank? %>
   <h1 class="spacing-above-25">Disaster Relief Assistance for Immigrants</h1>
   <div class="grid">
-    <div class="grid__item width-one-whole">
+    <div class="grid__item width-one-third">
       <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
         <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
       <% end %>
     </div>
-    <% if low_on_cards? %>
-      <div class="notice--warning grid__item width-one-half">
-        <p><%=t('aid_applications.index.low_card_warning') %></p>
-      </div>
-    <% end %>
-
-    <% if no_cards? %>
-      <div class="notice--error grid__item width-one-whole">
-        <p><%=t('aid_applications.index.no_card_warning') %></p>
-      </div>
-    <% end %>
+    <div class="grid__item width-two-thirds">
+      <% if current_organization.no_cards? %>
+        <p class="notice notice--error">
+          You have zero remaining cards. Applications can no longer be accepted.
+        </p>
+      <% elsif current_organization.using_waitlist? %>
+        <p class="notice notice--error">
+          Any new applications will be put on a waitlist. All cards are currently committed. Applications will only move off the waitlist as previously submitted applications are rejected or paused.
+        </p>
+      <% elsif current_organization.low_on_cards? %>
+        <p class="notice notice--warning">
+          You are running low on remaining cards. Once all of the cards are committed, new applications will be added to a waitlist.
+        </p>
+      <% end %>
+    </div>
   </div>
 
   <h2 class="spacing-above-25">Dashboard</h2>
 
   <div class="grid">
     <div class="grid__item width-one-third">
-      <div class="statistic-card statistics-remaining <% if low_on_cards? || no_cards? %>statistics-card__warning<% end %>">
+      <div class="statistic-card statistics-remaining <% if current_organization.low_on_cards? || current_organization.using_waitlist? || current_organization.no_cards? %>statistics-card__warning<% end %>">
         <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.total_aid_applications_count, locale: :en) %>
+          <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.committed_aid_applications_count, locale: :en) %>
           <small style="font-size: 14px;"> / <%= number_with_delimiter(current_organization.total_payment_cards_count, locale: :en) %></small>
         </p>
       </div>
@@ -38,7 +42,7 @@
       <div class="statistic-card statistics-committed">
         <p class="statistic-card__label">Committed Cards <br>(Submitted + Approved)</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter(current_organization.total_aid_applications_count - current_organization.disbursed_aid_applications_count, locale: :en) %>
+          <%= number_with_delimiter(current_organization.committed_aid_applications_count - current_organization.disbursed_aid_applications_count, locale: :en) %>
           <small style="font-size: 14px">&nbsp;</small>
         </p>
       </div>
@@ -72,6 +76,7 @@
         </p>
       </div>
     </div>
+
     <div class="grid__item width-one-third">
       <div class="statistic-card statistics-rejected">
         <p class="statistic-card__label">Rejected</p>
@@ -80,7 +85,22 @@
         </p>
       </div>
     </div>
+  </div>
 
+  <% if current_organization.waitlisted_aid_applications_count > 0 %>
+    <div class="grid">
+      <div class="grid__item width-one-third">
+        <div class="statistic-card statistics-submitted">
+          <p class="statistic-card__label">Waitlisted</p>
+          <p class="statistic-card__number">
+            <%= number_with_delimiter(current_organization.waitlisted_aid_applications_count, locale: :en) %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid">
     <% if current_organization.counts_by_county.size > 1 %>
       <div class="grid__item width-one-whole">
         <div class="statistic-card">

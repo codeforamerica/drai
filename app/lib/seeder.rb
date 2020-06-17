@@ -18,6 +18,9 @@ class Seeder
     low_card_organization
     no_card_organization
 
+    waitlist_org = FactoryBot.create :organization, name: 'Waitlisted', total_payment_cards_count: 10
+    FactoryBot.create_list :aid_application, 13, :submitted, organization: waitlist_org
+
     %w[
       123456
       223456
@@ -112,6 +115,6 @@ class Seeder
 
   def no_card_organization
     org = FactoryBot.create :organization, name: 'No-Card Org', total_payment_cards_count: 10
-    FactoryBot.create_list :aid_application, 10, :submitted, creator: FactoryBot.create(:assister, organization: org)
+    FactoryBot.create_list :aid_application, 10, :disbursed, creator: FactoryBot.create(:assister, organization: org)
   end
 end

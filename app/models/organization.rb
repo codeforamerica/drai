@@ -29,7 +29,7 @@ class Organization < ApplicationRecord
           AND submitted_at IS NOT NULL
           AND paused_at IS NULL
           AND rejected_at IS NULL
-      ) AS total_aid_applications_count,
+      ) AS committed_aid_applications_count,
       (
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
@@ -70,15 +70,21 @@ class Organization < ApplicationRecord
         WHERE
           organization_id = organizations.id 
           AND rejected_at IS NOT NULL
-      ) AS rejected_aid_applications_count
+      ) AS rejected_aid_applications_count,
+      (
+        SELECT COUNT(aid_application_waitlists.aid_application_id)
+        FROM aid_application_waitlists
+        WHERE
+          organization_id = organizations.id
+      ) AS waitlisted_aid_applications_count
     SQL
   }
 
-  def total_aid_applications_count
-    @total_aid_applications_count ||= attributes["total_aid_applications_count"] || aid_applications.submitted.count
+  def committed_aid_applications_count
+    @total_aid_applications_count ||= attributes["committed_aid_applications_count"] || aid_applications.submitted.count
   end
 
-  [:submitted, :approved, :disbursed, :paused, :rejected].each do |status|
+  [:submitted, :approved, :disbursed, :paused, :rejected, :waitlisted].each do |status|
     class_eval <<~RUBY
       def #{status}_aid_applications_count
         @#{status}_aid_applications_count ||= attributes["#{status}_aid_applications_count"] || aid_applications.only_#{status}.count
@@ -96,11 +102,13 @@ class Organization < ApplicationRecord
       disbursed: aid_applications.only_disbursed.group(:county_name).count,
       paused: aid_applications.only_paused.group(:county_name).count,
       rejected: aid_applications.only_rejected.group(:county_name).count,
+      waitlisted: aid_applications.only_waitlisted.group(:county_name).count,
     }
 
     by_counties = {}
     raw_counts.each do |type, counties|
       counties.each do |county, count|
+        next if county.nil?
         by_counties[county] ||= {}
         by_counties[county][type] = count
       end
@@ -114,5 +122,29 @@ class Organization < ApplicationRecord
     end
 
     @_counts_by_county = by_counties.sort.to_h
+  end
+
+  def low_on_cards?
+    total_cards = total_payment_cards_count
+    remaining_cards = total_cards - committed_aid_applications_count
+
+    card_limit = case
+                 when total_cards > 11_000
+                   2000
+                 when total_cards > 6000
+                   1000
+                 else
+                   500
+                 end
+
+    (remaining_cards < card_limit) && remaining_cards.positive?
+  end
+
+  def using_waitlist?
+    waitlisted_aid_applications_count > 0
+  end
+
+  def no_cards?
+    (total_payment_cards_count - disbursed_aid_applications_count) <= 0
   end
 end

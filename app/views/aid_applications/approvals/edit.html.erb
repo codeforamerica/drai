@@ -21,26 +21,34 @@
         by <strong><%= @aid_application.rejecter.name %></strong>.
       </p>
     <% else %>
-      <div class="form-card__footer">
-        <%= button_to({ action: :approve },
-                      method: :put,
-                      name: 'form_action',
-                      value: 'approve_and_exit',
-                      class: "button button--primary") { "Approve and exit" } %>
+        <% if @aid_application.waitlisted? %>
+          <p class="notice notice--error">
+            This application is <strong>Number <%= @aid_application.waitlist_position %></strong> on the waitlist.
+          </p>
+        <% end %>
 
-        <%= button_to({ action: :approve },
-                      method: :put,
-                      name: 'form_action',
-                      value: 'submit',
-                      class: "button button--primary") { "Approve and continue to disbursement" } %>
-        <br>
-        <br>
+        <div class="form-card__footer">
+          <%= button_to({ action: :approve },
+                        method: :put,
+                        name: 'form_action',
+                        value: 'approve_and_exit',
+                        disabled: @aid_application.waitlisted?,
+                        class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and exit" } %>
 
-        <%= button_to({ action: :reject },
-                      method: :put,
-                      class: "button button--danger",
-                      data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
-      </div>
+          <%= button_to({ action: :approve },
+                        method: :put,
+                        name: 'form_action',
+                        value: 'submit',
+                        disabled: @aid_application.waitlisted?,
+                        class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and continue to disbursement" } %>
+          <br>
+          <br>
+
+          <%= button_to({ action: :reject },
+                        method: :put,
+                        class: "button button--danger",
+                        data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
+        </div>
     <% end %>
   </div>
 

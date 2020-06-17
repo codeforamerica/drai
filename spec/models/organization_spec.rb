@@ -51,7 +51,8 @@ RSpec.describe Organization, type: :model do
                                                       disbursed: 3,
                                                       paused: 0,
                                                       rejected: 0,
-                                                      total: 3
+                                                      waitlisted: 0,
+                                                      total: 3,
                                                     },
                                                     "San Francisco" => {
                                                       submitted: 5,
@@ -59,6 +60,7 @@ RSpec.describe Organization, type: :model do
                                                       disbursed: 0,
                                                       paused: 2,
                                                       rejected: 2,
+                                                      waitlisted: 0,
                                                       total: 8,
                                                     },
                                                     "San Mateo" => {
@@ -67,6 +69,7 @@ RSpec.describe Organization, type: :model do
                                                       disbursed: 0,
                                                       paused: 0,
                                                       rejected: 0,
+                                                      waitlisted: 0,
                                                       total: 3
                                                     },
                                                   })
