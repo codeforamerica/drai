@@ -342,8 +342,9 @@ es:
       month: Mes
       year: Año
   text_message:
-    activation: El código es %{activation_code} para activar su tarjeta de Asistencia de Desastre.
-      Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.
+    activation: El código es %{activation_code} para activar su tarjeta de Asistencia
+      de Desastre. Cuando recibe su tarjeta, llame al número detrás de la tarjeta
+      para activarla.
     app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de
       identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar
       documentos, comuníquese con la organización que le asistió al: %{contact_information}'
