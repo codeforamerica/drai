@@ -5,7 +5,15 @@ module Admin
     LIMIT = 200
 
     def index
-      @aid_applications = AidApplication.includes(:organization, :creator, :submitter, :approver, :disburser)
+      @aid_applications = AidApplication.all
+                            .includes(
+                              :organization,
+                              :creator,
+                              :submitter,
+                              :approver,
+                              :disburser,
+                              :aid_application_waitlist
+                            )
                             .visible
                             .filter_by_params(params)
                             .limit(LIMIT)
