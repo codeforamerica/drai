@@ -113,6 +113,15 @@
         <fieldset>
           <div class="form-group group-of-mixed-fields">
             <%= f.cfa_input_field(:phone_number, t('general.phone_number'), options: { type: 'tel', inputmode: 'tel' }, classes: ['spacing-below-0']) %>
+            <% if @aid_application.error_message?(:phone_number, :twilio_phone_number_invalid) || @aid_application.confirmed_invalid_phone_number? %>
+              <label class="checkbox">
+                <%= f.check_box(:confirmed_invalid_phone_number) %>
+                <%= t('.contact_information.confirmed_invalid_phone_number') %>
+              </label>
+              <br>
+            <% end %>
+
+
             <%= f.cfa_checkbox(:landline, t('.contact_information.landline')) %>
           </div>
         </fieldset>

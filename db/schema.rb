@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_162551) do
+ActiveRecord::Schema.define(version: 2020_06_18_222230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_06_17_162551) do
     t.datetime "paused_at"
     t.datetime "unpaused_at"
     t.bigint "unpauser_id"
+    t.boolean "confirmed_invalid_phone_number"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"

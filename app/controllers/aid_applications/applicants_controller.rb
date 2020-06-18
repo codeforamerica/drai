@@ -128,6 +128,7 @@ module AidApplications
           :sms_consent,
           :email_consent,
           :phone_number,
+          :confirmed_invalid_phone_number,
           :landline,
           :email,
           :confirmed_invalid_email,
