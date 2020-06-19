@@ -33,7 +33,7 @@ module AidApplications
       @aid_application = current_aid_application
       @aid_application.save_and_reject(rejecter: current_user)
 
-      respond_with @aid_application, location: organization_dashboard_path(current_organization), notice: "#{@aid_application.application_number} has been approved."
+      respond_with @aid_application, location: organization_dashboard_path(current_organization), notice: "#{@aid_application.application_number} has been rejected."
     end
 
     def unapprove
