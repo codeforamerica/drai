@@ -5,7 +5,8 @@
         <%= text_field_tag "q",
                            params[:q],
                            placeholder: placeholder,
-                           class: "searchbar__input" %>
+                           class: "searchbar__input",
+                           autofocus: true %>
 
         <label class="searchbar__button">
           <span class="icon icon-arrow_forward"></span>
