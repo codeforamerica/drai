@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Start aid application', type: :system do
+describe 'Twilio Phone Number Validator', type: :system do
   let!(:assister) { create :assister, organization: build(:organization, county_names: ["San Francisco", "San Mateo"]) }
 
   specify do
@@ -30,23 +30,21 @@ describe 'Start aid application', type: :system do
     click_on "Continue"
 
     within_fieldset "How would you like to receive the messages with your Application Number and Activation Code?" do
-      check "Email"
-      expect(find_field("Email", checked: true)).to be_present
+      check "Text message"
+      expect(find_field("Text message", checked: true)).to be_present
     end
 
-    allow(MailgunEmailValidator).to receive(:valid?).and_return(false)
-    fill_in "Email address (if available)", with: "example@example.com"
+    allow(TwilioPhoneNumberValidator).to receive(:valid?).and_return(false)
+    fill_in "Phone number", with: "111-222-3333"
     click_on 'Submit'
 
-    expect(page).to have_content I18n.t("activerecord.errors.messages.mailgun_email_invalid")
+    expect(page).to have_content I18n.t("activerecord.errors.messages.twilio_phone_number_invalid")
 
-    check I18n.t('aid_applications.applicants.edit.contact_information.confirmed_invalid_email')
-    expect(find_field(I18n.t('aid_applications.applicants.edit.contact_information.confirmed_invalid_email'), checked: true)).to be_present
+    check I18n.t('aid_applications.applicants.edit.contact_information.confirmed_invalid_phone_number')
+    expect(find_field(I18n.t('aid_applications.applicants.edit.contact_information.confirmed_invalid_phone_number'), checked: true)).to be_present
 
     click_on 'Submit'
 
-    expect(page).not_to have_content I18n.t("activerecord.errors.messages.mailgun_email_invalid")
-
-
+    expect(page).not_to have_content I18n.t("activerecord.errors.messages.twilio_phone_number_invalid")
   end
 end

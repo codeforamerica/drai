@@ -37,6 +37,7 @@ en:
         landline_sms: Landlines cannot receive text messages. Enter a cell phone number
           or change the contact method.
         mailgun_email_invalid: Please confirm the email address is correct.
+        twilio_phone_number_invalid: Please confirm the telephone number is correct.
         not_saved: Errors prevented this resource from being saved.
         password_complexity: Complexity requirement not met.
         phone_number: Make sure your phone number is 10 digits long.
@@ -106,6 +107,9 @@ en:
             Application Number and Activation Code by this method.
           confirmed_invalid_email: I have confirmed with the client that their email
             is recorded correctly. Misspellings and typos will prevent them from receiving
+            benefits.
+          confirmed_invalid_phone_number: I have confirmed with the client that their phone number
+            is recorded correctly. Typos will prevent them from receiving
             benefits.
           email_address: Email address (if available)
           landline: This is a landline

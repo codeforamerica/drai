@@ -352,6 +352,11 @@ class AidApplication < ApplicationRecord
     validates :county_name, inclusion: {in: -> (aid_application) {aid_application.organization.county_names}, message: :county_required}
   end
 
+  with_options on: [:submit, :contact_information] do
+    validates :phone_number, presence: true, phone_number: true
+    validates :email, presence: true, email: {message: :email}, if: -> {email_consent?}
+  end
+
   with_options on: :submit do
     validates :name, presence: true
     validates :birthday, presence: true, inclusion: {in: -> (_member) {'01/01/1900'.to_date..18.years.ago}, message: :birthday}
@@ -369,17 +374,14 @@ class AidApplication < ApplicationRecord
       validates :mailing_zip_code, presence: true, five_digit_zip: true
     end
 
-    validates :email, mailgun_email: true, if: -> {email.present? && email_consent? && !confirmed_invalid_email?}
+    validates :email, mailgun_email: true, if: -> {email.present? && email_consent? && !confirmed_invalid_email? }
     validates :email_consent, presence: true, unless: -> {sms_consent?}
+
+    validates :phone_number, twilio_phone_number: true, if: -> { phone_number.present? && sms_consent? && !confirmed_invalid_phone_number? }
 
     validates :receives_calfresh_or_calworks, inclusion: {in: [true, false], message: :check_one_box_eligible}
     validate :unmet_needs_required
     validates :attestation, inclusion: {in: [true], message: :attestation_required}
-  end
-
-  with_options on: [:submit, :contact_information] do
-    validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: {message: :email}, if: -> {email_consent?}
   end
 
   with_options on: :confirmation do
