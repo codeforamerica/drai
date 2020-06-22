@@ -51,7 +51,7 @@ jobs:
 
   deploy:
     name: "Deploy to Aptible"
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     needs: [test]
     runs-on: ubuntu-latest
     env:
@@ -72,9 +72,9 @@ jobs:
       - name: Push to Aptible Staging
         run: |
           git remote add aptible-staging ${{ secrets.APTIBLE_STAGING_GIT_REMOTE }}
-          git push aptible-staging master
+          git push aptible-staging main:master
 
       - name: Push to Aptible Production
         run: |
           git remote add aptible-production ${{ secrets.APTIBLE_PRODUCTION_GIT_REMOTE }}
-          git push aptible-production master
+          git push aptible-production main:master
