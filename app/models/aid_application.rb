@@ -73,173 +73,173 @@ class AidApplication < ApplicationRecord
   READONLY_ONCE_SET = ['application_number']
   DEMOGRAPHIC_OPTIONS_DEFAULT = 'Decline to state'.freeze
   PREFERRED_LANGUAGE_OPTIONS = [
-      'American Sign Language',
-      '​Amharic​​​​​',
-      'Arabic',
-      '​Armenian',
-      '​Assyrian​​​​​',
-      '​Bengali​​​​​',
-      '​Burmese​​​​​',
-      '​Cambodian',
-      'Cantonese',
-      'English',
-      'Farsi',
-      'French',
-      'Gujarati',
-      'Hebrew',
-      'Hindi',
-      '​Ilocano',
-      'Italian',
-      'Japanese',
-      'Kanjobal',
-      'Korean',
-      'Lao',
-      'Mam',
-      'Mandarin',
-      'Mien',
-      'Mixteco',
-      'Pashtu',
-      'Polish',
-      'Portuguese',
-      'Punjabi',
-      '​Romanian',
-      'Russian',
-      'Samoan',
-      'Spanish',
-      'Tagalog',
-      'Thai',
-      'Tigrigna',
-      'Turkic',
-      'Turkish',
-      'Triqui',
-      'Urdu',
-      'Vietnamese',
-      'Zapoteco',
-      'Other Non-English',
-      'Other Sign Language',
-      'Other',
-      DEMOGRAPHIC_OPTIONS_DEFAULT
+    'American Sign Language',
+    '​Amharic​​​​​',
+    'Arabic',
+    '​Armenian',
+    '​Assyrian​​​​​',
+    '​Bengali​​​​​',
+    '​Burmese​​​​​',
+    '​Cambodian',
+    'Cantonese',
+    'English',
+    'Farsi',
+    'French',
+    'Gujarati',
+    'Hebrew',
+    'Hindi',
+    '​Ilocano',
+    'Italian',
+    'Japanese',
+    'Kanjobal',
+    'Korean',
+    'Lao',
+    'Mam',
+    'Mandarin',
+    'Mien',
+    'Mixteco',
+    'Pashtu',
+    'Polish',
+    'Portuguese',
+    'Punjabi',
+    '​Romanian',
+    'Russian',
+    'Samoan',
+    'Spanish',
+    'Tagalog',
+    'Thai',
+    'Tigrigna',
+    'Turkic',
+    'Turkish',
+    'Triqui',
+    'Urdu',
+    'Vietnamese',
+    'Zapoteco',
+    'Other Non-English',
+    'Other Sign Language',
+    'Other',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
   COUNTRY_OF_ORIGIN_OPTIONS = [
-      'Afghanistan',
-      'Argentina',
-      'Armenia',
-      'Bangladesh',
-      'Brazil',
-      'Cambodia',
-      'China, People\'s Republic',
-      'Colombia',
-      'Ecuador',
-      'Egypt',
-      'El Salvador',
-      'Ethiopia',
-      'Guatemala',
-      'Honduras',
-      'India',
-      'Indonesia',
-      'Iran',
-      'Iraq',
-      'Korea, South',
-      'Laos',
-      'Malaysia',
-      'Mexico',
-      'Myanmar',
-      'Nepal',
-      'Nicaragua',
-      'Pakistan',
-      'Peru',
-      'Philippines',
-      'Russia',
-      'Taiwan',
-      'Thailand',
-      'Ukraine',
-      'Vietnam',
-      'Other',
-      DEMOGRAPHIC_OPTIONS_DEFAULT
+    'Afghanistan',
+    'Argentina',
+    'Armenia',
+    'Bangladesh',
+    'Brazil',
+    'Cambodia',
+    'China, People\'s Republic',
+    'Colombia',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Ethiopia',
+    'Guatemala',
+    'Honduras',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Korea, South',
+    'Laos',
+    'Malaysia',
+    'Mexico',
+    'Myanmar',
+    'Nepal',
+    'Nicaragua',
+    'Pakistan',
+    'Peru',
+    'Philippines',
+    'Russia',
+    'Taiwan',
+    'Thailand',
+    'Ukraine',
+    'Vietnam',
+    'Other',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
   RACIAL_OR_ETHNIC_IDENTITY_OPTIONS = [
-      DEMOGRAPHIC_OPTIONS_DEFAULT,
-      'American Indian or Alaska Native',
-      'Asian Indian',
-      'Black or African American (Hispanic or Latino)',
-      'Black or African American (non-Hispanic or Latino)',
-      'Cambodian',
-      'Chinese',
-      'Filipino',
-      'Guamanian',
-      'Hmong',
-      'Indigenous - Latin America',
-      'Japanese',
-      'Korean',
-      'Laotian',
-      'Native Hawaiian',
-      'Vietnamese',
-      'Other Asian',
-      'Thai',
-      'Samoan',
-      'White (Hispanic or Latino)',
-      'White (non-Hispanic or Latino)',
-      'Hispanic or Latino (any other race)',
-      'Other',
+    DEMOGRAPHIC_OPTIONS_DEFAULT,
+    'American Indian or Alaska Native',
+    'Asian Indian',
+    'Black or African American (Hispanic or Latino)',
+    'Black or African American (non-Hispanic or Latino)',
+    'Cambodian',
+    'Chinese',
+    'Filipino',
+    'Guamanian',
+    'Hmong',
+    'Indigenous - Latin America',
+    'Japanese',
+    'Korean',
+    'Laotian',
+    'Native Hawaiian',
+    'Vietnamese',
+    'Other Asian',
+    'Thai',
+    'Samoan',
+    'White (Hispanic or Latino)',
+    'White (non-Hispanic or Latino)',
+    'Hispanic or Latino (any other race)',
+    'Other',
   ].freeze
 
   SEXUAL_ORIENTATION_OPTIONS = [
-      'Straight or heterosexual',
-      'Bisexual',
-      'Gay or lesbian',
-      'Queer',
-      'Another sexual orientation',
-      'Unknown',
-      DEMOGRAPHIC_OPTIONS_DEFAULT
+    'Straight or heterosexual',
+    'Bisexual',
+    'Gay or lesbian',
+    'Queer',
+    'Another sexual orientation',
+    'Unknown',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
   GENDER_OPTIONS = [
-      'Male',
-      'Female',
-      'Non-Binary (neither male nor female)',
-      'Transgender: Female to Male',
-      'Transgender: Male to Female',
-      'Another gender identity',
-      DEMOGRAPHIC_OPTIONS_DEFAULT
+    'Male',
+    'Female',
+    'Non-Binary (neither male nor female)',
+    'Transgender: Female to Male',
+    'Transgender: Male to Female',
+    'Another gender identity',
+    DEMOGRAPHIC_OPTIONS_DEFAULT
   ].freeze
 
   CARD_RECEIPT_OPTIONS = [
-      CARD_RECEIPT_PICK_UP = "pick_up".freeze,
-      CARD_RECEIPT_DELIVER = "deliver_in_person".freeze,
-      CARD_RECEIPT_MAIL = "mail".freeze,
-      CARD_RECEIPT_DECIDE_LATER = "decide_later".freeze
+    CARD_RECEIPT_PICK_UP = "pick_up".freeze,
+    CARD_RECEIPT_DELIVER = "deliver_in_person".freeze,
+    CARD_RECEIPT_MAIL = "mail".freeze,
+    CARD_RECEIPT_DECIDE_LATER = "decide_later".freeze
   ].freeze
 
   LOCALE_LANGUAGE_MAPPING = {
-      "en" => 'English',
-      "zh" => 'Mandarin',
-      "ar" => 'Arabic',
-      "vi" => 'Vietnamese',
-      "ko" => 'Korean',
-      "tl" => 'Tagalog',
-      "es" => 'Spanish'
+    "en" => 'English',
+    "zh" => 'Mandarin',
+    "ar" => 'Arabic',
+    "vi" => 'Vietnamese',
+    "ko" => 'Korean',
+    "tl" => 'Tagalog',
+    "es" => 'Spanish'
   }.freeze
 
   has_paper_trail
 
-  scope :visible, -> {where.not(submitted_at: nil)}
-  scope :submitted, -> {unrejected.unpaused.where.not(submitted_at: nil)}
-  scope :approved, -> {unrejected.where.not(approved_at: nil)}
-  scope :disbursed, -> {where.not(disbursed_at: nil)}
-  scope :paused, -> {where.not(paused_at: nil)}
-  scope :unpaused, -> {where(paused_at: nil)}
-  scope :rejected, -> {where.not(rejected_at: nil)}
-  scope :unrejected, -> {where(rejected_at: nil)}
+  scope :visible, -> { where.not(submitted_at: nil) }
+  scope :submitted, -> { unrejected.unpaused.where.not(submitted_at: nil) }
+  scope :approved, -> { unrejected.where.not(approved_at: nil) }
+  scope :disbursed, -> { where.not(disbursed_at: nil) }
+  scope :paused, -> { where.not(paused_at: nil) }
+  scope :unpaused, -> { where(paused_at: nil) }
+  scope :rejected, -> { where.not(rejected_at: nil) }
+  scope :unrejected, -> { where(rejected_at: nil) }
   scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
 
-  scope :only_submitted, -> {submitted.where(approved_at: nil)}
-  scope :only_approved, -> {approved.where(disbursed_at: nil)}
-  scope :only_disbursed, -> {disbursed}
-  scope :only_paused, -> {paused}
-  scope :only_rejected, -> {rejected}
-  scope :only_waitlisted, -> {waitlisted}
+  scope :only_submitted, -> { submitted.where(approved_at: nil) }
+  scope :only_approved, -> { approved.where(disbursed_at: nil) }
+  scope :only_disbursed, -> { disbursed }
+  scope :only_paused, -> { paused }
+  scope :only_rejected, -> { rejected }
+  scope :only_waitlisted, -> { waitlisted }
 
   scope :query, (lambda do |input|
     if input.strip.starts_with?('APP-')
@@ -285,13 +285,13 @@ class AidApplication < ApplicationRecord
 
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
-        .where.not(id: aid_application.id)
-        .where("#{normalize_sql('name')} = #{normalize_sql('?')}", aid_application.name)
-        .where(
-            birthday: aid_application.birthday,
-            zip_code: aid_application.zip_code.strip
-        )
-        .match_by_address(aid_application)
+      .where.not(id: aid_application.id)
+      .where("#{normalize_sql('name')} = #{normalize_sql('?')}", aid_application.name)
+      .where(
+        birthday: aid_application.birthday,
+        zip_code: aid_application.zip_code.strip
+      )
+      .match_by_address(aid_application)
   end
 
   scope :match_by_address, ->(aid_application) do
@@ -326,7 +326,7 @@ class AidApplication < ApplicationRecord
 
   delegate :waitlist_position, to: :aid_application_waitlist, allow_nil: true
 
-  enum preferred_contact_channel: {text: "text", voice: "voice", email: "email"}, _prefix: "preferred_contact_channel"
+  enum preferred_contact_channel: { text: "text", voice: "voice", email: "email" }, _prefix: "preferred_contact_channel"
 
   auto_strip_attributes :email,
                         :preferred_language,
@@ -346,20 +346,20 @@ class AidApplication < ApplicationRecord
   validates :application_number, uniqueness: true, allow_nil: true
 
   with_options on: :eligibility do
-    validates :valid_work_authorization, inclusion: {in: [false], message: :eligibility_criteria}
+    validates :valid_work_authorization, inclusion: { in: [false], message: :eligibility_criteria }
     validate :eligibility_required
-    validates :no_cbo_association, inclusion: {in: [true], message: :confirmation_required}
-    validates :county_name, inclusion: {in: -> (aid_application) {aid_application.organization.county_names}, message: :county_required}
+    validates :no_cbo_association, inclusion: { in: [true], message: :confirmation_required }
+    validates :county_name, inclusion: { in: -> (aid_application) { aid_application.organization.county_names }, message: :county_required }
   end
 
   with_options on: [:submit, :contact_information] do
     validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: {message: :email}, if: -> {email_consent?}
+    validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }
   end
 
   with_options on: :submit do
     validates :name, presence: true
-    validates :birthday, presence: true, inclusion: {in: -> (_member) {'01/01/1900'.to_date..18.years.ago}, message: :birthday}
+    validates :birthday, presence: true, inclusion: { in: -> (_member) { '01/01/1900'.to_date..18.years.ago }, message: :birthday }
     validates :racial_ethnic_identity, presence: true
 
     validates :street_address, presence: true
@@ -374,19 +374,19 @@ class AidApplication < ApplicationRecord
       validates :mailing_zip_code, presence: true, five_digit_zip: true
     end
 
-    validates :email, mailgun_email: true, if: -> {email.present? && email_consent? && !confirmed_invalid_email? }
-    validates :email_consent, presence: true, unless: -> {sms_consent?}
+    validates :email, mailgun_email: true, if: -> { email.present? && email_consent? && !confirmed_invalid_email? }
+    validates :email_consent, presence: true, unless: -> { sms_consent? }
 
     validates :phone_number, twilio_phone_number: true, if: -> { phone_number.present? && sms_consent? && !confirmed_invalid_phone_number? }
 
-    validates :receives_calfresh_or_calworks, inclusion: {in: [true, false], message: :check_one_box_eligible}
+    validates :receives_calfresh_or_calworks, inclusion: { in: [true, false], message: :check_one_box_eligible }
     validate :unmet_needs_required
-    validates :attestation, inclusion: {in: [true], message: :attestation_required}
+    validates :attestation, inclusion: { in: [true], message: :attestation_required }
   end
 
   with_options on: :confirmation do
-    validates :contact_method_confirmed, inclusion: {in: [true], message: :confirmation_required}
-    validates :card_receipt_method, inclusion: {in: CARD_RECEIPT_OPTIONS, message: :required_question}
+    validates :contact_method_confirmed, inclusion: { in: [true], message: :confirmation_required }
+    validates :card_receipt_method, inclusion: { in: CARD_RECEIPT_OPTIONS, message: :required_question }
   end
 
   with_options if: :submitted_at do
@@ -560,19 +560,19 @@ class AidApplication < ApplicationRecord
   def send_approval_notification
     if sms_consent?
       ApplicationTexter.with(messageable: self).basic_message(
-          to: phone_number,
-          body: I18n.t(
-              'text_message.approved',
-              locale: locale
-          )
+        to: phone_number,
+        body: I18n.t(
+          'text_message.approved',
+          locale: locale
+        )
       ).deliver_later
     end
 
     if email_consent?
       ApplicationEmailer.with(messageable: self).basic_message(
-          to: email,
-          subject: I18n.t('email_message.approved.subject', locale: locale),
-          body: I18n.t('email_message.approved.body_html', locale: locale)
+        to: email,
+        subject: I18n.t('email_message.approved.subject', locale: locale),
+        body: I18n.t('email_message.approved.body_html', locale: locale)
       ).deliver_later
     end
   end
@@ -580,26 +580,26 @@ class AidApplication < ApplicationRecord
   def send_disbursement_notification
     if sms_consent?
       ApplicationTexter.with(messageable: self).basic_message(
-          to: phone_number,
-          body: I18n.t(
-              'text_message.activation',
-              activation_code: payment_card.activation_code,
-              ivr_phone_number: BlackhawkApi.ivr_phone_number,
-              locale: locale
-          )
+        to: phone_number,
+        body: I18n.t(
+          'text_message.activation',
+          activation_code: payment_card.activation_code,
+          ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          locale: locale
+        )
       ).deliver_later
     end
 
     if email_consent?
       ApplicationEmailer.with(messageable: self).basic_message(
-          to: email,
-          subject: I18n.t('email_message.activation.subject', locale: locale),
-          body: I18n.t(
-              'email_message.activation.body_html',
-              activation_code: payment_card.activation_code,
-              ivr_phone_number: BlackhawkApi.ivr_phone_number,
-              locale: locale
-          )
+        to: email,
+        subject: I18n.t('email_message.activation.subject', locale: locale),
+        body: I18n.t(
+          'email_message.activation.body_html',
+          activation_code: payment_card.activation_code,
+          ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          locale: locale
+        )
       ).deliver_later
     end
   end
@@ -632,13 +632,13 @@ class AidApplication < ApplicationRecord
 
   def status_human
     {
-        started: 'Unsubmitted',
-        submitted: 'Submitted',
-        approved: 'Approved',
-        disbursed: 'Disbursed',
-        paused: 'Paused',
-        rejected: 'Rejected',
-        waitlisted: "Waitlist ##{waitlist_position}"
+      started: 'Unsubmitted',
+      submitted: 'Submitted',
+      approved: 'Approved',
+      disbursed: 'Disbursed',
+      paused: 'Paused',
+      rejected: 'Rejected',
+      waitlisted: "Waitlist ##{waitlist_position}"
     }.fetch(status)
   end
 
@@ -677,13 +677,13 @@ class AidApplication < ApplicationRecord
 
   def disburse(payment_card, disburser:)
     payment_card.update!(
-        activation_code: payment_card.generate_activation_code,
-        aid_application: self
+      activation_code: payment_card.generate_activation_code,
+      aid_application: self
     )
 
     update!(
-        disbursed_at: Time.current,
-        disburser: disburser
+      disbursed_at: Time.current,
+      disburser: disburser
     )
   end
 
