@@ -29,8 +29,8 @@
 
   <div class="grid">
     <div class="grid__item width-one-third">
-      <div class="statistic-card statistics-remaining <% if current_organization.low_on_cards? || current_organization.using_waitlist? || current_organization.no_cards? %>statistics-card__warning<% end %>">
-        <p class="statistic-card__label">Remaining Cards<br>&nbsp;</p>
+      <div class="statistic-card statistics-uncommitted <% if current_organization.low_on_cards? || current_organization.using_waitlist? || current_organization.no_cards? %>statistics-card__warning<% end %>">
+        <p class="statistic-card__label">Uncommitted Cards<br></p>
         <p class="statistic-card__number">
           <%= number_with_delimiter(current_organization.total_payment_cards_count - current_organization.committed_aid_applications_count, locale: :en) %>
           <small style="font-size: 14px;"> / <%= number_with_delimiter(current_organization.total_payment_cards_count, locale: :en) %></small>
@@ -78,27 +78,27 @@
     </div>
 
     <div class="grid__item width-one-third">
-      <div class="statistic-card statistics-rejected">
-        <p class="statistic-card__label">Rejected</p>
+      <div class="statistic-card statistics-paused">
+        <p class="statistic-card__label">Paused</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter(current_organization.rejected_aid_applications_count, locale: :en) %>
+          <%= number_with_delimiter(current_organization.paused_aid_applications_count, locale: :en) %>
         </p>
       </div>
     </div>
-  </div>
 
-  <% if current_organization.waitlisted_aid_applications_count > 0 %>
-    <div class="grid">
-      <div class="grid__item width-one-third">
-        <div class="statistic-card statistics-submitted">
-          <p class="statistic-card__label">Waitlisted</p>
-          <p class="statistic-card__number">
-            <%= number_with_delimiter(current_organization.waitlisted_aid_applications_count, locale: :en) %>
-          </p>
+    <% if current_organization.waitlisted_aid_applications_count > 0 %>
+      <div class="grid">
+        <div class="grid__item width-one-third">
+          <div class="statistic-card statistics-submitted">
+            <p class="statistic-card__label">Waitlisted</p>
+            <p class="statistic-card__number">
+              <%= number_with_delimiter(current_organization.waitlisted_aid_applications_count, locale: :en) %>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="grid">
     <% if current_organization.counts_by_county.size > 1 %>
@@ -112,7 +112,9 @@
                 <th>Submitted</th>
                 <th>Approved</th>
                 <th>Disbursed</th>
-                <th>Total</th>
+                <th><strong>Total committed</strong></th>
+                <th>Paused</th>
+                <th>Waitlisted</th>
               </tr>
               </thead>
               <tbody>
@@ -122,7 +124,9 @@
                   <td><%= counts[:submitted] %></td>
                   <td><%= counts[:approved] %></td>
                   <td><%= counts[:disbursed] %></td>
-                  <td><%= counts[:total] %></td>
+                  <td><strong><%= counts[:total] %></strong></td>
+                  <td><%= counts[:paused] %></td>
+                  <td><%= counts[:waitlisted] %></td>
                 </tr>
               <% end %>
               </tbody>

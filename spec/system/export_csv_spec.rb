@@ -60,7 +60,7 @@ describe 'Export CSV', type: :system do
                                        "mailing_zip_code" => disbursed_app.mailing_zip_code,
                                        'payment_card_sequence_number' => disbursed_app.payment_card.sequence_number,
                                        'preferred_card_receipt_method' => disbursed_app.card_receipt_method,
-                                       'waitlist_position' => nil,
+                                       'waitlist_position' => "3",
                                        'submitter' => disbursed_app.submitter.name,
                                        'approver' => disbursed_app.approver.name,
                                        'disburser' => disbursed_app.disburser.name,
