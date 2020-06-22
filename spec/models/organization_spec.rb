@@ -107,18 +107,18 @@ RSpec.describe Organization, type: :model do
     end
 
     context 'for an organization with multiple counties' do
-      let(:org) { create :organization, name: 'Catholic Charities', slug: 'catholic' }
+      let(:org) { create :organization, name: 'MICOP', slug: 'micop', county_names: ['Santa Barbara', 'Ventura'] }
 
       it 'just has the correct county' do
-        result = org.submission_instructions(application_number: 'APP-1-12345', county: 'Contra Costa', locale: 'en')
+        result = org.submission_instructions(application_number: 'APP-1-12345', county: 'Santa Barbara', locale: 'en')
 
         expect(result).to be_present
-        expect(result).to eq I18n.t('submission_instructions.catholic.contra_costa', application_number: 'APP-1-12345', locale: 'en')
+        expect(result).to eq I18n.t('submission_instructions.micop.santa_barbara', application_number: 'APP-1-12345', locale: 'en')
 
-        default_result = org.submission_instructions(application_number: 'APP-1-12345', county: 'San Francisco', locale: 'en')
+        default_result = org.submission_instructions(application_number: 'APP-1-12345', county: 'Ventura', locale: 'en')
 
         expect(default_result).to be_present
-        expect(default_result).to eq I18n.t('submission_instructions.catholic.default', application_number: 'APP-1-12345', locale: 'en')
+        expect(default_result).to eq I18n.t('submission_instructions.micop.ventura', application_number: 'APP-1-12345', locale: 'en')
       end
     end
 
