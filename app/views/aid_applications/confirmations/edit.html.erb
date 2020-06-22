@@ -14,9 +14,7 @@
           <% if @aid_application.sms_consent? %>
             <%= f.cfa_input_field :phone_number, t('general.phone_number'), options: { data: { enable_on_change: '#contact-info-button' } } %>
           <% end %>
-          <% if @aid_application.email_consent? %>
-            <%= f.cfa_input_field :email, t('general.email_address'), options: { data: { enable_on_change: '#contact-info-button' } } %>
-          <% end %>
+          <%= f.cfa_input_field :email, t('general.email_address'), options: { data: { enable_on_change: '#contact-info-button' } } %>
           <br>
           <%= f.button t('.application_number.edit_contact'), type: 'submit', class: 'button button--small' %>
         </fieldset>

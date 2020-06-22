@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def activation_code_notification_description(aid_application)
-    if aid_application.sms_consent? && aid_application.email_consent?
+    if aid_application.sms_consent? && aid_application.email.present?
       html_output = <<~HTML
         <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}</strong> and email at <strong>#{aid_application.email}.</strong></span>
       HTML
@@ -38,7 +38,7 @@ module ApplicationHelper
       html_output = <<~HTML
         <span>text message at <strong>#{add_dashes_to_phone_number(aid_application.phone_number)}.</strong></span>
       HTML
-    elsif aid_application.email_consent?
+    elsif aid_application.email.present?
       html_output = <<~HTML
         <span>email at <strong>#{aid_application.email}.</strong></span>
       HTML

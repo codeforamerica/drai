@@ -71,7 +71,7 @@ class User < ApplicationRecord
   scope :deactivated, -> { where.not(deactivated_at: nil) }
   scope :supervisor, -> { where(supervisor: true) }
 
-  validates :email, presence: true, email: true, uniqueness: { case_sensitive: true }
+  validates :email, presence: true, email: true, uniqueness: { case_sensitive: false }
   validates :password, confirmation: true, format: { with: PASSWORD_REGEX, message: :password_complexity }, if: :password_required?
   validates :password, presence: true, on: :account_setup, unless: :password_present?
 
