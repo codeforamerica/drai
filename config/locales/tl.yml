@@ -313,12 +313,12 @@ tl:
         Ang kodigo ng pagiging aktibo para sa iyong kabayaran sa kard ay %{activation_code}.</p><p>Tumawag
         %{ivr_phone_number} upang maging aktibo ang iyong kard. </p>"
       subject: Kodigo ng pagiging aktibo para sa kabayaran sa kard ng Tulong sa Sakuna
-    app_id:
+    application_number:
       body_html: "<p> Mabuhay!</p><p> Ang iyong aplikasyon para sa pinansiyal na tulong
-        ay naisumite. Ang iyong numero ng ID sa aplikasyon ay %{app_id}.</p><p> Kinakailangan
+        ay naisumite. Ang iyong numero ng ID sa aplikasyon ay %{application_number}.</p><p> Kinakailangan
         mo ang numero na ito at ang iyong mga beripikasyon na dokumento upang makatanggap
         ng kabayaran sa kard. </p><p>- Ang Kuponan ng DRAI</p> "
-      subject: Naisumite ang tulong sa aplikasyon %{app_id}
+      subject: Naisumite ang tulong sa aplikasyon %{application_number}
     approved:
       body_html: |
         <p>Hello!</p>
@@ -376,9 +376,6 @@ tl:
     activation: Ang iyong aplikasyon para sa Tulong sa Sakuna ay naaprubahan. Ang
       kodigo ng pagiging aktibo para sa iyong kabayaran na kard ay %{activation_code}.
       Tumawag sa %{ivr_phone_number} upang i-activate ang iyong kard.
-    app_id: Ang iyong aplikasyon para sa tulong pinansiyal ay naisumite. Ang iyong
-      numero ng ID sa aplikasyon ay %{app_id}. Kailangan mo ang numero na ito at ang
-      iyong beripikasyon na mga dokumentong upang makatanggap ng kabayaran sa kard.
     approved: Your application for Disaster Assistance has been approved! We’ll let
       you know when your payment card has been assigned to you.
     auto_response: Ito ay isang automatikong tugon mula sa Kodigo ng Tulong sa Sakuna
@@ -399,3 +396,7 @@ tl:
     auto_response: Ito ay isang awtomatikong mensahe mula sa Kodigo sa Tulong sa Sakuna
       ng Amerika. Para sa tulong sa iyong aplikasyon, tumawag sa organisasyon na tumulong
       sa iyong aplikasyon. Para sa tulong sa iyong kabayaran sa kard, tumawag sa 1-877-610-1075
+  submission_instructions:
+    default: Ang iyong aplikasyon para sa tulong pinansiyal ay naisumite. Ang iyong
+      numero ng ID sa aplikasyon ay %{application_number}. Kailangan mo ang numero na ito at ang
+      iyong beripikasyon na mga dokumentong upang makatanggap ng kabayaran sa kard.

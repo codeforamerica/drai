@@ -75,4 +75,62 @@ RSpec.describe Organization, type: :model do
                                                   })
     end
   end
+
+  describe '#contact_information_for_county' do
+    context 'when contact_information is just a phone number' do
+      let(:org) { create :organization, contact_information: '555-555-5555' }
+      it 'returns the contact information' do
+        expect(org.contact_information_for_county('San Francisco')).to eq '555-555-5555'
+      end
+    end
+
+    context 'when contact_information contains a slash with multiple counties' do
+      let(:org) { create :organization, contact_information: 'San Mateo County: 555-555-5555 / San Francisco County: 666-666-6666' }
+
+      it 'returns the contact information' do
+        expect(org.contact_information_for_county('San Mateo')).to eq '555-555-5555'
+        expect(org.contact_information_for_county('San Francisco')).to eq '666-666-6666'
+      end
+    end
+  end
+
+  describe '#submission_instructions' do
+    context 'for an organization with only one county' do
+      let(:org) { create :organization, name: 'CHIRLA', slug: 'chirla' }
+
+      it 'just has the simple info' do
+        result = org.submission_instructions(application_number: 'APP-1-12345', county: 'San Francisco', locale: 'en')
+
+        expect(result).to be_present
+        expect(result).to eq I18n.t('submission_instructions.chirla', application_number: 'APP-1-12345', locale: 'en')
+      end
+    end
+
+    context 'for an organization with multiple counties' do
+      let(:org) { create :organization, name: 'Catholic Charities', slug: 'catholic' }
+
+      it 'just has the correct county' do
+        result = org.submission_instructions(application_number: 'APP-1-12345', county: 'Contra Costa', locale: 'en')
+
+        expect(result).to be_present
+        expect(result).to eq I18n.t('submission_instructions.catholic.contra_costa', application_number: 'APP-1-12345', locale: 'en')
+
+        default_result = org.submission_instructions(application_number: 'APP-1-12345', county: 'San Francisco', locale: 'en')
+
+        expect(default_result).to be_present
+        expect(default_result).to eq I18n.t('submission_instructions.catholic.default', application_number: 'APP-1-12345', locale: 'en')
+      end
+    end
+
+    context 'for an organization without a custom message' do
+      let(:org) { create :organization, name: 'UFW', slug: 'cabsc', contact_information: '555-555-5555' }
+
+      it 'uses the default message' do
+        result = org.submission_instructions(application_number: 'APP-1-12345', county: 'Contra Costa', locale: 'en')
+
+        expect(result).to be_present
+        expect(result).to eq I18n.t('submission_instructions.default', application_number: 'APP-1-12345', contact_information: '555-555-5555', locale: 'en')
+      end
+    end
+  end
 end

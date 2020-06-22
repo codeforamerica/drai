@@ -271,13 +271,13 @@ vi:
         <p>Đơn xin Trợ Cấp Thảm Họa của quý vị đã được chấp thuận. Mã Kích Hoạt cho thẻ trợ cấp của quý vị là %{activation_code}.</p>
         <p>Gọi số %{ivr_phone_number} để kích hoạt thẻ của quý vị.</p>
       subject: Mã kích hoạt cho thẻ Trợ Cấp Thảm Họa
-    app_id:
+    application_number:
       body_html: |
         <p>Xin chào!</p>
-        <p>Hồ sơ xin trợ cấp của quý vị đã được nộp. Số hồ sơ của quý vị là %{app_id}.</p>
+        <p>Hồ sơ xin trợ cấp của quý vị đã được nộp. Số hồ sơ của quý vị là %{application_number}.</p>
         <p>Quý vị sẽ cần số này và các tài liệu xác minh để nhận thẻ trợ cấp.</p>
         <p>- Đội Ngũ DRAI</p>
-      subject: Đã nộp hồ sơ xin trợ cấp %{app_id}
+      subject: Đã nộp hồ sơ xin trợ cấp %{application_number}
     approved:
       body_html: |
         <p>Hello!</p>
@@ -332,8 +332,8 @@ vi:
     activation: Hồ sơ xin Trợ Cấp Thảm Họa của quý vị đã được phê duyệt. Mã Kích Hoạt
       cho thẻ trợ cấp của quý vị là %{activation_code}. Gọi %{ivr_phone_number} để
       kích hoạt thẻ của quý vị.
-    app_id: Đơn xin trợ cấp của quý vị đã được nộp. Số hồ sơ đăng ký của quý vị là
-      %{app_id}. Quý vị sẽ cần số này và tài liệu xác minh để nhận thẻ trợ cấp.
+    application_number: Đơn xin trợ cấp của quý vị đã được nộp. Số hồ sơ đăng ký của quý vị là
+      %{application_number}. Quý vị sẽ cần số này và tài liệu xác minh để nhận thẻ trợ cấp.
     approved: Your application for Disaster Assistance has been approved! We’ll let
       you know when your payment card has been assigned to you.
     auto_response: Đây là trả lời tự động từ chương trình Trợ Cấp Thảm Họa Code for
@@ -355,3 +355,6 @@ vi:
       America. Để được trợ giúp với hồ sơ của quý vị, hãy gọi cho tổ chức mà đã giúp
       quý vị đăng ký. Để được trợ giúp với thẻ trợ cấp của quý vị, hãy gọi số <card
       phone number>.
+  submission_instructions:
+    default: Đơn xin trợ cấp của quý vị đã được nộp. Số hồ sơ đăng ký của quý vị là
+      %{application_number}. Quý vị sẽ cần số này và tài liệu xác minh để nhận thẻ trợ cấp.

@@ -280,13 +280,13 @@ es:
         <p>El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.</p>
         <p>Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.</p>
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
-    app_id:
+    application_number:
       body_html: |
         <p>¡Hola!</p>
-        <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}.</p>
+        <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{application_number}.</p>
         <p>Si tiene preguntas sobre entregar documentos, comuníquese con la organización que le asistió al %{contact_information}</p>
         <p>- El equipo de DRAI</p>
-      subject: Solicitud de asistencia entregada %{app_id}
+      subject: Solicitud de asistencia entregada %{application_number}
     approved:
       body_html: |
         <p>¡Hola!</p>
@@ -297,12 +297,6 @@ es:
       por desastre de la organización Code for America.</p> <p>Para obtener ayuda
       con su caso, comuníquese con la organización que le ayudó con su solicitud.</p>
       <p>Para obtener ayuda con su tarjeta de pago, llame al %{ivr_phone_number}.</p>
-    chir_app_id:
-      body_html: |
-        <p>¡Hola!</p>
-        <p>Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{app_id}.</p>
-        <p>Favor de mandar comprobante de identidad, dirección, y como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al docs@chirla.org.</p>
-        <p>- El equipo de DRAI</p>
   general:
     activate: Activar
     affirmative: Sí
@@ -349,20 +343,13 @@ es:
     activation: El código es %{activation_code} para activar su tarjeta de Asistencia
       de Desastre. Cuando recibe su tarjeta, llame al número detrás de la tarjeta
       para activarla.
-    app_id: 'Su solicitud para asistencia económica ha sido entregada. El número de
-      identificación de su solicitud es %{app_id}. Si tiene preguntas sobre entregar
-      documentos, comuníquese con la organización que le asistió al: %{contact_information}'
+    application_number:
     approved: "¡Su solicitud de Asistencia de Desastre fue aprobada! Le avisaremos
       cuando se le haya asignado su tarjeta."
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud. Puede obtener más información
       en https://ca-drai.org/privacy.
-    chir_app_id: 'Su solicitud para asistencia económica ha sido entregada. El número
-      de identificación de su solicitud es %{app_id}. Favor de mandar comprobante
-      de identidad, dirección, y como le ha afectado la pandemia (síntomas del coronavirus,
-      pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo
-      electrónico o texto al docs@chirla.org.'
     help: Esta es una respuesta automatizada de la asistencia por desastre de la organización
       Code for America. Para obtener ayuda con su caso, comuníquese con la organización
       que le ayudó con su solicitud. Puede obtener más información en https://ca-drai.org/privacy.
@@ -379,3 +366,25 @@ es:
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud.  Para obtener ayuda con su
       tarjeta de pago, llame al 1-877-610-1075.
+  submission_instructions:
+    default: 'Su solicitud para asistencia económica ha sido entregada. El número de
+                   identificación de su solicitud es %{application_number}. Si tiene preguntas sobre entregar
+                   documentos, comuníquese con la organización que le asistió al: %{contact_information}'
+    catholic:
+      santa_clara: "Su solicitud para asistencia económica ha sido entregada a Catholic Charities. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) al drai@ccsj.org"
+      alameda: "Su solicitud para asistencia económica ha sido entregada a Catholic Charities. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) al drai@cceb.org"
+      contra_costa: "Su solicitud para asistencia económica ha sido entregada a Catholic Charities. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) al drai@cceb.org"
+      default: "Su solicitud para asistencia económica ha sido entregada a Catholic Charities. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) al hope@catholiccharitiessf.org"
+    chirla: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia por correo electrónico o texto al docs@chirla.org."
+    caracen: "Su solicitud para asistencia económica ha sido entregada a CARECEN. El número de identificación de su solicitud es %{application_number}. Un trabajador de CARECEN le llamara la semana que viene. Mientas que espera, puede comenzar a juntar comprobantes de identidad, dirección, y de como le ha afectado la pandemia. Le agradecemos su paciencia."
+    aaaj: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia al https://bit.ly/AJLA-DRAI . Favor de solo incluir los numeros de su confirmacion APP-ID cuando la forma se lo pide. Por exemplo, APP-1-123-123 seria 1123123."
+    micop:
+      ventura: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de Identificación es %{application_number}. Por favor de enviarnos por correo electrónico o texto copia de su identificación, prueba de domicilio y documento de haber sido impactado por COVID19 a: drai.sb@mixteco.org o 805-791-2003"
+      santa_barbara: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de Identificación es %{application_number}. Por favor de enviarnos por correo electrónico o texto copia de su identificación, prueba de domicilio y documento de haber sido impactado por COVID19 a: drai.vc@mixteco.org o 805-256-1001"
+    crlaf: "Su solicitud para un pago de alivio por desastre ha sido sometida. Su número de identificación es %{application_number}. Si aún no lo ha hecho, por favor mande por correo electrónico o texto su comprobante de identidad, su domicilio, y documentos comprobando su necesidad para estos pagos directamente a su trabajadora de caso."
+    todec: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al perris@todec.org"
+    jfssd:
+    cabsc:
+    ufw:
+    chd:
+    sbcsc:

@@ -534,54 +534,25 @@ class AidApplication < ApplicationRecord
   end
 
   def send_submission_notification
-    contact_information = if organization.contact_information.include?('/')
-                            contacts_by_county = organization.contact_information
-                                                     .split('/')
-                                                     .each_with_object({}) do |county_info, obj|
-                              matches = county_info.match(/(.*) County\: (.*)/)
-                              county_name = matches[1].strip
-                              phone_number = matches[2].strip
+    submission_message = organization.submission_instructions(application_number: application_number, county: county_name, locale: locale)
 
-                              obj[county_name] = phone_number
-                            end
-
-                            contacts_by_county[county_name]
-                          else
-                            organization.contact_information
-                          end
     if sms_consent?
-      text_msg_body = if chir_app?
-                        I18n.t('text_message.chir_app_id', app_id: application_number, locale: locale)
-                      else
-                        I18n.t('text_message.app_id',
-                               app_id: application_number,
-                               contact_information: contact_information,
-                               locale: locale
-                        )
-                      end
-
       ApplicationTexter.with(messageable: self).basic_message(
-          to: phone_number,
-          body: I18n.t('text_message.subscribed', locale: locale),
+        to: phone_number,
+        body: I18n.t('text_message.subscribed', locale: locale),
       ).deliver_later
 
       ApplicationTexter.with(messageable: self).basic_message(
-          to: phone_number,
-          body: text_msg_body
+        to: phone_number,
+        body: submission_message
       ).deliver_later
     end
 
     if email_consent?
-      email_body = if chir_app?
-                     I18n.t('email_message.chir_app_id.body_html', app_id: application_number, locale: locale)
-                   else
-                     I18n.t('email_message.app_id.body_html', app_id: application_number, contact_information: contact_information, locale: locale)
-                   end
-
       ApplicationEmailer.with(messageable: self).basic_message(
-          to: email,
-          subject: I18n.t('email_message.app_id.subject', app_id: application_number, locale: locale),
-          body: email_body
+        to: email,
+        subject: I18n.t('email_message.application_number.subject', application_number: application_number, locale: locale),
+        body: submission_message
       ).deliver_later
     end
   end

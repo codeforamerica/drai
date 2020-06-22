@@ -13,6 +13,7 @@
         <th>Approved</th>
         <th>Disbursed</th>
         <th>Available</th>
+        <th>Submission Instructions</th>
       </tr>
       </thead>
       <tbody>
@@ -26,6 +27,18 @@
           <td><%= organization.approved_aid_applications_count %></td>
           <td><%= organization.disbursed_aid_applications_count %></td>
           <td><%= organization.total_payment_cards_count - organization.committed_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
+          <td>
+            <%
+              messages = organization.county_names.each_with_object({}) do |county, obj|
+                message = organization.submission_instructions(application_number: "APP-#{organization.id}-XXX-XXX", county: county, locale: I18n.locale)
+                (obj[message] ||= []) << county
+              end
+
+              messages.each do |message, counties|
+            %>
+              <p><strong><%= counties.join(', ') %>:</strong> <%= message %></p>
+              <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>
