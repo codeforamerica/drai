@@ -329,6 +329,7 @@ class AidApplication < ApplicationRecord
   enum preferred_contact_channel: { text: "text", voice: "voice", email: "email" }, _prefix: "preferred_contact_channel"
 
   auto_strip_attributes :email,
+                        :phone_number,
                         :preferred_language,
                         :country_of_origin,
                         :racial_ethnic_identity,
@@ -354,7 +355,8 @@ class AidApplication < ApplicationRecord
 
   with_options on: [:submit, :contact_information] do
     validates :phone_number, presence: true, phone_number: true
-    validates :email, presence: true, email: { message: :email }, if: -> { email_consent? }
+    validates :email, presence: true, if: -> { email_consent? }
+    validates :email, email: { message: :email }, if: -> { email.present? }
   end
 
   with_options on: :submit do
@@ -374,8 +376,9 @@ class AidApplication < ApplicationRecord
       validates :mailing_zip_code, presence: true, five_digit_zip: true
     end
 
-    validates :email, mailgun_email: true, if: -> { email.present? && email_consent? && !confirmed_invalid_email? }
+    # TODO: add a presence check to `email` attribute once email_consent is fully deprecated
     validates :email_consent, presence: true, unless: -> { sms_consent? }
+    validates :email, mailgun_email: true, if: -> { email.present? && !confirmed_invalid_email? }
 
     validates :phone_number, twilio_phone_number: true, if: -> { phone_number.present? && sms_consent? && !confirmed_invalid_phone_number? }
 
@@ -548,7 +551,7 @@ class AidApplication < ApplicationRecord
       ).deliver_later
     end
 
-    if email_consent?
+    if email.present?
       ApplicationEmailer.with(messageable: self).basic_message(
         to: email,
         subject: I18n.t('email_message.application_number.subject', application_number: application_number, locale: locale),
@@ -568,7 +571,7 @@ class AidApplication < ApplicationRecord
       ).deliver_later
     end
 
-    if email_consent?
+    if email.present?
       ApplicationEmailer.with(messageable: self).basic_message(
         to: email,
         subject: I18n.t('email_message.approved.subject', locale: locale),
@@ -590,7 +593,7 @@ class AidApplication < ApplicationRecord
       ).deliver_later
     end
 
-    if email_consent?
+    if email.present?
       ApplicationEmailer.with(messageable: self).basic_message(
         to: email,
         subject: I18n.t('email_message.activation.subject', locale: locale),

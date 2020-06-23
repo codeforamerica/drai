@@ -564,7 +564,7 @@ RSpec.describe AidApplication, type: :model do
   describe '#send_submission_notification' do
     context 'when SMS consent' do
       let(:preferred_language) {'English'}
-      let(:aid_application) {create :aid_application, :submitted, email_consent: false, preferred_language: preferred_language}
+      let(:aid_application) {create :aid_application, :submitted, email: '', preferred_language: preferred_language}
 
       it 'sends an SMS welcome message and then SMS application number message' do
         perform_enqueued_jobs do
@@ -701,21 +701,17 @@ RSpec.describe AidApplication, type: :model do
       let(:aid_application) {create :aid_application, :disbursed, email_consent: false, preferred_language: preferred_language}
 
       it 'sends an SMS' do
-        expect do
+        perform_enqueued_jobs do
           aid_application.send_disbursement_notification
-        end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                   .with("ApplicationTexter", "basic_message", "deliver_now",
-                         params: {messageable: aid_application},
-                         args: [{
-                                    to: aid_application.phone_number,
-                                    body: I18n.t(
-                                        'text_message.activation',
-                                        activation_code: aid_application.payment_card.activation_code,
-                                        ivr_phone_number: BlackhawkApi.ivr_phone_number,
-                                        locale: 'en'
-                                    )
-                                }]
-                   )
+        end
+
+        sms_message = ActionMailer::Base.deliveries.find { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+        expect(sms_message.body).to eq I18n.t(
+          'text_message.activation',
+          activation_code: aid_application.payment_card.activation_code,
+          ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          locale: 'en'
+        )
       end
 
       it 'records a Messages objects' do
@@ -723,7 +719,7 @@ RSpec.describe AidApplication, type: :model do
           aid_application.send_disbursement_notification
         end
 
-        expect(aid_application.message_logs.size).to eq 1
+        expect(aid_application.message_logs.size).to eq 2
       end
 
       context 'with preferred language set to Spanish' do
