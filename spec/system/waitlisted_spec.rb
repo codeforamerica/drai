@@ -7,6 +7,10 @@ describe 'Approve aid application', type: :system do
   let!(:aid_applications) { create_list :aid_application, 2, :submitted, creator: assister }
   let!(:waitlisted_application) { create :aid_application, :submitted, creator: assister }
 
+  before do
+    AidApplicationWaitlist.refresh(concurrently: false)
+  end
+
   it 'shows waitlisted behaviors' do
     sign_in supervisor
     visit root_path
@@ -31,6 +35,8 @@ describe 'Approve aid application', type: :system do
     accept_alert do
       click_on 'Reject application'
     end
+
+    AidApplicationWaitlist.refresh(concurrently: false)
 
     # Verify that the previous waitlisted application is not on the waitlist
     visit root_path

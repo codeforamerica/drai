@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_213528) do
+ActiveRecord::Schema.define(version: 2020_06_24_180813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,7 +250,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_213528) do
   add_index "aid_application_searches", "to_tsvector('english'::regconfig, searchable_data)", name: "index_aid_application_searches_on_searchable_data", using: :gin
   add_index "aid_application_searches", ["aid_application_id"], name: "index_aid_application_searches_on_aid_application_id", unique: true
 
-  create_view "aid_application_waitlists", sql_definition: <<-SQL
+  create_view "aid_application_waitlists", materialized: true, sql_definition: <<-SQL
       WITH positions AS (
            SELECT aid_applications.id AS aid_application_id,
               aid_applications.organization_id,
@@ -267,4 +267,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_213528) do
      FROM positions
     WHERE (positions.waitlist_position > 0);
   SQL
+  add_index "aid_application_waitlists", ["aid_application_id"], name: "index_aid_application_waitlists_on_aid_application_id", unique: true
+  add_index "aid_application_waitlists", ["organization_id", "aid_application_id"], name: "index_aid_application_waitlists_on_org_id_and_app_id"
+  add_index "aid_application_waitlists", ["organization_id", "county_name"], name: "index_aid_application_waitlists_on_org_id_and_county"
+
 end

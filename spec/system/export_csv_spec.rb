@@ -13,6 +13,10 @@ describe 'Export CSV', type: :system do
   let!(:unpaused_aid_applications) { create_list :aid_application, 2, :unpaused, organization: supervisor.organization }
   let!(:other_aid_applications) { create_list :aid_application, 2, :submitted }
 
+  before do
+    AidApplicationWaitlist.refresh
+  end
+
   specify do
     sign_in supervisor
 
