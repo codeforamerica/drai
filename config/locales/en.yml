@@ -466,7 +466,7 @@ en:
     cabsc:
     ufw:
     chd:
-    sbcsc:
+    sbcsc: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please submit your documents via text/email as instructed by the Assister during your call. If you have questions, please contact the Assister at the phone number/email they provided. If you do not have the contact info for the person who assisted you, you may call (909) 521-7535 to request it."
 
   voice_message:
     auto_response: This is an automated message from Code for America Disaster Assistance.

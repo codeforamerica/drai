@@ -385,4 +385,4 @@ es:
     cabsc:
     ufw:
     chd:
-    sbcsc:
+    sbcsc: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de identificación es %{application_number}. Favor de enviar sus documentos de la forma que se le indico durante su llamada. Si tiene preguntas, contacte a la persona que le asistió con su aplicación via texto o correo electrónico. Si no tiene la información de contacto de la persona que le asistió, lo puede pedir llamando al (909) 521-7535."
