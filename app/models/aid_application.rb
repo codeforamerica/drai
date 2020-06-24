@@ -233,7 +233,6 @@ class AidApplication < ApplicationRecord
   scope :rejected, -> { where.not(rejected_at: nil) }
   scope :unrejected, -> { where(rejected_at: nil) }
   scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
-  scope :unwaitlisted, -> { left_joins(:aid_application_waitlist).where(aid_application_waitlists: { waitlist_position: nil }) }
 
   scope :only_submitted, -> { submitted.where(approved_at: nil) }
   scope :only_approved, -> { approved.where(disbursed_at: nil) }

@@ -25,7 +25,7 @@ class Organization < ApplicationRecord
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
         WHERE
-          aid_applications.organization_id = organizations.id
+          organization_id = organizations.id
           AND submitted_at IS NOT NULL
           AND paused_at IS NULL
           AND rejected_at IS NULL
@@ -34,7 +34,7 @@ class Organization < ApplicationRecord
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
         WHERE
-          aid_applications.organization_id = organizations.id 
+          organization_id = organizations.id 
           AND submitted_at IS NOT NULL
           AND paused_at IS NULL
           AND approved_at IS NULL

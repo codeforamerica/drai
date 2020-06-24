@@ -42,7 +42,7 @@ RSpec.describe 'CBO dashboard', type: :system do
     sign_in assister
     visit root_path
 
-    within '.statistics-uncommitted' do
+    within '.statistics-remaining' do
       expect(page).to have_content '6' # remaining
       expect(page).to have_content '10' # total
     end
@@ -56,6 +56,10 @@ RSpec.describe 'CBO dashboard', type: :system do
     end
 
     within '.statistics-disbursed' do
+      expect(page).to have_content '1'
+    end
+
+    within '.statistics-rejected' do
       expect(page).to have_content '1'
     end
   end
@@ -92,7 +96,7 @@ RSpec.describe 'CBO dashboard', type: :system do
       sign_in assister
       visit root_path
 
-      within '.statistics-uncommitted' do
+      within '.statistics-remaining' do
         expect(page).to have_content '0' # remaining
         expect(page).to have_content '2' # total
       end
