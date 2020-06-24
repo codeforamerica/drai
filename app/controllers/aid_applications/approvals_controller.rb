@@ -1,7 +1,6 @@
 module AidApplications
   class ApprovalsController < BaseController
     before_action :authenticate_supervisor!
-    before_action :authenticate_admin!, only: [:unapprove, :unreject]
     before_action :ensure_submitted
     before_action :prevent_waitlist_approval, only: [:approve]
     before_action :prevent_double_approval, only: [:approve, :reject]
@@ -46,6 +45,10 @@ module AidApplications
         approved_at: nil,
         approver: nil
       )
+
+      if params['form_action'] == 'reject'
+        @aid_application.save_and_reject(rejecter: current_user)
+      end
 
       redirect_to({ action: :edit }, notice: "#{@aid_application.application_number} has been un-approved.")
     end

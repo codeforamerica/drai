@@ -13,62 +13,66 @@
       </p>
 
       <% unless @aid_application.disbursed? %>
-        <p><%= link_to "Disburse Payment Card", edit_organization_aid_application_disbursement_path(current_organization, @aid_application) %></p>
+        <div class="spacing-above-35 spacing-below-25">
+          <div style="display:inline-block;">
+            <%= button_to({ action: :unapprove },
+                          method: :put,
+                          data: { confirm: "Are you sure you want to un-approve this application?" },
+                          class: "button button--small button--danger") { "Un-approve" } %>
+          </div>
+          <div style="display:inline-block;">
+            <%= button_to({ action: :unapprove },
+                          method: :put,
+                          name: 'form_action',
+                          value: 'reject',
+                          data: { confirm: "Are you sure you want to un-approve and reject this application?" },
+                          class: "button button--small button--danger") { "Un-approve and reject" } %>
+          </div>
+        </div>
+        <p>
+          <%= link_to "Continue to disbursement", edit_organization_aid_application_disbursement_path(current_organization, @aid_application), class: 'button button--primary' %>
+        </p>
       <% end %>
     <% elsif @aid_application.rejected? %>
       <p>
         Application was rejected on <strong><%= @aid_application.rejected_at.to_s(:month_day_year) %></strong>
         by <strong><%= @aid_application.rejecter.name %></strong>.
       </p>
-    <% else %>
-        <% if @aid_application.waitlisted? %>
-          <p class="notice notice--error">
-            This application is <strong>Number <%= @aid_application.waitlist_position %></strong> on the waitlist.
-          </p>
-        <% end %>
-
-        <div class="form-card__footer">
-          <%= button_to({ action: :approve },
-                        method: :put,
-                        name: 'form_action',
-                        value: 'approve_and_exit',
-                        disabled: @aid_application.waitlisted?,
-                        class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and exit" } %>
-
-          <%= button_to({ action: :approve },
-                        method: :put,
-                        name: 'form_action',
-                        value: 'submit',
-                        disabled: @aid_application.waitlisted?,
-                        class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and continue to disbursement" } %>
-          <br>
-          <br>
-
-          <%= button_to({ action: :reject },
-                        method: :put,
-                        class: "button button--danger",
-                        data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
-        </div>
-    <% end %>
-  </div>
-
-  <% if current_user.admin? && !@aid_application.disbursed? && (@aid_application.approved? || @aid_application.rejected? )  %>
-    <div class="form-card">
-      <p><em>This is only visible to Admins.</em></p>
-
-      <% if @aid_application.approved? %>
-        <%= button_to({ action: :unapprove },
-                      method: :put,
-                      data: { confirm: "Are you sure you want to un-approve this application?" },
-                      class: "button button--danger") { "Un-Approve" } %>
-      <% end %>
-
-      <% if @aid_application.rejected? %>
+      <p class="spacing-above-35">
         <%= button_to({ action: :unreject },
                       method: :put,
                       data: { confirm: "Are you sure you want to un-reject this application?" },
-            class: "button button--danger") { "Un-Reject" } %>
+                      class: "button button--small button--danger") { "Un-reject" } %>
+      </p>
+    <% else %>
+      <% if @aid_application.waitlisted? %>
+        <p class="notice notice--error">
+          This application is <strong>Number <%= @aid_application.waitlist_position %></strong> on the waitlist.
+        </p>
       <% end %>
-    </div>
-  <% end %>
+
+      <div class="form-card__footer">
+        <%= button_to({ action: :approve },
+                      method: :put,
+                      name: 'form_action',
+                      value: 'approve_and_exit',
+                      disabled: @aid_application.waitlisted?,
+                      class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and exit" } %>
+
+        <%= button_to({ action: :approve },
+                      method: :put,
+                      name: 'form_action',
+                      value: 'submit',
+                      disabled: @aid_application.waitlisted?,
+                      class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and continue to disbursement" } %>
+        <br>
+        <br>
+
+        <%= button_to({ action: :reject },
+                      method: :put,
+                      class: "button button--danger",
+                      data: { confirm: "Are you sure you want to reject this application?" }) { "Reject application" } %>
+      </div>
+    <% end %>
+  </div>
 </div>

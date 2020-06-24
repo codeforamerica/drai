@@ -51,4 +51,21 @@ describe AidApplications::ApprovalsController do
       expect(response).to redirect_to organization_dashboard_path(supervisor.organization)
     end
   end
+
+  describe '#unapprove' do
+    let(:aid_application) { create :aid_application, :submitted, organization: supervisor.organization }
+
+    it 'unapproves the application' do
+      put :unreject, params: {
+        aid_application_id: aid_application.id,
+        organization_id: supervisor.organization.id
+      }
+
+      expect(aid_application.reload).to have_attributes(
+                                          approved_at: nil,
+                                          approver: nil,
+                                          status: :submitted
+                                        )
+    end
+  end
 end
