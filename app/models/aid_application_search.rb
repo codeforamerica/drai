@@ -15,8 +15,8 @@ class AidApplicationSearch < ApplicationRecord
 
   belongs_to :aid_application
 
-  def self.refresh
-    Scenic.database.refresh_materialized_view(table_name, concurrently: false, cascade: false)
+  def self.refresh(concurrently: true)
+    Scenic.database.refresh_materialized_view(table_name, concurrently: concurrently, cascade: false)
   end
 
   private

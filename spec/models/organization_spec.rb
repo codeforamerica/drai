@@ -43,6 +43,10 @@ RSpec.describe Organization, type: :model do
     let!(:sf_unpaused) { create_list :aid_application, 2, :unpaused, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sm_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Mateo', zip_code: '94401' }
 
+    before do
+      AidApplicationWaitlist.refresh
+    end
+
     it 'returns each county with individual counts' do
       expect(organization.counts_by_county).to eq({
                                                     "Marin" => {
