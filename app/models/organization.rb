@@ -24,25 +24,21 @@ class Organization < ApplicationRecord
       (
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
-        LEFT JOIN aid_application_waitlists ON aid_application_waitlists.aid_application_id = aid_applications.id
         WHERE
           aid_applications.organization_id = organizations.id
           AND submitted_at IS NOT NULL
           AND paused_at IS NULL
           AND rejected_at IS NULL
-          AND waitlist_position IS NULL
       ) AS committed_aid_applications_count,
       (
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
-        LEFT JOIN aid_application_waitlists ON aid_application_waitlists.aid_application_id = aid_applications.id
         WHERE
           aid_applications.organization_id = organizations.id 
           AND submitted_at IS NOT NULL
           AND paused_at IS NULL
           AND approved_at IS NULL
           AND rejected_at IS NULL
-          AND waitlist_position IS NULL
       ) AS submitted_aid_applications_count,
       (
         SELECT COUNT(aid_applications.id)
