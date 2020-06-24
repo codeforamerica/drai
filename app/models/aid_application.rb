@@ -225,7 +225,7 @@ class AidApplication < ApplicationRecord
   has_paper_trail
 
   scope :visible, -> { where.not(submitted_at: nil) }
-  scope :submitted, -> { unrejected.unpaused.where.not(submitted_at: nil) }
+  scope :submitted, -> { unrejected.unpaused.unwaitlisted.where.not(submitted_at: nil) }
   scope :approved, -> { unrejected.where.not(approved_at: nil) }
   scope :disbursed, -> { where.not(disbursed_at: nil) }
   scope :paused, -> { where.not(paused_at: nil) }
@@ -233,6 +233,7 @@ class AidApplication < ApplicationRecord
   scope :rejected, -> { where.not(rejected_at: nil) }
   scope :unrejected, -> { where(rejected_at: nil) }
   scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
+  scope :unwaitlisted, -> { left_joins(:aid_application_waitlist).where(aid_application_waitlists: { waitlist_position: nil }) }
 
   scope :only_submitted, -> { submitted.where(approved_at: nil) }
   scope :only_approved, -> { approved.where(disbursed_at: nil) }

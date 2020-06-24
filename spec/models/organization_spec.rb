@@ -33,14 +33,14 @@ RSpec.describe Organization, type: :model do
   end
 
   describe '#counts_by_county' do
-    let(:organization) { create :organization, county_names: ['San Francisco', 'Marin'] }
+    let(:organization) { create :organization, county_names: ['San Francisco', 'Marin'], total_payment_cards_count: 8 }
 
-    let!(:sf_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:marin_disbursed) { create_list :aid_application, 3, :disbursed, organization: organization, county_name: 'Marin', zip_code: '94903' }
     let!(:sf_approved) { create_list :aid_application, 3, :approved, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:sf_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_rejected) { create_list :aid_application, 2, :rejected, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_paused) { create_list :aid_application, 2, :paused, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_unpaused) { create_list :aid_application, 2, :unpaused, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
-    let!(:marin_disbursed) { create_list :aid_application, 3, :disbursed, organization: organization, county_name: 'Marin', zip_code: '94903' }
     let!(:sm_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Mateo', zip_code: '94401' }
 
     it 'returns each county with individual counts' do
@@ -55,22 +55,22 @@ RSpec.describe Organization, type: :model do
                                                       total: 3,
                                                     },
                                                     "San Francisco" => {
-                                                      submitted: 5,
+                                                      submitted: 2,
                                                       approved: 3,
                                                       disbursed: 0,
                                                       paused: 2,
                                                       rejected: 2,
-                                                      waitlisted: 0,
-                                                      total: 8,
+                                                      waitlisted: 3,
+                                                      total: 5,
                                                     },
                                                     "San Mateo" => {
-                                                      submitted: 3,
+                                                      submitted: 0,
                                                       approved: 0,
                                                       disbursed: 0,
                                                       paused: 0,
                                                       rejected: 0,
-                                                      waitlisted: 0,
-                                                      total: 3
+                                                      waitlisted: 3,
+                                                      total: 0
                                                     },
                                                   })
     end
