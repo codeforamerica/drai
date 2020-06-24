@@ -1,6 +1,8 @@
 class Seeder
   def self.seed
-    new.seed
+    ActiveRecord::Base.transaction do
+      new.seed
+    end
   end
 
   def seed
@@ -56,7 +58,7 @@ class Seeder
                              approver: supervisors.sample
     end
 
-    refresh_search_views
+    refresh_materialized_views
   end
 
   private
@@ -106,8 +108,9 @@ class Seeder
     end
   end
 
-  def refresh_search_views
+  def refresh_materialized_views
     AidApplicationSearch.refresh
+    AidApplicationWaitlist.refresh
   end
 
   def low_card_organization

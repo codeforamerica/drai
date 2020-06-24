@@ -59,22 +59,22 @@ RSpec.describe Organization, type: :model do
                                                       total: 3,
                                                     },
                                                     "San Francisco" => {
-                                                      submitted: 5,
+                                                      submitted: 2,
                                                       approved: 3,
                                                       disbursed: 0,
-                                                      paused: 2,
+                                                      total: 5,
                                                       rejected: 2,
+                                                      paused: 2,
                                                       waitlisted: 3,
-                                                      total: 8,
                                                     },
                                                     "San Mateo" => {
-                                                      submitted: 3,
+                                                      submitted: 0,
                                                       approved: 0,
                                                       disbursed: 0,
+                                                      total: 0,
                                                       paused: 0,
                                                       rejected: 0,
                                                       waitlisted: 3,
-                                                      total: 3
                                                     },
                                                   })
     end
