@@ -20,8 +20,8 @@ gem 'paper_trail'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'
 gem 'puma', '~> 4.3'
-gem 'responders'
 gem 'rails'
+gem 'responders'
 gem 'rufus-scheduler'
 gem 'sass-rails', '>= 6'
 gem 'scenic'
@@ -42,6 +42,9 @@ group :development do
   gem 'eefgilm'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
