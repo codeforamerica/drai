@@ -123,6 +123,11 @@ class Organization < ApplicationRecord
       end
     end
 
+    # Do the Totals row
+    by_counties['Total'] = raw_counts.each_with_object({}) do |(type, _), obj|
+      obj[type] = by_counties.inject(0) { |memo, (_county, counts)| memo + counts[type] }
+    end
+
     @_counts_by_county = by_counties.sort.to_h
   end
 

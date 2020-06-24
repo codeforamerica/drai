@@ -76,6 +76,15 @@ RSpec.describe Organization, type: :model do
                                                       waitlisted: 3,
                                                       total: 3
                                                     },
+                                                    'Total' => {
+                                                      submitted: 8,
+                                                      approved: 3,
+                                                      disbursed: 3,
+                                                      total: 14,
+                                                      rejected: 2,
+                                                      paused: 2,
+                                                      waitlisted: 6,
+                                                    }
                                                   })
     end
   end
