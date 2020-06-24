@@ -10,11 +10,14 @@ module AidApplications
 
     def update
       @aid_application = current_aid_application
+      @aid_application.assign_attributes(aid_application_update_contact_information_params)
 
-      if params[:form_action] == "resend_code"
+      saved = @aid_application.save(context: :contact_information)
+      if saved
         @aid_application.send_disbursement_notification
-        respond_with @aid_application, location: -> {edit_organization_aid_application_finished_path(current_organization, current_aid_application)}, notice: "Activation Code re-sent"
       end
+
+      respond_with @aid_application, location: -> {edit_organization_aid_application_finished_path(current_organization, current_aid_application)}, notice: "Activation Code re-sent"
     end
 
     def reveal_activation_code
@@ -24,6 +27,15 @@ module AidApplications
       )
 
       redirect_to({ action: :edit, anchor: 'reveal-activation-code' }, flash: { reveal_activation_code: true })
+    end
+
+    private
+
+    def aid_application_update_contact_information_params
+      params.require(:aid_application).permit(
+        :phone_number,
+        :email
+      )
     end
   end
 end

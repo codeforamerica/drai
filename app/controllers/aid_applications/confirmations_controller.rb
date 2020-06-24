@@ -38,7 +38,7 @@ module AidApplications
     end
 
     def aid_application_update_contact_information_params
-      params.require(:aid_application).permit(
+      params.fetch(:aid_application, {}).permit(
         :phone_number,
         :email
       )
