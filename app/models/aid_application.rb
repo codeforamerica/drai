@@ -694,6 +694,27 @@ class AidApplication < ApplicationRecord
     )
   end
 
+  def locale
+    case preferred_language
+    when "Spanish", "Kanjobal", "Mam", "Mixteco", "Triqui", "Zapoteco"
+      "es"
+    when "Cantonese"
+      "zh"
+    when "Mandarin"
+      "zh"
+    when "Arabic"
+      "ar"
+    when "Vietnamese"
+      "vi"
+    when "Korean"
+      "ko"
+    when "Tagalog"
+      "tl"
+    else
+      "en"
+    end
+  end
+
   private
 
   def strip_phone_number
@@ -721,26 +742,4 @@ class AidApplication < ApplicationRecord
   def chir_app?
     organization.name == 'Coalition for Humane Immigrant Rights'
   end
-
-  def locale
-    case preferred_language
-    when "Spanish"
-      "es"
-    when "Cantonese"
-      "zh"
-    when "Mandarin"
-      "zh"
-    when "Arabic"
-      "ar"
-    when "Vietnamese"
-      "vi"
-    when "Korean"
-      "ko"
-    when "Tagalog"
-      "tl"
-    else
-      "en"
-    end
-  end
-
 end
