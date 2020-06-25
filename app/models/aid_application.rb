@@ -227,7 +227,9 @@ class AidApplication < ApplicationRecord
   scope :visible, -> { where.not(submitted_at: nil) }
   scope :submitted, -> { unrejected.unpaused.unwaitlisted.where.not(submitted_at: nil) }
   scope :approved, -> { where.not(approved_at: nil) }
+  scope :unapproved, -> { where(approved_at: nil) }
   scope :disbursed, -> { where.not(disbursed_at: nil) }
+  scope :undisbursed, -> { where(disbursed_at: nil) }
   scope :paused, -> { where.not(paused_at: nil) }
   scope :unpaused, -> { where(paused_at: nil) }
   scope :rejected, -> { where.not(rejected_at: nil) }
@@ -235,12 +237,12 @@ class AidApplication < ApplicationRecord
   scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
   scope :unwaitlisted, -> { left_joins(:aid_application_waitlist).where(aid_application_waitlists: { waitlist_position: nil }) }
 
-  scope :only_submitted, -> { submitted.where(approved_at: nil) }
-  scope :only_approved, -> { approved.where(disbursed_at: nil) }
+  scope :only_submitted, -> { submitted.unapproved }
+  scope :only_approved, -> { approved.undisbursed }
   scope :only_disbursed, -> { disbursed }
   scope :only_paused, -> { paused }
   scope :only_rejected, -> { rejected }
-  scope :only_waitlisted, -> { waitlisted }
+  scope :only_waitlisted, -> { visible.unrejected.waitlisted }
 
   scope :query, (lambda do |input|
     if input.strip.starts_with?('APP-')
@@ -619,14 +621,14 @@ class AidApplication < ApplicationRecord
   def status
     if disbursed?
       :disbursed
-    elsif rejected?
-      :rejected
-    elsif paused?
-      :paused
     elsif approved?
       :approved
+    elsif rejected?
+      :rejected
     elsif waitlisted?
       :waitlisted
+    elsif paused?
+      :paused
     elsif submitted?
       :submitted
     else
