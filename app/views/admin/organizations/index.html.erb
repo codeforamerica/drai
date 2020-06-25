@@ -6,39 +6,30 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>Slug</th>
         <th>Name</th>
         <th>Users</th>
         <th>Submitted</th>
         <th>Approved</th>
         <th>Disbursed</th>
+        <th>Committed</th>
         <th>Available</th>
-        <th>Submission Instructions</th>
+        <th>Paused</th>
+        <th>Waitlisted</th>
       </tr>
       </thead>
       <tbody>
       <% @organizations.each do |organization| %>
         <tr id="<%= dom_id(organization) %>">
           <td><%= organization.id %></td>
-          <td><%= organization.slug %></td>
           <td><%= link_to organization.name, organization_dashboard_path(organization) %></td>
           <td><%= organization.users_count %></td>
           <td><%= organization.submitted_aid_applications_count %></td>
           <td><%= organization.approved_aid_applications_count %></td>
           <td><%= organization.disbursed_aid_applications_count %></td>
+          <td><%= organization.committed_aid_applications_count %></td>
           <td><%= organization.total_payment_cards_count - organization.committed_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
-          <td>
-            <%
-              messages = organization.county_names.each_with_object({}) do |county, obj|
-                message = organization.submission_instructions(application_number: "APP-#{organization.id}-XXX-XXX", county: county, locale: I18n.locale)
-                (obj[message] ||= []) << county
-              end
-
-              messages.each do |message, counties|
-            %>
-              <p><strong><%= counties.join(', ') %>:</strong> <%= message %></p>
-              <% end %>
-          </td>
+          <td><%= organization.paused_aid_applications_count %></td>
+          <td><%= organization.waitlisted_aid_applications_count %></td>
         </tr>
       <% end %>
       </tbody>
