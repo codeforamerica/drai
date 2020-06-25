@@ -1,0 +1,46 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "0f7b37d7e40b44425ad4f3d186e5625cede7090eed3e088aedfd330fa017b9c8",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/aid_application.rb",
+      "line": 307,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "all.where(\"street_address like ?\", \"#{aid_application.street_address.match(/^(\\d*)\\s/)[1]}%\").where(\"#{normalize_sql(\"apartment_number\")} = #{normalize_sql(\"?\")}\", aid_application.apartment_number)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AidApplication",
+        "method": "match_by_address"
+      },
+      "user_input": "normalize_sql(\"apartment_number\")",
+      "confidence": "Weak",
+      "note": "No user input is directly interpolated"
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "f3e4af0b3cc96c4a224cfe8a1677a9ca849a0b4a42cceb95fdcd3d1b81043f8a",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/aid_application.rb",
+      "line": 292,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "submitted.where.not(:id => aid_application.id).where(\"#{normalize_sql(\"name\")} = #{normalize_sql(\"?\")}\", aid_application.name)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AidApplication",
+        "method": "matching_submitted_apps"
+      },
+      "user_input": "normalize_sql(\"name\")",
+      "confidence": "Medium",
+      "note": "No user input is directly interpolated"
+    }
+  ],
+  "updated": "2020-06-25 07:30:29 -0700",
+  "brakeman_version": "4.8.2"
+}
