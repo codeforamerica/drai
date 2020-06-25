@@ -760,6 +760,12 @@ RSpec.describe AidApplication, type: :model do
         end
 
         expect(aid_application.message_logs.size).to eq 1
+        message_log = aid_application.message_logs.first
+        expect(message_log).to have_attributes(
+                                 messageable: aid_application,
+                                 subject: "Disaster Assistance payment card activation code",
+                                 body: a_string_including(aid_application.payment_card.activation_code)
+                               )
       end
     end
 
