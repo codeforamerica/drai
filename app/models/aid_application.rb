@@ -225,6 +225,7 @@ class AidApplication < ApplicationRecord
   has_paper_trail
 
   scope :visible, -> { where.not(submitted_at: nil) }
+  scope :committed, -> { visible.unrejected.unwaitlisted }
   scope :submitted, -> { unrejected.unpaused.unwaitlisted.where.not(submitted_at: nil) }
   scope :approved, -> { where.not(approved_at: nil) }
   scope :unapproved, -> { where(approved_at: nil) }

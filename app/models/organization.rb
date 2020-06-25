@@ -105,7 +105,7 @@ class Organization < ApplicationRecord
     return @_counts_by_county if @_counts_by_county
 
     raw_counts = {
-      total: aid_applications.submitted.group(:county_name).count,
+      total: aid_applications.committed.group(:county_name).count,
       submitted: aid_applications.only_submitted.group(:county_name).count,
       approved: aid_applications.only_approved.group(:county_name).count,
       disbursed: aid_applications.only_disbursed.group(:county_name).count,
