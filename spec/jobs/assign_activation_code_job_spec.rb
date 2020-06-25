@@ -50,4 +50,17 @@ RSpec.describe AssignActivationCodeJob, type: :job do
       end.to raise_error AssignActivationCodeJob::PaymentCardAlreadyAssigned
     end
   end
+
+  context 'when re-sending and not messaging clients' do
+    before do
+      payment_card.update(blackhawk_activation_code_assigned_at: 5.minutes.ago)
+    end
+
+    it 're-assigns and does not message clients' do
+      described_class.perform_now(payment_card: payment_card, message_client: false, allow_reassignment: true)
+      expect(payment_card.blackhawk_activation_code_assigned_at).to be_within(1.second).of Time.current
+
+      expect(ActionMailer::Base.deliveries).to be_empty
+    end
+  end
 end
