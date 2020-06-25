@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_180813) do
+ActiveRecord::Schema.define(version: 2020_06_25_184404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_180813) do
               (row_number() OVER (PARTITION BY aid_applications.organization_id ORDER BY aid_applications.id) - organizations.total_payment_cards_count) AS waitlist_position
              FROM (aid_applications
                JOIN organizations ON ((organizations.id = aid_applications.organization_id)))
-            WHERE ((aid_applications.rejected_at IS NULL) AND (aid_applications.paused_at IS NULL))
+            WHERE (aid_applications.rejected_at IS NULL)
           )
    SELECT positions.aid_application_id,
       positions.organization_id,
