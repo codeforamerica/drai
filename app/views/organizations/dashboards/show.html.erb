@@ -118,7 +118,7 @@
               </tr>
               </thead>
               <tbody>
-              <% current_organization.counts_by_county.each do |county, counts| %>
+              <% (current_organization.counts_by_county.except('Total').to_a + [['Total', current_organization.counts_by_county['Total']]]).each do |(county, counts)| %>
                 <tr id="<%="#{county}-#{county.length}"%>" class="<%= county == 'Total' ? 'tr-total' : '' %>">
                   <td><%= county %></td>
                   <td><%= counts[:submitted] %></td>
