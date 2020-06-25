@@ -361,6 +361,7 @@ en:
       body_html: |
         <p>The activation code for your Disaster Assistance payment card is %{activation_code}.</p>
         <p>When you receive your card, call the number on the back of the card to activate it.</p>
+        <p>%{card_receipt_method_message}</p>
       subject: Disaster Assistance payment card activation code
     application_number:
       subject: Assistance application submitted %{application_number}
@@ -432,10 +433,15 @@ en:
       year: Year
     password_help: Should be 8-70 characters long and include 1 uppercase, 1 lowercase,
       1 digit, and 1 special character (#?!@$%^&*-).
+    card_receipt_method_message:
+      pick_up: "You will need to pick up your payment card."
+      deliver_in_person: "Your payment card will be delivered."
+      mail: "Your payment card will be mailed to you."
+
   text_message:
     activation: The activation code for your Disaster Assistance payment card is %{activation_code}.
       When you receive your card, call the number on the back of the card to activate
-      it.
+      it. %{card_receipt_method_message}
     approved: Your application for Disaster Assistance has been approved! We’ll let
       you know when your payment card has been assigned to you.
     auto_response: This is an automated response from Code for America Disaster Assistance.
