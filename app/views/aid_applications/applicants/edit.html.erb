@@ -7,9 +7,13 @@
         This application is paused. The client did not submit their verification documents within the 12 business day window.
         Restarting the application will reset the 12 day clock.
       </div>
-      <div class="form-card__footer">
-        <%= button_to({ action: 'unpause' }, method: :put, class: 'button button--primary') { "Restart application" } %>
-      </div>
+      <% if supervisor_visible? %>
+        <div class="form-card__footer">
+          <%= button_to({ action: 'unpause' }, method: :put, class: 'button button--primary') { "Restart application" } %>
+        </div>
+      <% else %>
+        <p>Only supervisors can unpause applications.</p>
+      <% end %>
     </div>
   <% end %>
 

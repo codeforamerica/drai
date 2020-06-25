@@ -8,6 +8,30 @@ describe 'Verify aid application', type: :system do
 
   before { AidApplicationSearch.refresh }
 
+  context 'when an assister is logged in' do
+    context 'when the application is paused' do
+      let!(:aid_application) { create :aid_application, :paused, creator: assister }
+
+      it 'does not allow unpausing' do
+        sign_in assister
+        visit root_path
+
+        within '.searchbar' do
+          fill_in "q", with: aid_application.application_number
+          click_on 'Search'
+        end
+
+        click_on aid_application.application_number
+
+        within '#application-navigation' do
+          click_on 'Verify'
+        end
+
+        expect(page).to have_content "Only supervisors can unpause applications."
+      end
+    end
+  end
+
   context 'when a supervisor is logged in' do
     context 'when changes are made' do
       it 'redirects to the dashboard' do
@@ -81,37 +105,37 @@ describe 'Verify aid application', type: :system do
         expect(current_path).to eq edit_organization_aid_application_verification_path(aid_application.organization, aid_application, locale: 'en')
       end
     end
-  end
 
-  context 'when the application is paused' do
-    let!(:aid_application) { create :aid_application, :paused, creator: assister }
+    context 'when the application is paused' do
+      let!(:aid_application) { create :aid_application, :paused, creator: assister }
 
-    it 'allows unpausing' do
-      sign_in supervisor
-      visit root_path
+      it 'allows unpausing' do
+        sign_in supervisor
+        visit root_path
 
-      within '.searchbar' do
-        fill_in "q", with: aid_application.application_number
-        click_on 'Search'
+        within '.searchbar' do
+          fill_in "q", with: aid_application.application_number
+          click_on 'Search'
+        end
+
+        click_on aid_application.application_number
+
+        within '#application-navigation' do
+          click_on 'Verify'
+        end
+
+        expect(page).to have_content "Restart application"
+
+        click_on "Restart application"
+
+        expect(page).not_to have_content "Restart application"
+
+        expect(aid_application.reload).to have_attributes(
+                                            paused_at: nil,
+                                            unpaused_at: be_within(1.minute).of(Time.current),
+                                            unpauser: supervisor
+                                          )
       end
-
-      click_on aid_application.application_number
-
-      within '#application-navigation' do
-        click_on 'Verify'
-      end
-
-      expect(page).to have_content "Restart application"
-
-      click_on "Restart application"
-
-      expect(page).not_to have_content "Restart application"
-
-      expect(aid_application.reload).to have_attributes(
-                                   paused_at: nil,
-                                   unpaused_at: be_within(1.minute).of(Time.current),
-                                   unpauser: supervisor
-                                 )
     end
   end
 end

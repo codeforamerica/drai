@@ -37,7 +37,7 @@
     2. Application
   <% end %>
 
-  <% enable_verify_tab = current_aid_application.submitted? && supervisor_visible? %>
+  <% enable_verify_tab = current_aid_application.submitted? %>
   <%= link_to organization_aid_application_verification_path(current_organization, current_aid_application), class: "tab-bar__tab #{ current_path?(organization_aid_application_verification_path(current_organization, current_aid_application)) ? 'is-selected' : '' } #{enable_verify_tab ? '' : 'disabled'}" do %>
     3. Verify
   <% end %>
