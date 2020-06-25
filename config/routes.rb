@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         put :replace_payment_card
         post :import_payment_cards
       end
+      resources :messages, only: :index
     end
 
     resources :organizations, only: [] do

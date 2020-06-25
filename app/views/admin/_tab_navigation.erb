@@ -3,5 +3,6 @@
   <%= link_to "All users", admin_users_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/users', action: 'index') ? 'is-selected' : '' }" %>
   <%= link_to "All applications", admin_aid_applications_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/aid_applications', action: 'index') ? 'is-selected' : '' }" %>
   <%= link_to "Tasks", admin_tasks_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/tasks', action: 'show') ? 'is-selected' : '' }" %>
+  <%= link_to "Messages", admin_messages_path, class: "tab-bar__tab #{ current_path?(controller: 'admin/messages', action: 'index') ? 'is-selected' : '' }" %>
 </div>
 <br>
