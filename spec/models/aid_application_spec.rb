@@ -776,6 +776,26 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#locale' do
+    it 'returns English key' do
+      aid_application.preferred_language = 'English'
+      expect(aid_application.locale).to eq 'en'
+    end
+
+    it 'returns Spanish for indigenous languages' do
+      [
+        'Spanish',
+        'Kanjobal',
+        'Mam',
+        'Mixteco',
+        'Triqui',
+        'Zapoteco'
+      ].each do |language|
+        aid_application.preferred_language = language
+        expect(aid_application.locale).to eq('es'), "#{language} should return 'es'"
+      end
+    end
+  end
   describe 'papertrail' do
     it 'tracks changes' do
       expect do
