@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resources :aid_applications, only: :index
       resource :tasks do
         put :replace_payment_card
+        put :undisburse_payment_card
         post :import_payment_cards
       end
       resources :messages, only: :index

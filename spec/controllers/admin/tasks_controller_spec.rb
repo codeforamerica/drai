@@ -28,6 +28,34 @@ describe Admin::TasksController, type: :controller do
     end
   end
 
+  describe '#undisburse_payment_card' do
+    let!(:disbursed_aid_application) { create :aid_application, :disbursed }
+
+    it 'undisburses the payment card' do
+      payment_card = disbursed_aid_application.payment_card
+
+      put :undisburse_payment_card, params: {
+        undisburse_payment_card: {
+          sequence_number: payment_card.sequence_number,
+        }
+      }
+
+      expect(disbursed_aid_application.reload).to have_attributes(
+                                                    status: :approved,
+                                                    disbursed_at: nil,
+                                                    disburser: nil,
+                                                    payment_card: nil,
+                                                  )
+
+      expect(payment_card.reload).to have_attributes(
+                                       aid_application: nil,
+                                       activation_code: nil,
+                                       blackhawk_activation_code_assigned_at: nil,
+                                     )
+    end
+  end
+
+
   describe '#import_payment_cards' do
     it 'imports cards' do
       post :import_payment_cards, params: {

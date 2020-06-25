@@ -23,6 +23,25 @@
 
   <div class="form-card">
     <header class="form-card__header">
+      <h2>Undisburse Payment Card</h2>
+    </header>
+
+    <%= form_for(@undisburse_payment_card, url: { action: :undisburse_payment_card }, method: :put, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+      <div class="form-card__content">
+        <%= f.cfa_input_field :sequence_number, "Sequence number" %>
+      </div>
+
+      <div class="form-card__footer">
+        <%= f.button 'Undisburse Payment Card', data: { disable_with: "Please wait..." }, class: 'toolbar__item button button--primary' %>
+      </div>
+    <% end %>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="form-card">
+    <header class="form-card__header">
       <h2>Import Payment Cards</h2>
     </header>
 
