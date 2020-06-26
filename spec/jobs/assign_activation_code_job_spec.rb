@@ -63,4 +63,16 @@ RSpec.describe AssignActivationCodeJob, type: :job do
       expect(ActionMailer::Base.deliveries).to be_empty
     end
   end
+
+  context 'when Blackhawk fails' do
+    before do
+      allow(BlackhawkApi).to receive(:activate).and_return(false)
+    end
+
+    it 'raises an exception' do
+      expect do
+        described_class.perform_now(payment_card: payment_card)
+      end.to raise_error AssignActivationCodeJob::ApiFailureError
+    end
+  end
 end

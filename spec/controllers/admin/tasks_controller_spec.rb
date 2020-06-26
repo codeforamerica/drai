@@ -12,7 +12,7 @@ describe Admin::TasksController, type: :controller do
     let!(:correct_payment_card) { create :payment_card }
 
     before do
-      allow(BlackhawkApi).to receive(:activate)
+      allow(BlackhawkApi).to receive(:activate).and_return(true)
     end
 
     it 'replaces the payment card' do
