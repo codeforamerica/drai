@@ -12,7 +12,7 @@ class ApplicationEmailer < ActionMailer::Base
       channel: 'email',
       to: mail.to.first,
       subject: mail.subject,
-      body: mail.body.raw_source,
+      body: (mail.text_part || mail).body.decoded,
       messageable: mailer.params&.[](:messageable)
     )
   end
