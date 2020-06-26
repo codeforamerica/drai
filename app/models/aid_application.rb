@@ -585,6 +585,12 @@ class AidApplication < ApplicationRecord
   end
 
   def send_disbursement_notification
+    card_receipt_method_message = I18n.t(
+      "shared.card_receipt_method_message.#{card_receipt_method}",
+      locale: locale,
+      default: ''
+    )
+
     if sms_consent?
       ApplicationTexter.with(messageable: self).basic_message(
         to: phone_number,
@@ -592,6 +598,7 @@ class AidApplication < ApplicationRecord
           'text_message.activation',
           activation_code: payment_card.activation_code,
           ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          card_receipt_method_message: card_receipt_method_message,
           locale: locale
         )
       ).deliver_later
@@ -605,6 +612,7 @@ class AidApplication < ApplicationRecord
           'email_message.activation.body_html',
           activation_code: payment_card.activation_code,
           ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          card_receipt_method_message: card_receipt_method_message,
           locale: locale
         )
       ).deliver_later

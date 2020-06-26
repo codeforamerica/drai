@@ -27,6 +27,7 @@ describe AidApplications::FinishedsController do
         'text_message.activation',
         activation_code: aid_application.payment_card.activation_code,
         ivr_phone_number: BlackhawkApi.ivr_phone_number,
+        card_receipt_method_message: I18n.t('shared.card_receipt_method_message.mail', locale: 'en'),
         locale: "en"
       )
     end

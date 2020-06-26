@@ -279,6 +279,7 @@ es:
       body_html: |
         <p>El código para activar su tarjeta de Asistencia de Desastre es %{activation_code}.</p>
         <p>Cuando recibe su tarjeta, llame al número detrás de la tarjeta para activarla.</p>
+        <p>%{card_receipt_method_message}</p>
       subject: Código de activación de la tarjeta de pago de asistencia por desastre
     application_number:
       body_html: |
@@ -339,11 +340,15 @@ es:
       day: Día
       month: Mes
       year: Año
+    card_receipt_method_message:
+      pick_up: "Necesitará recoger su tarjeta bancaria."
+      deliver_in_person: "Su tarjeta bancaria será entregada a usted."
+      mail: "Su tarjeta bancaria será enviada a usted."
+
   text_message:
     activation: El código es %{activation_code} para activar su tarjeta de Asistencia
       de Desastre. Cuando recibe su tarjeta, llame al número detrás de la tarjeta
-      para activarla.
-    application_number:
+      para activarla. %{card_receipt_method_message}
     approved: "¡Su solicitud de Asistencia de Desastre fue aprobada! Le avisaremos
       cuando se le haya asignado su tarjeta."
     auto_response: Esta es una respuesta automatizada de la asistencia por desastre

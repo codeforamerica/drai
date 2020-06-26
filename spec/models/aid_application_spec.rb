@@ -710,6 +710,7 @@ RSpec.describe AidApplication, type: :model do
           'text_message.activation',
           activation_code: aid_application.payment_card.activation_code,
           ivr_phone_number: BlackhawkApi.ivr_phone_number,
+          card_receipt_method_message: I18n.t('shared.card_receipt_method_message.mail'),
           locale: 'en'
         )
       end
@@ -726,21 +727,18 @@ RSpec.describe AidApplication, type: :model do
         let(:preferred_language) {'Spanish'}
 
         it 'sends an SMS in the preferred language' do
-          expect do
+          perform_enqueued_jobs do
             aid_application.send_disbursement_notification
-          end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                     .with("ApplicationTexter", "basic_message", "deliver_now",
-                           params: {messageable: aid_application},
-                           args: [{
-                                      to: aid_application.phone_number,
-                                      body: I18n.t(
-                                          'text_message.activation',
-                                          activation_code: aid_application.payment_card.activation_code,
-                                          ivr_phone_number: BlackhawkApi.ivr_phone_number,
-                                          locale: 'es'
-                                      )
-                                  }]
-                     )
+          end
+
+          sms_message = ActionMailer::Base.deliveries.find { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+          expect(sms_message.body.to_s).to eq I18n.t(
+            'text_message.activation',
+            activation_code: aid_application.payment_card.activation_code,
+            ivr_phone_number: BlackhawkApi.ivr_phone_number,
+            card_receipt_method_message: I18n.t('shared.card_receipt_method_message.mail', locale: 'es'),
+            locale: 'es'
+          )
         end
       end
     end
