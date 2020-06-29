@@ -56,15 +56,15 @@
                       method: :put,
                       name: 'form_action',
                       value: 'approve_and_exit',
-                      disabled: @aid_application.waitlisted?,
-                      class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and exit" } %>
+                      disabled: @aid_application.waitlisted?  || @aid_application.organization.no_cards?,
+                      class: "button button--primary") { "Approve and exit" } %>
 
         <%= button_to({ action: :approve },
                       method: :put,
                       name: 'form_action',
                       value: 'submit',
-                      disabled: @aid_application.waitlisted?,
-                      class: "button button--primary #{@aid_application.waitlisted? ? 'disabled' : '' }") { "Approve and continue to disbursement" } %>
+                      disabled: @aid_application.waitlisted? || @aid_application.organization.no_cards?,
+                      class: "button button--primary") { "Approve and continue to disbursement" } %>
         <br>
         <br>
 

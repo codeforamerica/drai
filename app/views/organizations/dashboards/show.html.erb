@@ -4,7 +4,7 @@
   <h1 class="spacing-above-25">Disaster Relief Assistance for Immigrants</h1>
   <div class="grid">
     <div class="grid__item width-one-third">
-      <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary' do %>
+      <%= button_to organization_aid_applications_path(current_organization), method: :post, class: 'button button--primary', disabled: current_organization.no_cards? do %>
         <span class="icon icon-add" aria-hidden="true"></span> <%= t('aid_applications.index.add_app') %>
       <% end %>
     </div>
