@@ -385,7 +385,7 @@ es:
       ventura: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de Identificación es %{application_number}. Por favor de enviarnos por correo electrónico o texto copia de su identificación, prueba de domicilio y documento de haber sido impactado por COVID19 a: drai.sb@mixteco.org o 805-791-2003"
       santa_barbara: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de Identificación es %{application_number}. Por favor de enviarnos por correo electrónico o texto copia de su identificación, prueba de domicilio y documento de haber sido impactado por COVID19 a: drai.vc@mixteco.org o 805-256-1001"
     crlaf: "Su solicitud para un pago de alivio por desastre ha sido sometida. Su número de identificación es %{application_number}. Si aún no lo ha hecho, por favor mande por correo electrónico o texto su comprobante de identidad, su domicilio, y documentos comprobando su necesidad para estos pagos directamente a su trabajadora de caso."
-    todec: "Su solicitud para asistencia económica ha sido entregada. El número de identificación de su solicitud es %{application_number}. Favor de mandar comprobante de identidad, dirección, y de como le ha afectado la pandemia (síntomas del coronavirus, pérdida de: ingreso, horas de trabajo, o de cuidado de niños, etc.) por correo electrónico o texto al perris@todec.org"
+    todec: "Su aplicación para la Asistencia de Desastre ha sido completada. Su número de identificación es %{application_number}. Favor de enviar sus documentos de la forma que se le indico durante su llamada. Si no tiene la información de contacto que la persona que le asistió le dio, lo puede pedir al 1-888-863-3291."
     jfssd:
     cabsc:
     ufw:
