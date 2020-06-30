@@ -16,10 +16,9 @@
         </div>
         <hr>
 
-        <% if @aid_application.waitlist_position.present? %>
+        <% if current_organization.using_waitlist? %>
           <p class="notice notice--error">
-            Explain to the client that they are on a waitlist and may not get a card.
-            This application is <strong>Number <%= @aid_application.waitlist_position %></strong> on the waitlist.
+            <strong>Application is waitlisted</strong>: Explain to the client that they are on a waitlist and may not get a card.
           </p>
         <% end %>
 

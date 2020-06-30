@@ -6,8 +6,12 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'envi
 scheduler = Rufus::Scheduler.new
 
 scheduler.every ENV.fetch('SEARCH_REFRESH_INTERVAL', '1m'), overlap: false do
-  puts '=== refreshing materialized views ==='
+  puts '=== refreshing AidApplicationSearch materialized view ==='
   AidApplicationSearch.refresh
+end
+
+scheduler.every ENV.fetch('WAITLIST_REFRESH_INTERVAL', '15s'), overlap: false do
+  puts '=== refreshing AidApplicationWaitlist materialized view ==='
   AidApplicationWaitlist.refresh
 end
 
