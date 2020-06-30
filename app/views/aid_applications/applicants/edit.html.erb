@@ -9,7 +9,7 @@
       </div>
       <% if supervisor_visible? %>
         <div class="form-card__footer">
-          <%= button_to({ action: 'unpause' }, method: :put, class: 'button button--primary') { "Restart application" } %>
+          <%= button_to({ action: 'unpause' }, method: :put, class: 'button button--primary', disabled: @aid_application.organization.no_cards?) { "Restart application" } %>
         </div>
       <% else %>
         <p>Only supervisors can unpause applications.</p>

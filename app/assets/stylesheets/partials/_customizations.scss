@@ -104,3 +104,7 @@
 .tr-total {
   border-top: 2px solid #CFC5BF;
 }
+
+.button[disabled] {
+  @extend .disabled;
+}

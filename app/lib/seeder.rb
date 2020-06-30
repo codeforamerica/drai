@@ -120,7 +120,10 @@ class Seeder
 
   def no_card_organization
     org = Organization.find_by(name: 'No-Card Org') || FactoryBot.create(:organization, name: 'No-Card Org', total_payment_cards_count: 10)
-    FactoryBot.create_list :aid_application, 10, :disbursed, creator: FactoryBot.create(:assister, organization: org)
+    assister = FactoryBot.create(:assister, organization: org)
+
+    FactoryBot.create_list :aid_application, 10, :disbursed, creator: assister
+    FactoryBot.create :aid_application, :paused, creator: assister
   end
 
   def waitlisted_organization
