@@ -9,11 +9,12 @@
         <th>Name</th>
         <th>Users</th>
         <th>Submitted</th>
+        <th>Verified</th>
+        <th>Paused</th>
         <th>Approved</th>
         <th>Disbursed</th>
         <th>Committed</th>
         <th>Available</th>
-        <th>Paused</th>
         <th>Waitlisted</th>
       </tr>
       </thead>
@@ -24,11 +25,12 @@
           <td><%= link_to organization.name, organization_dashboard_path(organization) %></td>
           <td><%= organization.users_count %></td>
           <td><%= organization.submitted_aid_applications_count %></td>
+          <td><%= organization.verified_aid_applications_count %></td>
+          <td><%= organization.paused_aid_applications_count %></td>
           <td><%= organization.approved_aid_applications_count %></td>
           <td><%= organization.disbursed_aid_applications_count %></td>
           <td><%= organization.committed_aid_applications_count %></td>
           <td><%= organization.total_payment_cards_count - organization.committed_aid_applications_count %> <small>/ <%= organization.total_payment_cards_count %></small></td>
-          <td><%= organization.paused_aid_applications_count %></td>
           <td><%= organization.waitlisted_aid_applications_count %></td>
         </tr>
       <% end %>

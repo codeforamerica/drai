@@ -40,11 +40,24 @@ class Organization < ApplicationRecord
         WHERE
           aid_applications.organization_id = organizations.id 
           AND submitted_at IS NOT NULL
+          AND (verified_photo_id IS NOT TRUE AND verified_proof_of_address IS NOT TRUE AND verified_covid_impact IS NOT TRUE)
           AND paused_at IS NULL
           AND approved_at IS NULL
           AND rejected_at IS NULL
           AND waitlist_position IS NULL
       ) AS submitted_aid_applications_count,
+      (
+        SELECT COUNT(aid_applications.id)
+        FROM aid_applications
+        LEFT JOIN aid_application_waitlists ON aid_application_waitlists.aid_application_id = aid_applications.id
+        WHERE
+          aid_applications.organization_id = organizations.id
+          AND (verified_photo_id IS TRUE AND verified_proof_of_address IS TRUE AND verified_covid_impact IS TRUE)
+          AND paused_at IS NULL
+          AND approved_at IS NULL
+          AND rejected_at IS NULL
+          AND waitlist_position IS NULL
+      ) AS paused_aid_applications_count,
       (
         SELECT COUNT(aid_applications.id)
         FROM aid_applications
@@ -95,7 +108,7 @@ class Organization < ApplicationRecord
     @total_aid_applications_count ||= attributes["committed_aid_applications_count"] || aid_applications.submitted.count
   end
 
-  [:submitted, :approved, :disbursed, :paused, :rejected, :waitlisted].each do |status|
+  [:submitted, :verified, :paused, :approved, :disbursed, :rejected, :waitlisted].each do |status|
     class_eval <<~RUBY
       def #{status}_aid_applications_count
         @#{status}_aid_applications_count ||= attributes["#{status}_aid_applications_count"] || aid_applications.only_#{status}.count
@@ -107,13 +120,14 @@ class Organization < ApplicationRecord
     return @_counts_by_county if @_counts_by_county
 
     raw_counts = {
-      total: aid_applications.committed.group(:county_name).count,
       submitted: aid_applications.only_submitted.group(:county_name).count,
+      verified: aid_applications.only_verified.group(:county_name).count,
+      paused: aid_applications.only_paused.group(:county_name).count,
       approved: aid_applications.only_approved.group(:county_name).count,
       disbursed: aid_applications.only_disbursed.group(:county_name).count,
-      paused: aid_applications.only_paused.group(:county_name).count,
-      rejected: aid_applications.only_rejected.group(:county_name).count,
+      total: aid_applications.committed.group(:county_name).count,
       waitlisted: aid_applications.only_waitlisted.group(:county_name).count,
+      rejected: aid_applications.only_rejected.group(:county_name).count,
     }
 
     by_counties = {}

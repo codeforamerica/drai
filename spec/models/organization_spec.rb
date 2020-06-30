@@ -35,11 +35,12 @@ RSpec.describe Organization, type: :model do
   describe '#counts_by_county' do
     let(:organization) { create :organization, county_names: ['San Francisco', 'Marin'], total_payment_cards_count: 8 }
 
-    let!(:marin_disbursed) { create_list :aid_application, 3, :disbursed, organization: organization, county_name: 'Marin', zip_code: '94903' }
+    let!(:marin_disbursed) { create_list :aid_application, 2, :disbursed, organization: organization, county_name: 'Marin', zip_code: '94903' }
 
     let!(:sf_approved) { create_list :aid_application, 1, :approved, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_paused) { create_list :aid_application, 1, :paused, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_unpaused) { create_list :aid_application, 1, :unpaused, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
+    let!(:sf_verified) { create_list :aid_application, 1, :verified, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_submitted) { create_list :aid_application, 1, :submitted, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sf_rejected) { create_list :aid_application, 2, :rejected, organization: organization, county_name: 'San Francisco', zip_code: '94108' }
     let!(:sm_submitted) { create_list :aid_application, 3, :submitted, organization: organization, county_name: 'San Mateo', zip_code: '94401' }
@@ -52,24 +53,27 @@ RSpec.describe Organization, type: :model do
       expect(organization.counts_by_county).to eq({
                                                     "Marin" => {
                                                       submitted: 0,
+                                                      verified: 0,
                                                       paused: 0,
                                                       approved: 0,
-                                                      disbursed: 3,
+                                                      disbursed: 2,
                                                       rejected: 0,
                                                       waitlisted: 0,
-                                                      total: 3,
+                                                      total: 2,
                                                     },
                                                     "San Francisco" => {
                                                       submitted: 2,
+                                                      verified: 1,
                                                       paused: 1,
                                                       approved: 1,
                                                       disbursed: 0,
-                                                      total: 4,
+                                                      total: 5,
                                                       rejected: 2,
                                                       waitlisted: 0,
                                                     },
                                                     "San Mateo" => {
                                                       submitted: 1,
+                                                      verified: 0,
                                                       paused: 0,
                                                       approved: 0,
                                                       disbursed: 0,
@@ -79,9 +83,10 @@ RSpec.describe Organization, type: :model do
                                                     },
                                                     'Total' => {
                                                       submitted: 3,
+                                                      verified: 1,
                                                       paused: 1,
                                                       approved: 1,
-                                                      disbursed: 3,
+                                                      disbursed: 2,
                                                       total: 8,
                                                       rejected: 2,
                                                       waitlisted: 2,

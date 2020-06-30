@@ -472,17 +472,17 @@ RSpec.describe AidApplication, type: :model do
 
   describe '.pause_stale_and_unapproved' do
     it 'pauses unapproved aid applications that are more than 12 days old' do
-      submitted_application = create :aid_application, :submitted, submitted_at: 11.days.ago
-      approved_application = create :aid_application, :approved
-      disbursed_application = create :aid_application, :disbursed
-      old_unapproved_application = create :aid_application, :submitted, submitted_at: 13.days.ago
-      unpaused_application = create :aid_application, :unpaused, submitted_at: 14.days.ago, unpaused_at: 1.days.ago
-      repaused_application = create :aid_application, :submitted, submitted_at: 26.days.ago, unpaused_at: 13.days.ago
+      submitted_application = create :aid_application, :submitted, submitted_at: 11.days.ago, name: 'submitted_application'
+      approved_application = create :aid_application, :approved, name: 'approved_application'
+      disbursed_application = create :aid_application, :disbursed, name: 'disbursed_application'
+      old_unapproved_application = create :aid_application, :submitted, submitted_at: 13.days.ago, name: 'old_unapproved_application'
+      unpaused_application = create :aid_application, :unpaused, submitted_at: 14.days.ago, unpaused_at: 1.days.ago, name: 'unpaused_application'
+      repaused_application = create :aid_application, :submitted, submitted_at: 26.days.ago, unpaused_at: 13.days.ago, name: 'repaused_application'
 
       described_class.pause_stale_and_unapproved
 
       expect(AidApplication.paused).to contain_exactly(old_unapproved_application, repaused_application)
-      expect(AidApplication.submitted).to contain_exactly(submitted_application, approved_application, disbursed_application, unpaused_application)
+      expect(AidApplication.unpaused.map(&:name)).to contain_exactly(submitted_application.name, approved_application.name, disbursed_application.name, unpaused_application.name)
     end
   end
 

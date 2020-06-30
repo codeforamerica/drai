@@ -64,7 +64,7 @@
       <div class="statistic-card statistics-submitted">
         <p class="statistic-card__label">Submitted pending Approval</p>
         <p class="statistic-card__number">
-          <%= number_with_delimiter(current_organization.submitted_aid_applications_count, locale: :en) %>
+          <%= number_with_delimiter(current_organization.submitted_aid_applications_count + current_organization.verified_aid_applications_count, locale: :en) %>
         </p>
       </div>
     </div>
@@ -111,6 +111,7 @@
               <tr>
                 <th>County</th>
                 <th>Submitted</th>
+                <th>Verified</th>
                 <th>Paused</th>
                 <th>Approved</th>
                 <th>Disbursed</th>
@@ -123,6 +124,7 @@
                 <tr id="<%="#{county}-#{county.length}"%>" class="<%= county == 'Total' ? 'tr-total' : '' %>">
                   <td><%= county %></td>
                   <td><%= counts[:submitted] %></td>
+                  <td><%= counts[:verified] %></td>
                   <td><%= counts[:paused] %></td>
                   <td><%= counts[:approved] %></td>
                   <td><%= counts[:disbursed] %></td>
