@@ -17,6 +17,8 @@ class Organization < ApplicationRecord
   has_many :users
   has_many :supervisors, -> { supervisor }, class_name: 'User'
   has_many :aid_applications
+  has_many :payment_card_orders
+  has_many :ordered_payment_cards, through: :payment_card_orders, source: :payment_cards
 
   scope :with_counts, lambda {
     select <<~SQL
