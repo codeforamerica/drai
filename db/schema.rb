@@ -75,6 +75,10 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
     t.datetime "unpaused_at"
     t.bigint "unpauser_id"
     t.boolean "confirmed_invalid_phone_number"
+    t.boolean "verified_photo_id"
+    t.boolean "verified_proof_of_address"
+    t.boolean "verified_covid_impact"
+    t.text "verification_case_note"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
@@ -83,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
     t.index ["organization_id", "disbursed_at"], name: "index_aid_applications_org_id_disbursed_at"
     t.index ["organization_id", "submitted_at", "approved_at"], name: "index_aid_applications_org_id_submitted_at_approved_at"
     t.index ["organization_id", "submitted_at", "paused_at"], name: "index_aid_applications_org_id_submitted_at_paused_at"
+    t.index ["organization_id", "submitted_at"], name: "index_aid_applications_org_id_submitted_at_when_verified", where: "((verified_photo_id = true) AND (verified_proof_of_address = true) AND (verified_covid_impact = true))"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"

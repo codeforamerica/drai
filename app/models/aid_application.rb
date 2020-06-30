@@ -227,6 +227,7 @@ class AidApplication < ApplicationRecord
   scope :visible, -> { where.not(submitted_at: nil) }
   scope :committed, -> { visible.unrejected.unwaitlisted }
   scope :submitted, -> { unrejected.unpaused.unwaitlisted.where.not(submitted_at: nil) }
+  scope :verified, -> { where(verified_photo_id: true, verified_proof_of_address: true, verified_covid_impact: true) }
   scope :approved, -> { where.not(approved_at: nil) }
   scope :unapproved, -> { where(approved_at: nil) }
   scope :disbursed, -> { where.not(disbursed_at: nil) }
@@ -239,6 +240,7 @@ class AidApplication < ApplicationRecord
   scope :unwaitlisted, -> { left_joins(:aid_application_waitlist).where(aid_application_waitlists: { waitlist_position: nil }) }
 
   scope :only_submitted, -> { submitted.unapproved }
+  scope :only_verified, -> { verified.unapproved }
   scope :only_approved, -> { approved.undisbursed }
   scope :only_disbursed, -> { disbursed }
   scope :only_paused, -> { paused }
@@ -265,7 +267,7 @@ class AidApplication < ApplicationRecord
       filter_query = filter_query.query(params[:q])
     end
 
-    if params[:status].in? ['submitted', 'approved', 'disbursed', 'paused', 'rejected', 'waitlisted']
+    if params[:status].in? ['submitted', 'verified', 'approved', 'disbursed', 'paused', 'rejected', 'waitlisted']
       status = params[:status]
       filter_query = filter_query.send("only_#{status}")
     else
@@ -280,6 +282,8 @@ class AidApplication < ApplicationRecord
 
     if status == 'waitlisted'
       filter_query = filter_query.order("aid_application_waitlists.waitlist_position" => order)
+    elsif status == 'verified'
+      filter_query = filter_query.order("submitted_at" => order)
     else
       filter_query = filter_query.order("#{status}_at" => order)
     end
@@ -638,6 +642,8 @@ class AidApplication < ApplicationRecord
       :waitlisted
     elsif paused?
       :paused
+    elsif verified?
+      :verified
     elsif submitted?
       :submitted
     else
@@ -649,6 +655,7 @@ class AidApplication < ApplicationRecord
     {
       started: 'Unsubmitted',
       submitted: 'Submitted',
+      verified: 'Verified',
       approved: 'Approved',
       disbursed: 'Disbursed',
       paused: 'Paused',
@@ -667,6 +674,10 @@ class AidApplication < ApplicationRecord
 
   def submitted?
     submitted_at.present?
+  end
+
+  def verified?
+    [verified_photo_id, verified_proof_of_address, verified_covid_impact].all?
   end
 
   def waitlisted?
@@ -700,6 +711,10 @@ class AidApplication < ApplicationRecord
       disbursed_at: Time.current,
       disburser: disburser
     )
+  end
+
+  def documents_count
+    [verified_photo_id, verified_proof_of_address, verified_covid_impact].count(&:present?)
   end
 
   def locale

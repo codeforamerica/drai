@@ -14,6 +14,8 @@ class Seeder
     FactoryBot.create_list :aid_application, 5, :rejected, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 50, :approved, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 10, :paused, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 5, :verified, creator: assister, organization: organization
+    FactoryBot.create_list :aid_application, 5, :partially_verified, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 100, :submitted, creator: assister, organization: organization
     FactoryBot.create_list :aid_application, 5, creator: assister, organization: organization
 

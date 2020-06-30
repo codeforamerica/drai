@@ -52,6 +52,20 @@ FactoryBot.define do
       application_number { generate_application_number }
     end
 
+    trait :partially_verified do
+      submitted
+
+      verified_photo_id { true }
+    end
+
+    trait :verified do
+      submitted
+
+      verified_photo_id { true }
+      verified_proof_of_address { true }
+      verified_covid_impact { true }
+    end
+
     trait :approved do
       submitted
 

@@ -17,30 +17,29 @@
     </div>
   <% end %>
 
-  <div class="form-card">
-    <% if verify_page? %>
-      <header class="form-card__header">
-        <h1>Verify</h1>
-      </header>
-    <% else %>
-      <header class="form-card__header">
-        <h1><%= t('general.drai_application') %></h1>
-      </header>
-    <% end %>
+  <% form_url = params[:verify] ? organization_aid_application_verification_path(current_organization, @aid_application) : organization_aid_application_applicant_path(current_organization, @aid_application) %>
+  <%= form_for(@aid_application, url: form_url, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
+    <div class="form-card">
+      <% if verify_page? %>
+        <header class="form-card__header">
+          <h1>Verify</h1>
+        </header>
+      <% else %>
+        <header class="form-card__header">
+          <h1><%= t('general.drai_application') %></h1>
+        </header>
+      <% end %>
 
-    <% if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
-      <div class="notice notice--error">
-        This site is for demonstration purposes only.
-        Do not enter any personal information!
-        If you need to submit an application go to
-        <strong><%= link_to 'ca-drai.org', 'https://www.ca-drai.org' %></strong>.
-      </div>
-    <% end %>
+      <% if Rails.env.demo? || ActiveModel::Type::Boolean.new.cast(ENV['DEMO_MODE']) %>
+        <div class="notice notice--error">
+          This site is for demonstration purposes only.
+          Do not enter any personal information!
+          If you need to submit an application go to
+          <strong><%= link_to 'ca-drai.org', 'https://www.ca-drai.org' %></strong>.
+        </div>
+      <% end %>
 
-    <% form_url = params[:verify] ? organization_aid_application_verification_path(current_organization, @aid_application) : organization_aid_application_applicant_path(current_organization, @aid_application) %>
-    <%= form_for(@aid_application, url: form_url, builder: DafiFormBuilder, html: { novalidate: 'novalidate' }) do |f| %>
       <div class="form-card__content">
-
         <h2><%= t('.applicant_information.title') %></h2>
         <%= f.cfa_input_field :name, t('.applicant_information.name') %>
 
@@ -180,18 +179,10 @@
         </div>
       </div>
 
-      <div class="form-card__footer">
+      <% unless verify_page? %>
+        <div class="form-card__footer">
         <% if @aid_application.disbursed? %>
           <p><em>Aid Applications cannot be modified once they have been disbursed.</em></p>
-        <% elsif verify_page? %>
-          <div class="toolbar">
-            <div class="toolbar__left">
-              <%= f.button t('general.save_and_exit'), type: 'submit', name: 'form_action', value: 'verify_and_exit', class: 'toolbar__item button' %>
-            </div>
-            <div class="toolbar__right">
-              <%= f.button t('general.continue'), type: 'submit', name: 'form_action', value: 'verify', class: 'button button--primary' %>
-            </div>
-          </div>
         <% else %>
           <div class="toolbar">
             <div class="toolbar__left">
@@ -213,7 +204,39 @@
           </div>
         <% end %>
       </div>
+      <% end %>
+    </div>
+
+    <br>
+    <br>
+
+    <% if verify_page? %>
+      <div class="form-card">
+        <h2>Documents <span style="font-weight: normal">(Optional)</span></h2>
+
+        <fieldset class="input-group form-group group-of-individual-fields">
+          <legend class="spacing-below-15"><strong>Which documents have been submitted?</strong></legend>
+          <% [
+               { method: :verified_photo_id, label: "Photo ID" },
+               { method: :verified_proof_of_address, label: "Proof of Address" },
+               { method: :verified_covid_impact, label: "COVID-19 Impact" },
+             ].each do |item| %>
+            <%= f.cfa_checkbox(item[:method], item[:label]) %>
+          <% end %>
+        </fieldset>
+
+        <%= f.cfa_textarea :verification_case_note, "Leave a note about verification (optional)", help_text: "This will be visible to the supervisor making the application determination on the next page." %>
+
+        <div class="toolbar">
+          <div class="toolbar__left">
+            <%= f.button t('general.save_and_exit'), type: 'submit', name: 'form_action', value: 'verify_and_exit', class: 'toolbar__item button' %>
+          </div>
+          <div class="toolbar__right">
+            <%= f.button t('general.continue'), type: 'submit', name: 'form_action', value: 'verify', class: 'button button--primary' %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div>
+<% end %>
 </div>
 
