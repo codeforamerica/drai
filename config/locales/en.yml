@@ -467,7 +467,7 @@ en:
       ventura: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to: drai.sb@mixteco.org or 805-791-2003 or 805-519-7776"
       santa_barbara: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to: drai.vc@mixteco.org or 805-256-1001 or 805-519-7774"
     crlaf: "Your application for a Disaster Relief payment has been submitted. Your application ID number is %{application_number}. If you have not done so already, please email or text proof of identity, address, and hardship documents directly to your caseworker."
-    todec: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please email or text proof of identity, address, and hardship documents to perris@todec.org"
+    todec: "Your application for Disaster Assistance has been submitted. Your application ID number is %{application_number}. Please submit proof of identity, address, and hardship documents as instructed by the Assister during your call. If you do not have the contact info for the person who assisted you, you may call 1-888-863-3291 to request it."
     jfssd:
     cabsc:
     ufw:
