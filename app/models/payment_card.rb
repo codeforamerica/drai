@@ -4,6 +4,8 @@ class PaymentCard < ApplicationRecord
   has_paper_trail
 
   belongs_to :aid_application, optional: true
+  has_one :payment_card_order, primary_key: :client_order_number, foreign_key: :client_order_number
+  has_one :client_order_organization, through: :payment_card_order, source: :organization
 
   def self.import(csv_text:, quote_number:)
     if quote_number.blank?

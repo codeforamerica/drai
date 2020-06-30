@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_184404) do
+ActiveRecord::Schema.define(version: 2020_06_30_180142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,14 @@ ActiveRecord::Schema.define(version: 2020_06_25_184404) do
     t.string "slug"
   end
 
+  create_table "payment_card_orders", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "client_order_number"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_payment_card_orders_on_organization_id"
+  end
+
   create_table "payment_cards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -226,6 +234,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_184404) do
   add_foreign_key "aid_applications", "users", column: "unpauser_id"
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"
+  add_foreign_key "payment_card_orders", "organizations"
   add_foreign_key "payment_cards", "aid_applications"
   add_foreign_key "reveal_activation_code_logs", "aid_applications"
   add_foreign_key "reveal_activation_code_logs", "users"
