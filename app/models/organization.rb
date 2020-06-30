@@ -157,7 +157,7 @@ class Organization < ApplicationRecord
   end
 
   def using_waitlist?
-    waitlisted_aid_applications_count > 0
+    waitlisted_aid_applications_count > 0 || (total_payment_cards_count - committed_aid_applications_count) <= 0
   end
 
   def no_cards?

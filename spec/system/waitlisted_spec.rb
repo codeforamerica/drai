@@ -44,5 +44,9 @@ describe 'Approve aid application', type: :system do
     expect(page).not_to have_content "Waitlist #1"
     click_on 'Determination'
     expect(page).to have_button('Approve and exit', disabled: false)
+    click_on 'Approve and exit'
+
+    click_on 'Start a new application'
+    expect(page).to have_content 'Explain to the client that they are on a waitlist and may not get a card.'
   end
 end
