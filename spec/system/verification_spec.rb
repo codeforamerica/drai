@@ -56,18 +56,29 @@ describe 'Verify aid application', type: :system do
         select "Bisexual", from: "Sexual orientation"
         select "Another gender identity", from: "Gender"
 
+        within_fieldset "Which documents have been submitted?" do
+          check "Photo ID"
+          check "Proof of Address"
+          check "COVID-19 Impact"
+        end
+
+        fill_in "Leave a note about verification (optional)", with: "Lotsa docs"
+
         click_on 'Save and exit'
 
         expect(page).to have_content 'Start a new application'
 
         aid_application = AidApplication.last
         expect(aid_application).to have_attributes(
-                                       name: "New Name",
-                                       birthday: "02-02-2000".to_date,
-                                       sexual_orientation: "Bisexual",
-                                       gender: "Another gender identity",
-                                       )
-
+                                     name: "New Name",
+                                     birthday: "02-02-2000".to_date,
+                                     sexual_orientation: "Bisexual",
+                                     gender: "Another gender identity",
+                                     verified_photo_id: true,
+                                     verified_proof_of_address: true,
+                                     verified_covid_impact: true,
+                                     verification_case_note: "Lotsa docs"
+                                   )
       end
     end
 

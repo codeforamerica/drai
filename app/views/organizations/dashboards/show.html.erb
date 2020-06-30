@@ -160,6 +160,7 @@
           <th>Date Submitted</th>
           <th>Applicant</th>
           <th>Assister</th>
+          <th>Docs</th>
           <th>Status</th>
         </tr>
         </thead>
@@ -170,6 +171,13 @@
             <td><%= aid_application.submitted_at.to_s(:month_day_year) %></td>
             <td><%= aid_application.name %></td>
             <td><%= (aid_application.submitter || aid_application.creator).name %></td>
+            <td>
+              <% if aid_application.documents_count > 0 %>
+                <%= aid_application.documents_count %> / 3
+              <% else %>
+                --
+              <% end %>
+            </td>
             <td><%= aid_application.status_human %></td>
           </tr>
         <% end %>
