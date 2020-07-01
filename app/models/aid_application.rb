@@ -226,8 +226,9 @@ class AidApplication < ApplicationRecord
 
   scope :visible, -> { where.not(submitted_at: nil) }
   scope :committed, -> { visible.unrejected.unwaitlisted }
-  scope :submitted, -> { unrejected.unpaused.unwaitlisted.where.not(submitted_at: nil) }
+  scope :submitted, -> { where.not(submitted_at: nil) }
   scope :verified, -> { where(verified_photo_id: true, verified_proof_of_address: true, verified_covid_impact: true) }
+  scope :unverified, -> { where(verified_photo_id: [nil, false], verified_proof_of_address: [nil, false], verified_covid_impact: [nil, false]) }
   scope :approved, -> { where.not(approved_at: nil) }
   scope :unapproved, -> { where(approved_at: nil) }
   scope :disbursed, -> { where.not(disbursed_at: nil) }
@@ -239,7 +240,7 @@ class AidApplication < ApplicationRecord
   scope :waitlisted, -> { left_joins(:aid_application_waitlist).where.not(aid_application_waitlists: { waitlist_position: nil }) }
   scope :unwaitlisted, -> { left_joins(:aid_application_waitlist).where(aid_application_waitlists: { waitlist_position: nil }) }
 
-  scope :only_submitted, -> { submitted.unapproved }
+  scope :only_submitted, -> { submitted.unverified.unpaused.unapproved.unwaitlisted.unrejected }
   scope :only_verified, -> { verified.unapproved }
   scope :only_approved, -> { approved.undisbursed }
   scope :only_disbursed, -> { disbursed }
