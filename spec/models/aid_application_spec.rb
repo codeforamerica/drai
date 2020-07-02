@@ -476,13 +476,15 @@ RSpec.describe AidApplication, type: :model do
       approved_application = create :aid_application, :approved, name: 'approved_application'
       disbursed_application = create :aid_application, :disbursed, name: 'disbursed_application'
       old_unapproved_application = create :aid_application, :submitted, submitted_at: 13.days.ago, name: 'old_unapproved_application'
+      old_verified_application = create :aid_application, :verified, submitted_at: 13.days.ago, name: 'old_verified_application'
       unpaused_application = create :aid_application, :unpaused, submitted_at: 14.days.ago, unpaused_at: 1.days.ago, name: 'unpaused_application'
       repaused_application = create :aid_application, :submitted, submitted_at: 26.days.ago, unpaused_at: 13.days.ago, name: 'repaused_application'
+      verified_repaused_application = create :aid_application, :verified, submitted_at: 26.days.ago, unpaused_at: 13.days.ago, name: 'verified_repaused_application'
 
       described_class.pause_stale_and_unapproved
 
       expect(AidApplication.paused).to contain_exactly(old_unapproved_application, repaused_application)
-      expect(AidApplication.unpaused.map(&:name)).to contain_exactly(submitted_application.name, approved_application.name, disbursed_application.name, unpaused_application.name)
+      expect(AidApplication.unpaused).to contain_exactly(submitted_application, old_verified_application, verified_repaused_application, approved_application, disbursed_application, unpaused_application)
     end
   end
 

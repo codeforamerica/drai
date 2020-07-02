@@ -439,8 +439,8 @@ class AidApplication < ApplicationRecord
 
 
   def self.pause_stale_and_unapproved
-    pausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil, unpaused_at: nil).where('submitted_at < ?', PAUSE_INTERVAL.ago)
-    repausable = AidApplication.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('unpaused_at < ?', PAUSE_INTERVAL.ago)
+    pausable = AidApplication.unverified.where(paused_at: nil, approved_at: nil, rejected_at: nil, unpaused_at: nil).where('submitted_at < ?', PAUSE_INTERVAL.ago)
+    repausable = AidApplication.unverified.where(paused_at: nil, approved_at: nil, rejected_at: nil).where('unpaused_at < ?', PAUSE_INTERVAL.ago)
     pausable.or(repausable).find_each do |aid_application|
       aid_application.update!(paused_at: Time.current)
     rescue => e
