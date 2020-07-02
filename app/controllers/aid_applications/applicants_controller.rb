@@ -77,6 +77,7 @@ module AidApplications
           respond_with @aid_application, location: -> { edit_organization_aid_application_confirmation_path(current_organization, @aid_application) }
         end
       when 'verify', 'verify_and_exit'
+        @aid_application.record_verification_if_changed(verifier: current_user)
         @aid_application.save(context: :submit)
 
         app_is_duplicate_approved = AidApplication.matching_approved_apps(@aid_application).any?

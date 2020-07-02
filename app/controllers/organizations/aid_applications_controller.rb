@@ -10,6 +10,8 @@ module Organizations
           redirect_to edit_organization_aid_application_finished_path(current_organization, aid_application)
         elsif aid_application.approved? || aid_application.rejected?
           redirect_to edit_organization_aid_application_disbursement_path(current_organization, aid_application)
+        elsif aid_application.verified?
+          redirect_to edit_organization_aid_application_approval_path(current_organization, aid_application)
         else
           redirect_to edit_organization_aid_application_verification_path(current_organization, aid_application)
         end
