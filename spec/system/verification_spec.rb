@@ -84,41 +84,6 @@ describe 'Verify aid application', type: :system do
       end
     end
 
-    context 'when the application is a duplicate of an approved application' do
-      before do
-        duplicate = aid_application.dup
-        duplicate.update!(
-          application_number: duplicate.generate_application_number,
-          approved_at: 1.day.ago,
-          approver: supervisor
-        )
-      end
-
-      it 'shows the duplicate application screen' do
-        sign_in supervisor
-        visit root_path
-
-        within '.searchbar' do
-          fill_in "q", with: aid_application.application_number
-          click_on 'Search'
-        end
-
-        click_on aid_application.application_number
-
-        within '#application-navigation' do
-          click_on 'Verify'
-        end
-
-        click_on 'Save and exit'
-
-        expect(page).to have_content 'This applicant has been identified as a duplicate.'
-
-        click_on "Go back"
-
-        expect(current_path).to eq edit_organization_aid_application_verification_path(aid_application.organization, aid_application, locale: 'en')
-      end
-    end
-
     context 'when the application is paused' do
       let!(:aid_application) { create :aid_application, :paused, creator: assister }
 

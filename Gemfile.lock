@@ -234,6 +234,7 @@ GEM
     parser (2.7.1.1)
       ast (~> 2.4.0)
     pg (1.2.3)
+    pg_trgm (0.0.1)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -440,6 +441,7 @@ DEPENDENCIES
   logstash-event
   paper_trail
   pg (>= 0.18, < 2.0)
+  pg_trgm
   pry-rails
   puma (~> 4.3)
   rails

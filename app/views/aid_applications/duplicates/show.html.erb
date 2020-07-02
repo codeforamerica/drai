@@ -11,29 +11,21 @@
     <div class="data-table-container">
       <table class="data-table js-sticky-header">
         <thead>
-        <tr>
-          <th>Name</th>
-          <th>DOB</th>
-          <th>Address</th>
-          <th>Phone number</th>
-          <th>Date submitted</th>
-          <th>Worker</th>
-          <th>CBO</th>
-          <th>Case status</th>
-        </tr>
+          <tr> <!-- empty header renders top line on table-->
+            <th></th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
-        <% @aid_applications.each do |aid_application| %>
-          <tr id="<%= dom_id(aid_application) %>">
-            <td><%= aid_application.name %></td>
-            <td><%= aid_application.birthday %>
-            <td><%= aid_application.street_address %></td>
-            <td><%= aid_application.phone_number %></td>
-            <td><%= aid_application.phone_number %></td>
-            <td><%= aid_application.phone_number %></td>
-            <td><%= aid_application.phone_number %></td>
-            <td><%= aid_application.phone_number %></td>
-          </tr>
+          <% AidApplication.matching_submitted_apps(@aid_application).each do |aid_application| %>
+            <%= render 'data_row', header: 'Name', value: @aid_application.name == aid_application.name ? 'Same' : 'Similar', aid_application: aid_application %>
+            <%= render 'data_row', header: 'DOB', value: 'Same', aid_application: aid_application %>
+            <%= render 'data_row', header: 'Address', value: 'Same', aid_application: aid_application %>
+            <%= render 'data_row', header: 'Phone number', value: aid_application.phone_number, aid_application: aid_application %>
+            <%= render 'data_row', header: 'Date submitted', value: aid_application.submitted_at.strftime("%d-%m-%Y"), aid_application: aid_application %>
+            <%= render 'data_row', header: 'Worker', value: aid_application.submitter.name, aid_application: aid_application %>
+            <%= render 'data_row', header: 'CBO', value: aid_application.organization.name, aid_application: aid_application %>
+            <%= render 'data_row', header: 'Case status', value: aid_application.status.capitalize, aid_application: aid_application %>
         <% end %>
         </tbody>
       </table>

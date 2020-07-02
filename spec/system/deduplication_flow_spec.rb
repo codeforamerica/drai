@@ -11,7 +11,7 @@ RSpec.describe 'Deduplication flow', type: :system do
       visit edit_organization_aid_application_applicant_path(organization_id: assister.organization.id, aid_application_id: duplicate_app.id)
 
       click_on 'Submit'
-      expect(page).to have_content 'This applicant has been identified as a duplicate.'
+      expect(page).to have_content 'Potential duplicate identified'
 
       expect(duplicate_app.reload.submitted_at).to be_nil
 
@@ -19,37 +19,8 @@ RSpec.describe 'Deduplication flow', type: :system do
       expect(page).to have_content 'Applicant Information'
 
       click_on 'Submit'
-      expect(page).to have_content 'This applicant has been identified as a duplicate.'
+      expect(page).to have_content 'Potential duplicate identified'
 
-      click_on 'Delete this application'
-      expect(page).to have_content 'Start a new application'
-      expect(AidApplication.find_by(id: duplicate_app.id)).to be_nil
-    end
-  end
-
-  context 'on application approval' do
-    let!(:supervisor) { create :supervisor }
-    let!(:assister) { create :assister, organization: supervisor.organization }
-    let!(:approved_app) { create :aid_application, :approved, creator: assister, organization: supervisor.organization }
-    let!(:duplicate_app) { create :aid_application, :submitted, creator: assister, organization: supervisor.organization, name: approved_app.name, street_address: approved_app.street_address, zip_code: approved_app.zip_code, birthday: approved_app.birthday }
-
-    it 'shows the duplication page when approving a duplicate app' do
-      sign_in supervisor
-      visit root_path
-      click_on duplicate_app.application_number
-      click_on 'Determination'
-      click_on 'Approve and continue to disbursement'
-
-      expect(page).to have_content 'This applicant has been identified as a duplicate.'
-      expect(duplicate_app.reload.approved_at).to be_nil
-
-      click_on 'Go back'
-      expect(page).to have_content 'Applicant Information'
-
-      click_on 'Determination'
-      click_on 'Approve and continue to disbursement'
-
-      expect(page).to have_content 'This applicant has been identified as a duplicate.'
       click_on 'Delete this application'
       expect(page).to have_content 'Start a new application'
       expect(AidApplication.find_by(id: duplicate_app.id)).to be_nil

@@ -295,29 +295,22 @@ class AidApplication < ApplicationRecord
   scope :matching_submitted_apps, ->(aid_application) do
     submitted
       .where.not(id: aid_application.id)
-      .where("#{normalize_sql('name')} = #{normalize_sql('?')}", aid_application.name)
       .where(
         birthday: aid_application.birthday,
         zip_code: aid_application.zip_code.strip
       )
       .match_by_address(aid_application)
+      .fuzzy_search(aid_application.name)
   end
 
   scope :match_by_address, ->(aid_application) do
-    result = all
-    street_address_starts_with_number = aid_application.street_address.match(/^(\d*)\s/)
-    if street_address_starts_with_number
-      result = result.where("street_address like ?", "#{street_address_starts_with_number[1]}%")
+    result = all.fuzzy_search(aid_application.street_address)
 
-      if aid_application.apartment_number.present?
-        result = result.where("#{normalize_sql('apartment_number')} = #{normalize_sql('?')}", aid_application.apartment_number)
-      end
+    if aid_application.apartment_number.present?
+      result = result.where("#{normalize_sql('apartment_number')} = #{normalize_sql('?')}", aid_application.apartment_number)
     end
-    result
-  end
 
-  scope :matching_approved_apps, ->(aid_application) do
-    approved.matching_submitted_apps(aid_application)
+    result
   end
 
   belongs_to :organization, counter_cache: true
