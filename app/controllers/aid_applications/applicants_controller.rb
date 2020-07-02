@@ -80,12 +80,6 @@ module AidApplications
         @aid_application.record_verification_if_changed(verifier: current_user)
         @aid_application.save(context: :submit)
 
-        app_is_duplicate_approved = AidApplication.matching_approved_apps(@aid_application).any?
-        if app_is_duplicate_approved
-          respond_with @aid_application, location: -> { organization_aid_application_duplicate_path(current_organization, @aid_application, verify: true) }
-          return
-        end
-
         respond_with @aid_application, location: (lambda do
           if params[:form_action] == 'verify_and_exit'
             organization_dashboard_path(current_organization)
