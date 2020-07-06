@@ -66,12 +66,14 @@ describe 'Approve aid application', type: :system do
     expect(aid_application.approved_at).to be_within(2.seconds).of(Time.current)
     expect(aid_application.approver).to eq supervisor
 
-    fill_in I18n.t('aid_applications.disbursements.edit.sequence_number'), with: "garbage"
+    fill_in I18n.t('aid_applications.disbursements.edit.sequence_number'), with: "garbage", match: :first
     click_on I18n.t('aid_applications.disbursements.edit.disburse_card')
 
     expect(page).to have_content I18n.t('activerecord.errors.messages.sequence_number_invalid')
+    expect(page).to have_content I18n.t('activerecord.errors.messages.sequence_numbers_must_match')
 
     fill_in I18n.t('aid_applications.disbursements.edit.sequence_number'), with: payment_card.sequence_number
+    fill_in I18n.t('aid_applications.disbursements.edit.sequence_number_confirmation'), with: payment_card.sequence_number
     click_on I18n.t('aid_applications.disbursements.edit.disburse_card')
 
     expect(page).to have_content "Card successfully disbursed"

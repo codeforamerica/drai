@@ -28,6 +28,10 @@ module AidApplications
         @search_card.errors.add(:sequence_number, t('activerecord.errors.messages.sequence_number_already_assigned'))
       end
 
+      unless @search_card.matching_sequence_numbers?
+        @search_card.errors.add(:sequence_number_confirmation, t('activerecord.errors.messages.sequence_numbers_must_match'))
+      end
+
       if @search_card.errors.any?
         render :edit
         return
@@ -51,7 +55,7 @@ module AidApplications
     private
 
     def search_card_params
-      params.require(:search_card).permit(:sequence_number).except(:aid_application)
+      params.require(:search_card).permit(:sequence_number, :sequence_number_confirmation).except(:aid_application)
     end
 
     def aid_application_params
@@ -61,9 +65,14 @@ module AidApplications
     class SearchCard
       include ActiveModel::Model
       attr_accessor :sequence_number
+      attr_accessor :sequence_number_confirmation
 
       def self.model_name
         ActiveModel::Name.new(self, nil, "SearchCard")
+      end
+
+      def matching_sequence_numbers?
+        (sequence_number.presence || '').strip == (sequence_number_confirmation.presence || '').strip
       end
     end
   end

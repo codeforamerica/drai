@@ -44,6 +44,7 @@ en:
         required_question: This question is required.
         sequence_number_already_assigned: This sequence number has already been used.
         sequence_number_invalid: Make sure the sequence number is correct.
+        sequence_numbers_must_match: Make sure these numbers match.
         zip_code: Must be a 5-digit ZIP Code in California.
         zip_code_outside_organization_service_area: "%{zip_code} is in %{zip_code_county},
           which is outside of your organization's service area. Please update the
@@ -267,6 +268,7 @@ en:
         method: What method was the card disbursed by?
         print_signature: Print Signature Page
         sequence_number: Card Sequence Number
+        sequence_number_confirmation: Type card sequence number again
         sequence_number_help: Where to find the card sequence number
         title: Disburse card
         when: When was the card disbursed?
