@@ -44,6 +44,7 @@ describe AidApplications::DisbursementsController do
         aid_application_id: aid_application.id,
         search_card: {
           sequence_number: payment_card.sequence_number,
+          sequence_number_confirmation: payment_card.sequence_number,
           aid_application: {
             card_receipt_method: 'mail'
           }
