@@ -323,6 +323,7 @@ class AidApplication < ApplicationRecord
   belongs_to :organization, counter_cache: true
   belongs_to :creator, class_name: 'User', inverse_of: :aid_applications_created, counter_cache: :aid_applications_created_count
   belongs_to :submitter, class_name: 'User', inverse_of: :aid_applications_submitted, counter_cache: :aid_applications_submitted_count, optional: :true
+  belongs_to :verifier, class_name: 'User', inverse_of: :aid_applications_verified, counter_cache: :aid_applications_verified_count, optional: :true
   belongs_to :approver, class_name: 'User', inverse_of: :aid_applications_approved, counter_cache: :aid_applications_approved_count, optional: :true
   belongs_to :disburser, class_name: 'User', inverse_of: :aid_applications_disbursed, counter_cache: :aid_applications_disbursed_count, optional: :true
   belongs_to :unpauser, class_name: 'User', inverse_of: :aid_applications_unpaused, counter_cache: :aid_applications_unpaused_count, optional: :true
@@ -528,6 +529,24 @@ class AidApplication < ApplicationRecord
     save!
   end
 
+  def record_verification_if_changed(verifier:)
+    if verified_photo_id_changed? || verified_proof_of_address_changed? || verified_covid_impact_changed? || verification_case_note_changed?
+      assign_attributes(
+        verifier: verifier
+      )
+    end
+
+    if verified? && (verified_photo_id_changed?(to: true) || verified_proof_of_address_changed?(to: true) || verified_covid_impact_changed?(to: true))
+      assign_attributes(
+        verified_at: Time.current,
+      )
+    elsif !verified?
+      assign_attributes(
+        verified_at: nil
+      )
+    end
+  end
+
   def save_and_unpause(unpauser:)
     assign_attributes(
       paused_at: nil,
@@ -675,6 +694,10 @@ class AidApplication < ApplicationRecord
 
   def submitted?
     submitted_at.present?
+  end
+
+  def partially_verified?
+    [verified_photo_id, verified_proof_of_address, verified_covid_impact, verification_case_note.present?].any?
   end
 
   def verified?

@@ -77,7 +77,9 @@ describe 'Verify aid application', type: :system do
                                      verified_photo_id: true,
                                      verified_proof_of_address: true,
                                      verified_covid_impact: true,
-                                     verification_case_note: "Lotsa docs"
+                                     verification_case_note: "Lotsa docs",
+                                     verified_at: be_within(1.minute).of(Time.current),
+                                     verifier: supervisor
                                    )
       end
     end

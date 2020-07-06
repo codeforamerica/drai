@@ -51,12 +51,37 @@
         </p>
       <% end %>
 
+      <% if @aid_application.partially_verified? %>
+        <div class="notice">
+          <p>
+            <strong>
+              Verified
+              <% if @aid_application.verifier %>
+                by <%= @aid_application.verifier&.name %>
+              <% end %>
+              <% if @aid_application.verified_at %>
+                on <%= @aid_application.verified_at&.to_s(:month_day_year) %>
+              <% end %>
+            </strong>
+
+          <ul>
+            <li><%= @aid_application.verified_photo_id? ? '✅' : '❌' %> Photo ID</li>
+            <li><%= @aid_application.verified_proof_of_address? ? '✅' : '❌' %> Proof of Address</li>
+            <li><%= @aid_application.verified_covid_impact? ? '✅' : '❌' %> COVID-19 Impact</li>
+          </ul>
+
+          <% if @aid_application.verification_case_note.present? %>
+            <%= simple_format @aid_application.verification_case_note %>
+          <% end %>
+        </div>
+      <% end %>
+
       <div class="form-card__footer">
         <%= button_to({ action: :approve },
                       method: :put,
                       name: 'form_action',
                       value: 'approve_and_exit',
-                      disabled: @aid_application.waitlisted?  || @aid_application.organization.no_cards?,
+                      disabled: @aid_application.waitlisted? || @aid_application.organization.no_cards?,
                       class: "button button--primary") { "Approve and exit" } %>
 
         <%= button_to({ action: :approve },

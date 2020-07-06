@@ -64,6 +64,9 @@ FactoryBot.define do
       verified_photo_id { true }
       verified_proof_of_address { true }
       verified_covid_impact { true }
+
+      verified_at { Time.current }
+      verifier { supervisor }
     end
 
     trait :approved do

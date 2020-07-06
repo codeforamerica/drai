@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_184646) do
+ActiveRecord::Schema.define(version: 2020_07_02_221510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
     t.boolean "verified_proof_of_address"
     t.boolean "verified_covid_impact"
     t.text "verification_case_note"
+    t.datetime "verified_at"
+    t.bigint "verifier_id"
     t.index ["application_number"], name: "index_aid_applications_on_application_number", unique: true
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
@@ -92,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
     t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
     t.index ["unpauser_id"], name: "index_aid_applications_on_unpauser_id"
+    t.index ["verifier_id"], name: "index_aid_applications_on_verifier_id"
     t.index ["zip_code", "birthday"], name: "index_aid_applications_on_zip_code_and_birthday"
   end
 
@@ -210,6 +213,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
     t.bigint "aid_applications_disbursed_count", default: 0, null: false
     t.bigint "aid_applications_rejected_count", default: 0, null: false
     t.bigint "aid_applications_unpaused_count", default: 0, null: false
+    t.bigint "aid_applications_verified_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deactivated_at", "id"], name: "index_users_on_deactivated_at_and_id", order: :desc
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -237,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_184646) do
   add_foreign_key "aid_applications", "users", column: "rejecter_id"
   add_foreign_key "aid_applications", "users", column: "submitter_id"
   add_foreign_key "aid_applications", "users", column: "unpauser_id"
+  add_foreign_key "aid_applications", "users", column: "verifier_id"
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"
   add_foreign_key "payment_card_orders", "organizations"
