@@ -433,7 +433,27 @@ RSpec.describe AidApplication, type: :model do
         extra_white_space_in_fields_aid_application = create :aid_application, :submitted, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}", apartment_number: apartment_number
         different_cases_aid_application = create :aid_application, :submitted, name: name.upcase, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
 
-        expect(AidApplication.matching_submitted_apps(aid_application).map(&:id)).to match_array [duplicate_aid_application, extra_white_space_in_fields_aid_application, different_cases_aid_application].map(&:id)
+        expect(AidApplication.matching_submitted_apps(aid_application)).to contain_exactly(duplicate_aid_application, extra_white_space_in_fields_aid_application, different_cases_aid_application)
+      end
+    end
+  end
+
+  describe '.matching_approved_apps' do
+    context 'there are existing approved apps with the same name, birthday, zip code and street address' do
+      it 'returns the matching apps' do
+        name = "Fake Name"
+        birthday = 'January 1, 1980'
+        zip_code = '12345'
+        street_address = '123 Main St'
+        apartment_number = '#1'
+        aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        duplicate_aid_application = create :aid_application, :approved, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address, apartment_number: apartment_number
+        _unapproved_matching_aid_application = create :aid_application, :submitted, name: name, birthday: birthday, zip_code: zip_code, street_address: street_address
+        _approved_street_address_does_not_match_aid_application = create :aid_application, :approved, name: name, birthday: birthday, zip_code: zip_code, street_address: 'other street address'
+        _approved_name_does_not_match_aid_application = create :aid_application, :approved, name: 'different name', birthday: birthday, zip_code: zip_code, street_address: street_address
+        extra_white_space_in_fields_aid_application = create :aid_application, :approved, name: "#{name}    ", birthday: birthday, zip_code: "#{zip_code}       ", street_address: " #{street_address}", apartment_number: apartment_number
+
+        expect(AidApplication.matching_approved_apps(aid_application)).to contain_exactly(duplicate_aid_application, extra_white_space_in_fields_aid_application)
       end
     end
   end
