@@ -44,15 +44,19 @@
         <%= f.cfa_input_field :name, t('.applicant_information.name') %>
 
         <%= f.gcf_date_input :birthday, t('.applicant_information.dob'), help_text: 'MM/DD/YYYY' %>
-        <fieldset>
-          <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
-          <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>
-          <%= f.cfa_select :country_of_origin, t('.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
-          <%= f.cfa_select :sexual_orientation, t('.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
-          <%= f.cfa_select :gender, t('.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
-          <%= f.gcf_collection_check_boxes :racial_ethnic_identity, t('.applicant_information.racial_ethnic_identity'), AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS %>
-        </fieldset>
 
+        <% if verify_page? %>
+          <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>
+        <% else %>
+          <fieldset>
+            <legend class="spacing-below-15"><em><%= t('.contact_information.optional_questions_prompt') %></em></legend>
+            <%= f.cfa_select :preferred_language, t('.applicant_information.preferred_language'), AidApplication::PREFERRED_LANGUAGE_OPTIONS %>
+            <%= f.cfa_select :country_of_origin, t('.applicant_information.country_of_origin'), AidApplication::COUNTRY_OF_ORIGIN_OPTIONS %>
+            <%= f.cfa_select :sexual_orientation, t('.applicant_information.sexual_orientation'), AidApplication::SEXUAL_ORIENTATION_OPTIONS %>
+            <%= f.cfa_select :gender, t('.applicant_information.gender'), AidApplication::GENDER_OPTIONS %>
+            <%= f.gcf_collection_check_boxes :racial_ethnic_identity, t('.applicant_information.racial_ethnic_identity'), AidApplication::RACIAL_OR_ETHNIC_IDENTITY_OPTIONS %>
+          </fieldset>
+        <% end %>
         <hr>
 
         <div class="address" id="address">
@@ -140,6 +144,7 @@
 
         <hr>
 
+        <% unless verify_page? %>
         <div class="additional-information-section">
           <h2><%= t('.additional_information.title') %></h2>
           <%= f.cfa_radio_set(
@@ -177,6 +182,7 @@
           </fieldset>
 
         </div>
+        <% end %>
       </div>
 
       <% unless verify_page? %>

@@ -53,8 +53,6 @@ describe 'Verify aid application', type: :system do
         fill_in "aid_application[birthday(1i)]", with: "2000"
         fill_in "aid_application[birthday(2i)]", with: "2"
         fill_in "aid_application[birthday(3i)]", with: "2"
-        select "Bisexual", from: "Sexual orientation"
-        select "Another gender identity", from: "Gender"
 
         within_fieldset "Which documents have been submitted?" do
           check "Photo ID"
@@ -72,8 +70,6 @@ describe 'Verify aid application', type: :system do
         expect(aid_application).to have_attributes(
                                      name: "New Name",
                                      birthday: "02-02-2000".to_date,
-                                     sexual_orientation: "Bisexual",
-                                     gender: "Another gender identity",
                                      verified_photo_id: true,
                                      verified_proof_of_address: true,
                                      verified_covid_impact: true,
