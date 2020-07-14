@@ -79,7 +79,7 @@
         <% if @aid_application.allow_mailing_address? %>
           <div class="mailing-address" id="mailing-address">
             <h2><%= t('.mailing_address.title') %></h2>
-            <%= f.hidden_field :allow_mailing_address %>
+            <%= f.hidden_field :allow_mailing_address, value: true %>
 
             <%= f.cfa_input_field :mailing_street_address, t('.shared_address.street_address') %>
             <%= f.cfa_input_field :mailing_apartment_number, t('.shared_address.apartment_number') %>
