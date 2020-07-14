@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_221510) do
+ActiveRecord::Schema.define(version: 2020_07_14_224629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -121,6 +121,18 @@ ActiveRecord::Schema.define(version: 2020_07_02_221510) do
     t.bigint "exporter_id"
     t.index ["exporter_id"], name: "index_export_logs_on_exporter_id"
     t.index ["organization_id"], name: "index_export_logs_on_organization_id"
+  end
+
+  create_table "ignored_duplicates", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "aid_application_id"
+    t.bigint "duplicate_aid_application_id"
+    t.bigint "user_id"
+    t.index ["aid_application_id", "duplicate_aid_application_id"], name: "index_ignored_duplicates_on_both_ids", unique: true
+    t.index ["aid_application_id"], name: "index_ignored_duplicates_on_aid_application_id"
+    t.index ["duplicate_aid_application_id"], name: "index_ignored_duplicates_on_duplicate_id"
+    t.index ["user_id"], name: "index_ignored_duplicates_on_user_id"
   end
 
   create_table "message_logs", force: :cascade do |t|
@@ -245,6 +257,9 @@ ActiveRecord::Schema.define(version: 2020_07_02_221510) do
   add_foreign_key "aid_applications", "users", column: "verifier_id"
   add_foreign_key "export_logs", "organizations"
   add_foreign_key "export_logs", "users", column: "exporter_id"
+  add_foreign_key "ignored_duplicates", "aid_applications", column: "duplicate_aid_application_id", on_delete: :cascade
+  add_foreign_key "ignored_duplicates", "aid_applications", on_delete: :cascade
+  add_foreign_key "ignored_duplicates", "users"
   add_foreign_key "payment_card_orders", "organizations"
   add_foreign_key "payment_cards", "aid_applications"
   add_foreign_key "reveal_activation_code_logs", "aid_applications"

@@ -29,6 +29,7 @@ RSpec.describe 'Deduplication flow', type: :system do
 
       expect(duplicate_app.reload.submitted_at).to be_present
       expect(page).to have_content 'Review and submit'
+      expect(duplicate_app.ignored_duplicate_aid_applications).to contain_exactly(aid_app)
     end
   end
 
@@ -62,7 +63,39 @@ RSpec.describe 'Deduplication flow', type: :system do
 
       expect(page).to have_content 'Potential duplicate identified'
       click_on 'Approve anyway'
+
+      expect(page).to have_content 'Disburse card'
       expect(duplicate_app.reload.approved_at).to be_present
+      expect(duplicate_app.ignored_duplicate_aid_applications).to contain_exactly(approved_app)
+    end
+  end
+
+  context 'when submitting and approving' do
+    let!(:supervisor) { create :supervisor }
+    let!(:aid_app) { create :aid_application, :submitted, creator: supervisor, organization: supervisor.organization }
+    let!(:duplicate_app) { create :aid_application, creator: supervisor, organization: supervisor.organization, name: aid_app.name, street_address: aid_app.street_address, zip_code: aid_app.zip_code, birthday: aid_app.birthday }
+
+    it 'allows assister to submit duplicate app anyway' do
+      sign_in supervisor
+      visit edit_organization_aid_application_applicant_path(organization_id: supervisor.organization.id, aid_application_id: duplicate_app.id)
+
+      click_on 'Submit'
+      expect(page).to have_content 'Potential duplicate identified'
+
+      click_on 'Submit anyway'
+
+      expect(duplicate_app.reload.submitted_at).to be_present
+      expect(page).to have_content 'Review and submit'
+      expect(duplicate_app.ignored_duplicate_aid_applications).to contain_exactly(aid_app)
+
+      # Behind the scenes, someone else approves the duplicate app
+      aid_app.save_and_approve(approver: supervisor)
+
+      click_on 'Determination'
+      click_on 'Approve and continue to disbursement'
+
+      expect(page).to have_content 'Potential duplicate identified'
+      click_on 'Approve anyway'
 
       expect(page).to have_content 'Disburse card'
     end

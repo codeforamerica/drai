@@ -330,6 +330,8 @@ class AidApplication < ApplicationRecord
   has_one :aid_application_search
   has_one :aid_application_waitlist
   has_many :message_logs, as: :messageable
+  has_many :ignored_duplicates
+  has_many :ignored_duplicate_aid_applications, through: :ignored_duplicates, class_name: 'AidApplication', source: :duplicate_aid_application
 
   delegate :waitlist_position, to: :aid_application_waitlist, allow_nil: true
 
