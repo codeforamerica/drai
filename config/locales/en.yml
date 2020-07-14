@@ -273,7 +273,7 @@ en:
         title: Disburse card
         when: When was the card disbursed?
     duplicates:
-      show:
+      edit:
         body: We've found an application that looks similar. Please confirm that this client has not already applied.
         note_html: |
           <strong>Leave a note about this</strong> (optional)

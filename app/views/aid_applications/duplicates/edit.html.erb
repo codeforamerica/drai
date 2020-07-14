@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <% AidApplication.matching_submitted_apps(@aid_application).each do |aid_application| %>
+          <% matching_apps.each do |aid_application| %>
             <%= render 'data_row', header: 'Name', value: @aid_application.name == aid_application.name ? 'Same' : 'Similar', aid_application: aid_application %>
             <%= render 'data_row', header: 'DOB', value: 'Same', aid_application: aid_application %>
             <%= render 'data_row', header: 'Address', value: @aid_application.street_address == aid_application.street_address ? 'Same' : 'Similar', aid_application: aid_application %>
@@ -42,12 +42,12 @@
         <div class="toolbar__right">
         <% if verify_step? %>
             <%= button_to "Approve anyway",
-                          edit_organization_aid_application_disbursement_path(current_organization, current_aid_application),
+                          { action: :update },
                           method: :put,
                           class: "button button--primary" %>
         <% else %>
             <%= button_to "Submit anyway",
-                          edit_organization_aid_application_verification_path(current_organization, current_aid_application, verify: true),
+                          { action: :update },
                           method: :put,
                           class: "button button--primary" %>
         <% end %>

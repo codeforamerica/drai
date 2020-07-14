@@ -15,7 +15,7 @@ module AidApplications
       app_is_duplicate = AidApplication.matching_approved_apps(@aid_application).any?
 
       if app_is_duplicate
-        respond_with @aid_application, location: organization_aid_application_duplicate_path(current_organization, @aid_application, verify: true)
+        respond_with @aid_application, location: organization_aid_application_duplicate_path(current_organization, @aid_application)
       else
         @aid_application.save_and_approve(approver: current_user)
         @aid_application.send_approval_notification
