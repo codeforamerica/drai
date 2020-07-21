@@ -16,7 +16,7 @@
         </div>
         <hr>
 
-        <% if current_organization.using_waitlist? %>
+        <% if (!@aid_application.submitted? && current_organization.using_waitlist?) || @aid_application.waitlisted? %>
           <p class="notice notice--error">
             <strong>Application is waitlisted</strong>: Explain to the client that they are on a waitlist and may not get a card.
           </p>
