@@ -235,7 +235,7 @@ zh:
     confirm: 确认
     continue: 继续
     delete: 删除
-    delete_application: 删除这份申请
+    delete_this_application: 删除这份申请
     disabled: 有残疾
     email_address: 电子邮件地址
     go_back: 返回

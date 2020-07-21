@@ -333,7 +333,7 @@ ar:
     confirm: تأكيد
     continue: متابعة
     delete: حذف
-    delete_application: حذف هذا الطلب
+    delete_this_application: حذف هذا الطلب
     disabled: فقد الأهلية
     email_address: عنوان البريد الإلكتروني
     go_back: عودة للوراء

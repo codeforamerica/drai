@@ -24,7 +24,7 @@
             <%= render 'data_row', header: 'DOB', value: 'Same', aid_application: aid_application %>
             <%= render 'data_row', header: 'Address', value: @aid_application.street_address == aid_application.street_address ? 'Same' : 'Similar', aid_application: aid_application %>
             <%= render 'data_row', header: 'Phone number', value: aid_application.phone_number, aid_application: aid_application %>
-            <%= render 'data_row', header: 'Date submitted', value: aid_application.submitted_at.strftime("%d-%m-%Y"), aid_application: aid_application %>
+            <%= render 'data_row', header: 'Date submitted', value: aid_application.submitted_at.strftime("%m-%d-%Y"), aid_application: aid_application %>
             <%= render 'data_row', header: 'Worker', value: aid_application.submitter.name, aid_application: aid_application %>
             <%= render 'data_row', header: 'CBO', value: aid_application.organization.name, aid_application: aid_application %>
             <%= render 'data_row', header: 'Case status', value: aid_application.status.capitalize, aid_application: aid_application %>
@@ -36,7 +36,7 @@
     <div class="form-card__footer">
       <div class="toolbar">
         <div class="toolbar__left">
-          <%= button_to t('general.delete_this_application'),
+          <%= button_to "Delete this application",
                         organization_aid_application_path(current_organization, current_aid_application),
                         method: :delete,
                         class: "button button--danger",
