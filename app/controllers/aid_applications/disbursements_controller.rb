@@ -25,7 +25,7 @@ module AidApplications
       if payment_card.blank?
         @search_card.errors.add(:sequence_number, t('activerecord.errors.messages.sequence_number_invalid'))
       elsif payment_card.aid_application.present?
-        @search_card.errors.add(:sequence_number, t('activerecord.errors.messages.sequence_number_already_assigned'))
+        @search_card.errors.add(:sequence_number, t('activerecord.errors.messages.sequence_number_already_assigned', app_number: payment_card.aid_application.application_number, organization: payment_card.aid_application.organization.name))
       end
 
       unless @search_card.matching_sequence_numbers?
