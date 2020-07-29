@@ -273,10 +273,11 @@ en:
         title: Disburse card
         when: When was the card disbursed?
     duplicates:
-      show:
-        body: Someone with a matching name, date of birth and address has already
-          applied for DRAI.
-        title: This applicant has been identified as a duplicate.
+      edit:
+        body: We've found an application that looks similar. Please confirm that this client has not already applied.
+        note_html: |
+          <strong>Leave a note about this</strong> (optional)
+        title: Potential duplicate identified
     eligibilities:
       edit:
         about_program:

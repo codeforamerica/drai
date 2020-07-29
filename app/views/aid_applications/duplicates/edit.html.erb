@@ -1,0 +1,54 @@
+<%= render 'aid_applications/navigation' %>
+
+<div class="grid__item width-two-thirds shift-one-sixth" <%=raw I18n.locale == :ar ? 'dir="rtl"' : '' %>>
+  <div class="form-card">
+    <header class="form-card__header">
+      <h2><%= t('.title') %></h2>
+    </header>
+    <div class="form-card__content">
+      <p><%= t('.body') %></p>
+    </div>
+
+    <% matching_apps.each do |aid_application| %>
+      <div class="data-table-container">
+        <table class="data-table">
+          <thead>
+            <tr> <!-- empty header renders top line on table-->
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'data_row', header: 'Duplicate application', value: aid_application.application_number %>
+            <%= render 'data_row', header: 'Name', value: @aid_application.name == aid_application.name ? 'Same' : 'Similar', aid_application: aid_application %>
+            <%= render 'data_row', header: 'DOB', value: 'Same', aid_application: aid_application %>
+            <%= render 'data_row', header: 'Address', value: @aid_application.street_address == aid_application.street_address ? 'Same' : 'Similar', aid_application: aid_application %>
+            <%= render 'data_row', header: 'Phone number', value: aid_application.phone_number, aid_application: aid_application %>
+            <%= render 'data_row', header: 'Date submitted', value: aid_application.submitted_at.strftime("%m-%d-%Y"), aid_application: aid_application %>
+            <%= render 'data_row', header: 'Worker', value: aid_application.submitter.name, aid_application: aid_application %>
+            <%= render 'data_row', header: 'CBO', value: aid_application.organization.name, aid_application: aid_application %>
+            <%= render 'data_row', header: 'Case status', value: aid_application.status.capitalize, aid_application: aid_application %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+    <div class="form-card__footer">
+      <div class="toolbar">
+        <div class="toolbar__left">
+          <%= button_to "Delete this application",
+                        organization_aid_application_path(current_organization, current_aid_application),
+                        method: :delete,
+                        class: "button button--danger",
+                        data: { confirm: "Are you sure you want to delete this application?" } %>
+        </div>
+        <div class="toolbar__right">
+          <%= button_to verify_step? ? "Approve anyway" : "Submit anyway",
+                        { action: :update },
+                        method: :put,
+                        class: "button button--primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

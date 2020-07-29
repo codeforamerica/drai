@@ -72,7 +72,7 @@ Rails.application.routes.draw do
             put :unapprove
             put :unreject
           end
-          resource :duplicate, only: [:show]
+          resource :duplicate, only: [:edit, :update], path_names: { edit: '' }
           resource :disbursement, only: [:edit, :update], path_names: { edit: '' }
           resource :finished, only: [:edit, :update], path_names: { edit: '' } do
             post 'reveal_activation_code'

@@ -63,28 +63,24 @@ module AidApplications
           return
         end
 
-        app_is_duplicate_submitted = AidApplication.matching_submitted_apps(@aid_application).any?
+        @aid_application.save(context: :submit)
 
-        if app_is_duplicate_submitted
-          @aid_application.save
-          respond_with @aid_application, location: -> { organization_aid_application_duplicate_path(current_organization, @aid_application) }
-        else
-          @aid_application.save_and_submit(submitter: current_user)
-          if @aid_application.errors.empty?
-            @aid_application.send_submission_notification
+        if @aid_application.errors.empty?
+          app_is_duplicate_submitted = AidApplication.matching_submitted_apps(@aid_application).any?
+
+          if app_is_duplicate_submitted
+            redirect_to organization_aid_application_duplicate_path(current_organization, @aid_application)
+            return
           end
 
-          respond_with @aid_application, location: -> { edit_organization_aid_application_confirmation_path(current_organization, @aid_application) }
+          @aid_application.save_and_submit(submitter: current_user)
+          @aid_application.send_submission_notification
         end
+
+        respond_with @aid_application, location: -> { edit_organization_aid_application_confirmation_path(current_organization, @aid_application) }
       when 'verify', 'verify_and_exit'
         @aid_application.record_verification_if_changed(verifier: current_user)
         @aid_application.save(context: :submit)
-
-        app_is_duplicate_approved = AidApplication.matching_approved_apps(@aid_application).any?
-        if app_is_duplicate_approved
-          respond_with @aid_application, location: -> { organization_aid_application_duplicate_path(current_organization, @aid_application, verify: true) }
-          return
-        end
 
         respond_with @aid_application, location: (lambda do
           if params[:form_action] == 'verify_and_exit'

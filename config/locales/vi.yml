@@ -298,7 +298,7 @@ vi:
     confirm: Xác nhận
     continue: Tiếp
     delete: Xóa
-    delete_application: Xóa hồ sơ đăng ký này
+    delete_this_application: Xóa hồ sơ đăng ký này
     disabled: Đã vô hiệu hóa
     email_address: Email
     go_back: Quay lại
