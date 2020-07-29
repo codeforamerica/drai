@@ -42,8 +42,8 @@ en:
         password_complexity: Complexity requirement not met.
         phone_number: Make sure your phone number is 10 digits long.
         required_question: This question is required.
-        sequence_number_already_assigned: This sequence number has already been used.
-        sequence_number_invalid: Make sure the sequence number is correct.
+        sequence_number_already_assigned: "This sequence number has already been disbursed to %{app_number} by %{organization}."
+        sequence_number_invalid: This sequence number does not correspond to a known payment card.
         sequence_numbers_must_match: Make sure these numbers match.
         zip_code: Must be a 5-digit ZIP Code in California.
         zip_code_outside_organization_service_area: "%{zip_code} is in %{zip_code_county},
