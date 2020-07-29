@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_224629) do
+ActiveRecord::Schema.define(version: 2020_07_29_165858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_224629) do
     t.index ["approver_id"], name: "index_aid_applications_on_approver_id"
     t.index ["creator_id"], name: "index_aid_applications_on_creator_id"
     t.index ["disburser_id"], name: "index_aid_applications_on_disburser_id"
+    t.index ["name"], name: "index_aid_applications_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["organization_id", "approved_at", "disbursed_at"], name: "index_aid_applications_org_id_approved_at_disbursed_at"
     t.index ["organization_id", "disbursed_at"], name: "index_aid_applications_org_id_disbursed_at"
     t.index ["organization_id", "submitted_at", "approved_at"], name: "index_aid_applications_org_id_submitted_at_approved_at"
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_224629) do
     t.index ["organization_id", "submitted_at"], name: "index_aid_applications_org_id_submitted_at_when_verified", where: "((verified_photo_id = true) AND (verified_proof_of_address = true) AND (verified_covid_impact = true))"
     t.index ["organization_id"], name: "index_aid_applications_on_organization_id"
     t.index ["rejecter_id"], name: "index_aid_applications_on_rejecter_id"
+    t.index ["street_address"], name: "index_aid_applications_on_street_address", opclass: :gist_trgm_ops, using: :gist
     t.index ["submitter_id"], name: "index_aid_applications_on_submitter_id"
     t.index ["unpauser_id"], name: "index_aid_applications_on_unpauser_id"
     t.index ["verifier_id"], name: "index_aid_applications_on_verifier_id"
