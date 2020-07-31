@@ -6,6 +6,7 @@ class Seeder
   end
 
   def seed
+    puts "\n==== Seeding Database ===="
     admin_user
     organization
     supervisor
@@ -73,6 +74,9 @@ class Seeder
         admin: true,
         confirmed_at: Time.current
       )
+      puts "\n==== Admin User ===="
+      puts "Email: admin@codeforamerica.org"
+      puts "Password: Qwerty!2"
     end
   end
 
@@ -95,6 +99,9 @@ class Seeder
         password: 'Qwerty!2',
         confirmed_at: Time.current
       )
+      puts "\n==== Assister User ===="
+      puts "Email: assister@aid.org"
+      puts "Password: Qwerty!2"
     end
   end
 
@@ -107,6 +114,9 @@ class Seeder
         supervisor: true,
         confirmed_at: Time.current
       )
+      puts "\n==== Supervisor User ===="
+      puts "Email: supervisor@aid.org"
+      puts "Password: Qwerty!2"
     end
   end
 
