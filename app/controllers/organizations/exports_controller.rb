@@ -43,8 +43,9 @@ class Organizations::ExportsController < ApplicationController
                   :mailing_city,
                   :mailing_state,
                   :mailing_zip_code,
+                  :card_receipt_method,
                   "payment_cards.sequence_number AS payment_card_sequence_number",
-                  "card_receipt_method AS preferred_card_receipt_method",
+                  :card_receipt_method,
                   :waitlist_position,
                   "submitters.name AS submitter",
                   "approvers.name AS approver",
@@ -54,7 +55,18 @@ class Organizations::ExportsController < ApplicationController
                   "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
                   "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
                   "date_trunc('second', rejected_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS rejected_at",
-                  )
+                  :preferred_language,
+                  :country_of_origin,
+                  :gender,
+                  :sexual_orientation,
+                  normalize_array_with_sql(:racial_ethnic_identity),
+                  normalize_boolean_with_sql(:unmet_food),
+                  normalize_boolean_with_sql(:unmet_housing),
+                  normalize_boolean_with_sql(:unmet_childcare),
+                  normalize_boolean_with_sql(:unmet_utilities),
+                  normalize_boolean_with_sql(:unmet_transportation),
+                  normalize_boolean_with_sql(:unmet_other)
+                )
     stream_csv_report(query)
   end
 
@@ -79,9 +91,25 @@ class Organizations::ExportsController < ApplicationController
     response.status = 200
   end
 
-  private
-
   def csv_filename
     "drai_applications_#{current_organization.name.truncate(20, separator: /\s/).parameterize}.csv"
+  end
+
+  def normalize_boolean_with_sql(attribute)
+    <<~SQL
+      (
+        CASE
+        WHEN #{attribute} IS TRUE THEN 'true'
+        WHEN #{attribute} IS FALSE THEN 'false'
+        ELSE ''
+        END
+      ) AS #{attribute}
+    SQL
+  end
+
+  def normalize_array_with_sql(attribute)
+    <<~SQL
+      array_to_string(#{attribute}, ', ', '') AS #{attribute}
+    SQL
   end
 end

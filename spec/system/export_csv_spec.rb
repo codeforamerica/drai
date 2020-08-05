@@ -63,7 +63,7 @@ describe 'Export CSV', type: :system do
                                        "mailing_state" => disbursed_app.mailing_state,
                                        "mailing_zip_code" => disbursed_app.mailing_zip_code,
                                        'payment_card_sequence_number' => disbursed_app.payment_card.sequence_number,
-                                       'preferred_card_receipt_method' => disbursed_app.card_receipt_method,
+                                       'card_receipt_method' => disbursed_app.card_receipt_method,
                                        'waitlist_position' => "1",
                                        'submitter' => disbursed_app.submitter.name,
                                        'approver' => disbursed_app.approver.name,
@@ -73,10 +73,30 @@ describe 'Export CSV', type: :system do
                                        'approved_at' => disbursed_app.approved_at.strftime('%Y-%m-%d %H:%M:%S'),
                                        'disbursed_at' => disbursed_app.disbursed_at.strftime('%Y-%m-%d %H:%M:%S'),
                                        'rejected_at' => disbursed_app.rejected_at.try(:strftime, '%Y-%m-%d %H:%M:%S'),
+                                       'preferred_language' => disbursed_app.preferred_language,
+                                       'country_of_origin' => disbursed_app.country_of_origin,
+                                       'gender' => disbursed_app.gender,
+                                       'sexual_orientation' => disbursed_app.sexual_orientation,
+                                       'racial_ethnic_identity' => array_to_string(disbursed_app.racial_ethnic_identity),
+                                       'unmet_food' => boolean_to_string(disbursed_app.unmet_food),
+                                       'unmet_housing' => boolean_to_string(disbursed_app.unmet_housing),
+                                       'unmet_childcare' => boolean_to_string(disbursed_app.unmet_childcare),
+                                       'unmet_utilities' => boolean_to_string(disbursed_app.unmet_utilities),
+                                       'unmet_transportation' => boolean_to_string(disbursed_app.unmet_transportation),
+                                       'unmet_other' => boolean_to_string(disbursed_app.unmet_other),
                                      })
 
     export_log = ExportLog.last
     expect(export_log.created_at).to be_within(1.second).of Time.current
     expect(export_log.exporter).to eq supervisor
+  end
+
+  def boolean_to_string(boolean)
+    return '' if boolean.nil?
+    boolean ? 'true' : 'false'
+  end
+
+  def array_to_string(array)
+    array.join(', ')
   end
 end
