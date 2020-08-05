@@ -43,6 +43,27 @@ class Organizations::ExportsController < ApplicationController
                   :mailing_city,
                   :mailing_state,
                   :mailing_zip_code,
+                  normalize_boolean_with_sql(:attestation),
+                  normalize_boolean_with_sql(:valid_work_authorization),
+                  normalize_boolean_with_sql(:covid19_care_facility_closed),
+                  normalize_boolean_with_sql(:covid19_reduced_work_hours),
+                  normalize_boolean_with_sql(:covid19_experiencing_symptoms),
+                  normalize_boolean_with_sql(:covid19_underlying_health_condition),
+                  normalize_boolean_with_sql(:covid19_caregiver),
+                  normalize_boolean_with_sql(:unmet_food),
+                  normalize_boolean_with_sql(:unmet_housing),
+                  normalize_boolean_with_sql(:unmet_childcare),
+                  normalize_boolean_with_sql(:unmet_utilities),
+                  normalize_boolean_with_sql(:unmet_transportation),
+                  normalize_boolean_with_sql(:unmet_other),
+                  normalize_boolean_with_sql(:receives_calfresh_or_calworks),
+                  :preferred_language,
+                  :country_of_origin,
+                  :sexual_orientation,
+                  :gender,
+                  :racial_ethnic_identity,
+                  normalize_boolean_with_sql(:no_cbo_association),
+                  :card_receipt_method,
                   "payment_cards.sequence_number AS payment_card_sequence_number",
                   "card_receipt_method AS preferred_card_receipt_method",
                   :waitlist_position,
@@ -83,5 +104,17 @@ class Organizations::ExportsController < ApplicationController
 
   def csv_filename
     "drai_applications_#{current_organization.name.truncate(20, separator: /\s/).parameterize}.csv"
+  end
+
+  def normalize_boolean_with_sql(attribute)
+    <<~SQL
+      (
+        CASE
+        WHEN #{attribute} = 't' THEN 'true'
+        WHEN #{attribute} = 'f' THEN 'false'
+        ELSE 'nil'
+        END
+      ) AS #{attribute}
+    SQL
   end
 end
