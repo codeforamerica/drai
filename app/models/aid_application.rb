@@ -228,7 +228,7 @@ class AidApplication < ApplicationRecord
   scope :committed, -> { visible.unrejected.unwaitlisted }
   scope :submitted, -> { where.not(submitted_at: nil) }
   scope :verified, -> { where(verified_photo_id: true, verified_proof_of_address: true, verified_covid_impact: true) }
-  scope :unverified, -> { where(verified_photo_id: [nil, false], verified_proof_of_address: [nil, false], verified_covid_impact: [nil, false]) }
+  scope :unverified, -> { where(verified_photo_id: [nil, false]).or(where(verified_proof_of_address: [nil, false])).or(where(verified_covid_impact: [nil, false])) }
   scope :approved, -> { where.not(approved_at: nil) }
   scope :unapproved, -> { where(approved_at: nil) }
   scope :disbursed, -> { where.not(disbursed_at: nil) }

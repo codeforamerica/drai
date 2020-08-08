@@ -35,20 +35,24 @@ RSpec.describe 'CBO dashboard', type: :system do
 
   it 'shows the proper number of applications' do
     assister.organization.update(total_payment_cards_count: 10)
-    create :aid_application, :rejected, organization: assister.organization
+    create :aid_application, :partially_verified, organization: assister.organization
+    create :aid_application, :verified, organization: assister.organization
     create :aid_application, :approved, organization: assister.organization
     create :aid_application, :disbursed, organization: assister.organization
+    create :aid_application, :rejected, organization: assister.organization
 
     sign_in assister
     visit root_path
 
+    save_and_open_page
+
     within '.statistics-uncommitted' do
-      expect(page).to have_content '6' # remaining
+      expect(page).to have_content '4' # remaining
       expect(page).to have_content '10' # total
     end
 
     within '.statistics-committed' do
-      expect(page).to have_content '3'
+      expect(page).to have_content '5'
     end
 
     within '.statistics-approved' do
