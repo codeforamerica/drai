@@ -36,6 +36,7 @@ class Seeder
       623456
     ].each do |sequence_number|
       next if PaymentCard.find_by(sequence_number: sequence_number)
+
       FactoryBot.create(:payment_card, sequence_number: sequence_number)
     end
 
@@ -45,6 +46,16 @@ class Seeder
 
       FactoryBot.create_list :aid_application, rand(5..10),
                              :submitted,
+                             organization: org,
+                             creator: assisters.sample
+
+      FactoryBot.create_list :aid_application, rand(5..10),
+                             :partially_verified,
+                             organization: org,
+                             creator: assisters.sample
+
+      FactoryBot.create_list :aid_application, rand(5..10),
+                             :verified,
                              organization: org,
                              creator: assisters.sample
 
