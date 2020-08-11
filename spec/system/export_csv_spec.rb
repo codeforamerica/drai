@@ -63,7 +63,7 @@ describe 'Export CSV', type: :system do
                                        "mailing_state" => disbursed_app.mailing_state,
                                        "mailing_zip_code" => disbursed_app.mailing_zip_code,
                                        'payment_card_sequence_number' => disbursed_app.payment_card.sequence_number,
-                                       'preferred_card_receipt_method' => disbursed_app.card_receipt_method,
+                                       'card_receipt_method' => disbursed_app.card_receipt_method,
                                        'waitlist_position' => "1",
                                        'submitter' => disbursed_app.submitter.name,
                                        'approver' => disbursed_app.approver.name,
@@ -81,6 +81,11 @@ describe 'Export CSV', type: :system do
                                        'covid19_experiencing_symptoms' => boolean_to_string(disbursed_app.covid19_experiencing_symptoms),
                                        'covid19_underlying_health_condition' => boolean_to_string(disbursed_app.covid19_underlying_health_condition),
                                        'covid19_caregiver' => boolean_to_string(disbursed_app.covid19_caregiver),
+                                       'preferred_language' => disbursed_app.preferred_language,
+                                       'country_of_origin' => disbursed_app.country_of_origin,
+                                       'gender' => disbursed_app.gender,
+                                       'sexual_orientation' => disbursed_app.sexual_orientation,
+                                       'racial_ethnic_identity' => array_to_string(disbursed_app.racial_ethnic_identity),
                                        'unmet_food' => boolean_to_string(disbursed_app.unmet_food),
                                        'unmet_housing' => boolean_to_string(disbursed_app.unmet_housing),
                                        'unmet_childcare' => boolean_to_string(disbursed_app.unmet_childcare),
@@ -88,11 +93,6 @@ describe 'Export CSV', type: :system do
                                        'unmet_transportation' => boolean_to_string(disbursed_app.unmet_transportation),
                                        'unmet_other' => boolean_to_string(disbursed_app.unmet_other),
                                        'receives_calfresh_or_calworks' => boolean_to_string(disbursed_app.receives_calfresh_or_calworks),
-                                       'preferred_language' => disbursed_app.preferred_language,
-                                       'country_of_origin' => disbursed_app.country_of_origin,
-                                       'sexual_orientation' => disbursed_app.sexual_orientation,
-                                       'gender' => disbursed_app.gender,
-                                       'racial_ethnic_identity' => disbursed_app.racial_ethnic_identity,
                                        'no_cbo_association' => boolean_to_string(disbursed_app.no_cbo_association),
                                        'card_receipt_method' => disbursed_app.card_receipt_method,
                                      })
@@ -103,7 +103,11 @@ describe 'Export CSV', type: :system do
   end
 
   def boolean_to_string(boolean)
-    return "nil" if boolean.nil?
+    return '' if boolean.nil?
     boolean ? 'true' : 'false'
+  end
+
+  def array_to_string(array)
+    array.join(', ')
   end
 end

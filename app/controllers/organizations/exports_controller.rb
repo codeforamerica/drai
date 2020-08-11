@@ -61,11 +61,9 @@ class Organizations::ExportsController < ApplicationController
                   :country_of_origin,
                   :sexual_orientation,
                   :gender,
-                  :racial_ethnic_identity,
                   normalize_boolean_with_sql(:no_cbo_association),
-                  :card_receipt_method,
                   "payment_cards.sequence_number AS payment_card_sequence_number",
-                  "card_receipt_method AS preferred_card_receipt_method",
+                  :card_receipt_method,
                   :waitlist_position,
                   "submitters.name AS submitter",
                   "approvers.name AS approver",
@@ -75,7 +73,8 @@ class Organizations::ExportsController < ApplicationController
                   "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
                   "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
                   "date_trunc('second', rejected_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS rejected_at",
-                  )
+                  normalize_array_with_sql(:racial_ethnic_identity),
+                )
     stream_csv_report(query)
   end
 
@@ -100,8 +99,6 @@ class Organizations::ExportsController < ApplicationController
     response.status = 200
   end
 
-  private
-
   def csv_filename
     "drai_applications_#{current_organization.name.truncate(20, separator: /\s/).parameterize}.csv"
   end
@@ -110,11 +107,17 @@ class Organizations::ExportsController < ApplicationController
     <<~SQL
       (
         CASE
-        WHEN #{attribute} = 't' THEN 'true'
-        WHEN #{attribute} = 'f' THEN 'false'
-        ELSE 'nil'
+        WHEN #{attribute} IS TRUE THEN 'true'
+        WHEN #{attribute} IS FALSE THEN 'false'
+        ELSE ''
         END
       ) AS #{attribute}
+    SQL
+  end
+
+  def normalize_array_with_sql(attribute)
+    <<~SQL
+      array_to_string(#{attribute}, ', ', '') AS #{attribute}
     SQL
   end
 end
