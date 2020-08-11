@@ -43,8 +43,27 @@ class Organizations::ExportsController < ApplicationController
                   :mailing_city,
                   :mailing_state,
                   :mailing_zip_code,
+                  normalize_boolean_with_sql(:attestation),
+                  normalize_boolean_with_sql(:valid_work_authorization),
+                  normalize_boolean_with_sql(:covid19_care_facility_closed),
+                  normalize_boolean_with_sql(:covid19_reduced_work_hours),
+                  normalize_boolean_with_sql(:covid19_experiencing_symptoms),
+                  normalize_boolean_with_sql(:covid19_underlying_health_condition),
+                  normalize_boolean_with_sql(:covid19_caregiver),
+                  normalize_boolean_with_sql(:unmet_food),
+                  normalize_boolean_with_sql(:unmet_housing),
+                  normalize_boolean_with_sql(:unmet_childcare),
+                  normalize_boolean_with_sql(:unmet_utilities),
+                  normalize_boolean_with_sql(:unmet_transportation),
+                  normalize_boolean_with_sql(:unmet_other),
+                  normalize_boolean_with_sql(:receives_calfresh_or_calworks),
+                  :preferred_language,
+                  :country_of_origin,
+                  :sexual_orientation,
+                  :gender,
+                  normalize_boolean_with_sql(:no_cbo_association),
                   "payment_cards.sequence_number AS payment_card_sequence_number",
-                  "card_receipt_method AS preferred_card_receipt_method",
+                  :card_receipt_method,
                   :waitlist_position,
                   "submitters.name AS submitter",
                   "approvers.name AS approver",
@@ -54,7 +73,8 @@ class Organizations::ExportsController < ApplicationController
                   "date_trunc('second', approved_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS approved_at",
                   "date_trunc('second', disbursed_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS disbursed_at",
                   "date_trunc('second', rejected_at) AT TIME ZONE 'UTC' AT TIME ZONE 'America/Los_angeles' AS rejected_at",
-                  )
+                  normalize_array_with_sql(:racial_ethnic_identity),
+                )
     stream_csv_report(query)
   end
 
@@ -79,9 +99,25 @@ class Organizations::ExportsController < ApplicationController
     response.status = 200
   end
 
-  private
-
   def csv_filename
     "drai_applications_#{current_organization.name.truncate(20, separator: /\s/).parameterize}.csv"
+  end
+
+  def normalize_boolean_with_sql(attribute)
+    <<~SQL
+      (
+        CASE
+        WHEN #{attribute} IS TRUE THEN 'true'
+        WHEN #{attribute} IS FALSE THEN 'false'
+        ELSE ''
+        END
+      ) AS #{attribute}
+    SQL
+  end
+
+  def normalize_array_with_sql(attribute)
+    <<~SQL
+      array_to_string(#{attribute}, ', ', '') AS #{attribute}
+    SQL
   end
 end
