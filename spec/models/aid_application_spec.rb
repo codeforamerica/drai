@@ -783,6 +783,91 @@ RSpec.describe AidApplication, type: :model do
     end
   end
 
+  describe '#send_card_activation_reminder' do
+    context 'when SMS consent' do
+      let(:preferred_language) {'English'}
+      let(:aid_application) {create :aid_application, :disbursed, email_consent: false, preferred_language: preferred_language}
+
+      it 'sends an SMS' do
+        perform_enqueued_jobs do
+          aid_application.send_card_activation_reminder
+        end
+
+        sms_message = ActionMailer::Base.deliveries.find { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+        expect(sms_message.body).to eq I18n.t(
+          'text_message.card_activation_reminder',
+          organization_name: aid_application.organization.name,
+          sequence_number: aid_application.payment_card.sequence_number,
+          activation_code: aid_application.payment_card.activation_code,
+          locale: 'en'
+        )
+      end
+
+      it 'records a Messages objects' do
+        perform_enqueued_jobs do
+          aid_application.send_card_activation_reminder
+        end
+
+        expect(aid_application.message_logs.size).to eq 2
+      end
+
+      context 'with preferred language set to Spanish' do
+        let(:preferred_language) {'Spanish'}
+
+        it 'sends an SMS in the preferred language' do
+          perform_enqueued_jobs do
+            aid_application.send_card_activation_reminder
+          end
+
+          sms_message = ActionMailer::Base.deliveries.find { |m| m.to.include? PhoneNumberFormatter.format(aid_application.phone_number) }
+          expect(sms_message.body.to_s).to eq I18n.t(
+            'text_message.card_activation_reminder',
+            organization_name: aid_application.organization.name,
+            sequence_number: aid_application.payment_card.sequence_number,
+            activation_code: aid_application.payment_card.activation_code,
+            locale: 'es'
+          )
+        end
+      end
+    end
+
+    context 'when email consent' do
+      let(:aid_application) {create :aid_application, :disbursed, sms_consent: false}
+
+      it 'sends an email' do
+        expect do
+          aid_application.send_card_activation_reminder
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+      end
+
+      it 'records a Message object' do
+        perform_enqueued_jobs do
+          aid_application.send_card_activation_reminder
+        end
+
+        expect(aid_application.message_logs.size).to eq 1
+        message_log = aid_application.message_logs.first
+        expect(message_log).to have_attributes(
+                                 messageable: aid_application,
+                                 subject: "Action Required: Activate your Disaster Assistance card",
+                                 body: a_string_including(aid_application.payment_card.activation_code)
+                               )
+      end
+    end
+
+    context 'when both consents' do
+      let(:aid_application) {create :aid_application, :disbursed}
+
+      it 'sends both email and sms' do
+        expect do
+          aid_application.send_disbursement_notification
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationEmailer", any_args)
+                 .and have_enqueued_job(ActionMailer::MailDeliveryJob).with("ApplicationTexter", any_args)
+      end
+    end
+  end
+
+
   describe '#locale' do
     it 'returns English key' do
       aid_application.preferred_language = 'English'
