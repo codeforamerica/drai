@@ -379,6 +379,14 @@ en:
         <p>This is an automated response from Code for America Disaster Assistance.</p>
         <p>For help with your application, call the organization that assisted your application.</p>
         <p>For help with your payment card, call 1-877-610-1075.</p>
+    card_activation_reminder:
+      body_html: |
+        <p>This is a message from %{organization_name}.</p>
+        <p>It looks like you haven’t activated the prepaid card you got for disaster relief (DRAI).</p>
+        <p>If you have your card but need help setting it up, please call 1-877-610-1075. If you never got your card, call 1-877-227-0956.</p>
+        <p>You will be asked for your card sequence number, which is %{sequence_number}, and your card activation code, which is %{activation_code}.</p>
+        <p>Please activate your card in the next 7 days or your card may be permanently deactivated.</p>
+      subject: "Action Required: Activate your Disaster Assistance card"
   flash:
     actions:
       create:
@@ -450,6 +458,7 @@ en:
     auto_response: This is an automated response from Code for America Disaster Assistance.
       For help with your application, call the organization that assisted your application.
       For help with your payment card, call 1-877-610-1075.
+    card_activation_reminder: This is a message from %{organization_name}. It looks like you haven’t activated the prepaid card you got for disaster relief (DRAI). If you have your card but need help setting it up, please call 1-877-610-1075. If you never got your card, call 1-877-227-0956. You will be asked for your card sequence number, which is %{sequence_number}, and your card activation code, which is %{activation_code}. Please activate your card in the next 7 days or your card may be permanently deactivated.
     help: This is an automated response from Code for America Disaster Assistance.
       For help with your case, contact the organization that assisted your application.
       More information at https://ca-drai.org/en/privacy. Reply STOP to unsubscribe.

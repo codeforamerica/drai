@@ -642,6 +642,31 @@ class AidApplication < ApplicationRecord
     end
   end
 
+  def send_card_activation_reminder
+    if sms_consent?
+      ApplicationTexter.with(messageable: self).basic_message(
+        to: phone_number,
+        body: I18n.t('text_message.card_activation_reminder',
+                     organization_name: self.organization.name,
+                     sequence_number: self.payment_card.sequence_number,
+                     activation_code: self.payment_card.activation_code,
+                     locale: locale)
+      ).deliver_later
+    end
+
+    if email.present?
+      ApplicationEmailer.with(messageable: self).basic_message(
+        to: email,
+        subject: I18n.t('email_message.card_activation_reminder.subject', locale: locale),
+        body: I18n.t('email_message.card_activation_reminder.body_html',
+                     organization_name: self.organization.name,
+                     sequence_number: self.payment_card.sequence_number,
+                     activation_code: self.payment_card.activation_code,
+                     locale: locale)
+      ).deliver_later
+    end
+  end
+
   def readonly_attribute?(name)
     if name.in? READONLY_ONCE_SET
       attribute_was(name).present?
