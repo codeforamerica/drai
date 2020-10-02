@@ -302,7 +302,7 @@ es:
       body_html: |
         <p>Este mensaje es de %{organization_name}.</p>
         <p>Parece que no ha activado la tarjeta débito que recibió para la ayuda de desastres (DRAI).</p>
-        <p>Si tiene su tarjeta pero necesita ayuda en programarla, favor de llamar a 1-877-610-1075. Si nunca recibió su tarjeta, llame a 1-877-277-0956.</p>
+        <p>Si tiene su tarjeta pero necesita ayuda en programarla, favor de llamar a 1-877-610-1075. Si nunca recibió su tarjeta, llame a 1-877-227-0956 [CORREGIDO].</p>
         <p>Se le pedirá su número de secuencia de la tarjeta, el cual es %{sequence_number}, y su código para activar, el cual es %{activation_code}.</p>
         <p>avor de activar su tarjeta dentro de los próximos 7 días o su tarjeta puede ser desactivada permanentemente.</p>
       subject: "Acción Requerida: Activar su tarjeta de Asistencia por Desastre"
@@ -363,7 +363,7 @@ es:
       de la organización Code for America. Para obtener ayuda con su caso, comuníquese
       con la organización que le ayudó con su solicitud. Puede obtener más información
       en https://ca-drai.org/privacy.
-    card_activation_reminder: Este mensaje es de %{organization_name}. Parece que no ha activado la tarjeta débito que recibió para la ayuda de desastres (DRAI). Si tiene su tarjeta pero necesita ayuda en programarla, favor de llamar a 1-877-610-1075. Si nunca recibió su tarjeta, llame a 1-877-277-0956. Se le pedirá su número de secuencia de la tarjeta, el cual es %{sequence_number}, y su código para activar, el cual es %{activation_code}. avor de activar su tarjeta dentro de los próximos 7 días o su tarjeta puede ser desactivada permanentemente.
+    card_activation_reminder: Este mensaje es de %{organization_name}. Parece que no ha activado la tarjeta débito que recibió para la ayuda de desastres (DRAI). Si tiene su tarjeta pero necesita ayuda en programarla, favor de llamar a 1-877-610-1075. Si nunca recibió su tarjeta, llame a 1-877-227-0956 [CORREGIDO]. Se le pedirá su número de secuencia de la tarjeta, el cual es %{sequence_number}, y su código para activar, el cual es %{activation_code}. avor de activar su tarjeta dentro de los próximos 7 días o su tarjeta puede ser desactivada permanentemente.
     help: Esta es una respuesta automatizada de la asistencia por desastre de la organización
       Code for America. Para obtener ayuda con su caso, comuníquese con la organización
       que le ayudó con su solicitud. Puede obtener más información en https://ca-drai.org/privacy.
