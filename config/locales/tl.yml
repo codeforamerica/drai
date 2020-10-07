@@ -330,6 +330,14 @@ tl:
         Sakuna ng Amerika. </p><p> Para sa tulong sa iyong aplikasyon, tawagan ang
         organisasyon na nakatulong sa iyong aplikasyon. </p><p> Para sa tulong sa
         iyong kabayaran na kard, tumawag sa 1-877-610-1075.</p>"
+    card_activation_reminder:
+      body_html: |
+        <p>Ito ay isang mensahe mula sa %{organization_name}.</p>
+        <p>Mukhang hindi mo pa napapagana ang prepaid card na nakuha mo para sa kalamidad (DRAI).</p>
+        <p>Kung mayroon ka ng iyong card ngunit kailangan ng tulong sa pag-set up nito, mangyaring tawagan ang 1-877-610-1075. Kung hindi mo nakuha ang iyong card, tumawag sa 1-877-227-0956.</p>
+        <p>Hihilingin sa iyo ang iyong numero ng pagkakasunud-sunod ng card, na kung saan ay %{sequence_number}, at ang iyong code ng activation ng card, na kung saan ay %{activation_code}.</p>
+        <p>Mangyaring i-aktibo ang iyong card sa susunod na 7 araw o ang iyong card ay maaaring permanenteng na-deactivate.</p>
+      subject: "Kinakailangan ang Aksyon: Paganahin ang iyong card para sa tulong sa sakuna"
   general:
     activate: Gawing Aktibo
     affirmative: Oo
